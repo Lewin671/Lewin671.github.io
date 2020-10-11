@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="定义类 在Python中，类的定义使用class关键字来实现，语法如下： 123class ClassName:    &quot;类的帮助信息&quot;  # 类文档的字符串    statement   # 类体  创建类的实例 创建类的实例的语法如下： variable &#x3D; ClassName(parameterlist) 其中variable是实例对象，parameterlist是参数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python面向对象">
+<meta property="og:url" content="https://qingyingliu.top/2018/11/29/programming/python/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="定义类 在Python中，类的定义使用class关键字来实现，语法如下： 123class ClassName:    &quot;类的帮助信息&quot;  # 类文档的字符串    statement   # 类体  创建类的实例 创建类的实例的语法如下： variable &#x3D; ClassName(parameterlist) 其中variable是实例对象，parameterlist是参数">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-28T16:21:00.000Z">
+<meta property="article:modified_time" content="2020-04-27T05:09:02.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2018/11/29/programming/python/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python面向对象 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text"> 定义类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text"> 创建类的实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%B9%B6%E8%AE%BF%E9%97%AE"><span class="nav-number">3.</span> <span class="nav-text"> 创建类的成员并访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E5%B9%B6%E8%AE%BF%E9%97%AE"><span class="nav-number">3.1.</span> <span class="nav-text"> 创建类的实例方法并访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E6%88%90%E5%91%98%E5%B9%B6%E8%AE%BF%E9%97%AE"><span class="nav-number">3.2.</span> <span class="nav-text"> 创建数据成员并访问</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text"> 访问属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text"> 属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">6.</span> <span class="nav-text"> 继承</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/29/programming/python/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python面向对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-29 00:21:00" itemprop="dateCreated datePublished" datetime="2018-11-29T00:21:00+08:00">2018-11-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="定义类"><a class="markdownIt-Anchor" href="#定义类"></a> 定义类</h3>
+<p>在Python中，类的定义使用class关键字来实现，语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span>:</span></span><br><span class="line">    <span class="string">&quot;类的帮助信息&quot;</span>  <span class="comment"># 类文档的字符串</span></span><br><span class="line">    statement   <span class="comment"># 类体</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建类的实例"><a class="markdownIt-Anchor" href="#创建类的实例"></a> 创建类的实例</h3>
+<p>创建类的实例的语法如下：</p>
+<p><code>variable = ClassName(parameterlist)</code></p>
+<p>其中variable是实例对象，parameterlist是参数列表。当创建一个类时，会自动调用__init__()方法。<code>__init__</code>()方法，除了self参数外，还可以自定义一些参数，参数间使用都好分割。比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Geese</span>:</span></span><br><span class="line">    <span class="string">&quot;大雁类&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;我是大雁类&quot;</span>)</span><br><span class="line"></span><br><span class="line">wildGeese = Geese()</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>输出结果为：</p>
+<p><code>我是大雁类</code></p>
+<p>注意： <code>__init__</code>方法的第一个参数必须时self。</p>
+<h3 id="创建类的成员并访问"><a class="markdownIt-Anchor" href="#创建类的成员并访问"></a> 创建类的成员并访问</h3>
+<h4 id="创建类的实例方法并访问"><a class="markdownIt-Anchor" href="#创建类的实例方法并访问"></a> 创建类的实例方法并访问</h4>
+<p>实例的第一个方法必须是self，语法格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">functionName</span>(<span class="params">self,parameterlist</span>):</span></span><br><span class="line">block</span><br></pre></td></tr></table></figure>
+<p>实例方法完成后，通过类的实例方法和点操作符进行访问。语法格式如下：</p>
+<p><code>instanceName.fucntionName(parameterlist)</code></p>
+<p>值得注意的是，在创建实例方法时，也可以和创建函数一样为参数设置默认值，但是被设置了默认值的参数必须位于所有参数的最后（即最右侧）。</p>
+<h4 id="创建数据成员并访问"><a class="markdownIt-Anchor" href="#创建数据成员并访问"></a> 创建数据成员并访问</h4>
+<p>根据属性，可以分为两种类型：类属性和实例属性。</p>
+<ul>
+<li>类属性类似于C++或者Java的静态变量，该类的所有实例都可以访问，是大家共享的，可以通过实例或者类名来访问。</li>
+<li>而实例属性则值能通过实例访问。</li>
+</ul>
+<p>比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Geese</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># neck和wing是类属性</span></span><br><span class="line">    neck = <span class="string">&quot;脖子比较长&quot;</span></span><br><span class="line">    wing = <span class="string">&quot;振翅频率高&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,name</span>):</span></span><br><span class="line">        self.name = name    <span class="comment">#实例属性</span></span><br></pre></td></tr></table></figure>
+<h3 id="访问属性"><a class="markdownIt-Anchor" href="#访问属性"></a> 访问属性</h3>
+<p>在Python中也是需要区分private、protected和public数据的，这是通过变量的名称来确定的。</p>
+<ul>
+<li>首尾双下划线表示定义特殊的方法，<strong>一般是系统定义的名字</strong>。</li>
+<li>以单下划线开头的表示保护类型(protected)类型成员，值能允许类本身和子类进行访问</li>
+<li>双下划线表示私有成员(private)类型成员的数据，只允许定义该方法的类本身进行访问，而不能通过类的实例进行访问。</li>
+</ul>
+<p>比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Swan</span>:</span></span><br><span class="line">    <span class="string">&quot;天鹅类&quot;</span></span><br><span class="line"></span><br><span class="line">    _neck_swan = <span class="string">&#x27;天鹅的脖子很长&#x27;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;__init__() &quot;</span>,_neck_swan)</span><br><span class="line">    </span><br><span class="line">swan = Swan</span><br><span class="line">print(<span class="string">&#x27;直接访问: &#x27;</span>,swan._neck_swan)</span><br></pre></td></tr></table></figure>
+<p>可以发现，上面的运行程序没有错误，说明保护属性可以通过实例名访问。</p>
+<h3 id="属性"><a class="markdownIt-Anchor" href="#属性"></a> 属性</h3>
+<p>这里介绍的属性指的是特殊的属性，通过<code>@property</code>(装饰器)的声明。可以把一个方法转换成一个属性。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span>:</span></span><br><span class="line">    <span class="keyword">del</span> __init(self,r):</span><br><span class="line">        this.r = r</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">area</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.r*self.r*<span class="number">3.14</span>;</span><br><span class="line"></span><br><span class="line">circle = Circle(<span class="number">1</span>)</span><br><span class="line">print(circle.area)</span><br></pre></td></tr></table></figure>
+<p>可以看出，通过装饰器的声明，我们可以不用加括号地访问它的值。但是。通过@property转换过的值不能重新赋值，否则会出错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不能这样子</span></span><br><span class="line">circle.area = <span class="number">3.14</span></span><br></pre></td></tr></table></figure>
+<p>通过属性不仅可以将属性设置为只读，而且还可以为属性设置拦截器，即让属性允许修改，但是需要满足一定的约束。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TVshow</span>:</span></span><br><span class="line">    list_film = [<span class="string">&#x27;战狼二&#x27;</span>,<span class="string">&#x27;红海行动&#x27;</span>,<span class="string">&#x27;西游记女儿国&#x27;</span>,<span class="string">&#x27;熊出没&#x27;</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,show</span>):</span></span><br><span class="line">        self.__show = show</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.__show</span><br><span class="line"></span><br><span class="line"><span class="meta">    @show.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">self,value</span>):</span></span><br><span class="line">        <span class="keyword">if</span> value <span class="keyword">in</span> TVshow.list_film:</span><br><span class="line">            self.__show = <span class="string">&#x27;您选择了《&#x27;</span> + value + <span class="string">&quot;》,稍后将播放&quot;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.__show = <span class="string">&#x27;你选择的电影不存在&#x27;</span></span><br><span class="line"></span><br><span class="line">tvshow = TVshow(<span class="string">&#x27;战狼二&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;正在播放: &#x27;</span>,tvshow.show)</span><br><span class="line"><span class="comment"># 不能修改，因为红海行动不在列表中</span></span><br><span class="line">tvshow.show = <span class="string">&#x27;红海行动&#x27;</span></span><br><span class="line">print(tvshow.show)</span><br></pre></td></tr></table></figure>
+<h3 id="继承"><a class="markdownIt-Anchor" href="#继承"></a> 继承</h3>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/11/27/algorithm/tree/binary-search-tree/" rel="prev" title="binary search tree">
+                  <i class="fa fa-chevron-left"></i> binary search tree
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/11/29/programming/python/Python%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/" rel="next" title="Python文件和目录操作">
+                  Python文件和目录操作 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

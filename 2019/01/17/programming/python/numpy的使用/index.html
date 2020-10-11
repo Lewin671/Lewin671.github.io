@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="什麼是numpy? Numpy是一個開源的python科學計算基礎庫，包括：  一个强大的N维数组对象： ndarray，我們也叫作數組 广播功能函数 整合C&#x2F;C++&#x2F;Fortran代码的工具 线性代数、傅里叶变换、随机数生成等功能  NumPy是SciPy、Pandas等数据处理或科学计算库的基础  numpy的引用 import numpy as np，尽管别名可以省略或更改，建议使用上述约">
+<meta property="og:type" content="article">
+<meta property="og:title" content="numpy的使用">
+<meta property="og:url" content="https://qingyingliu.top/2019/01/17/programming/python/numpy%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="什麼是numpy? Numpy是一個開源的python科學計算基礎庫，包括：  一个强大的N维数组对象： ndarray，我們也叫作數組 广播功能函数 整合C&#x2F;C++&#x2F;Fortran代码的工具 线性代数、傅里叶变换、随机数生成等功能  NumPy是SciPy、Pandas等数据处理或科学计算库的基础  numpy的引用 import numpy as np，尽管别名可以省略或更改，建议使用上述约">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/uploads/numpy-attr.png">
+<meta property="og:image" content="https://qingyingliu.top/uploads/onep.png">
+<meta property="og:image" content="https://qingyingliu.top/uploads/onep1.png">
+<meta property="og:image" content="https://qingyingliu.top/uploads/twop.png">
+<meta property="article:published_time" content="2019-01-17T12:24:48.000Z">
+<meta property="article:modified_time" content="2020-04-27T05:09:02.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/uploads/numpy-attr.png">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2019/01/17/programming/python/numpy%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>numpy的使用 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AFnumpy"><span class="nav-number">1.</span> <span class="nav-text"> 什麼是numpy?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text"> numpy的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray%E5%A4%9A%E7%B6%AD%E6%95%B8%E7%B5%84%E5%B0%8D%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text"> ndarray:多維數組對象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray%E7%9A%84%E5%B1%AC%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text"> ndarray的屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%B5%E5%BB%BAndarray%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text"> 創建ndarray的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray%E6%95%B8%E7%B5%84%E7%9A%84%E8%AE%8A%E6%8F%9B"><span class="nav-number">6.</span> <span class="nav-text"> ndarray數組的變換</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%87%E7%89%87"><span class="nav-number">7.</span> <span class="nav-text"> 索引和切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray%E6%95%B8%E7%B5%84%E7%9A%84%E9%81%8B%E7%AE%97"><span class="nav-number">8.</span> <span class="nav-text"> ndarray數組的運算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E9%96%8B%E5%92%8C%E5%AD%98%E5%8F%96csv%E6%96%87%E4%BB%B6"><span class="nav-number">9.</span> <span class="nav-text"> 打開和存取csv文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy%E7%9A%84%E4%BE%BF%E6%8D%B7%E6%96%87%E4%BB%B6%E5%AD%98%E5%8F%96"><span class="nav-number">10.</span> <span class="nav-text"> numpy的便捷文件存取</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2019/01/17/programming/python/numpy%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          numpy的使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-17 20:24:48" itemprop="dateCreated datePublished" datetime="2019-01-17T20:24:48+08:00">2019-01-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="什麼是numpy"><a class="markdownIt-Anchor" href="#什麼是numpy"></a> 什麼是numpy?</h3>
+<p>Numpy是一個開源的python科學計算基礎庫，包括：</p>
+<ul>
+<li>一个强大的N维数组对象： ndarray，我們也叫作數組</li>
+<li>广播功能函数</li>
+<li>整合C/C++/Fortran代码的工具</li>
+<li>线性代数、傅里叶变换、随机数生成等功能</li>
+</ul>
+<p>NumPy是SciPy、Pandas等数据处理或科学计算库的基础</p>
+<h3 id="numpy的引用"><a class="markdownIt-Anchor" href="#numpy的引用"></a> numpy的引用</h3>
+<p><code>import numpy as np</code>，尽管别名可以省略或更改，建议使用上述约定的别名</p>
+<h3 id="ndarray多維數組對象"><a class="markdownIt-Anchor" href="#ndarray多維數組對象"></a> ndarray:多維數組對象</h3>
+<p>ndarray是一個通用的同质數據多維容器，也就是說，其中所有元素的數據類型必須是相同類型的，数组下标从0开始。</p>
+<p>注意： ndarray在程序中的别名是:array</p>
+<h3 id="ndarray的屬性"><a class="markdownIt-Anchor" href="#ndarray的屬性"></a> ndarray的屬性</h3>
+<p><img src="/uploads/numpy-attr.png" alt="" /></p>
+<h3 id="創建ndarray的方法"><a class="markdownIt-Anchor" href="#創建ndarray的方法"></a> 創建ndarray的方法</h3>
+<ol>
+<li>从Python中的列表、元组等类型创建ndarray数组</li>
+<li>使用NumPy中函数创建ndarray数组,如:arange, ones, zeros等</li>
+<li>从字节流(raw bytes)中创建ndarray数组</li>
+<li>从文件中读取特定格式,创建ndarray数组</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法1： 使用list或者tuple來創建</span></span><br><span class="line">data1 = np.array([ [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>] ])</span><br><span class="line">print(data1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2：使用numpy的函數來創建特殊數組，如：</span></span><br><span class="line">data2 = np.ones_like(np.arange(<span class="number">20</span>).reshape((<span class="number">4</span>,<span class="number">5</span>)))</span><br><span class="line">print(data2)</span><br></pre></td></tr></table></figure>
+<h3 id="ndarray數組的變換"><a class="markdownIt-Anchor" href="#ndarray數組的變換"></a> ndarray數組的變換</h3>
+<p>对于创建后的ndarray数组,可以对其进行维度变换和元素类型变换。</p>
+<p>维度变换</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.reshape(shape)</td>
+<td>不改变数组元素,返回一个shape形状的数组,原数组不变</td>
+</tr>
+<tr>
+<td>.resize(shape)</td>
+<td>与.reshape()功能一致,但修改原数组</td>
+</tr>
+<tr>
+<td>.swapaxes(ax1,ax2)</td>
+<td>将数组n个维度中两个维度进行调换</td>
+</tr>
+<tr>
+<td>.flatten()</td>
+<td>对数组进行降维,返回折叠后的一维数组,原数组不变</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">b = a.reshape((<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;\n=========================\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">c = a.resize((<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+<p>ndarray数组的类型变换則通過astyle方法來更改數據類型。值得注意的是<br />
+astype()方法一定会创建新的数组(原始数据的一个拷贝),即使两个类型一致</p>
+<h3 id="索引和切片"><a class="markdownIt-Anchor" href="#索引和切片"></a> 索引和切片</h3>
+<p>索引:获取数组中特定位置元素的过程<br />
+切片:获取数组元素子集的过程</p>
+<p>多维数组的索引: 每个维度一个索引值,逗号分割<br />
+切片和列表的切片一樣。</p>
+<p>如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line">print(a[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line">print(a[:,:,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="ndarray數組的運算"><a class="markdownIt-Anchor" href="#ndarray數組的運算"></a> ndarray數組的運算</h3>
+<ol>
+<li>数组与标量之间的运算作用于数组的每一个元素</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">print(a)</span><br><span class="line">print(a*<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>
+<p>numpy一元函數：对ndarray中的数据执行元素级运算的函数<br />
+<img src="/uploads/onep.png" alt="" /><br />
+<img src="/uploads/onep1.png" alt="" /></p>
+</li>
+<li>
+<p>numpy二元函數<br />
+<img src="/uploads/twop.png" alt="" /></p>
+</li>
+</ol>
+<h3 id="打開和存取csv文件"><a class="markdownIt-Anchor" href="#打開和存取csv文件"></a> 打開和存取csv文件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.savetxt(frame, array, fmt=<span class="string">&#x27;%.18e&#x27;</span>, delimiter=<span class="literal">None</span>)</span><br><span class="line">np.loadtxt(frame, dtype=np.float, delimiter=<span class="literal">None</span>, unpack=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>frame : 文件、字符串或产生器,可以是.gz或.bz2的压缩文件</li>
+<li>dtype : 数据类型,可选</li>
+<li>delimiter :分割字符串,默认是任何空格</li>
+<li>unpack : 如果True,读入属性将分别写入不同变量</li>
+</ul>
+<h3 id="numpy的便捷文件存取"><a class="markdownIt-Anchor" href="#numpy的便捷文件存取"></a> numpy的便捷文件存取</h3>
+<p>np.save(fname, array) 或 np.savez(fname, array)<br />
+np.load(fname)<br />
+注意：fname文件名,以.npy为扩展名,压缩扩展名为.npz</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/12/12/programming/python/%E4%BD%BF%E7%94%A8Selector%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/" rel="prev" title="使用Selector提取数据">
+                  <i class="fa fa-chevron-left"></i> 使用Selector提取数据
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/09/25/math/advanced-algebra/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0%E7%9A%84%E6%98%93%E9%94%99%E7%82%B9%E5%92%8C%E5%81%9A%E9%A2%98%E6%8A%80%E5%B7%A7/" rel="next" title="高等代数的易错点和做题技巧">
+                  高等代数的易错点和做题技巧 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

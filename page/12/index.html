@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="记录数学和计算机方面的知识">
+<meta property="og:type" content="website">
+<meta property="og:title" content="qingying&#39;s blog">
+<meta property="og:url" content="https://qingyingliu.top/page/12/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="记录数学和计算机方面的知识">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Qingying Liu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/page/12/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+      
+
+      
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2019/01/17/programming/python/numpy%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/17/programming/python/numpy%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">numpy的使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-17 20:24:48" itemprop="dateCreated datePublished" datetime="2019-01-17T20:24:48+08:00">2019-01-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="什麼是numpy"><a class="markdownIt-Anchor" href="#什麼是numpy"></a> 什麼是numpy?</h3>
+<p>Numpy是一個開源的python科學計算基礎庫，包括：</p>
+<ul>
+<li>一个强大的N维数组对象： ndarray，我們也叫作數組</li>
+<li>广播功能函数</li>
+<li>整合C/C++/Fortran代码的工具</li>
+<li>线性代数、傅里叶变换、随机数生成等功能</li>
+</ul>
+<p>NumPy是SciPy、Pandas等数据处理或科学计算库的基础</p>
+<h3 id="numpy的引用"><a class="markdownIt-Anchor" href="#numpy的引用"></a> numpy的引用</h3>
+<p><code>import numpy as np</code>，尽管别名可以省略或更改，建议使用上述约定的别名</p>
+<h3 id="ndarray多維數組對象"><a class="markdownIt-Anchor" href="#ndarray多維數組對象"></a> ndarray:多維數組對象</h3>
+<p>ndarray是一個通用的同质數據多維容器，也就是說，其中所有元素的數據類型必須是相同類型的，数组下标从0开始。</p>
+<p>注意： ndarray在程序中的别名是:array</p>
+<h3 id="ndarray的屬性"><a class="markdownIt-Anchor" href="#ndarray的屬性"></a> ndarray的屬性</h3>
+<p><img src="/uploads/numpy-attr.png" alt="" /></p>
+<h3 id="創建ndarray的方法"><a class="markdownIt-Anchor" href="#創建ndarray的方法"></a> 創建ndarray的方法</h3>
+<ol>
+<li>从Python中的列表、元组等类型创建ndarray数组</li>
+<li>使用NumPy中函数创建ndarray数组,如:arange, ones, zeros等</li>
+<li>从字节流(raw bytes)中创建ndarray数组</li>
+<li>从文件中读取特定格式,创建ndarray数组</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法1： 使用list或者tuple來創建</span></span><br><span class="line">data1 = np.array([ [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>] ])</span><br><span class="line">print(data1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2：使用numpy的函數來創建特殊數組，如：</span></span><br><span class="line">data2 = np.ones_like(np.arange(<span class="number">20</span>).reshape((<span class="number">4</span>,<span class="number">5</span>)))</span><br><span class="line">print(data2)</span><br></pre></td></tr></table></figure>
+<h3 id="ndarray數組的變換"><a class="markdownIt-Anchor" href="#ndarray數組的變換"></a> ndarray數組的變換</h3>
+<p>对于创建后的ndarray数组,可以对其进行维度变换和元素类型变换。</p>
+<p>维度变换</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.reshape(shape)</td>
+<td>不改变数组元素,返回一个shape形状的数组,原数组不变</td>
+</tr>
+<tr>
+<td>.resize(shape)</td>
+<td>与.reshape()功能一致,但修改原数组</td>
+</tr>
+<tr>
+<td>.swapaxes(ax1,ax2)</td>
+<td>将数组n个维度中两个维度进行调换</td>
+</tr>
+<tr>
+<td>.flatten()</td>
+<td>对数组进行降维,返回折叠后的一维数组,原数组不变</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">b = a.reshape((<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;\n=========================\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">c = a.resize((<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+<p>ndarray数组的类型变换則通過astyle方法來更改數據類型。值得注意的是<br />
+astype()方法一定会创建新的数组(原始数据的一个拷贝),即使两个类型一致</p>
+<h3 id="索引和切片"><a class="markdownIt-Anchor" href="#索引和切片"></a> 索引和切片</h3>
+<p>索引:获取数组中特定位置元素的过程<br />
+切片:获取数组元素子集的过程</p>
+<p>多维数组的索引: 每个维度一个索引值,逗号分割<br />
+切片和列表的切片一樣。</p>
+<p>如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line">print(a[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line">print(a[:,:,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="ndarray數組的運算"><a class="markdownIt-Anchor" href="#ndarray數組的運算"></a> ndarray數組的運算</h3>
+<ol>
+<li>数组与标量之间的运算作用于数组的每一个元素</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">print(a)</span><br><span class="line">print(a*<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>
+<p>numpy一元函數：对ndarray中的数据执行元素级运算的函数<br />
+<img src="/uploads/onep.png" alt="" /><br />
+<img src="/uploads/onep1.png" alt="" /></p>
+</li>
+<li>
+<p>numpy二元函數<br />
+<img src="/uploads/twop.png" alt="" /></p>
+</li>
+</ol>
+<h3 id="打開和存取csv文件"><a class="markdownIt-Anchor" href="#打開和存取csv文件"></a> 打開和存取csv文件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.savetxt(frame, array, fmt=<span class="string">&#x27;%.18e&#x27;</span>, delimiter=<span class="literal">None</span>)</span><br><span class="line">np.loadtxt(frame, dtype=np.float, delimiter=<span class="literal">None</span>, unpack=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>frame : 文件、字符串或产生器,可以是.gz或.bz2的压缩文件</li>
+<li>dtype : 数据类型,可选</li>
+<li>delimiter :分割字符串,默认是任何空格</li>
+<li>unpack : 如果True,读入属性将分别写入不同变量</li>
+</ul>
+<h3 id="numpy的便捷文件存取"><a class="markdownIt-Anchor" href="#numpy的便捷文件存取"></a> numpy的便捷文件存取</h3>
+<p>np.save(fname, array) 或 np.savez(fname, array)<br />
+np.load(fname)<br />
+注意：fname文件名,以.npy为扩展名,压缩扩展名为.npz</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/12/programming/python/%E4%BD%BF%E7%94%A8Selector%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/12/programming/python/%E4%BD%BF%E7%94%A8Selector%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">使用Selector提取数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-12 16:18:17" itemprop="dateCreated datePublished" datetime="2018-12-12T16:18:17+08:00">2018-12-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<p>Scrapy有它自己的工具提取数据，这就是Selector。我们可以通过使用XPath和CSS表达式来提取数据。</p>
+<p>Scrapy的Selector是根据<code>lxml</code>库编写的，所以它们的速度和解析的准确性都是非常接近的。</p>
+<p>For a complete reference of the selectors API see <a target="_blank" rel="noopener" href="https://doc.scrapy.org/en/latest/topics/selectors.html#topics-selectors-ref">Selector reference</a></p>
+<h3 id="selector-objects"><a class="markdownIt-Anchor" href="#selector-objects"></a> Selector objects</h3>
+<h4 id="构造函数"><a class="markdownIt-Anchor" href="#构造函数"></a> 构造函数</h4>
+<p><code>class scrapy.selector.Selector(response=None, text=None, type=None)</code><br />
+参数说明：</p>
+<ul>
+<li>
+<p>response: response是<code>HtmlResponse</code>或者<code>XmlResponse</code>对象,是要被抽取数据的数据源。</p>
+</li>
+<li>
+<p>text: text是一个unicode或者uft8字符当一个response对象不可用的时候的文字.</p>
+</li>
+<li>
+<p>type: type定义选择器的类型，有<code>html</code>、<code>xml</code>、<code>None</code>(default)。<br />
+如果 type 是 None ，选择器会根据 response 类型(参见下面)自动选择最佳的类型，或者在和 text 一起使用时，默认为 “html” 。</p>
+<p>如果 type 是 None ，并传递了一个 response ，选择器类型将从response类型中推导如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;html&quot; for HtmlResponse type</span><br><span class="line">&quot;xml&quot; for XmlResponse type</span><br><span class="line">&quot;html&quot; for anything else</span><br></pre></td></tr></table></figure>
+<p>所以我们既可以根据<code>text</code>来构建一个<code>Selector</code>对象，也可以根据<code>response</code>来构建一个<code>Selector</code>对象.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/12/programming/python/%E4%BD%BF%E7%94%A8Selector%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/12/programming/python/%E7%BC%96%E5%86%99Spider/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/12/programming/python/%E7%BC%96%E5%86%99Spider/" class="post-title-link" itemprop="url">编写Spider</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-12 14:31:59" itemprop="dateCreated datePublished" datetime="2018-12-12T14:31:59+08:00">2018-12-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>参考： 《精通Scrapy网络爬虫》</p>
+<h3 id="scrapy框架结构和流程"><a class="markdownIt-Anchor" href="#scrapy框架结构和流程"></a> Scrapy框架结构和流程</h3>
+<p>如下图所示，Scrapy的框架结构和流程如下图所示：<br />
+<img src="http://kaito-blog.qiniudn.com/1477839561.png" alt="" /></p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>描述</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENGINE</td>
+<td>引擎，框架的核心，其他所有组建在其控制下协同工作</td>
+<td>内部组件</td>
+</tr>
+<tr>
+<td>SCHEDULER</td>
+<td>调度器，负责对SPIDER提交的下载请求进行调度</td>
+<td>内部组件</td>
+</tr>
+<tr>
+<td>DOWNLOADER</td>
+<td>下载器，负责下载页面（发送HTTP请求和接受HTTP响应）</td>
+<td>内部组件</td>
+</tr>
+<tr>
+<td>SPIDER</td>
+<td>爬虫，负责提取页面中的数据，并产生对页面的下载请求</td>
+<td>用户实现</td>
+</tr>
+<tr>
+<td>MIDDLEWAVE</td>
+<td>中间件，负责对Request对象和Response对象进行处理</td>
+<td>可选组件</td>
+</tr>
+<tr>
+<td>ITEM PIPLINE</td>
+<td>数据通道，负责对爬取到的数据进行处理</td>
+<td>可选组件</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/12/programming/python/%E7%BC%96%E5%86%99Spider/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/12/programming/python/%E5%88%9D%E5%A7%8Bscrapy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/12/programming/python/%E5%88%9D%E5%A7%8Bscrapy/" class="post-title-link" itemprop="url">初始scrapy</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-12 14:07:55" itemprop="dateCreated datePublished" datetime="2018-12-12T14:07:55+08:00">2018-12-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>注：系统环境： Ubuntu18.04LST<br />
+参考： 《精通Scrapy网络爬虫》第一章</p>
+<h3 id="安装scrapy模块"><a class="markdownIt-Anchor" href="#安装scrapy模块"></a> 安装scrapy模块</h3>
+<p>安装scrapy最好参照官方文档，不然可能会有很多坑。</p>
+<ol>
+<li>To install scrapy on Ubuntu (or Ubuntu-based) systems, you need to install these dependencies:<br />
+<code>sudo apt-get install python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev libffi-dev libssl-dev</code></li>
+<li>If you want to install scrapy on Python 3, you’ll also need Python 3 development headers:<br />
+<code>sudo apt-get install python3 python3-dev</code></li>
+<li><code>sudo pip3 install scrapy</code>，如果是python2的scrapy，则<code>sudo pip install scrapy</code></li>
+</ol>
+<p>这些安装python2的scrapy是没有问题的，但是python3的scrapy却会出现有很多模块不存在的情况，这是因为twisted的版本不对或者没有安装，经过大量google，终于找到了合适的版本的twisted：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">axel -n 100 -k https:&#x2F;&#x2F;twistedmatrix.com&#x2F;Releases&#x2F;Twisted&#x2F;17.9&#x2F;Twisted-17.9.0.tar.bz2</span><br><span class="line">tar -xvf Twisted-17.9.0.tar.bz2</span><br><span class="line">cd Twisted-17.9.0</span><br><span class="line">sudo python3 setup.py install</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/12/programming/python/%E5%88%9D%E5%A7%8Bscrapy/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">linux配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-10 19:55:07" itemprop="dateCreated datePublished" datetime="2018-12-10T19:55:07+08:00">2018-12-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="下载源设置"><a class="markdownIt-Anchor" href="#下载源设置"></a> 下载源设置</h3>
+<p>将下载源设置为国内的清华源: <code>https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/</code></p>
+<h3 id="搜狗输入法"><a class="markdownIt-Anchor" href="#搜狗输入法"></a> 搜狗输入法</h3>
+<p>先去搜狗输入法官网下载安装包,然后使用<code>dpkg -i</code>命令安装，如果安装过程有错，则运行<code>sudo apt-get --fix-broken install</code>。</p>
+<p>接着去设置那里设置keyboard input method system为fcitx。</p>
+<h3 id="代理命令行"><a class="markdownIt-Anchor" href="#代理命令行"></a> 代理命令行</h3>
+<p>下载proxychains: <code>sudo apt-get install proxychains</code></p>
+<h3 id="visual-stdio-code"><a class="markdownIt-Anchor" href="#visual-stdio-code"></a> Visual Stdio Code</h3>
+<p>注意，安装Visual Studio Code不要从默认的应用商店下载，因为这样会导致无法在VS Code中输入中文，而是应该从官网下载最新的deb包，然后再安装。</p>
+<h3 id="goole-chrome"><a class="markdownIt-Anchor" href="#goole-chrome"></a> goole chrome</h3>
+<ol>
+<li>
+<p>add key:<br />
+<code>wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -</code></p>
+</li>
+<li>
+<p>set repository:<br />
+<code>echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list</code></p>
+</li>
+<li>
+<p>install package:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install google-chrome-stable</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>​	注意，如果需要登录谷歌账号，则需要在设置里面设置全局代理。然后设置代理规则: <code>https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/08/algorithm/dp/%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/08/algorithm/dp/%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6/" class="post-title-link" itemprop="url">石子合并</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-08 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-08T00:00:00+08:00">2018-12-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="问题描述"><a class="markdownIt-Anchor" href="#问题描述"></a> 问题描述</h2>
+<p>在一个圆形操场的四周摆放着n 堆石子。现要将石子有次序地合并成一堆。规定每次只能选相邻的2 堆石子合并成新的一堆，并将新的一堆石子数记为该次合并的得分。求将n堆石子合并成一堆的最小得分和最大得分。</p>
+<p>要求：</p>
+<ul>
+<li>采用的算法：动态规划</li>
+<li>要求给出计算表格和结果</li>
+</ul>
+<h2 id="算法描述"><a class="markdownIt-Anchor" href="#算法描述"></a> 算法描述</h2>
+<p>读完题目之后，我们可以发现题目具有这两个特点：</p>
+<ol>
+<li>每次只能合并相邻两堆石子</li>
+<li>圆形操场</li>
+</ol>
+<p>特点1限制了此题不可以使用贪心算法，而应该使用更加准确的算法——动态规划，具体地说，是区间类型的动态规划。而对于特点二，我们采用“断链为环”的思想去解决这个问题。</p>
+<h3 id="动态规划的正确性"><a class="markdownIt-Anchor" href="#动态规划的正确性"></a> 动态规划的正确性</h3>
+<p>前面已经说过，虽然这一道题目的描述让人非常容易联想到贪心算法，但是应用贪心算法来解决这个问题是错误的，可以看下面这个例子：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/08/algorithm/dp/%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/03/programming/python/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/03/programming/python/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">Python多线程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-03 19:59:52" itemprop="dateCreated datePublished" datetime="2018-12-03T19:59:52+08:00">2018-12-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="线程对象"><a class="markdownIt-Anchor" href="#线程对象"></a> 线程对象</h3>
+<p>为了不浪费事件，我在这里写的都是关于threading模块的。</p>
+<h4 id="指定线程的活动"><a class="markdownIt-Anchor" href="#指定线程的活动"></a> 指定线程的活动</h4>
+<p>当我们创建一个线程的时候，我们需要先去指定这个线程去干什么，这里有两种指定的方法：</p>
+<ul>
+<li>传递一个回调对象到构造函数</li>
+<li>子类(继承threading.Thread)重写run()方法</li>
+</ul>
+<p>值得注意的是,threading.Thread的子类只能重写__init__()和run()方法。</p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span>():</span></span><br><span class="line">    print(<span class="string">&quot;bar by callable function&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">subThread</span>(<span class="params">threading.Thread</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;bar by override run function&quot;</span>)</span><br><span class="line"></span><br><span class="line">t1 = threading.Thread(target=bar)</span><br><span class="line">t2 = subThread()</span><br><span class="line"></span><br><span class="line">t1.run()</span><br><span class="line">t2.run()</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bar by callable function</span><br><span class="line">bar by override run function</span><br></pre></td></tr></table></figure>
+<p>其中，threading.Thread类的构造函数为：<br />
+<code>threading.Thread(group=None,target=None,name=None,args=(),kwargs=&#123;&#125;,*,daemon=None)</code></p>
+<p>参数说明：</p>
+<ul>
+<li>group是以后的拓展（当ThreadGroup实现的时候)</li>
+<li>target是回调目标用于被run()方法调用的，默认为None，表示没有任何东西被调用。</li>
+<li>name是线程的名字，默认一个唯一的名字是这样构造的：<code>Thread-N</code>。</li>
+<li>args是一个元组，表示target的参数，默认为()。</li>
+<li>kwargs是一个target关键字字典，默认为{}</li>
+<li>daemon是守护进程</li>
+</ul>
+<h4 id="启动线程start"><a class="markdownIt-Anchor" href="#启动线程start"></a> 启动线程start()</h4>
+<p>调用start()函数之后，线程会自动run方法。</p>
+<h4 id="jointimeoutnone"><a class="markdownIt-Anchor" href="#jointimeoutnone"></a> join(timeout=None)</h4>
+<p>这个函数的作用是: wait until thread terminates。也就是说，会一直运行当前的线程，直到当前线程结束。我们可以使用is_alive()来判断进程是否结束。</p>
+<h4 id="name"><a class="markdownIt-Anchor" href="#name"></a> name</h4>
+<p>线程的名字，可以直接通过点操作符<code>(.)</code>调用name属性。</p>
+<h3 id="线程同步"><a class="markdownIt-Anchor" href="#线程同步"></a> 线程同步</h3>
+<p>由于在多线程中，数据是共享的，所以就有可能多个线程同时去改变一个变量，这个有时候会出问题。比如：我们的计算机的操作就经常要求关闭文件后才能打开，这就是因为如果同时去修改一个文件，会造成最终的结果不确定或者出错，所以我们就需要去同步，或者说，需要把数据“锁”上。在Python中，我们可以使用Lock和RLock类，他们都有相同的方法：</p>
+<ul>
+<li>acquire(blocking=true,timeout=-1)</li>
+<li>release()</li>
+</ul>
+<p>根据英文意思你也知道上面两个方法的作用，acquire是获得一把锁，release是释放锁（即解锁的意思）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span>():</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,balance=<span class="number">0</span></span>):</span></span><br><span class="line">                self.balance = balance</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">take</span>(<span class="params">self,d</span>):</span></span><br><span class="line">                self.balance-=d</span><br><span class="line">                time.sleep(<span class="number">0.001</span>)</span><br><span class="line">                print(<span class="string">&quot;after take &quot;</span>,d,<span class="string">&quot;, and the balance is &quot;</span>,self.balance)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">self,d</span>):</span></span><br><span class="line">                self.balance+=d</span><br><span class="line">                time.sleep(<span class="number">0.0008</span>)</span><br><span class="line">                print(<span class="string">&quot;after save &quot;</span>,d,<span class="string">&quot;, and the balance is &quot;</span>,self.balance)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">take</span>(<span class="params">b</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">                b.take(<span class="number">1</span>)</span><br><span class="line">                <span class="comment">#time.sleep(0.01)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">b</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">                b.save(<span class="number">1</span>)</span><br><span class="line">                <span class="comment">#time.sleep(0.01)</span></span><br><span class="line"></span><br><span class="line">b = Account()</span><br><span class="line">t1 = threading.Thread(target=take,args=(b,))</span><br><span class="line">t2 = threading.Thread(target=save,args=(b,))</span><br><span class="line"></span><br><span class="line">t2.start()</span><br><span class="line">t1.start()</span><br></pre></td></tr></table></figure>
+<p>由于没有同步，会出现这样的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">after save  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  1</span><br><span class="line">after save  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  1</span><br><span class="line">after save  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  1</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span>():</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,balance=<span class="number">0</span></span>):</span></span><br><span class="line">                self.balance = balance</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">take</span>(<span class="params">self,d</span>):</span></span><br><span class="line">                lock.acquire()</span><br><span class="line">                self.balance-=d</span><br><span class="line">                print(<span class="string">&quot;after take &quot;</span>,d,<span class="string">&quot;, and the balance is &quot;</span>,self.balance)</span><br><span class="line">                lock.release()</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">self,d</span>):</span></span><br><span class="line">                lock.acquire()</span><br><span class="line">                self.balance+=d</span><br><span class="line">                print(<span class="string">&quot;after save &quot;</span>,d,<span class="string">&quot;, and the balance is &quot;</span>,self.balance)</span><br><span class="line">                lock.release()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">take</span>(<span class="params">b</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">                b.take(<span class="number">1</span>)</span><br><span class="line">                time.sleep(<span class="number">0.01</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">b</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">                b.save(<span class="number">1</span>)</span><br><span class="line">                time.sleep(<span class="number">0.01</span>)</span><br><span class="line">lock = threading.Lock()</span><br><span class="line">b = Account()</span><br><span class="line">t1 = threading.Thread(target=take,args=(b,))</span><br><span class="line">t2 = threading.Thread(target=save,args=(b,))</span><br><span class="line"></span><br><span class="line">t2.start()</span><br><span class="line">t1.start()</span><br></pre></td></tr></table></figure>
+<p>进行了同步之后的结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">after save  1 , and the balance is  1</span><br><span class="line">after take  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  -1</span><br><span class="line">after save  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  -1</span><br><span class="line">after save  1 , and the balance is  0</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/" class="post-title-link" itemprop="url">Python连接MySQL</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-01 22:26:02" itemprop="dateCreated datePublished" datetime="2018-12-01T22:26:02+08:00">2018-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="安装pymysql"><a class="markdownIt-Anchor" href="#安装pymysql"></a> 安装PyMySQL</h3>
+<p>直接在终端输入： <code>pip install PyMySQL</code>。<br />
+注意：如果没有安装pip的，需要先按照pip。如果安装了pip的还是出错，那应该就是有多个Python的版本，应该使用相应的Python。</p>
+<h3 id="获取连接对象"><a class="markdownIt-Anchor" href="#获取连接对象"></a> 获取连接对象</h3>
+<p>我们首先需要获取连接对象，使用的是connect()函数。connect的参数如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数序号</th>
+<th>参数含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>主机名或IP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>3</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>4</td>
+<td>数据库名称</td>
+</tr>
+</tbody>
+</table>
+<p>注：如果我们再加一个参数: <code>charset='utf-8'</code>可以防止插入中文出错。</p>
+<p>比如：<code>db=pymysql.connect('localhost','Lewin','root','Lewin',charset='utf=8')</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/01/others/regular-expression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/01/others/regular-expression/" class="post-title-link" itemprop="url">regular expression</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-01 18:47:16" itemprop="dateCreated datePublished" datetime="2018-12-01T18:47:16+08:00">2018-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Others/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">正则表达式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="元字符"><a class="markdownIt-Anchor" href="#元字符"></a> 元字符</h3>
+<p>正则表达式语言由两种基本字符类型组成：原义（正常）文本字符和元字符。元字符使正则表达式具有处理能力。所谓<strong>元字符就是指那些在正则表达式中具有特殊意义的专用字符，可以用来规定其前导字符（即位于元字符前面的字符）在目标对象中的出现模式。</strong><br />
+下面列出常用的元字符：</p>
+<ul>
+<li><code>.</code>: 匹配除换行以外的任意字符</li>
+<li><code>\w</code>: 匹配字母或数字或下划线或汉字</li>
+<li><code>\s</code>: 匹配任意的空白符</li>
+<li><code>\d</code>: 匹配数字</li>
+<li><code>\b</code>: 匹配单词的开始或结束</li>
+<li><code>^</code>: 匹配字符串的开始</li>
+<li><code>$</code>: 匹配字符串的结束</li>
+</ul>
+<p>比如：<br />
+<code>\bmr\w*\b</code>: 表示匹配以mr开头的单词。先从某个单词开始处(<code>\b</code>)然后匹配字母(<code>mr</code>)，接着是匹配任意数量的字母或者数字(<code>*</code>)，最后单词结尾处(<code>\b</code>)</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/01/others/regular-expression/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/30/programming/python/Python%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/30/programming/python/Python%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="post-title-link" itemprop="url">Python字符串</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-30 23:52:13" itemprop="dateCreated datePublished" datetime="2018-11-30T23:52:13+08:00">2018-11-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="字符串常用操作"><a class="markdownIt-Anchor" href="#字符串常用操作"></a> 字符串常用操作</h3>
+<h4 id="拼接字符串"><a class="markdownIt-Anchor" href="#拼接字符串"></a> 拼接字符串</h4>
+<p>使用<code>+</code>运算符可以完成对多个字符串的拼接，<code>+</code>运算符可以连接多个字符串并产生一个字符串对象。<br />
+例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">met_en = <span class="string">&#x27;Rememberance is a form fo meeting. Forgetfulness is a form of freedom.&#x27;</span></span><br><span class="line">met_cn = <span class="string">&#x27;记忆是一种相遇。遗忘是一种自由&#x27;</span></span><br><span class="line">print(met_en + <span class="string">&#x27;----&#x27;</span> + met_cn)</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rememberance is a form fo meeting. Forgetfulness is a form of freedom.----记忆是一种相遇。遗忘是一种自由</span><br></pre></td></tr></table></figure>
+<p>注意： 字符串不允许直接与其他类型的数据拼接，而应该使用<code>str</code>函数转换成字符类型再进行拼接。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/30/programming/python/Python%E5%AD%97%E7%AC%A6%E4%B8%B2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

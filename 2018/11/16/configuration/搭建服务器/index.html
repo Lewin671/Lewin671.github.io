@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="今天买了一个阿里云服务器，为了就是想让自己写的网页也能够在校外网打开。下面一步一步搭建我的服务器。  安装SSH 安装SSH的原因是为了能够在本地的电脑连接服务器。  Ubuntu缺省没有安装SSH Server，使用这个命令安装：sudo apt-get install openssh-server、 然后确认sshserver是否启动了。ps -e|grep ssh。如果看到sshd那说明ss">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建服务器">
+<meta property="og:url" content="https://qingyingliu.top/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="今天买了一个阿里云服务器，为了就是想让自己写的网页也能够在校外网打开。下面一步一步搭建我的服务器。  安装SSH 安装SSH的原因是为了能够在本地的电脑连接服务器。  Ubuntu缺省没有安装SSH Server，使用这个命令安装：sudo apt-get install openssh-server、 然后确认sshserver是否启动了。ps -e|grep ssh。如果看到sshd那说明ss">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/uploads/1542358069.png">
+<meta property="og:image" content="https://qingyingliu.top/uploads/msql.png">
+<meta property="article:published_time" content="2018-11-16T08:43:02.000Z">
+<meta property="article:modified_time" content="2020-04-27T05:09:02.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/uploads/1542358069.png">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>搭建服务器 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85ssh"><span class="nav-number">1.</span> <span class="nav-text"> 安装SSH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85mysql"><span class="nav-number">2.</span> <span class="nav-text"> 安装mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85jdk"><span class="nav-number">3.</span> <span class="nav-text"> 安装jdk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85apache-tomcat"><span class="nav-number">4.</span> <span class="nav-text"> 安装Apache-Tomcat</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搭建服务器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-16 16:43:02" itemprop="dateCreated datePublished" datetime="2018-11-16T16:43:02+08:00">2018-11-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>今天买了一个阿里云服务器，为了就是想让自己写的网页也能够在校外网打开。下面一步一步搭建我的服务器。</p>
+<h3 id="安装ssh"><a class="markdownIt-Anchor" href="#安装ssh"></a> 安装SSH</h3>
+<p>安装SSH的原因是为了能够在本地的电脑连接服务器。</p>
+<ol>
+<li>Ubuntu缺省没有安装SSH Server，使用这个命令安装：<code>sudo apt-get install openssh-server</code>、</li>
+<li>然后确认sshserver是否启动了。<code>ps -e|grep ssh</code>。如果看到sshd那说明ssh-server已经启动了，如下图所示。<br />
+<img src="/uploads/1542358069.png" alt="" /></li>
+<li>启动SSH。<code>sudo/etc/init.d/ssh start</code></li>
+</ol>
+<a id="more"></a>
+<h3 id="安装mysql"><a class="markdownIt-Anchor" href="#安装mysql"></a> 安装mysql</h3>
+<p>购买服务器肯定是需要安装数据库的。没有数据库，什么事情都做不了。下面我来介绍在linux服务器上mysql的安装。</p>
+<ol>
+<li>更新软件源。注意，在没有更新之前可能会出错，所以这一步是很需要的（亲测）。<code>sudo apt-get update</code></li>
+<li>更新软件源之后，我们就可以接着安装mysql服务器端和客户端了。安装的命令：<code>sudo apt-get install mysql-server mysql-client</code>。</li>
+<li>设置密码。<br />
+<img src="/uploads/msql.png" alt="" /></li>
+<li>设置完密码之后我们就可以登陆：<code>mysql -u root -p</code>。<br />
+但是这个时候我们需要远程连接数据库，所以这个时候我们需要远程连接数据库。</li>
+<li>远程连接数据库。可以查看我上一篇文章。<a target="_blank" rel="noopener" href="https://lewin671.github.io/2018/11/16/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">mysql远程连接</a></li>
+</ol>
+<h3 id="安装jdk"><a class="markdownIt-Anchor" href="#安装jdk"></a> 安装jdk</h3>
+<ol>
+<li>先在官网下载jdk</li>
+<li>把jdk压缩包传给服务器，通过<strong>WinSCP</strong>软件就可以，很方便。</li>
+<li>把压缩包放在<code>usr/local/java</code>文件夹中，进行解压：<code>tar zxvf jdk-7u45-linux-x64.gz</code></li>
+<li>修改环境变量。<code>vim /etc/profile</code>。在<code>/etc/profile</code>文件的最后面添加下面的语句：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME&#x3D;&#x2F;opt&#x2F;java&#x2F;jdk1.7.0_45</span><br><span class="line">JRE_HOME&#x3D;$JAVA_HOME&#x2F;jre</span><br><span class="line">PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$JRE_HOME&#x2F;bin</span><br><span class="line">CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;jt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar:$JRE_HOME&#x2F;lib</span><br><span class="line">export JAVA_HOME JRE_HOME PATH CLASSPATH</span><br></pre></td></tr></table></figure>
+<p>注意把jdk的版本改成你自己的版本就行了。</p>
+<h3 id="安装apache-tomcat"><a class="markdownIt-Anchor" href="#安装apache-tomcat"></a> 安装Apache-Tomcat</h3>
+<ol>
+<li>通过<strong>WinSCP</strong>把<code>apache-tomcat-8.0.53.tar.gz</code>传到服务器的<code>/home/server/apache-tomcat</code>文件夹。</li>
+<li>解压缩<code>apache-tomcat-8.0.53.tar.gz</code>。<code>tar zxvf apache-tomcat-8.0.53.tar.gz</code>。</li>
+<li><a target="_blank" rel="noopener" href="http://xn--binstartup-3m4pl08snf5bwc0ay99c.xn--shshutdown-ih7q.sh">配置bin文件的startup.sh和shutdown.sh</a>。在文件最后面添加下面的语句：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME&#x3D;&#x2F;opt&#x2F;java&#x2F;jdk1.7.0_45</span><br><span class="line">JRE_HOME&#x3D;$JAVA_HOME&#x2F;jre</span><br><span class="line">PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$JRE_HOME&#x2F;bin</span><br><span class="line">CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;jt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar:$JRE_HOME&#x2F;lib</span><br><span class="line">export JAVA_HOME JRE_HOME PATH CLASSPATH</span><br><span class="line">TOMCAT_HOME&#x3D;&#x2F;home&#x2F;server&#x2F;apache-tomcat&#x2F;apache-tomcat-8.0.53</span><br></pre></td></tr></table></figure>
+<pre><code>注意： jdk和apache-tomcat的路径根据自己的实际路径填写。
+</code></pre>
+<ol start="4">
+<li>开启apache-tomcat。<code>./bin/startup.sh</code>。如果成功，则会出现下面的提示：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Using CATALINA_BASE:   &#x2F;home&#x2F;server&#x2F;apache-tomcat&#x2F;apache-tomcat-8.0.53</span><br><span class="line">Using CATALINA_HOME:   &#x2F;home&#x2F;server&#x2F;apache-tomcat&#x2F;apache-tomcat-8.0.53</span><br><span class="line">Using CATALINA_TMPDIR: &#x2F;home&#x2F;server&#x2F;apache-tomcat&#x2F;apache-tomcat-8.0.53&#x2F;temp</span><br><span class="line">Using JRE_HOME:        &#x2F;opt&#x2F;java&#x2F;jdk1.7.0_45&#x2F;jre</span><br><span class="line">Using CLASSPATH:       &#x2F;home&#x2F;server&#x2F;apache-tomcat&#x2F;apache-tomcat-8.0.53&#x2F;bin&#x2F;bootstrap.jar:&#x2F;home&#x2F;server&#x2F;apache-tomcat&#x2F;apache-tomcat-8.0.53&#x2F;bin&#x2F;tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" rel="prev" title="mysql远程连接">
+                  <i class="fa fa-chevron-left"></i> mysql远程连接
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/11/18/programming/java-web/%E8%A7%A3%E5%86%B3cookie%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/" rel="next" title="解决在Java Web中的cookie不支持中文的问题">
+                  解决在Java Web中的cookie不支持中文的问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

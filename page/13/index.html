@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="记录数学和计算机方面的知识">
+<meta property="og:type" content="website">
+<meta property="og:title" content="qingying&#39;s blog">
+<meta property="og:url" content="https://qingyingliu.top/page/13/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="记录数学和计算机方面的知识">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Qingying Liu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/page/13/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+      
+
+      
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/29/programming/python/Python%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/29/programming/python/Python%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">Python文件和目录操作</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-29 15:47:48" itemprop="dateCreated datePublished" datetime="2018-11-29T15:47:48+08:00">2018-11-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="基本文件操作"><a class="markdownIt-Anchor" href="#基本文件操作"></a> 基本文件操作</h3>
+<h4 id="创建和打开文件"><a class="markdownIt-Anchor" href="#创建和打开文件"></a> 创建和打开文件</h4>
+<p>在Python中，想要操作文件需要先创建或者打开指定文件，可以通过open（）函数实现。open（）函数的语法格式如下：</p>
+<p><code>file = open(filename[,mode[,buffering]])</code></p>
+<p>其中<code>[]</code>里面的参数表示是可选参数。</p>
+<ul>
+<li>filename 表示文件路径</li>
+<li>mode表示文件打开的方式</li>
+<li>buffering: 用于指定读写文件的缓冲模式。值为0表示不缓存，值为1表示缓存，如果大于1表示缓冲区的大小。</li>
+</ul>
+<h4 id="打开一个不存在的文件时先创建该文件"><a class="markdownIt-Anchor" href="#打开一个不存在的文件时先创建该文件"></a> 打开一个不存在的文件时先创建该文件</h4>
+<p>在默认情况下，使用open打开一个不存在的文件会抛出异常。解决的方法有两种：</p>
+<ul>
+<li>自己手动在该路径建立一个文件</li>
+<li>打开文件的的时候赋予写权限，比如：w,w+,a,a+等等。这样，当要打开一个不存在的文件时，就可以创建一个新的文件了。</li>
+</ul>
+<p>例如：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/29/programming/python/Python%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/29/programming/python/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/29/programming/python/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">Python面向对象</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-29 00:21:00" itemprop="dateCreated datePublished" datetime="2018-11-29T00:21:00+08:00">2018-11-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="定义类"><a class="markdownIt-Anchor" href="#定义类"></a> 定义类</h3>
+<p>在Python中，类的定义使用class关键字来实现，语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span>:</span></span><br><span class="line">    <span class="string">&quot;类的帮助信息&quot;</span>  <span class="comment"># 类文档的字符串</span></span><br><span class="line">    statement   <span class="comment"># 类体</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建类的实例"><a class="markdownIt-Anchor" href="#创建类的实例"></a> 创建类的实例</h3>
+<p>创建类的实例的语法如下：</p>
+<p><code>variable = ClassName(parameterlist)</code></p>
+<p>其中variable是实例对象，parameterlist是参数列表。当创建一个类时，会自动调用__init__()方法。<code>__init__</code>()方法，除了self参数外，还可以自定义一些参数，参数间使用都好分割。比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Geese</span>:</span></span><br><span class="line">    <span class="string">&quot;大雁类&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;我是大雁类&quot;</span>)</span><br><span class="line"></span><br><span class="line">wildGeese = Geese()</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/29/programming/python/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/27/algorithm/tree/binary-search-tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/27/algorithm/tree/binary-search-tree/" class="post-title-link" itemprop="url">binary search tree</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-27 16:14:24" itemprop="dateCreated datePublished" datetime="2018-11-27T16:14:24+08:00">2018-11-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/Tree/" itemprop="url" rel="index"><span itemprop="name">Tree</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="二叉搜索树的概念"><a class="markdownIt-Anchor" href="#二叉搜索树的概念"></a> 二叉搜索树的概念</h3>
+<p>在《算法导论》中是这样定义的：</p>
+<blockquote>
+<p>二叉搜索树，对任何结点x，其左子树的关键字最大不超过x.key，其右子树的关键字最小不低于x.key。</p>
+</blockquote>
+<p>注： 上面的<code>关键字</code>表示的是结点的数据域，下同。</p>
+<p>在二叉搜索树中，不同的二叉搜索树可以表示同一数值的集和，所以我们后面还会讨论如何构建更好的二叉树（不是这一篇文章)。比如下面的两颗二叉搜索树就表示了相同的集合。<br />
+<img src="/uploads/bst1.png" alt="binarytree1" /><br />
+下面我们直接进入主题，如何构建二叉搜索树，如何对二叉搜索树进行操作，包括插入、删除和查找。</p>
+<h3 id="二叉搜索树的操作"><a class="markdownIt-Anchor" href="#二叉搜索树的操作"></a> 二叉搜索树的操作</h3>
+<h4 id="查询"><a class="markdownIt-Anchor" href="#查询"></a> 查询</h4>
+<p>在二叉搜索树中，最简单的就是查询一个（可以比较的）元素是不是属于二叉搜索树的，因为根据二叉搜索树的定义可以知道，对于一个需要查找的元素element，如果element大于当前结点，那么它肯定是只可能存在于右子树；同理，如果element小于当前结点，那么它肯定只可能存在于右子树，如果element的关键字等于当前结点的关键字，那么当前结点就是我们需要查找的结点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span>(<span class="params">x,element</span>):</span></span><br><span class="line">    <span class="keyword">if</span> x == null:</span><br><span class="line">        <span class="keyword">return</span> null</span><br><span class="line">    <span class="keyword">if</span> x &gt; element:</span><br><span class="line">        <span class="keyword">return</span> search(x.left,element)</span><br><span class="line">    <span class="keyword">elif</span> x &lt; element:</span><br><span class="line">        <span class="keyword">return</span> search(x.right,element)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<p>当然，我们除了查找特定值之外，我们还可以查找最到最小值。根据二叉搜索树的定义，最小值肯定是在最左边，最大值肯定是最右边。通过O(h)的时间复杂度可以找到。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x是当前结点</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span>-<span class="title">min</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">if</span> x.left != null:</span><br><span class="line">        <span class="keyword">return</span> find-min(x.left)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span>-<span class="title">max</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">if</span> x.right != null:</span><br><span class="line">        <span class="keyword">return</span> find-max(x.right)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<p>除此之外，我们还可以查找x的后继，这在删除一个结点的时候会用到。<br />
+注： 一个结点x的后继是大于x.key的最小关键字的结点。<br />
+下面根据x结点是否有右结点来进行讨论：</p>
+<ul>
+<li>如果x存在右结点（或者右子树），那么后继肯定存在右子树</li>
+<li>如果x不存在右结点，则后继y只可能存在于x的最底层祖先（根结点），且y的左孩子也是x的一个祖先</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span>-<span class="title">successor</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="comment"># 如果存在右子树，则返回右子树的一个最小值</span></span><br><span class="line">    <span class="keyword">if</span>(x.right!=null):</span><br><span class="line">        <span class="keyword">return</span> find-min(x.right)</span><br><span class="line"></span><br><span class="line">    y = x.father</span><br><span class="line">    <span class="keyword">while</span>(y!=null <span class="keyword">and</span> x==y.right):</span><br><span class="line">        x= y</span><br><span class="line">        y = y.father</span><br><span class="line">    <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure>
+<h4 id="插入"><a class="markdownIt-Anchor" href="#插入"></a> 插入</h4>
+<p>插入是一个动态更新二叉搜索树的过程，而我们需要去做的就是去更新结点的位置和相关属性(left,right,father)。<br />
+首先我们需要找到插入的位置，这个时候我们需要使用类似于查找的方法找到插入的位置，然后再更新插入之后的相关属性即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">element</span>):</span></span><br><span class="line">    <span class="comment"># 从根开始找</span></span><br><span class="line">    x = root</span><br><span class="line">    y = null</span><br><span class="line">    <span class="keyword">while</span>(x!=null):</span><br><span class="line">        y =x</span><br><span class="line">        <span class="keyword">if</span> x.key &gt; element:</span><br><span class="line">            x = x.left</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            x = x.right</span><br><span class="line">    <span class="comment"># 此时的x就是我们要插入的结点的位置</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#插入之后还需要更新结点的信息</span></span><br><span class="line">    x.father = y</span><br><span class="line">    <span class="keyword">if</span>(x.key&gt;y.key):</span><br><span class="line">        y.right = x</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        y.left = x</span><br></pre></td></tr></table></figure>
+<h4 id="删除"><a class="markdownIt-Anchor" href="#删除"></a> 删除</h4>
+<p>从一颗二叉搜索树中删除一个结点x可以分为三种基本情况：</p>
+<ul>
+<li>如果x没有孩子结点，那么只是将他简单地删除即可，并修改它的父结点</li>
+<li>如果x只有一个孩子结点，那么将这个孩子提上来，代替x，并修改x的父结点</li>
+<li>如果x有两个孩子结点，此时后继肯定存在于右子树，这个时候需要把右子树提上来即可。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">element</span>):</span></span><br><span class="line">    <span class="comment">#先找到元素的位置,x</span></span><br><span class="line">    x = find(element)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#第一种情况，没有左右孩子</span></span><br><span class="line">    <span class="keyword">if</span> x.left == null <span class="keyword">and</span> x.right ==null:</span><br><span class="line">        update(x.father,x)</span><br><span class="line">        <span class="keyword">del</span> x</span><br><span class="line">        </span><br><span class="line">    <span class="comment">#第三种情况，有两个孩子结点</span></span><br><span class="line">    <span class="keyword">if</span> x.left != null <span class="keyword">and</span> x.right != null:</span><br><span class="line">        successor = find-min(x.right)</span><br><span class="line">        <span class="comment"># 如果x是左孩子</span></span><br><span class="line">        <span class="keyword">if</span> x.father.left == x:</span><br><span class="line">            x.father.left = successor</span><br><span class="line">            successor.left = x.left</span><br><span class="line">            successor.right = x.right</span><br><span class="line">            <span class="keyword">del</span> x</span><br><span class="line">    </span><br><span class="line">        <span class="comment">#如果x是右孩子，类似与左孩子</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#第二种情况，只有一个孩子结点</span></span><br><span class="line">    <span class="comment">#如果是左孩子：</span></span><br><span class="line">    <span class="keyword">if</span> x.left != null <span class="keyword">and</span> x.right == null:</span><br><span class="line">        x.father.child = x.left</span><br><span class="line">        x.left.father = x.father</span><br><span class="line">    <span class="comment">#如果是右孩子，类似于左孩子，这里不再写出</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/26/programming/python/%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E5%BA%8F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/26/programming/python/%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E5%BA%8F%E5%88%97/" class="post-title-link" itemprop="url">功能强大的序列</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-26 21:04:21" itemprop="dateCreated datePublished" datetime="2018-11-26T21:04:21+08:00">2018-11-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h3>
+<p>序列是Python中的一种常用的内置数据类型，一共有五种，包括：</p>
+<ul>
+<li>列表</li>
+<li>元组</li>
+<li>集合</li>
+<li>字典</li>
+<li>字符串</li>
+</ul>
+<p>这篇博客讲的是前四种序列，和字符串分开讲。<br />
+在上面5种序列中，很多的属性和方法都是类似的，下面介绍它们的公共的方法和属性。</p>
+<h3 id="共有的方法"><a class="markdownIt-Anchor" href="#共有的方法"></a> 共有的方法</h3>
+<h4 id="索引indexing"><a class="markdownIt-Anchor" href="#索引indexing"></a> 索引(Indexing)</h4>
+<p>类似与C++、Java等语言的数组，Python的序列也是通过索引来访问的，而且索引的开始下标都是为0.<br />
+比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">verse = [<span class="string">&#x27;春眠不觉晓&#x27;</span>,<span class="string">&#x27;处处闻啼鸟&#x27;</span>,<span class="string">&#x27;夜来风雨声&#x27;</span>,<span class="string">&#x27;花落知多少&#x27;</span>]</span><br><span class="line"><span class="comment"># 输出第1个元素</span></span><br><span class="line">print(verse[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#输出第三个元素</span></span><br><span class="line">print(verse[<span class="number">2</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">春眠不觉晓</span><br><span class="line">夜来风雨声</span><br></pre></td></tr></table></figure>
+<p>但是，Python也有它独自的特点：负数索引。这个索引从最后一个元素开始计数，从-1开始。然后向左依次索引减小1。<br />
+即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-n, -(n-1) , -(n-2) , ,... , -2 , -1 #n为序列的长度</span><br></pre></td></tr></table></figure>
+<p>比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">verse = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">print(verse[<span class="number">-1</span>])</span><br><span class="line">print(verse[<span class="number">-2</span>])</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="切片sliceing"><a class="markdownIt-Anchor" href="#切片sliceing"></a> 切片(Sliceing)</h4>
+<p>切片操作是访问序列中元素的另一种方法，他可以访问一定范围内的元素。通过切片操作可以生成一个新的序列，实现切片操作的语法格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sname[start,end,step]</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>sname: 表示序列的名称</li>
+<li>start： 表示切片的开始位置（包括该位置）。</li>
+<li>end： 切片的截止位置（不包括该位置）。</li>
+<li>step： 步长。</li>
+</ul>
+<p>值得注意的是，这里的参数都是有默认参数的。start默认为0，end默认为序列的长度，step默认为1。<br />
+比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">squares = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>]</span><br><span class="line"></span><br><span class="line">print(squares[<span class="number">-3</span>:])</span><br><span class="line"><span class="comment">#all</span></span><br><span class="line">print(squares[:])</span><br><span class="line"><span class="comment">#reverse</span></span><br><span class="line">print(squares[::<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[9, 16, 25]</span><br><span class="line">[1, 4, 9, 16, 25]</span><br><span class="line">[25, 16, 9, 4, 1]</span><br></pre></td></tr></table></figure>
+<h4 id="序列相加adding"><a class="markdownIt-Anchor" href="#序列相加adding"></a> 序列相加(Adding)</h4>
+<p>在Python中，支持两种<strong>类型相同</strong>的序列进行相加操作，将两个列表合成一个列表。<br />
+比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding&#x3D;utf-8</span><br><span class="line">num &#x3D; [1, 2, 3, 4]</span><br><span class="line">str &#x3D; [&#39;python niubi&#39;,&#39;i love python&#39;,&#39;why not learn python&#39;]</span><br><span class="line">print(num + str)</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, &#39;python niubi&#39;, &#39;i love python&#39;, &#39;why not learn python&#39;]</span><br></pre></td></tr></table></figure>
+<p>注意我刚才上面说的话，支持两种类型相同的序列进行操作，指的是序列的类型，而不是序列元素的类型。比如元组和列表就不能够进行加法操作。</p>
+<h4 id="乘法操作multiplying"><a class="markdownIt-Anchor" href="#乘法操作multiplying"></a> 乘法操作(multiplying)</h4>
+<p>通过乘法操作，我们可以把序列重复n次。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding&#x3D;utf-8</span><br><span class="line">l &#x3D; [1, 2, 3]</span><br><span class="line">print(l*3)</span><br></pre></td></tr></table></figure>
+<p>输出的结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 1, 2, 3, 1, 2, 3]</span><br></pre></td></tr></table></figure>
+<h4 id="检查某个元素是否是序列的成员"><a class="markdownIt-Anchor" href="#检查某个元素是否是序列的成员"></a> 检查某个元素是否是序列的成员</h4>
+<p>通过in关键字，可以判断某个元素是否为序列的成员。<br />
+<code>item in sequence</code><br />
+返回的结果是true或者false</p>
+<h4 id="计算序列的长度-最大值和最小值"><a class="markdownIt-Anchor" href="#计算序列的长度-最大值和最小值"></a> 计算序列的长度、最大值和最小值</h4>
+<p>计算序列的长度： len()函数<br />
+计算最小值： min()<br />
+计算最大值： max()<br />
+比如计算上面例子中的num序列的长度可以这样写：<code>len(num)</code></p>
+<h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3>
+<p>列表是可变的序列，类似于C语言的数组，但是它的元素的类型却是任意的。下面来介绍一些关于列表的方法。</p>
+<h4 id="列表的创建和删除"><a class="markdownIt-Anchor" href="#列表的创建和删除"></a> 列表的创建和删除</h4>
+<p>可以直接通过赋值运算符和<code>[]</code>来创建列表，也可以使用list函数来创建数值列表。<br />
+删除列表：<code>del listname</code>，其中listname是列表名<br />
+例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过扶植和[]来创建列表</span></span><br><span class="line">list1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过list()来创建数值列表</span></span><br><span class="line">list2 = list(range(<span class="number">1</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">print(list1)</span><br><span class="line">print(list2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除列表</span></span><br><span class="line"><span class="keyword">del</span> list1</span><br><span class="line"><span class="keyword">del</span> list2</span><br></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, 5]</span><br><span class="line">[1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
+<h4 id="遍历序列"><a class="markdownIt-Anchor" href="#遍历序列"></a> 遍历序列</h4>
+<p>语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> listname:</span><br><span class="line">    <span class="comment"># do some same things</span></span><br></pre></td></tr></table></figure>
+<p>如果我们需要同时得到元素和下标，则可以这样便利：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(listname):</span><br><span class="line">    <span class="comment"># do some same things</span></span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line">team =[<span class="string">&#x27;火箭&#x27;</span>,<span class="string">&#x27;勇士&#x27;</span>,<span class="string">&#x27;开拓者&#x27;</span>,<span class="string">&#x27;雷霆&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(team):</span><br><span class="line">    print(index,<span class="string">&quot; :&quot;</span>+item)</span><br></pre></td></tr></table></figure>
+<h4 id="排序列表"><a class="markdownIt-Anchor" href="#排序列表"></a> 排序列表</h4>
+<p>排序列表有两种方法，使用列表对象的sort方法和内置的sorted函数。<br />
+比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">l = [<span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">7</span>]</span><br><span class="line">l.sort()</span><br><span class="line">print(l)</span><br><span class="line"></span><br><span class="line">l = [<span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">7</span>]</span><br><span class="line">l = sorted(l)</span><br><span class="line">print(l)</span><br></pre></td></tr></table></figure>
+<p>其中列表对象的sort方法为<br />
+<code>listname.sort(cmp = None, key = None, reverse= NOne)</code><br />
+其中cmp是老的方法，这里不详细介绍（类似与C++的sort函数的cmp函数），主要介绍key和reverse。<br />
+key: 通过某个函数或者是映射返回的值，根据这个值来进行排序。<br />
+reverse： 升序还是降序，默认升序。<br />
+sorted的方法类似，只是加了一个对象参数，表明需要排序的对象。<br />
+<code>sorted(iterable, key = None,reverse = None)</code><br />
+在key那里很多时候为了简洁，会经常用到lamber表达式，有兴趣的同学可以去查一查。</p>
+<h4 id="列表推导式"><a class="markdownIt-Anchor" href="#列表推导式"></a> 列表推导式</h4>
+<p>列表推导式可以快速生成一个列表，或者根据某个列表生存满足指定需求的列表。<br />
+<code>list = [Expression for var in range if condition]</code><br />
+上面的表达的意思就是for循环的var变量如果满足condition表达是，则会加入到list中。</p>
+<p>比如，我们想得到20以内的偶数，我们可以这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line">list = [var <span class="keyword">for</span> var <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">21</span>) <span class="keyword">if</span> var %<span class="number">2</span> ==<span class="number">0</span>]</span><br><span class="line">print(list)</span><br></pre></td></tr></table></figure>
+<h3 id="元组"><a class="markdownIt-Anchor" href="#元组"></a> 元组</h3>
+<p>元组的方法和列表类似，这里只列举出不同之处。</p>
+<ol>
+<li>创建方法不同。元组的创建方法使用<code>()</code>来创建。</li>
+<li>元组是不可修改的，所以修改序列的方法在这里不能用，比如append，insert等等</li>
+<li>列表不能够作为字典的健,而元组可以。</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="comment"># 创建元组</span></span><br><span class="line">tp = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 便利元组</span></span><br><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(tp):</span><br><span class="line">    print(index,item)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/23/programming/python/%E9%80%89%E6%8B%A9%E5%92%8C%E5%BE%AA%E7%8E%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/23/programming/python/%E9%80%89%E6%8B%A9%E5%92%8C%E5%BE%AA%E7%8E%AF/" class="post-title-link" itemprop="url">选择和循环</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-23 10:18:29" itemprop="dateCreated datePublished" datetime="2018-11-23T10:18:29+08:00">2018-11-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="选择语句"><a class="markdownIt-Anchor" href="#选择语句"></a> 选择语句</h3>
+<h4 id="if语句"><a class="markdownIt-Anchor" href="#if语句"></a> if语句</h4>
+<p>语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> expression:</span><br><span class="line">    语句块</span><br></pre></td></tr></table></figure>
+<p>如果expression为真，则跳到相应的语句块。例如：<br />
+判断数字是否为5可以如下这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">number = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">if</span> number = <span class="number">5</span>:</span><br><span class="line">    print(<span class="string">&#x27;the number is 5&#x27;</span>)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/23/programming/python/%E9%80%89%E6%8B%A9%E5%92%8C%E5%BE%AA%E7%8E%AF/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/23/programming/python/python%E8%AF%AD%E6%B3%95%E7%89%B9%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/23/programming/python/python%E8%AF%AD%E6%B3%95%E7%89%B9%E7%82%B9/" class="post-title-link" itemprop="url">python语法特点</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-23 00:11:51" itemprop="dateCreated datePublished" datetime="2018-11-23T00:11:51+08:00">2018-11-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这篇文章主要介绍python的一些语法特点和习惯，包括注释，</p>
+<h3 id="注释"><a class="markdownIt-Anchor" href="#注释"></a> 注释</h3>
+<p>注释的作用就是对代码的解释和说明，让他人了解代码实现的功能，从而帮助程序猿更好地阅读代码。注释的内容python将不会执行，因此也可以用于临时不想执行的代码。</p>
+<h4 id="单行注释"><a class="markdownIt-Anchor" href="#单行注释"></a> 单行注释</h4>
+<p>在python中，使用<code>#</code>作为单行注释的符号。从符号<code>#</code>开始直到换行为止，<code>#</code>所有的内容都作为注释的内容，并被编译器忽略。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/23/programming/python/python%E8%AF%AD%E6%B3%95%E7%89%B9%E7%82%B9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/18/configuration/%E8%AE%A9mysql%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/18/configuration/%E8%AE%A9mysql%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87/" class="post-title-link" itemprop="url">让mysql支持中文</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-18 16:43:02" itemprop="dateCreated datePublished" datetime="2018-11-18T16:43:02+08:00">2018-11-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="在etcmysql-mysqlcnf后添加下面的代码"><a class="markdownIt-Anchor" href="#在etcmysql-mysqlcnf后添加下面的代码"></a> 在<code>/etc/mysql/ mysql.cnf</code>后添加下面的代码:</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set&#x3D;utf8</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">character_set_server&#x3D;utf8</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/18/configuration/%E8%AE%A9mysql%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/18/programming/java-web/%E8%A7%A3%E5%86%B3cookie%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/18/programming/java-web/%E8%A7%A3%E5%86%B3cookie%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">解决在Java Web中的cookie不支持中文的问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-18 16:43:02" itemprop="dateCreated datePublished" datetime="2018-11-18T16:43:02+08:00">2018-11-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/JSP/" itemprop="url" rel="index"><span itemprop="name">JSP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天在写一个登陆界面的时候，需要使用记住密码的功能，把网页部署到服务器后，发现在使用中文账号进行登陆时候进行记住密码的时候会出错。在查阅了一些资料之后，找到了解决方法。</p>
+<ol>
+<li>把保存到cookie的值的编码改成utf-8。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//进行转编码</span></span><br><span class="line">String userName1=URLEncoder.encode(userName,<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">String password1=URLEncoder.encode(password,<span class="string">&quot;UTF-8&quot;</span>);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/18/programming/java-web/%E8%A7%A3%E5%86%B3cookie%E4%B8%AD%E6%96%87%E9%97%AE%E9%A2%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">搭建服务器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-16 16:43:02" itemprop="dateCreated datePublished" datetime="2018-11-16T16:43:02+08:00">2018-11-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天买了一个阿里云服务器，为了就是想让自己写的网页也能够在校外网打开。下面一步一步搭建我的服务器。</p>
+<h3 id="安装ssh"><a class="markdownIt-Anchor" href="#安装ssh"></a> 安装SSH</h3>
+<p>安装SSH的原因是为了能够在本地的电脑连接服务器。</p>
+<ol>
+<li>Ubuntu缺省没有安装SSH Server，使用这个命令安装：<code>sudo apt-get install openssh-server</code>、</li>
+<li>然后确认sshserver是否启动了。<code>ps -e|grep ssh</code>。如果看到sshd那说明ssh-server已经启动了，如下图所示。<br />
+<img src="/uploads/1542358069.png" alt="" /></li>
+<li>启动SSH。<code>sudo/etc/init.d/ssh start</code></li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">mysql远程连接</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-16 11:41:25" itemprop="dateCreated datePublished" datetime="2018-11-16T11:41:25+08:00">2018-11-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近在尝试将实验室的电脑当做自己的服务器，发现不能够远程实验室的mysql。于是在查阅了一番资料之后，写此博客来记录解决办法。</p>
+<h4 id="检查3306端口是否开启"><a class="markdownIt-Anchor" href="#检查3306端口是否开启"></a> 检查3306端口是否开启</h4>
+<p><code>netstat -an|grep 3306</code><br />
+一般来说这个端口都是打开的。但是服务器的就不一定了，服务器的解决方法请看最下面的注意点。<br />
+<img src="/uploads/portCheck.png" alt="port" /></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

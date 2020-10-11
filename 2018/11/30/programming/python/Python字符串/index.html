@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="字符串常用操作  拼接字符串 使用+运算符可以完成对多个字符串的拼接，+运算符可以连接多个字符串并产生一个字符串对象。 例如： 123met_en &#x3D; &amp;#x27;Rememberance is a form fo meeting. Forgetfulness is a form of freedom.&amp;#x27;met_cn &#x3D; &amp;#x27;记忆是一种相遇。遗忘是一种自由&amp;#x27;print">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python字符串">
+<meta property="og:url" content="https://qingyingliu.top/2018/11/30/programming/python/Python%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="字符串常用操作  拼接字符串 使用+运算符可以完成对多个字符串的拼接，+运算符可以连接多个字符串并产生一个字符串对象。 例如： 123met_en &#x3D; &amp;#x27;Rememberance is a form fo meeting. Forgetfulness is a form of freedom.&amp;#x27;met_cn &#x3D; &amp;#x27;记忆是一种相遇。遗忘是一种自由&amp;#x27;print">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-30T15:52:13.000Z">
+<meta property="article:modified_time" content="2020-04-27T05:09:02.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2018/11/30/programming/python/Python%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python字符串 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text"> 字符串常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.</span> <span class="nav-text"> 拼接字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="nav-number">1.2.</span> <span class="nav-text"> 计算字符串的长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.</span> <span class="nav-text"> 截取字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%89%B2-%E5%90%88%E5%B9%B6%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.4.</span> <span class="nav-text"> 分割、合并字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E7%B4%A2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.5.</span> <span class="nav-text"> 检索字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#count%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.1.</span> <span class="nav-text"> count()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#find%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.2.</span> <span class="nav-text"> find()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#index%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.3.</span> <span class="nav-text"> index()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#startwith%E6%96%B9%E6%B3%95endwith%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.4.</span> <span class="nav-text"> startwith()方法&#x2F;endwith()方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%AF%8D%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.6.</span> <span class="nav-text"> 字母的大小写转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E7%A9%BA%E6%A0%BC%E5%92%8C%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="nav-number">1.7.</span> <span class="nav-text"> 去除字符串中的空格和特殊字符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.</span> <span class="nav-text"> 格式化字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%99%BE%E5%88%86%E5%8F%B7"><span class="nav-number">2.1.</span> <span class="nav-text"> 使用百分号%</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8format%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 使用format方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E4%BD%8D%E7%BD%AE%E6%9D%A5%E5%A1%AB%E5%85%85%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 通过位置来填充字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87key%E6%9D%A5%E5%A1%AB%E5%85%85"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 通过key来填充</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.3.</span> <span class="nav-text"> 通过对象属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-number">2.2.4.</span> <span class="nav-text"> 格式限定符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.</span> <span class="nav-text"> 字符串编码转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8encode%E8%BF%9B%E8%A1%8C%E7%BC%96%E7%A0%81"><span class="nav-number">3.1.</span> <span class="nav-text"> 使用encode()进行编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8decode%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E8%A7%A3%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text"> 使用decode()方法进行解码</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/30/programming/python/Python%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python字符串
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-30 23:52:13" itemprop="dateCreated datePublished" datetime="2018-11-30T23:52:13+08:00">2018-11-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="字符串常用操作"><a class="markdownIt-Anchor" href="#字符串常用操作"></a> 字符串常用操作</h3>
+<h4 id="拼接字符串"><a class="markdownIt-Anchor" href="#拼接字符串"></a> 拼接字符串</h4>
+<p>使用<code>+</code>运算符可以完成对多个字符串的拼接，<code>+</code>运算符可以连接多个字符串并产生一个字符串对象。<br />
+例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">met_en = <span class="string">&#x27;Rememberance is a form fo meeting. Forgetfulness is a form of freedom.&#x27;</span></span><br><span class="line">met_cn = <span class="string">&#x27;记忆是一种相遇。遗忘是一种自由&#x27;</span></span><br><span class="line">print(met_en + <span class="string">&#x27;----&#x27;</span> + met_cn)</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rememberance is a form fo meeting. Forgetfulness is a form of freedom.----记忆是一种相遇。遗忘是一种自由</span><br></pre></td></tr></table></figure>
+<p>注意： 字符串不允许直接与其他类型的数据拼接，而应该使用<code>str</code>函数转换成字符类型再进行拼接。</p>
+<a id="more"></a>
+<h4 id="计算字符串的长度"><a class="markdownIt-Anchor" href="#计算字符串的长度"></a> 计算字符串的长度</h4>
+<p>使用<code>len</code>函数可以计算字符串的长度，值得注意的是，<code>len</code>函数计算的字符的个数，不区分数字，字母和汉字，所有的字符都按照一个字符计算。<br />
+再实际开发中，有时候需要计算实际所占的<strong>字节数</strong>，即如果采用UTF-8编码，汉字占3个字节。例如，如果要采取UTF-8编码的字符串长度，可以使用下面的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&#x27;人生苦短，我学python&#x27;</span></span><br><span class="line"><span class="comment"># 默认采用UTF-8编码</span></span><br><span class="line">length = len(str1.encode())</span><br><span class="line">print(length)</span><br></pre></td></tr></table></figure>
+<p>输出结果为: <code>27</code></p>
+<h4 id="截取字符串"><a class="markdownIt-Anchor" href="#截取字符串"></a> 截取字符串</h4>
+<p>由于字符串也是一种序列，所以我们可以使用截取序列的方法，详情请看之前序列的文章。</p>
+<h4 id="分割-合并字符串"><a class="markdownIt-Anchor" href="#分割-合并字符串"></a> 分割、合并字符串</h4>
+<p>字符串对象的<code>split()</code>方法可以实现分割字符串，也就是把一个字符串按照指定的分隔符<strong>切分成字符列表</strong>。语法格式如下：<br />
+<code>str.split(sep, maxsplit)</code><br />
+参数说明：</p>
+<ul>
+<li>str: 表示要进行分割的字符串</li>
+<li>sep： 用于指定分隔符，默认为None，即所有的空字符</li>
+<li>maxsplit： 可选参数，用来指定分割的次数。如果不指定或者为-1，则分割次数没有限制。</li>
+<li>返回值： 分割后的字符串列表</li>
+</ul>
+<p>比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&#x27;&#x27;&#x27;这里</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">有  很多 空白符&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">str2 = <span class="string">&#x27;cout&lt;&lt;test&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 去掉所有的空白符</span></span><br><span class="line">print(str1.split())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用&lt;&lt;分割</span></span><br><span class="line">print(str2.split(<span class="string">&#x27;&lt;&lt;&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[&#39;这里&#39;, &#39;有&#39;, &#39;很多&#39;, &#39;空白符&#39;]</span><br><span class="line">[&#39;cout&#39;, &#39;test&#39;]</span><br></pre></td></tr></table></figure>
+<p>合并字符串将会把多个字符串采用固定的分隔符连接在一起。例如：@Lewin@俞敏洪@刘亦菲@毛泽东就可以使用合并字符串的方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person_list = [<span class="string">&#x27;Lewin&#x27;</span>,<span class="string">&#x27;俞敏洪&#x27;</span>,<span class="string">&#x27;刘亦菲&#x27;</span>,<span class="string">&#x27;毛泽东&#x27;</span>]</span><br><span class="line"><span class="comment"># 注意第一个元素前不加分隔符</span></span><br><span class="line">res = <span class="string">&#x27;@&#x27;</span> + <span class="string">&#x27;@&#x27;</span>.join(person_list)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
+<h4 id="检索字符串"><a class="markdownIt-Anchor" href="#检索字符串"></a> 检索字符串</h4>
+<h5 id="count方法"><a class="markdownIt-Anchor" href="#count方法"></a> count()方法</h5>
+<p>语法：</p>
+<p><code>str.count(sub,[,start[,end]])</code></p>
+<p>参数说明：</p>
+<ul>
+<li>sub： 表示要检索的字串</li>
+<li>start： 可选参数，表示检索的开始位置。默认为0.</li>
+<li>end： 可选参数，表示检索范围的结束位置，如果不指定，则一直检索到结尾。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">&#x27;@Lewin@俞敏洪@刘亦菲@毛泽东&#x27;</span></span><br><span class="line">print(str.count(<span class="string">&#x27;@&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果为：4</p>
+<h5 id="find方法"><a class="markdownIt-Anchor" href="#find方法"></a> find()方法</h5>
+<p>用于检索字符串的起始位置。如果不存在则返回-1.语法格式如下：<br />
+<code>str.find(sub[,start[,end]]</code><br />
+参数和count的含义一样。</p>
+<h5 id="index方法"><a class="markdownIt-Anchor" href="#index方法"></a> index()方法</h5>
+<p>index和find方法基本一样，只是如果检索的字符串不存在，就会抛出异常。</p>
+<h5 id="startwith方法endwith方法"><a class="markdownIt-Anchor" href="#startwith方法endwith方法"></a> startwith()方法/endwith()方法</h5>
+<p>用来判断字符串的起始（结束）是否为指定字符。语法格式如下：<br />
+<code>startwith(str[,start[,end]])</code></p>
+<h4 id="字母的大小写转换"><a class="markdownIt-Anchor" href="#字母的大小写转换"></a> 字母的大小写转换</h4>
+<p>转换成大写： <code>str.upper()</code><br />
+转换成小写： <code>str.lower()</code><br />
+注意： 字符串是不可变的，所以经过大小写转换后源字符串不变，返回一个转换后的字符。<br />
+例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">origin_str = <span class="string">&#x27;Python&#x27;</span></span><br><span class="line">transform_str = origin_str.upper()</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;源字符串: &#x27;</span>,origin_str)</span><br><span class="line">print(<span class="string">&#x27;大写的字符串&#x27;</span>,transform_str)</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">源字符串:  Python</span><br><span class="line">大写的字符串 PYTHON</span><br></pre></td></tr></table></figure>
+<h4 id="去除字符串中的空格和特殊字符"><a class="markdownIt-Anchor" href="#去除字符串中的空格和特殊字符"></a> 去除字符串中的空格和特殊字符</h4>
+<p>使用<code>strip()</code>方法可以去除字符串中指定的字符。语法格式如下：<br />
+<code>str.strip([char])</code><br />
+默认将空白字符去除。</p>
+<h3 id="格式化字符串"><a class="markdownIt-Anchor" href="#格式化字符串"></a> 格式化字符串</h3>
+<p>格式化字符串是指先制定一个模板，在这个模板留几个空位，然后再根据需要填上相应的内容。这些空位需要指定符号标记（也成为占位符）。在Python中，格式化字符串有一下两种方法：</p>
+<h4 id="使用百分号"><a class="markdownIt-Anchor" href="#使用百分号"></a> 使用百分号<code>%</code></h4>
+<p>这里给出使用百分号的教程，由于现在Python中并不推荐这种方法，所以我这里就给出相关教程：<code>http://www.cnblogs.com/vamei/archive/2013/03/12/2954938.html</code>。</p>
+<h4 id="使用format方法"><a class="markdownIt-Anchor" href="#使用format方法"></a> 使用format方法</h4>
+<h5 id="通过位置来填充字符串"><a class="markdownIt-Anchor" href="#通过位置来填充字符串"></a> 通过位置来填充字符串</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&#x27;hello &#123;0&#125; i am &#123;1&#125;&#x27;</span>.format(<span class="string">&#x27;world&#x27;</span>,<span class="string">&#x27;python&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;hello &#123;&#125; i am &#123;&#125;&#x27;</span>.format(<span class="string">&#x27;world&#x27;</span>,<span class="string">&#x27;python&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>输出结果都是：</p>
+<p><code>hello world i am python</code></p>
+<p>format会把参数赋予一系列的编号，第一个字符串为0，第二个字符串为1…，然后在模板那里指定相应的卡槽对应。如果只有<code>&#123;&#125;</code>则会按照默认顺序填充。</p>
+<h5 id="通过key来填充"><a class="markdownIt-Anchor" href="#通过key来填充"></a> 通过key来填充</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">&#x27;hello &#123;wd&#125; i am &#123;py&#125;&#x27;</span>.format(wd=<span class="string">&#x27;world&#x27;</span>,py=<span class="string">&#x27;python&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<p><code>hello world i am python</code></p>
+<h5 id="通过对象属性"><a class="markdownIt-Anchor" href="#通过对象属性"></a> 通过对象属性</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,name,age</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;this guy is &#123;self.name&#125;, is &#123;self.age&#125; old&#x27;</span>.format(self=self)</span><br><span class="line"></span><br><span class="line">print(str(Person(<span class="string">&#x27;Lewin&#x27;</span>,<span class="number">18</span>)))</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br />
+<code>this guy is Lewin, is 18 old</code></p>
+<h5 id="格式限定符"><a class="markdownIt-Anchor" href="#格式限定符"></a> 格式限定符</h5>
+<p>它有着丰富的“格式限定符”，语法是<code>&#123;&#125;</code>中带有<code>:</code>号.<br />
+一. 填充与对齐<br />
+填充和对齐一起使用<br />
+<code>^</code>、<code>&gt;</code>、<code>&lt;</code>分别是居中，右对齐，左对齐，后面带宽度。<br />
+<code>:</code>后面带填充的字符，只能是一个字符，不指定的话默认为空格。<br />
+比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template = <span class="string">&quot;编号：&#123;:0&gt;9&#125;\t公司名称: &#123;:s&#125;\t官网: http://www.&#123;:s&#125;.com&quot;</span></span><br><span class="line">print(template.format(<span class="string">&#x27;7&#x27;</span>,<span class="string">&#x27;百度&#x27;</span>,<span class="string">&#x27;baidu&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<p><code>编号：000000007 公司名称: 百度 官网: http://www.baidu.com</code></p>
+<p>二. 精度与类型f<br />
+精度常常和类型f一起使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template = <span class="string">&#x27;&#123;:.2f&#125;&#x27;</span></span><br><span class="line">print(template.format(<span class="number">123.12311</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果为：<code>123.12</code><br />
+<code>.2</code>表示保留2为小数，f表示浮点数</p>
+<p>三. 其他类型。<br />
+b、d、o、x分别是二进制、十进制、八进制、十六进制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template = <span class="string">&#x27;二进制&#123;0:b&#125;,十六进制&#123;0:x&#125;&#x27;</span></span><br><span class="line">print(template.format(<span class="number">45</span>))</span><br></pre></td></tr></table></figure>
+<p>输出结果： <code>二进制101101,十六进制2d</code></p>
+<p>用<code>,</code>号还能用来做金额的千位分隔符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template = <span class="string">&#x27;&#123;:,&#125;&#x27;</span></span><br><span class="line">print(tempate.format(<span class="number">123456789</span>))</span><br></pre></td></tr></table></figure>
+<p>运行结果： <code>123,456,789</code></p>
+<h3 id="字符串编码转换"><a class="markdownIt-Anchor" href="#字符串编码转换"></a> 字符串编码转换</h3>
+<h4 id="使用encode进行编码"><a class="markdownIt-Anchor" href="#使用encode进行编码"></a> 使用encode()进行编码</h4>
+<p>语法：<br />
+<code>str.encode([encoding = 'utf-8'][,error = &quot;strict&quot;]</code></p>
+<ul>
+<li>encoding =“utf-8”: 可选参数，用于指定进行编码转换时采用的字符编码，默认UTF-8</li>
+<li>errors = “strict”: 可选参数，用于指定错误处理的方式，默认为strict（遇到非法字符就抛出异常)</li>
+</ul>
+<h4 id="使用decode方法进行解码"><a class="markdownIt-Anchor" href="#使用decode方法进行解码"></a> 使用decode()方法进行解码</h4>
+<p><code>str.decode([encoding='utf-8][,errors='strict']</code></p>
+<p>参数和encode一样。</p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">verse = <span class="string">&#x27;野渡无人舟自横&#x27;</span></span><br><span class="line">byte = verse.encode(<span class="string">&#x27;GBK&#x27;</span>)</span><br><span class="line">print(<span class="string">&#x27;原字符串: &#x27;</span>,verse)</span><br><span class="line">print(<span class="string">&#x27;转换后: &#x27;</span>,byte)</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">原字符串:  野渡无人舟自横</span><br><span class="line">转换后:  b&#39;\xd2\xb0\xb6\xc9\xce\xde\xc8\xcb\xd6\xdb\xd7\xd4\xba\xe1&#39;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/11/29/programming/python/Python%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C/" rel="prev" title="Python文件和目录操作">
+                  <i class="fa fa-chevron-left"></i> Python文件和目录操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/01/others/regular-expression/" rel="next" title="regular expression">
+                  regular expression <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

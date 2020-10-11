@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Introduction Scrapy有它自己的工具提取数据，这就是Selector。我们可以通过使用XPath和CSS表达式来提取数据。 Scrapy的Selector是根据lxml库编写的，所以它们的速度和解析的准确性都是非常接近的。 For a complete reference of the selectors API see Selector reference  Selector">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Selector提取数据">
+<meta property="og:url" content="https://qingyingliu.top/2018/12/12/programming/python/%E4%BD%BF%E7%94%A8Selector%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="Introduction Scrapy有它自己的工具提取数据，这就是Selector。我们可以通过使用XPath和CSS表达式来提取数据。 Scrapy的Selector是根据lxml库编写的，所以它们的速度和解析的准确性都是非常接近的。 For a complete reference of the selectors API see Selector reference  Selector">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-12-12T08:18:17.000Z">
+<meta property="article:modified_time" content="2020-04-27T05:09:02.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2018/12/12/programming/python/%E4%BD%BF%E7%94%A8Selector%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>使用Selector提取数据 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text"> Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#selector-objects"><span class="nav-number">2.</span> <span class="nav-text"> Selector objects</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text"> 构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xpathquery"><span class="nav-number">2.2.</span> <span class="nav-text"> xpath(query)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cssquery"><span class="nav-number">2.3.</span> <span class="nav-text"> css(query)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#extract"><span class="nav-number">2.4.</span> <span class="nav-text"> extract()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reregex"><span class="nav-number">2.5.</span> <span class="nav-text"> re(regex)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xpath"><span class="nav-number">3.</span> <span class="nav-text"> XPath</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text"> 基础语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">3.2.</span> <span class="nav-text"> 例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css%E9%81%B8%E6%93%87%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text"> CSS選擇器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text"> 語法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90-2"><span class="nav-number">4.2.</span> <span class="nav-text"> 例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nesting-selectors"><span class="nav-number">5.</span> <span class="nav-text"> Nesting selectors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%89%87%E8%A1%A8%E9%81%94%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text"> 正則表達式</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/12/programming/python/%E4%BD%BF%E7%94%A8Selector%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Selector提取数据
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-12 16:18:17" itemprop="dateCreated datePublished" datetime="2018-12-12T16:18:17+08:00">2018-12-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<p>Scrapy有它自己的工具提取数据，这就是Selector。我们可以通过使用XPath和CSS表达式来提取数据。</p>
+<p>Scrapy的Selector是根据<code>lxml</code>库编写的，所以它们的速度和解析的准确性都是非常接近的。</p>
+<p>For a complete reference of the selectors API see <a target="_blank" rel="noopener" href="https://doc.scrapy.org/en/latest/topics/selectors.html#topics-selectors-ref">Selector reference</a></p>
+<h3 id="selector-objects"><a class="markdownIt-Anchor" href="#selector-objects"></a> Selector objects</h3>
+<h4 id="构造函数"><a class="markdownIt-Anchor" href="#构造函数"></a> 构造函数</h4>
+<p><code>class scrapy.selector.Selector(response=None, text=None, type=None)</code><br />
+参数说明：</p>
+<ul>
+<li>
+<p>response: response是<code>HtmlResponse</code>或者<code>XmlResponse</code>对象,是要被抽取数据的数据源。</p>
+</li>
+<li>
+<p>text: text是一个unicode或者uft8字符当一个response对象不可用的时候的文字.</p>
+</li>
+<li>
+<p>type: type定义选择器的类型，有<code>html</code>、<code>xml</code>、<code>None</code>(default)。<br />
+如果 type 是 None ，选择器会根据 response 类型(参见下面)自动选择最佳的类型，或者在和 text 一起使用时，默认为 “html” 。</p>
+<p>如果 type 是 None ，并传递了一个 response ，选择器类型将从response类型中推导如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;html&quot; for HtmlResponse type</span><br><span class="line">&quot;xml&quot; for XmlResponse type</span><br><span class="line">&quot;html&quot; for anything else</span><br></pre></td></tr></table></figure>
+<p>所以我们既可以根据<code>text</code>来构建一个<code>Selector</code>对象，也可以根据<code>response</code>来构建一个<code>Selector</code>对象.</p>
+<a id="more"></a>
+<h4 id="xpathquery"><a class="markdownIt-Anchor" href="#xpathquery"></a> xpath(query)</h4>
+<p>寻找可以匹配xpath <code>query</code> 的节点，并返回 <code>SelectorList</code> 的一个实例结果，单一化其所有元素。列表元素也实现了 Selector 的接口。</p>
+<p><strong>为了方便起见，该方法也可以通过 response.xpath() 调用</strong></p>
+<h4 id="cssquery"><a class="markdownIt-Anchor" href="#cssquery"></a> css(query)</h4>
+<p>应用给定的CSS选择器，返回 SelectorList 的一个实例。</p>
+<p>query 是一个包含CSS选择器的字符串。</p>
+<p>在后台，通过 cssselect 库和运行 .xpath() 方法，<strong>CSS查询会被转换为XPath查询</strong>。</p>
+<p><strong>为了方便起见，该方法也可以通过 response.css() 调用</strong></p>
+<h4 id="extract"><a class="markdownIt-Anchor" href="#extract"></a> extract()</h4>
+<p>串行化并将匹配到的节点返回一个unicode字符串列表。 结尾是编码内容的百分比。</p>
+<h4 id="reregex"><a class="markdownIt-Anchor" href="#reregex"></a> re(regex)</h4>
+<p>应用给定的<code>regex</code>，并返回匹配到的<code>unicode</code>字符串列表。、</p>
+<p><code>regex</code> 可以是一个已编译的正则表达式，也可以是一个将被 <code>re.compile(regex)</code> 编译为正则表达式的字符串</p>
+<h3 id="xpath"><a class="markdownIt-Anchor" href="#xpath"></a> XPath</h3>
+<p>XPath即XML路径语言(XML Path Language)，它是一种用来确定xml文档中的某个部分位置的语言。</p>
+<h4 id="基础语法"><a class="markdownIt-Anchor" href="#基础语法"></a> 基础语法</h4>
+<center>Xpath的常用基本语法</center>
+表达式|描述
+---|----
+/|选中文档的根
+.|选中当前结点
+..|选中当前结点的父亲结点
+ELEMENT|选中**子节点中**的所有ELEMENT元素的结点
+//ELEMENT|选中后代节点中的所有ELEMENT元素的结点
+*|选中所有元素子节点
+text()|选中所有文本结点
+@ATTR|选中名为ATTR的属性结点
+@*|选中所有属性结点
+[谓词] | 谓词用来查找某个特定的结点或者包含某个特定值的结点
+<p>注:<br />
+子节点是相对于父节点的下一层，只有一层，后代则是父节点下的所有元素</p>
+<h4 id="例子"><a class="markdownIt-Anchor" href="#例子"></a> 例子</h4>
+<p>先創建一個response對象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">from</span> scrapy.selector <span class="keyword">import</span> Selector                                    </span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: <span class="keyword">from</span> scrapy.http <span class="keyword">import</span> HtmlResponse                                    </span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: html = <span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">   ...: &lt;html&gt; </span></span><br><span class="line"><span class="string">   ...:  &lt;head&gt; </span></span><br><span class="line"><span class="string">   ...:   &lt;base href=&#x27;http://example.com/&#x27; /&gt; </span></span><br><span class="line"><span class="string">   ...:   &lt;title&gt;Example website&lt;/title&gt; </span></span><br><span class="line"><span class="string">   ...:  &lt;/head&gt; </span></span><br><span class="line"><span class="string">   ...:  &lt;body&gt; </span></span><br><span class="line"><span class="string">   ...:   &lt;div id=&#x27;images&#x27;&gt; </span></span><br><span class="line"><span class="string">   ...:    &lt;a href=&#x27;image1.html&#x27;&gt;Name: My image 1 &lt;br /&gt;&lt;img src=&#x27;image1_thumb.j</span></span><br><span class="line"><span class="string">   ...: pg&#x27; /&gt;&lt;/a&gt; </span></span><br><span class="line"><span class="string">   ...:    &lt;a href=&#x27;image2.html&#x27;&gt;Name: My image 2 &lt;br /&gt;&lt;img src=&#x27;image2_thumb.j</span></span><br><span class="line"><span class="string">   ...: pg&#x27; /&gt;&lt;/a&gt; </span></span><br><span class="line"><span class="string">   ...:    &lt;a href=&#x27;image3.html&#x27;&gt;Name: My image 3 &lt;br /&gt;&lt;img src=&#x27;image3_thumb.j</span></span><br><span class="line"><span class="string">   ...: pg&#x27; /&gt;&lt;/a&gt; </span></span><br><span class="line"><span class="string">   ...:    &lt;a href=&#x27;image4.html&#x27;&gt;Name: My image 4 &lt;br /&gt;&lt;img src=&#x27;image4_thumb.j</span></span><br><span class="line"><span class="string">   ...: pg&#x27; /&gt;&lt;/a&gt; </span></span><br><span class="line"><span class="string">   ...:    &lt;a href=&#x27;image5.html&#x27;&gt;Name: My image 5 &lt;br /&gt;&lt;img src=&#x27;image5_thumb.j</span></span><br><span class="line"><span class="string">   ...: pg&#x27; /&gt;&lt;/a&gt; </span></span><br><span class="line"><span class="string">   ...:   &lt;/div&gt; </span></span><br><span class="line"><span class="string">   ...:  &lt;/body&gt; </span></span><br><span class="line"><span class="string">   ...: &lt;/html&gt; </span></span><br><span class="line"><span class="string">   ...: &quot;&quot;&quot;</span>                                                                     </span><br><span class="line">In [<span class="number">4</span>]: response = HtmlResponse(url=<span class="string">&quot;https://doc.scrapy.org/en/latest/_static/se</span></span><br><span class="line"><span class="string">   ...: lectors-sample1.html&quot;</span>,body=html,encoding=<span class="string">&quot;utf8&quot;</span>)        </span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>/</code>:描述從根開始的絕對路徑：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">5</span>]: response.xpath(<span class="string">&#x27;/html&#x27;</span>)                                                 </span><br><span class="line">Out[<span class="number">5</span>]: [&lt;Selector xpath=<span class="string">&#x27;/html&#x27;</span> data=<span class="string">&#x27;&lt;html&gt;\n &lt;head&gt;\n  &lt;base href=&quot;http://exam&#x27;</span>&gt;]</span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: response.xpath(<span class="string">&#x27;/html/head&#x27;</span>)                                            </span><br><span class="line">Out[<span class="number">6</span>]: [&lt;Selector xpath=<span class="string">&#x27;/html/head&#x27;</span> data=<span class="string">&#x27;&lt;head&gt;\n  &lt;base href=&quot;http://example.com/&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>E1/E2</code>： 選中E1子節點中的所有E2</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">7</span>]: response.xpath(<span class="string">&#x27;/html/body/div/a&#x27;</span>)                                      </span><br><span class="line">Out[<span class="number">7</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;/html/body/div/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image1.html&quot;&gt;Name: My image 1 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/body/div/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image2.html&quot;&gt;Name: My image 2 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/body/div/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image3.html&quot;&gt;Name: My image 3 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/body/div/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image4.html&quot;&gt;Name: My image 4 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/body/div/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image5.html&quot;&gt;Name: My image 5 &lt;&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>//E</code>: 選中文檔中的所有E,無論在什麼地方</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">8</span>]: response.xpath(<span class="string">&quot;//a&quot;</span>)                                                   </span><br><span class="line">Out[<span class="number">8</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;//a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image1.html&quot;&gt;Name: My image 1 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image2.html&quot;&gt;Name: My image 2 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image3.html&quot;&gt;Name: My image 3 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image4.html&quot;&gt;Name: My image 4 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image5.html&quot;&gt;Name: My image 5 &lt;&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>E1//E2</code>: 選中E1後代節點的所有E2，無論後代在什麼地方</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">10</span>]: response.xpath(<span class="string">&#x27;/html/body//img&#x27;</span>)                                      </span><br><span class="line">Out[<span class="number">10</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;/html/body//img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image1_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/body//img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image2_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/body//img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image3_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/body//img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image4_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/body//img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image5_thumb.jpg&quot;&gt;&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>E/text()</code>: 選中E的文本節點</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">11</span>]: response.xpath(<span class="string">&#x27;//a/text()&#x27;</span>)                                           </span><br><span class="line">Out[<span class="number">11</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;//a/text()&#x27;</span> data=<span class="string">&#x27;Name: My image 1 &#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a/text()&#x27;</span> data=<span class="string">&#x27;Name: My image 2 &#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a/text()&#x27;</span> data=<span class="string">&#x27;Name: My image 3 &#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a/text()&#x27;</span> data=<span class="string">&#x27;Name: My image 4 &#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a/text()&#x27;</span> data=<span class="string">&#x27;Name: My image 5 &#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>E/*</code>: 選中E的所有元素子節點</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">12</span>]: response.xpath(<span class="string">&#x27;/html/*&#x27;</span>)                                              </span><br><span class="line">Out[<span class="number">12</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;/html/*&#x27;</span> data=<span class="string">&#x27;&lt;head&gt;\n  &lt;base href=&quot;http://example.com/&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;/html/*&#x27;</span> data=<span class="string">&#x27;&lt;body&gt;\n  &lt;div id=&quot;images&quot;&gt;\n   &lt;a href=&quot;i&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>*/E</code>： 選中孫節點中所有的E</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">13</span>]: response.xpath(<span class="string">&#x27;//div/*/img&#x27;</span>)                                          </span><br><span class="line">Out[<span class="number">13</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;//div/*/img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image1_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//div/*/img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image2_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//div/*/img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image3_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//div/*/img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image4_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//div/*/img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image5_thumb.jpg&quot;&gt;&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>E/@ATTR</code>: 選中E的所有ATTR屬性</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">14</span>]: response.xpath(<span class="string">&#x27;//a/@href&#x27;</span>)                                            </span><br><span class="line">Out[<span class="number">14</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;//a/@href&#x27;</span> data=<span class="string">&#x27;image1.html&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a/@href&#x27;</span> data=<span class="string">&#x27;image2.html&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a/@href&#x27;</span> data=<span class="string">&#x27;image3.html&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a/@href&#x27;</span> data=<span class="string">&#x27;image4.html&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;//a/@href&#x27;</span> data=<span class="string">&#x27;image5.html&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<h3 id="css選擇器"><a class="markdownIt-Anchor" href="#css選擇器"></a> CSS選擇器</h3>
+<h4 id="語法"><a class="markdownIt-Anchor" href="#語法"></a> 語法</h4>
+<table>
+<thead>
+<tr>
+<th>表達式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>選中所有元素</td>
+</tr>
+<tr>
+<td>E</td>
+<td>選中E元素</td>
+</tr>
+<tr>
+<td>E1，E2</td>
+<td>選中E1和E2元素</td>
+</tr>
+<tr>
+<td>E1 E2</td>
+<td>選中E1<strong>後代</strong>中的E2元素</td>
+</tr>
+<tr>
+<td>E1&gt;E2</td>
+<td>選中E1子元素中的E2元素</td>
+</tr>
+<tr>
+<td>E1+E2</td>
+<td>選中E1兄弟中的E2元素</td>
+</tr>
+<tr>
+<td>.CLASS</td>
+<td>選中CLASS屬性包含CLASS的元素</td>
+</tr>
+<tr>
+<td><code>#ID</code></td>
+<td>選中id屬性爲IDD元素</td>
+</tr>
+<tr>
+<td>[ATTR]</td>
+<td>選中包含ATTR屬性的元素</td>
+</tr>
+<tr>
+<td>[ATTR=VALUE]</td>
+<td>選中屬性爲ATTR且<strong>值爲</strong>VALUE的元素</td>
+</tr>
+<tr>
+<td>[ATTR~=VALUE]</td>
+<td>選中包含ATTR屬性且<strong>值包含</strong>VALUE的元素</td>
+</tr>
+<tr>
+<td>E:nth-child(n)<br>E:nth-last-child(n)</td>
+<td>選中E元素，且該元素必須是其父親元素的（倒數）第n個子元素</td>
+</tr>
+<tr>
+<td>E:first-child<br>E:last-child</td>
+<td>選中E元素，且改元素必須是其父元素的（倒數）第1個元素</td>
+</tr>
+<tr>
+<td>E:empty</td>
+<td>選中沒有子元素的E元素</td>
+</tr>
+<tr>
+<td>E::text</td>
+<td>選中E元素的文本節點(TEXT NODE)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="例子-2"><a class="markdownIt-Anchor" href="#例子-2"></a> 例子</h4>
+<p>注： 這個response還是接着上面那個例子的response。</p>
+<ul>
+<li>E: 選中所有E元素</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">18</span>]: response.css(<span class="string">&#x27;img&#x27;</span>)                                                    </span><br><span class="line">Out[<span class="number">18</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;descendant-or-self::img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image1_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image2_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image3_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image4_thumb.jpg&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::img&#x27;</span> data=<span class="string">&#x27;&lt;img src=&quot;image5_thumb.jpg&quot;&gt;&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>E1,E2: 選中所有E1和E2元素</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">19</span>]: response.css(<span class="string">&#x27;base,title&#x27;</span>)                                             </span><br><span class="line">Out[<span class="number">19</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;descendant-or-self::base | descendant-or-self::title&#x27;</span> data=<span class="string">&#x27;&lt;base href=&quot;http://example.com/&quot;&gt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::base | descendant-or-self::title&#x27;</span> data=<span class="string">&#x27;&lt;title&gt;Example website&lt;/title&gt;&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>E1 E2: 選中E1後代元素中的E2元素</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">20</span>]: response.css(<span class="string">&#x27;div a&#x27;</span>)                                                  </span><br><span class="line">Out[<span class="number">20</span>]: </span><br><span class="line">[&lt;Selector xpath=<span class="string">&#x27;descendant-or-self::div/descendant-or-self::*/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image1.html&quot;&gt;Name: My image 1 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::div/descendant-or-self::*/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image2.html&quot;&gt;Name: My image 2 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::div/descendant-or-self::*/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image3.html&quot;&gt;Name: My image 3 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::div/descendant-or-self::*/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image4.html&quot;&gt;Name: My image 4 &lt;&#x27;</span>&gt;,</span><br><span class="line"> &lt;Selector xpath=<span class="string">&#x27;descendant-or-self::div/descendant-or-self::*/a&#x27;</span> data=<span class="string">&#x27;&lt;a href=&quot;image5.html&quot;&gt;Name: My image 5 &lt;&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>E1&gt;E2：選中E1子元素中的E2元素</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">22</span>]: response.css(<span class="string">&#x27;body&gt;div&#x27;</span>)                                               </span><br><span class="line">Out[<span class="number">22</span>]: [&lt;Selector xpath=<span class="string">&#x27;descendant-or-self::body/div&#x27;</span> data=<span class="string">&#x27;&lt;div id=&quot;images&quot;&gt;\n   &lt;a href=&quot;image1.htm&#x27;</span>&gt;]</span><br></pre></td></tr></table></figure>
+<h3 id="nesting-selectors"><a class="markdownIt-Anchor" href="#nesting-selectors"></a> Nesting selectors</h3>
+<p>因爲css和xpath函數都是返回相同的類型—SelectorList,所以我們可以嵌套使用css和xpath方法。<br />
+例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">23</span>]: response.css(<span class="string">&#x27;a&#x27;</span>).xpath(<span class="string">&#x27;@href&#x27;</span>).extract()                             </span><br><span class="line">Out[<span class="number">23</span>]: [<span class="string">&#x27;image1.html&#x27;</span>, <span class="string">&#x27;image2.html&#x27;</span>, <span class="string">&#x27;image3.html&#x27;</span>, <span class="string">&#x27;image4.html&#x27;</span>, <span class="string">&#x27;image5.html&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="正則表達式"><a class="markdownIt-Anchor" href="#正則表達式"></a> 正則表達式</h3>
+<p>正則表達式的方法re不像css和xpath方法，它返回的是字符列表（a list of unicode strings）<br />
+例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">24</span>]: response.xpath(<span class="string">&#x27;//a[contains(@href, &quot;image&quot;)]/text()&#x27;</span>).re(<span class="string">r&#x27;Name:\s*(.*)&#x27;</span>)              </span><br><span class="line">Out[<span class="number">24</span>]: [<span class="string">&#x27;My image 1 &#x27;</span>, <span class="string">&#x27;My image 2 &#x27;</span>, <span class="string">&#x27;My image 3 &#x27;</span>, <span class="string">&#x27;My image 4 &#x27;</span>, <span class="string">&#x27;My image 5 &#x27;</span>]</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/12/12/programming/python/%E7%BC%96%E5%86%99Spider/" rel="prev" title="编写Spider">
+                  <i class="fa fa-chevron-left"></i> 编写Spider
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/01/17/programming/python/numpy%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="next" title="numpy的使用">
+                  numpy的使用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

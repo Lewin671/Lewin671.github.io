@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="记录数学和计算机方面的知识">
+<meta property="og:type" content="website">
+<meta property="og:title" content="qingying&#39;s blog">
+<meta property="og:url" content="https://qingyingliu.top/page/14/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="记录数学和计算机方面的知识">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Qingying Liu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/page/14/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+      
+
+      
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/10/programming/java/Collections-and-Generics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/10/programming/java/Collections-and-Generics/" class="post-title-link" itemprop="url">Collections and Generics</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-10 18:33:49" itemprop="dateCreated datePublished" datetime="2018-11-10T18:33:49+08:00">2018-11-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="collection"><a class="markdownIt-Anchor" href="#collection"></a> Collection</h1>
+<p>在我们编程的时候，我们难免会遇到处理一些集合的问题，在我们的Java中，Collection API就是为了处理集合类问题的API。<br />
+Collections API方便了Java程序猿去使用一些高效的数据类型和算法，比如list,tree，hashtable等等，减少了代码量，同时也是易于拓展，简单使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/10/programming/java/Collections-and-Generics/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/10/programming/java-web/Session%E5%92%8CApplication%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/10/programming/java-web/Session%E5%92%8CApplication%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">Session和Application对象</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-10 14:05:42" itemprop="dateCreated datePublished" datetime="2018-11-10T14:05:42+08:00">2018-11-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/JSP/" itemprop="url" rel="index"><span itemprop="name">JSP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="session"><a class="markdownIt-Anchor" href="#session"></a> session</h4>
+<p>在我们的实际开发中，难免会遇到需要登陆的功能，但是我们需要思考如何去保持在多个页面下的用户的登录状态。在Java Web中，Session是一个很好的解决方案，它的特点就是<strong>跨页面保持</strong>。</p>
+<ol>
+<li>在sesion中添加对象： <code>session.setAttribute(String name,Object obj)</code></li>
+<li>获取session对象: <code>Object session.getAttribute(String name)</code></li>
+<li>移除session的内容: <code>session.removeAttribute(String name)</code></li>
+<li>移除session的全部内容: <code>session.invalidate()</code></li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/10/programming/java-web/Session%E5%92%8CApplication%E5%AF%B9%E8%B1%A1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/10/programming/java-web/Cookie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/10/programming/java-web/Cookie/" class="post-title-link" itemprop="url">Cookie</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-10 13:48:14" itemprop="dateCreated datePublished" datetime="2018-11-10T13:48:14+08:00">2018-11-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/JSP/" itemprop="url" rel="index"><span itemprop="name">JSP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在页面之间传递数据的过程中，Cookie是一种常见的方法。Cookie是一个小小的文本数据，由服务端生成，发送给客户端浏览器。如果浏览器设置为启动Cookie，则会将这个小文本数据保存在某个目录下的文本文件内。一般情况下，Cookie中的值是由key-value的形式进行表达的。下面介绍Cookie的常用方法：<br />
+respond.addCookie(Cookie e),通过这种方法，将Cookie写入客户端<br />
+Cookie.setMaxAge(int second),通过这种方法，设置Cookie的存活时间，参数是秒数。<br />
+Cookie[]request.getCookies(),读取客户端传过来的Cookie，以数组的形式返回。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/10/programming/java-web/Cookie/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/10/programming/java-web/JSP-connect-database/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/10/programming/java-web/JSP-connect-database/" class="post-title-link" itemprop="url">JSP connect database</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-10 11:24:58" itemprop="dateCreated datePublished" datetime="2018-11-10T11:24:58+08:00">2018-11-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/JSP/" itemprop="url" rel="index"><span itemprop="name">JSP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="jdbc简介"><a class="markdownIt-Anchor" href="#jdbc简介"></a> JDBC简介</h4>
+<p>在Java技术中，访问数据库的技术叫做JDBC，它提供了一系列的API，让Java语言编写的代码连接数据库，对数据库进行添加、删除、修改和查询。<br />
+JDBC相关的API存在java.sql包中。主要包括以下类或者接口：</p>
+<ul>
+<li>java.sql.Connection: 负责数据库的连接</li>
+<li>java.sql.Statement, 负责执行SQL语句</li>
+<li>java.sql.ResultSet, 负责存放查询结果</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/10/programming/java-web/JSP-connect-database/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/05/programming/java/Exception/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/05/programming/java/Exception/" class="post-title-link" itemprop="url">Exception</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-05 17:55:13" itemprop="dateCreated datePublished" datetime="2018-11-05T17:55:13+08:00">2018-11-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>异常时程序中的一些错误，但是不是所有的错误都是异常。</p>
+<h3 id="try-catch语句捕捉异常"><a class="markdownIt-Anchor" href="#try-catch语句捕捉异常"></a> try-catch语句捕捉异常</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;   </span><br><span class="line">	<span class="comment">// critical code block   </span></span><br><span class="line">	<span class="comment">// code that might throw exceptions </span></span><br><span class="line">	&#125; <span class="keyword">catch</span>( MyException1 e1 )&#123;</span><br><span class="line">		<span class="comment">// code to execute if a MyException1 is thrown </span></span><br><span class="line">	&#125; <span class="keyword">catch</span>( MyException2 e2 )&#123; </span><br><span class="line">		<span class="comment">// code to execute if a MyException1 is thrown </span></span><br><span class="line">	&#125; <span class="keyword">catch</span> ( Exception e3 )&#123; </span><br><span class="line">		<span class="comment">// code to execute if any other exception is thrown </span></span><br><span class="line">	&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">		code that will always be executed</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/05/programming/java/Exception/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/28/algorithm/tree/Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/28/algorithm/tree/Tree/" class="post-title-link" itemprop="url">Tree</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-10-28 19:26:24" itemprop="dateCreated datePublished" datetime="2018-10-28T19:26:24+08:00">2018-10-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/Tree/" itemprop="url" rel="index"><span itemprop="name">Tree</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="树的相关术语"><a class="markdownIt-Anchor" href="#树的相关术语"></a> 树的相关术语</h3>
+<ol>
+<li>树的定义： 树（Tree)是含有n**(n&gt;0)**个结点的有限集合T，其中：
+<ul>
+<li>有且仅有一个特定的结点，称为树的根(root)</li>
+<li>当n&gt;1时，其余结点可分为m(m&gt;0)个<strong>互不相交的</strong>有限集合T1,T2,T3…,其中每一个集合又是一棵树，称为根的子树。<br />
+所以，根据定义，树有一下特点：</li>
+<li>树至少有一个结点——根</li>
+<li>树的子树互不相交</li>
+</ul>
+</li>
+<li>结点： 表示树中的元素，包括<strong>数据项</strong>及若干指向其<strong>子树的分支</strong>。</li>
+<li>结点的度： 结点拥有的子树的个数。</li>
+<li>叶子： 结点的度为0的结点。</li>
+<li>分支结点：结点的度不为零的结点，非终端结点</li>
+<li>孩子： 结点的子树的根</li>
+<li>双亲： 结点的上层结点</li>
+<li>兄弟： 同一个双亲的孩子</li>
+<li>树的度： 一颗树中所有结点的最大度</li>
+<li>结点的层次： 从根节点算起，根为第一层，它的孩子为第二层…（注：也可以规定根节点为第0层，然后每下一层层数加一）</li>
+<li>深度： 树中的结点的最大层次</li>
+<li>森林： m颗树互不相交的树的集合</li>
+<li>有序树： 各个子树的次序是有意义的，不能交换</li>
+<li>无序树： 各个子树的次序不影响树，可以交换次序<br />
+例子：<br />
+<img src="/uploads/Tree_1.png" alt="" /></li>
+</ol>
+<h3 id="树的5种表示方法"><a class="markdownIt-Anchor" href="#树的5种表示方法"></a> 树的5种表示方法</h3>
+<ol>
+<li>图形表示法： 画出树的图形结构。比如：<br />
+<img src="/uploads/Tree_2.png" alt="" /></li>
+<li>嵌套集合表示法： 根据圈的大小来表示层次关系。比如:<br />
+<img src="/uploads/Tree_3.png" alt="" /></li>
+<li>广义表示法： 用括号来表示层次关系<br />
+<img src="/uploads/Tree_4.png" alt="" /></li>
+<li>凹入表示法（目录表示法）： 根据缩进的不同来表示层次关系，类比目录。<br />
+<img src="/uploads/Tree_5.png" alt="" /></li>
+<li>左孩子右兄弟表示法：这是一种将树转换成二叉树的方法。<br />
+将每一个结点的坐孩子和右兄弟分别表示二叉树的左孩子和右孩子。<br />
+<img src="/uploads/Tree_6.png" alt="" /></li>
+</ol>
+<h3 id="二叉树"><a class="markdownIt-Anchor" href="#二叉树"></a> 二叉树</h3>
+<ol>
+<li>二叉树的定义： 二叉树是n(n&gt;=0)个结点的有限集，它或为<strong>空树</strong>或由一个根节点和两颗分别称作左子树和右子树的互不相交的二叉树构成。<br />
+注意： 二叉树的子树有左右之分，所以二叉树是有序树。</li>
+<li>满二叉树： 深度为k且含有2^k-1个结点的二叉树。<br />
+特点： 每一层上的结点树都是最大结点数。<br />
+<img src="/uploads/Tree_7.png" alt="" /></li>
+<li>完全二叉树： 若设二叉树的深度为h，除第h 层外，其它各层(1～h-1) 的结点数都达到最大个数，第h层所有的结点都连续集中在最左边，这就是完全二叉树。<br />
+特点： 叶子结点只可能出现在层次最大的两层出现。<br />
+<img src="/uploads/Tree_8.png" alt="" /></li>
+<li>二叉树的性质：
+<ul>
+<li>性质1： 二叉树的第i层上之多有2^(i-1)个结点<br />
+证明：<br />
+i=1时，只有一个根结点；<br />
+i=k时，假设对于所有的k命题成立，则<br />
+当i=k+1，当前k层的每一个结点都有两个子树时，第i层的结点个数最大， 此时最大结点个数为2*2<sup>(k-1)=2</sup>k。得证命题成立。</li>
+<li>性质2： 深度为k的二叉树最有有2^k-1个结点。<br />
+证明： 结点最大个数sum=2<sup>0+2</sup>1+2<sup>2+…+2</sup>(k-1)=2^k-1</li>
+<li>性质3： 若在任意一颗二叉树中，有n0个叶子结点，有n2个度数为2的结点，则n0=n2+1。<br />
+证明： 假设n1为二叉树中度为1的结点数。<br />
+因为 二叉树中的度均小于2，<br />
+所有 树的总结点树n=n0+n1+n2<br />
+在二叉树中，除根节点外，其余结点只有一个分支进入。<br />
+设B为分支总数，则n=B+1.<br />
+又分支由度为1和度为2的结点射出，所以： B=n1+2*n2<br />
+联立上式，解得n0=n2+1<br />
+证毕！</li>
+<li>性质4： 具有n个结点的完全二叉树的深度为floor(log2(n))+1.<br />
+证明： 假设二叉树的深度为h，则2<sup>(h-1)-1&lt;n&lt;=2</sup>h-1，<br />
+所以 h-1&lt;log2(n+1)&lt;=h。<br />
+所以h=log2(n+1)(向上取整)=log2(n+1)=<a href="%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4">log2(n)</a>+1<br />
+证毕！</li>
+<li>性质5： 对于<strong>完全二叉树</strong>的任意结点i，有<br />
+(1)如果i==1，则是二叉树的根<br />
+(2)如果2i&gt;n，则结点i没有左孩子;如果2i&lt;=n，则其左孩子是2n<br />
+(3)如果2i+1&gt;n，则结点i没有右孩子,否则右孩子是2n+1</li>
+</ul>
+</li>
+<li>二叉树和树的转换<br />
+二叉树和树的转换方法是前面提到的树的左孩子右兄弟表示方法。然后再旋转45度即可。对应关系如下：<br />
+<img src="/uploads/Tree_9.png" alt="" /><br />
+可以总结为下面三个步骤：
+<ol>
+<li>加线： 给兄弟关系的结点加线。</li>
+<li>抹线： 抹去每个结点的右孩子的线</li>
+<li>旋转： 将同一孩子的连线绕左孩子顺时针旋转45度</li>
+</ol>
+</li>
+</ol>
+<p>例子：<br />
+<img src="/uploads/Tree_10.png" alt="" /></p>
+<ol start="6">
+<li>
+<p>二叉树还原成树<br />
+还原的操作是把所有的右孩子变成兄弟（逆操作）</p>
+</li>
+<li>
+<p>森林转换成二叉树：<br />
+方法是： 先森林变兄弟，然后再转为二叉树。<br />
+例子：<br />
+<img src="/uploads/Tree_11.png" alt="" /></p>
+</li>
+<li>
+<p>二叉树还原成森林<br />
+方法： 把最右边的子树变成森林，其余右子树变成兄弟。<br />
+例子：<br />
+<img src="/uploads/Tree_12.png" alt="" /></p>
+</li>
+</ol>
+<h3 id="二叉树的创建和遍历"><a class="markdownIt-Anchor" href="#二叉树的创建和遍历"></a> 二叉树的创建和遍历</h3>
+<ol>
+<li>二叉树的创建：<br />
+a. 完全二叉树类型的创建： 这种类型用顺序存储比较好。当根结点下标为1时，假设有结点下标为i，则左子树的根的下标可以表示为2i，右子树的根的下标为2i+1。<br />
+假设输入按照先序遍历的结果输入，则创建的方法为： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数不用返回根结点是因为我们选定了根结点为1</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">constructBiTree</span><span class="params">(<span class="keyword">int</span> curRoot)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;data;</span><br><span class="line">	<span class="keyword">if</span>(data==<span class="string">&quot;0&quot;</span>)	<span class="comment">//用0表示空</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//在这里可以设置一些标记来标记空</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		constructBiTree(curRoot*<span class="number">2</span>);</span><br><span class="line">		constructBiTree(curRoot*<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+b. 一般的二叉树也可以用链表来构建 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Node* <span class="title">constructBiTree</span><span class="params">(Node* curRoot)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;data;</span><br><span class="line">	<span class="keyword">if</span>(data==<span class="string">&quot;0&quot;</span>)	<span class="comment">//用0表示空</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> null;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		curRoot-&gt;left=<span class="keyword">new</span> Node();</span><br><span class="line">		curRoor-&gt;right=<span class="keyword">new</span> Node();</span><br><span class="line">		curRoot-&gt;left=constructBiTree(curRoot-&gt;left);</span><br><span class="line">		curRoot-&gt;right=constructBiTree(curRoot-&gt;right);</span><br><span class="line">		<span class="keyword">return</span> curRoot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>二叉树的遍历<br />
+a. 先序遍历： 先访问根结点，然后访问左子树，然后访问右子树<br />
+b. 中序遍历： 先遍历左子树，然后遍历根结点，最后遍历右子树<br />
+c. 后序遍历： 先遍历左子树，然后遍历右子树，最后访问根结点</li>
+</ol>
+<p>代码的实现的话，根据不同的遍历，只需要改变访问左子树、根和右子树的顺序即可。这里给出先序遍历的代码：</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(Node* cur)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(cur)&#123;</span><br><span class="line">		visite(cur);    <span class="comment">//表示访问该结点</span></span><br><span class="line">		preOrder(cur-&gt;left);</span><br><span class="line">		preOrder(cur-&gt;right);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>还有一种层次遍历，如果是用数组表示树的话，直接安装下标的顺序输出即可。如果是链式存储的话，可以使用队列来进行广度优先遍历：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">levelOrder</span><span class="params">(Node* root)</span></span>&#123;</span><br><span class="line">		<span class="built_in">queue</span>&lt;Node*&gt; q;</span><br><span class="line">		q.push(root);</span><br><span class="line">		<span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">			Node* top=q.front();</span><br><span class="line">			q.pop();</span><br><span class="line">			visite(top);</span><br><span class="line">			<span class="keyword">if</span>(top-&gt;left)&#123;</span><br><span class="line">				q.push(top-&gt;left);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(top-&gt;right)&#123;</span><br><span class="line">				q.push(top-&gt;right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="树的遍历"><a class="markdownIt-Anchor" href="#树的遍历"></a> 树的遍历</h3>
+<ul>
+<li>先根遍历： 先访问树的根结点，然后依次遍历根的每颗子树。</li>
+<li>后根遍历： 先依次遍历每颗子树，然后访问根结点。</li>
+<li>层次遍历： 逐层依次访问每个结点<br />
+例子：<br />
+<img src="/uploads/Tree_13.png" alt="" /></li>
+</ul>
+<h3 id="森林的遍历"><a class="markdownIt-Anchor" href="#森林的遍历"></a> 森林的遍历</h3>
+<ul>
+<li>先序遍历： 若森林不空，则：<br />
+a. 访问第一棵树的根结点<br />
+b. 先序遍历第一颗树的根结点的子树森林<br />
+c. 现需遍历除了第一棵树之外其余树构成的森林<br />
+即先序遍历对于的二叉树</li>
+<li>中序遍历： 若森林不空，则：<br />
+a. 中序遍历第一颗树的根结点的子树森林<br />
+b. 访问第一棵树的根结点<br />
+c. 中序遍历除第一颗树之外的其余树构成的森林<br />
+即中序遍历对于的二叉树<br />
+例子：<br />
+<img src="/uploads/Tree_14.png" alt="" /></li>
+</ul>
+<h3 id="线索二叉树"><a class="markdownIt-Anchor" href="#线索二叉树"></a> 线索二叉树</h3>
+<p>定义： 二叉树添加了<strong>直接指向节点的前驱和后继的指针</strong>的二叉树称为线索二叉树。<br />
+<img src="/uploads/Tree_18.png" alt="" /><br />
+也就是说：</p>
+<ul>
+<li>把所有的空指针域中的lchild，改为它的前驱结点(图6-11-3)</li>
+<li>把所有的空指针域的rchild，改为它的后继节点(图6-11-2)<br />
+<img src="/uploads/Tree_16.png" alt="" /><br />
+<img src="/uploads/Tree_15.png" alt="" /></li>
+</ul>
+<p>通过图6-10-4（空心箭头实线为前驱，虚线黑箭头为后继），更容易看出，其实线索二叉树，等于是把一棵二叉树转变成了一个双向链表，这样对我们的插入删除结点，查找某个结点都带来了方便。所以我们把对二叉树以某种次序遍历使其变为线索二叉树的过程称做是线索化。<br />
+<img src="/uploads/Tree_17.png" alt="" /></p>
+<h3 id="huffman编码"><a class="markdownIt-Anchor" href="#huffman编码"></a> Huffman编码</h3>
+<p>在之前已经写过这篇博客了：<a target="_blank" rel="noopener" href="https://lewin671.github.io/2018/10/23/huffman-tree/">Huffman code</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/27/programming/java/Java-OOP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/27/programming/java/Java-OOP/" class="post-title-link" itemprop="url">Java 面向对象编程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-10-27 13:26:37" itemprop="dateCreated datePublished" datetime="2018-10-27T13:26:37+08:00">2018-10-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="object"><a class="markdownIt-Anchor" href="#object"></a> Object</h2>
+<p>在我们的现实生活中，对象无处不在。那对象到底是什么？我觉得，<strong>对象是一种模拟现实世界中的实体(entity)的计算机的表示方法</strong>。比如，我们可以抽象出Vehicle，它有height和weight属性，有run和speedup方法，这不就是模拟我们现实世界中的Vehicle吗？<br />
+对象有以下特点：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/10/27/programming/java/Java-OOP/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/27/programming/java/static-factory-methods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/27/programming/java/static-factory-methods/" class="post-title-link" itemprop="url">static factory methods</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-10-27 00:35:13" itemprop="dateCreated datePublished" datetime="2018-10-27T00:35:13+08:00">2018-10-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这一篇博客介绍的是<strong>Effective Java</strong>中的<strong>static factory method</strong>来代替构造器，我将会介绍什么是静态工厂方法以及它和构造函数相比有什么优势。在介绍的过程中，相信读者也会领悟到static factory method的好处。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/10/27/programming/java/static-factory-methods/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/26/programming/java-web/Form-development/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/26/programming/java-web/Form-development/" class="post-title-link" itemprop="url">Form development</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-10-26 20:03:20" itemprop="dateCreated datePublished" datetime="2018-10-26T20:03:20+08:00">2018-10-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/JSP/" itemprop="url" rel="index"><span itemprop="name">JSP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>表单时用户和服务器之间进行信息交互的重要手段，是一种由用户输入并提交给服务器的一个图形界面。</p>
+<h4 id="一-表单提交给服务器"><a class="markdownIt-Anchor" href="#一-表单提交给服务器"></a> 一、 表单提交给服务器。</h4>
+<p>使用action属性来确定提交的页面。<br />
+例如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;page.jsp&quot;</span>&gt;</span></span><br><span class="line">	请你输入账号:<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;account&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">	请你输入密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;登陆&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>表示表单输入的内容提交给page.jsp去运行。</p>
+<h4 id="二-在服务器中获取接受表单的数据"><a class="markdownIt-Anchor" href="#二-在服务器中获取接受表单的数据"></a> 二、 在服务器中获取接受表单的数据</h4>
+<p>获取提交过来的值，使用<strong>request对象</strong>。通过<strong>name属性</strong>来获得提交过来的值。分为以下两种类型获取数据元素：</p>
+<h5 id="获取单一元素数据"><a class="markdownIt-Anchor" href="#获取单一元素数据"></a> 获取单一元素数据</h5>
+<p>由于获取的元素只是一个元素，所以只需要一个变量来储存即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String res=request.getParameter(name);</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>： 获取的数据必须是String类型。如果是其他元素的类型，需要用类型转换来转换。<br />
+比如获取上面的表单的account和password：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//因为账号输入的input的name属性为&quot;account&quot;，所以传入的参数为&quot;account&quot;</span></span><br><span class="line">String account=request.getParameter(<span class="string">&quot;account&quot;</span>);</span><br><span class="line">String password=request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="获取捆绑表单元素的数据"><a class="markdownIt-Anchor" href="#获取捆绑表单元素的数据"></a> 获取捆绑表单元素的数据</h5>
+<p>捆绑表单元素指的是<strong>多个同名元素的值传给服务器端的时，是一个捆绑的数组</strong>。这种情况的表单元素有复选框、多选列表框、同名表单等等。<br />
+获取数据的方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String []str=request.getParameterValues(name)</span><br></pre></td></tr></table></figure>
+<p>比如在<code>choose.html</code>中定义一个选择爱好的表单，然后把表单发送给<code>result.jsp</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;result.jsp&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sing&quot;</span>&gt;</span>唱歌</span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;dance&quot;</span>&gt;</span>跳舞</span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;ball&quot;</span>&gt;</span>打球</span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;game&quot;</span>&gt;</span>打游戏</span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>  <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/form_1.jpg" alt="" /><br />
+提交表单之后，我们使用<code>String []str=request.getParameterValues(name)</code>的方法来获取表单的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line"></span><br><span class="line">&lt;%</span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">	String []str=request.getParameterValues(<span class="string">&quot;hobby&quot;</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length;i++)&#123;</span><br><span class="line">			out.print(str[i]+<span class="string">&quot;&lt;br&gt;&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">		out.print(<span class="string">&quot;no hobby&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+<p>选择唱歌和跳舞后的运行结果：<br />
+<img src="/uploads/form1_result.png" alt="" /></p>
+<h4 id="三-隐藏表单技术"><a class="markdownIt-Anchor" href="#三-隐藏表单技术"></a> 三、 隐藏表单技术</h4>
+<p>这种方法可以实现值的传递，而且无法看到传递的信息。<br />
+实现的方法：</p>
+<ol>
+<li>将input的type改为&quot;hidden&quot;</li>
+<li>将form的method改为&quot;post&quot;</li>
+</ol>
+<p><strong>注意</strong>： 对于秘密性要求很严格的数据（如密码），不推荐使用表单的方法传值。</p>
+<h4 id="四-中文乱码问题"><a class="markdownIt-Anchor" href="#四-中文乱码问题"></a> 四、 中文乱码问题</h4>
+<ol>
+<li>首先需要将JSP页面设置为<code>UTF-8</code>的字符集<br />
+<code>&lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;UTF-8&quot;%&gt;</code></li>
+<li>需要将request的内容设置为<code>UTF-8</code>的字符集<br />
+<code>request.setCharacterEncoding(&quot;utf8&quot;);</code></li>
+<li>需要将response的内容设置为<code>UTF-8</code><br />
+<code>response.setContentType(&quot;text/html;charset=utf8&quot;);</code></li>
+</ol>
+<p>通过学习后面的知识后，我们可以使用Servlet的Filter来对多个页面进行设置字符集，这样就不用分别在每一个页面都添加上面三行代码了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/23/algorithm/tree/huffman-tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/23/algorithm/tree/huffman-tree/" class="post-title-link" itemprop="url">huffman tree</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-10-23 11:30:32" itemprop="dateCreated datePublished" datetime="2018-10-23T11:30:32+08:00">2018-10-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/Tree/" itemprop="url" rel="index"><span itemprop="name">Tree</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> introduction</h3>
+<p>假设我们有一个文件，它只含有a,b,c,d,e,f这六种字符，如果我们用固定长度的bit来表示字符，那么我们需要3个bit来表示一个字符，但是，如果我们使用可变长度的bit来保存字符的话，通过Huffman编码我们可以压缩内存，可以节省20%到90%的内存。下面给出六种字符对应的频率(所有字符一共是10万)，还有其固定长度的bit和可变长度的bit的码字：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+<th>f</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frequency(in thousands)</td>
+<td>45</td>
+<td>13</td>
+<td>12</td>
+<td>16</td>
+<td>9</td>
+</tr>
+<tr>
+<td>fixed-length codeword</td>
+<td>000</td>
+<td>001</td>
+<td>010</td>
+<td>011</td>
+<td>100</td>
+</tr>
+<tr>
+<td>variable-length codeword</td>
+<td>0</td>
+<td>101</td>
+<td>100</td>
+<td>111</td>
+<td>1101</td>
+</tr>
+</tbody>
+</table>
+<p>如果使用定长bit来表示字符，则需要的内存是：3 * 100000 = 300000 bits</p>
+<p>如果使用不定长bit来表示字符，则需要的内存是: (45*1+13*3+12*3+16*3+9*4+5*4) = 224000 bits。<br />
+与定长编码相比，节省了25%的空间。实际上，我们将会看到，这是此文件的最优字符编码。</p>
+<h3 id="prefix-code"><a class="markdownIt-Anchor" href="#prefix-code"></a> prefix code</h3>
+<p>首先我先介绍一下什么叫做前缀编码(prefix code)</p>
+<p><strong>前缀编码</strong>:在一个编码集合中，任何一个字符的编码都不是另外一个字符编码的前缀，这种编码叫做前缀编码。<strong>这种前缀特性保证了每一个编码都能被译码成唯一与之对应的字符，没有二义性(unambiguous)。</strong></p>
+<h3 id="how-to-construct-a-huffman-code"><a class="markdownIt-Anchor" href="#how-to-construct-a-huffman-code"></a> how to construct a Huffman code?</h3>
+<p>Huffman设计了一个贪心算法来<strong>构造最优前缀码</strong>，被称为赫夫曼编码(Huffman code),它的正确性依赖于证明贪心选择属性(greedy choice property)和最优子结构(optimal substructure)。但是我先讲如何构造赫夫曼编码，然后再去证明。</p>
+<p><strong>Huffman tree</strong><br />
+这棵树和Huffman code相对应，其中叶子节点放着字母和它的频率，内部节点则放着它的左右子树的和。我们可以以左子树的边为0，右子树的边代表1，从而进行编码。</p>
+<p>这个算法使用了最小优先队列，每次都将队列里最小的两个值取出来，合并成一个新的节点，然后再把这个节点放入队列，循环，直到队列的大小等于1，说明不能合并，这时就构建好了Huffman tree.</p>
+<p>伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Huffman(C):</span><br><span class="line">	for i &#x3D; 1 to n-1:</span><br><span class="line">		allocate a new node z</span><br><span class="line">		z.left&#x3D;x&#x3D;EXTRACT-MIN(Q)</span><br><span class="line">		z.right&#x3D;y&#x3D;EXTRACT-MIN(Q)</span><br><span class="line">		z.freq&#x3D;x.freq+y.freq</span><br><span class="line">		Insert(Q,z)</span><br><span class="line">	return EXTRACT-MIN(Q)</span><br></pre></td></tr></table></figure>
+<h3 id="demonstration-of-greedy-choice-property"><a class="markdownIt-Anchor" href="#demonstration-of-greedy-choice-property"></a> demonstration of greedy-choice property</h3>
+<p>首先我们先定义一个符号B，B(T)表示Huffman Tree的需要的空间。则</p>
+<p>B(T)=sum(freq(ele) * len(ele)), 其中freq(ele)代表ele字符的频率，len(ele)表示表示该字符需要的bit.</p>
+<p>我们假设T为最优Huffman Tree，且树的最大深度的叶子节点为y，且它出现的频率不是最小。<br />
+而频率最小的叶子节点不在最大深度，且用a表示。<br />
+此时<code>B(T)=freq(y) * len(y) + freq(a) * len(a) + ...</code> ,其中<code>freq(y) &gt; freq(a)</code>, <code>len(y) &gt; len(a)</code></p>
+<p>我们交换a,y的位置,此时得到一颗新的树T1，则<code>freq(a1)=freq(a)</code>,<code>freq(y1)=freq(y)</code>,<code>len(a1)=len(y)</code>, <code>len(y1)=len(a)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B(T1)&#x3D; freq(y1) * len(y1) + freq(a1) * len(a1) + ...</span><br><span class="line">	 &#x3D; freq(y) * len(a) + freq(a) * len(y) + ...</span><br></pre></td></tr></table></figure>
+<p>则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B(T)-B(T1)&#x3D; (freq(y) * len(y) + freq(a) * len(a) + ...) - (freq(y) * len(a) + freq(a) * len(y) + ...)</span><br><span class="line">		  &#x3D; len(y) * (freq(y)-freq(a)) + len(a) * (freq(a) - freq(y))</span><br><span class="line">		  &#x3D; (len(y) - len(a)) * (freq(y) - freq(a))</span><br></pre></td></tr></table></figure>
+<p>其中<code>len(y)-len(a)&gt;0</code>, <code>ferq(y)-freq(a)&gt;0</code>, 所以上式等价于<code>B(T)-B(T1)&gt;0</code>,即：<br />
+<code>B(T)&gt;B(T1)</code>,这就和T是最优的Huffman Tree相矛盾了。所以，频率越小的字符，应该放越深的地方。<br />
+证毕！</p>
+<h3 id="proof-of-optimal-substructure"><a class="markdownIt-Anchor" href="#proof-of-optimal-substructure"></a> Proof of optimal substructure</h3>
+<p><strong>Lemma</strong>: <code>Lemma: T′ is optimal for C′=C∖&#123;x,y&#125;+&#123;z&#125;, if T is optimal for C.</code></p>
+<p><strong>Proof:</strong><br />
+我们用反证法来证明。假设对于<code>C'</code>的最优前缀是<code>T''</code>, 而不是<code>T'</code>,则对于C，<br />
+最优前缀<code>T'''</code>=<code>T''</code>+f(x)+f(y) &gt; <code>T'</code>+f(x)+f(y)=<code>T</code><br />
+这和我们的假设：“对于C，T是最优前缀“相矛盾。所以<code>T'</code>是<code>C'</code>的最优前缀。</p>
+<h3 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h3>
+<p><strong>Introduction to algorithm</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>
