@@ -220,7 +220,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -605,6 +605,16 @@ k_{n}
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2020/09/08/math/advanced-algebra/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84/',]
+      });
+      });
+  </script>
 
 </body>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">

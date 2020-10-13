@@ -217,7 +217,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -278,13 +278,53 @@
     <div class="post-content">
       <div class="collection-title">
         
-        <span class="collection-header">Great! 146 posts in total. Keep on posting.</span>
+        <span class="collection-header">Great! 148 posts in total. Keep on posting.</span>
       </div>
 
       
     <div class="collection-year">
       <span class="collection-header">2019</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2019-11-30T20:56:03+08:00"
+              content="2019-11-30">
+          11-30
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2019/11/30/math/elementary-mathematics/%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E5%9B%9B%E5%BF%83/" itemprop="url">
+            <span itemprop="name">三角形的四心</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2019-11-27T19:37:34+08:00"
+              content="2019-11-27">
+          11-27
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2019/11/27/math/mathematical-analysis/%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%80%A7/" itemprop="url">
+            <span itemprop="name">函数的连续性</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -446,46 +486,6 @@
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2019-11-08T19:05:26+08:00"
-              content="2019-11-08">
-          11-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/11/08/math/mathematical-analysis/%E5%AE%9E%E6%95%B0%E7%B3%BB/" itemprop="url">
-            <span itemprop="name">实数系</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2019-11-07T21:15:39+08:00"
-              content="2019-11-07">
-          11-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/11/07/configuration/Visual-Studio-Code%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/" itemprop="url">
-            <span itemprop="name">Visual Studio Code插件推荐</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
 
     </div>
   </div>
@@ -583,6 +583,16 @@
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/archives/page/10/',]
+      });
+      });
+  </script>
 
 </body>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">

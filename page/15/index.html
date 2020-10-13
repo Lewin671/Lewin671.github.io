@@ -217,7 +217,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -270,6 +270,291 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/26/programming/java-web/Form-development/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/26/programming/java-web/Form-development/" class="post-title-link" itemprop="url">Form development</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-10-26 20:03:20" itemprop="dateCreated datePublished" datetime="2018-10-26T20:03:20+08:00">2018-10-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java-Web/JSP/" itemprop="url" rel="index"><span itemprop="name">JSP</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>表单时用户和服务器之间进行信息交互的重要手段，是一种由用户输入并提交给服务器的一个图形界面。</p>
+<h4 id="一-表单提交给服务器"><a class="markdownIt-Anchor" href="#一-表单提交给服务器"></a> 一、 表单提交给服务器。</h4>
+<p>使用action属性来确定提交的页面。<br />
+例如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;page.jsp&quot;</span>&gt;</span></span><br><span class="line">	请你输入账号:<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;account&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">	请你输入密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;登陆&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>表示表单输入的内容提交给page.jsp去运行。</p>
+<h4 id="二-在服务器中获取接受表单的数据"><a class="markdownIt-Anchor" href="#二-在服务器中获取接受表单的数据"></a> 二、 在服务器中获取接受表单的数据</h4>
+<p>获取提交过来的值，使用<strong>request对象</strong>。通过<strong>name属性</strong>来获得提交过来的值。分为以下两种类型获取数据元素：</p>
+<h5 id="获取单一元素数据"><a class="markdownIt-Anchor" href="#获取单一元素数据"></a> 获取单一元素数据</h5>
+<p>由于获取的元素只是一个元素，所以只需要一个变量来储存即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String res=request.getParameter(name);</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>： 获取的数据必须是String类型。如果是其他元素的类型，需要用类型转换来转换。<br />
+比如获取上面的表单的account和password：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//因为账号输入的input的name属性为&quot;account&quot;，所以传入的参数为&quot;account&quot;</span></span><br><span class="line">String account=request.getParameter(<span class="string">&quot;account&quot;</span>);</span><br><span class="line">String password=request.getParameter(<span class="string">&quot;password&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="获取捆绑表单元素的数据"><a class="markdownIt-Anchor" href="#获取捆绑表单元素的数据"></a> 获取捆绑表单元素的数据</h5>
+<p>捆绑表单元素指的是<strong>多个同名元素的值传给服务器端的时，是一个捆绑的数组</strong>。这种情况的表单元素有复选框、多选列表框、同名表单等等。<br />
+获取数据的方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String []str=request.getParameterValues(name)</span><br></pre></td></tr></table></figure>
+<p>比如在<code>choose.html</code>中定义一个选择爱好的表单，然后把表单发送给<code>result.jsp</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;result.jsp&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sing&quot;</span>&gt;</span>唱歌</span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;dance&quot;</span>&gt;</span>跳舞</span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;ball&quot;</span>&gt;</span>打球</span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;game&quot;</span>&gt;</span>打游戏</span><br><span class="line">   <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>  <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/form_1.jpg" alt="" /><br />
+提交表单之后，我们使用<code>String []str=request.getParameterValues(name)</code>的方法来获取表单的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line"></span><br><span class="line">&lt;%</span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">	String []str=request.getParameterValues(<span class="string">&quot;hobby&quot;</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length;i++)&#123;</span><br><span class="line">			out.print(str[i]+<span class="string">&quot;&lt;br&gt;&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">		out.print(<span class="string">&quot;no hobby&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+<p>选择唱歌和跳舞后的运行结果：<br />
+<img src="/uploads/form1_result.png" alt="" /></p>
+<h4 id="三-隐藏表单技术"><a class="markdownIt-Anchor" href="#三-隐藏表单技术"></a> 三、 隐藏表单技术</h4>
+<p>这种方法可以实现值的传递，而且无法看到传递的信息。<br />
+实现的方法：</p>
+<ol>
+<li>将input的type改为&quot;hidden&quot;</li>
+<li>将form的method改为&quot;post&quot;</li>
+</ol>
+<p><strong>注意</strong>： 对于秘密性要求很严格的数据（如密码），不推荐使用表单的方法传值。</p>
+<h4 id="四-中文乱码问题"><a class="markdownIt-Anchor" href="#四-中文乱码问题"></a> 四、 中文乱码问题</h4>
+<ol>
+<li>首先需要将JSP页面设置为<code>UTF-8</code>的字符集<br />
+<code>&lt;%@ page language=&quot;java&quot; import=&quot;java.util.*&quot; pageEncoding=&quot;UTF-8&quot;%&gt;</code></li>
+<li>需要将request的内容设置为<code>UTF-8</code>的字符集<br />
+<code>request.setCharacterEncoding(&quot;utf8&quot;);</code></li>
+<li>需要将response的内容设置为<code>UTF-8</code><br />
+<code>response.setContentType(&quot;text/html;charset=utf8&quot;);</code></li>
+</ol>
+<p>通过学习后面的知识后，我们可以使用Servlet的Filter来对多个页面进行设置字符集，这样就不用分别在每一个页面都添加上面三行代码了。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/23/algorithm/tree/huffman-tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/23/algorithm/tree/huffman-tree/" class="post-title-link" itemprop="url">huffman tree</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-10-23 11:30:32" itemprop="dateCreated datePublished" datetime="2018-10-23T11:30:32+08:00">2018-10-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/Tree/" itemprop="url" rel="index"><span itemprop="name">Tree</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> introduction</h3>
+<p>假设我们有一个文件，它只含有a,b,c,d,e,f这六种字符，如果我们用固定长度的bit来表示字符，那么我们需要3个bit来表示一个字符，但是，如果我们使用可变长度的bit来保存字符的话，通过Huffman编码我们可以压缩内存，可以节省20%到90%的内存。下面给出六种字符对应的频率(所有字符一共是10万)，还有其固定长度的bit和可变长度的bit的码字：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>d</th>
+<th>e</th>
+<th>f</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frequency(in thousands)</td>
+<td>45</td>
+<td>13</td>
+<td>12</td>
+<td>16</td>
+<td>9</td>
+</tr>
+<tr>
+<td>fixed-length codeword</td>
+<td>000</td>
+<td>001</td>
+<td>010</td>
+<td>011</td>
+<td>100</td>
+</tr>
+<tr>
+<td>variable-length codeword</td>
+<td>0</td>
+<td>101</td>
+<td>100</td>
+<td>111</td>
+<td>1101</td>
+</tr>
+</tbody>
+</table>
+<p>如果使用定长bit来表示字符，则需要的内存是：3 * 100000 = 300000 bits</p>
+<p>如果使用不定长bit来表示字符，则需要的内存是: (45*1+13*3+12*3+16*3+9*4+5*4) = 224000 bits。<br />
+与定长编码相比，节省了25%的空间。实际上，我们将会看到，这是此文件的最优字符编码。</p>
+<h3 id="prefix-code"><a class="markdownIt-Anchor" href="#prefix-code"></a> prefix code</h3>
+<p>首先我先介绍一下什么叫做前缀编码(prefix code)</p>
+<p><strong>前缀编码</strong>:在一个编码集合中，任何一个字符的编码都不是另外一个字符编码的前缀，这种编码叫做前缀编码。<strong>这种前缀特性保证了每一个编码都能被译码成唯一与之对应的字符，没有二义性(unambiguous)。</strong></p>
+<h3 id="how-to-construct-a-huffman-code"><a class="markdownIt-Anchor" href="#how-to-construct-a-huffman-code"></a> how to construct a Huffman code?</h3>
+<p>Huffman设计了一个贪心算法来<strong>构造最优前缀码</strong>，被称为赫夫曼编码(Huffman code),它的正确性依赖于证明贪心选择属性(greedy choice property)和最优子结构(optimal substructure)。但是我先讲如何构造赫夫曼编码，然后再去证明。</p>
+<p><strong>Huffman tree</strong><br />
+这棵树和Huffman code相对应，其中叶子节点放着字母和它的频率，内部节点则放着它的左右子树的和。我们可以以左子树的边为0，右子树的边代表1，从而进行编码。</p>
+<p>这个算法使用了最小优先队列，每次都将队列里最小的两个值取出来，合并成一个新的节点，然后再把这个节点放入队列，循环，直到队列的大小等于1，说明不能合并，这时就构建好了Huffman tree.</p>
+<p>伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Huffman(C):</span><br><span class="line">	for i &#x3D; 1 to n-1:</span><br><span class="line">		allocate a new node z</span><br><span class="line">		z.left&#x3D;x&#x3D;EXTRACT-MIN(Q)</span><br><span class="line">		z.right&#x3D;y&#x3D;EXTRACT-MIN(Q)</span><br><span class="line">		z.freq&#x3D;x.freq+y.freq</span><br><span class="line">		Insert(Q,z)</span><br><span class="line">	return EXTRACT-MIN(Q)</span><br></pre></td></tr></table></figure>
+<h3 id="demonstration-of-greedy-choice-property"><a class="markdownIt-Anchor" href="#demonstration-of-greedy-choice-property"></a> demonstration of greedy-choice property</h3>
+<p>首先我们先定义一个符号B，B(T)表示Huffman Tree的需要的空间。则</p>
+<p>B(T)=sum(freq(ele) * len(ele)), 其中freq(ele)代表ele字符的频率，len(ele)表示表示该字符需要的bit.</p>
+<p>我们假设T为最优Huffman Tree，且树的最大深度的叶子节点为y，且它出现的频率不是最小。<br />
+而频率最小的叶子节点不在最大深度，且用a表示。<br />
+此时<code>B(T)=freq(y) * len(y) + freq(a) * len(a) + ...</code> ,其中<code>freq(y) &gt; freq(a)</code>, <code>len(y) &gt; len(a)</code></p>
+<p>我们交换a,y的位置,此时得到一颗新的树T1，则<code>freq(a1)=freq(a)</code>,<code>freq(y1)=freq(y)</code>,<code>len(a1)=len(y)</code>, <code>len(y1)=len(a)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B(T1)&#x3D; freq(y1) * len(y1) + freq(a1) * len(a1) + ...</span><br><span class="line">	 &#x3D; freq(y) * len(a) + freq(a) * len(y) + ...</span><br></pre></td></tr></table></figure>
+<p>则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B(T)-B(T1)&#x3D; (freq(y) * len(y) + freq(a) * len(a) + ...) - (freq(y) * len(a) + freq(a) * len(y) + ...)</span><br><span class="line">		  &#x3D; len(y) * (freq(y)-freq(a)) + len(a) * (freq(a) - freq(y))</span><br><span class="line">		  &#x3D; (len(y) - len(a)) * (freq(y) - freq(a))</span><br></pre></td></tr></table></figure>
+<p>其中<code>len(y)-len(a)&gt;0</code>, <code>ferq(y)-freq(a)&gt;0</code>, 所以上式等价于<code>B(T)-B(T1)&gt;0</code>,即：<br />
+<code>B(T)&gt;B(T1)</code>,这就和T是最优的Huffman Tree相矛盾了。所以，频率越小的字符，应该放越深的地方。<br />
+证毕！</p>
+<h3 id="proof-of-optimal-substructure"><a class="markdownIt-Anchor" href="#proof-of-optimal-substructure"></a> Proof of optimal substructure</h3>
+<p><strong>Lemma</strong>: <code>Lemma: T′ is optimal for C′=C∖&#123;x,y&#125;+&#123;z&#125;, if T is optimal for C.</code></p>
+<p><strong>Proof:</strong><br />
+我们用反证法来证明。假设对于<code>C'</code>的最优前缀是<code>T''</code>, 而不是<code>T'</code>,则对于C，<br />
+最优前缀<code>T'''</code>=<code>T''</code>+f(x)+f(y) &gt; <code>T'</code>+f(x)+f(y)=<code>T</code><br />
+这和我们的假设：“对于C，T是最优前缀“相矛盾。所以<code>T'</code>是<code>C'</code>的最优前缀。</p>
+<h3 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h3>
+<p><strong>Introduction to algorithm</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1233,6 +1518,16 @@ This problem has huge input, use scanf instead of cin to avoid time limit exceed
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/page/15/',]
+      });
+      });
+  </script>
 
 </body>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">

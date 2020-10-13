@@ -217,7 +217,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">146</span>
+          <span class="site-state-item-count">148</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -278,13 +278,53 @@
     <div class="post-content">
       <div class="collection-title">
         
-        <span class="collection-header">Great! 146 posts in total. Keep on posting.</span>
+        <span class="collection-header">Great! 148 posts in total. Keep on posting.</span>
       </div>
 
       
     <div class="collection-year">
       <span class="collection-header">2018</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2018-12-01T18:47:16+08:00"
+              content="2018-12-01">
+          12-01
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2018/12/01/others/regular-expression/" itemprop="url">
+            <span itemprop="name">regular expression</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2018-11-30T23:52:13+08:00"
+              content="2018-11-30">
+          11-30
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2018/11/30/programming/python/Python%E5%AD%97%E7%AC%A6%E4%B8%B2/" itemprop="url">
+            <span itemprop="name">Python字符串</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -446,46 +486,6 @@
     </header>
   </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-11-16T16:43:02+08:00"
-              content="2018-11-16">
-          11-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url">
-            <span itemprop="name">搭建服务器</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-11-16T11:41:25+08:00"
-              content="2018-11-16">
-          11-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" itemprop="url">
-            <span itemprop="name">mysql远程连接</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
 
     </div>
   </div>
@@ -583,6 +583,16 @@
   
 
   
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/archives/page/13/',]
+      });
+      });
+  </script>
 
 </body>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
