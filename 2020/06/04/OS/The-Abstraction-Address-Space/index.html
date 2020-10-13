@@ -1,4 +1,412 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"><script class="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"qingyingliu.top",root:"/",scheme:"Pisces",version:"8.0.1",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12},copycode:!0,bookmark:{enable:!0,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},motion:{enable:!0,async:!0,transition:{post_block:"fadeIn",sidebar:"fadeInUp"}},prism:!1,i18n:{placeholder:"Searching...",empty:"We didn't find any results for the search: ${query}",hits_time:"${hits} results found in ${time} ms",hits:"${hits} results found"},path:"/search.xml",localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1}}</script><meta name="description" content="Early Systems 从内存的角度来看，早期的机器没有为用户提供大量的抽象。机器的物理内存基本上如下图所示:  早期的操作系统是一组位于内存中的指令（在物理内存中的起始位置是0），并且当前有一个正在运行的程序位于物理内存中，使用了从物理内存的64k的位置开始的剩余内存。"><meta property="og:type" content="article"><meta property="og:title" content="The Abstraction - Address Space"><meta property="og:url" content="https://qingyingliu.top/2020/06/04/OS/The-Abstraction-Address-Space/index.html"><meta property="og:site_name" content="qingying&#39;s blog"><meta property="og:description" content="Early Systems 从内存的角度来看，早期的机器没有为用户提供大量的抽象。机器的物理内存基本上如下图所示:  早期的操作系统是一组位于内存中的指令（在物理内存中的起始位置是0），并且当前有一个正在运行的程序位于物理内存中，使用了从物理内存的64k的位置开始的剩余内存。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://qingyingliu.top/img/OS/Operating-System-The-Early-Days.png"><meta property="og:image" content="https://qingyingliu.top/img/OS/An-Example-Address-Space.png"><meta property="og:image" content="https://qingyingliu.top/img/OS/Three-Process-Sharing-Memory.png"><meta property="article:published_time" content="2020-06-04T02:57:24.000Z"><meta property="article:modified_time" content="2020-06-13T09:51:53.000Z"><meta property="article:author" content="Qingying Liu"><meta property="article:tag" content="OS"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://qingyingliu.top/img/OS/Operating-System-The-Early-Days.png"><link rel="canonical" href="https://qingyingliu.top/2020/06/04/OS/The-Abstraction-Address-Space/"><script class="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"en"}</script><title>The Abstraction - Address Space | qingying's blog</title><noscript><style>body{margin-top:2rem}.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header,.use-motion .sidebar{visibility:visible}.use-motion .footer,.use-motion .header,.use-motion .site-brand-container .toggle{opacity:initial}.use-motion .custom-logo-image,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line{transform:scaleX(1)}.search-pop-overlay,.sidebar-nav{display:none}.sidebar-panel{display:block}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="Toggle navigation bar"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><h1 class="site-title">qingying's blog</h1><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc">Table of Contents</li><li class="sidebar-nav-overview">Overview</li></ul><section class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#early-systems"><span class="nav-number">1.</span> <span class="nav-text">Early Systems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multiprogramming-and-time-sharing"><span class="nav-number">2.</span> <span class="nav-text">Multiprogramming and Time Sharing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-address-space"><span class="nav-number">3.</span> <span class="nav-text">The Address Space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goals"><span class="nav-number">4.</span> <span class="nav-text">Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">5.</span> <span class="nav-text">Summary</span></a></li></ol></div></section><section class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="Qingying Liu" src="/uploads/avatar.gif"><p class="site-author-name" itemprop="name">Qingying Liu</p><div class="site-description" itemprop="description">记录数学和计算机方面的知识</div></div><div class="site-state-wrap site-overview-item animated"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">148</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">30</span> <span class="site-state-item-name">categories</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">71</span> <span class="site-state-item-name">tags</span></a></div></nav></div><div class="links-of-author site-overview-item animated"><span class="links-of-author-item"><a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a></span></div></section></div></aside><div class="sidebar-dimmer"></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a role="button" class="book-mark-link book-mark-link-fixed"></a><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en"><link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2020/06/04/OS/The-Abstraction-Address-Space/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/uploads/avatar.gif"><meta itemprop="name" content="Qingying Liu"><meta itemprop="description" content="记录数学和计算机方面的知识"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="qingying's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">The Abstraction - Address Space</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Created: 2020-06-04 10:57:24" itemprop="dateCreated datePublished" datetime="2020-06-04T10:57:24+08:00">2020-06-04</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i> </span><span class="post-meta-item-text">Edited on</span> <time title="Modified: 2020-06-13 17:51:53" itemprop="dateModified" datetime="2020-06-13T17:51:53+08:00">2020-06-13</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">In</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span></span></div></div></header><div class="post-body" itemprop="articleBody"><h2 id="early-systems"><a class="markdownIt-Anchor" href="#early-systems"></a> Early Systems</h2><p>从内存的角度来看，早期的机器没有为用户提供大量的抽象。机器的物理内存基本上如下图所示:</p><p><img src="/img/OS/Operating-System-The-Early-Days.png" alt="Operating-System-The-Early-Days"></p><p>早期的操作系统是一组位于内存中的指令（在物理内存中的起始位置是0），并且当前有一个正在运行的程序位于物理内存中，使用了从物理内存的64k的位置开始的剩余内存。</p><a id="more"></a><h2 id="multiprogramming-and-time-sharing"><a class="markdownIt-Anchor" href="#multiprogramming-and-time-sharing"></a> Multiprogramming and Time Sharing</h2><p>后面的一段时间，因为机器的价格昂贵，所以人们开始更加有效地share machines. 因此，<strong>multiprogramming</strong>的时代就诞生了，在给定的时间中可以运行多道进程，OS可以切换它们。这样做可以有效提高CPU的占用率。</p><p>很快，人们对机器的需求越来越多，因此time sharing的时代诞生了。特别地，很多人意识到了批处理计算机的局限性。交互性的概念变得非常重要，因为很多用户会并发地（同时）使用一个机器，每个用户都在等待他们当前运行的任务的及时响应。</p><p>实现分时的一个方法是，短时间运行一个进程，让其拥有访问所有内存的权限，然后停止它，保存它的状态到磁盘或者物理内存，再加载其他的处理器状态，运行一段时间。一直重复上面的步骤，从而实现对计算机的某种粗略共享。</p><p>不幸的是，这种方法有一个大问题：这种方法太慢了，特别是随着内存增长。即使保存和恢复寄存器的状态是相当快的，但是保存整个内存的内容到磁盘是残酷的。因此，我们宁愿让进程留在内存中，同时切换它们，使得OS可以更有效地实现分时。</p><p>随着分时技术变得越来越流行，我们对操作系统也提出了新要求。特别地，允许多道程序并发地保留在内存，因此，保护进程的内存访问是一个重要的问题。比如，您不希望某个进程能够读取，或者更糟的是写入其他进程的内存。</p><h2 id="the-address-space"><a class="markdownIt-Anchor" href="#the-address-space"></a> The Address Space</h2><p>我们把物理内存的抽象叫做地址空间。</p><p>进程的内存地址空间包含了正在运行的程序的所有内存状态。 例如，程序的<strong>代码</strong>必须放在内存的某个位置，因此它们是在地址空间里面的。 当程序运行时，使用<strong>栈</strong>来跟踪函数调用链中的位置，以及分配局部变量传递参数以及返回值。最后，<strong>堆</strong>用来动态申请的、用户管理的内存。当然，地址空间中也有其他东西，但是我们在这里假设地址空间由三部分组成: 代码、栈、堆。</p><p><img src="/img/OS/An-Example-Address-Space.png" alt="An-Example-Address-Space"></p><p>如上图所示，我们有一个很小的地址空间（只有16KB）。程序的代码放在了地址空间的顶部（在这个例子中是从0开始，被打包到了前1K的地址空间中）。代码区是静态的，当程序运行的时候，代码区也不需要更多的空间。</p><p>接下来，我们有两个地址空间的区域，当程序运行时，可能会增长（和收缩）。它们分别是堆(at the top)和栈(at the bottom)，它们增长的方向是相反的。这样，堆就放在了代码区之后，向下增长；栈从16K的位置开始，向上增长。</p><p>当然，当我们描述地址空间时，我们所描述的是OS提供给运行程序的一种抽象。程序并不是真正在物理地址中是0到16KB，反而是被加载到任意的物理地址。</p><p>例如，下图中描述了每一个进程被加载到了内存的不同地址。当OS这样做的时候，我们就说OS正在虚拟化内存，因为运行程序会认为它被加载到了特定的内存地址(0)，拥有非常大的地址空间(32位或者64位)。但是事实却不是这样的。</p><p><img src="/img/OS/Three-Process-Sharing-Memory.png" alt="Three-Process-Sharing-Memory"></p><p>在上图的例子中，进程A尝试加载程序在地址为0的地方（我们说这是一个虚拟地址），OS会以某种方式，通过硬件的支持，会确保加载的真实物理地址不是0而是320KB的地方。</p><p>内存的虚拟化的关键，是世界上每一个现代计算机系统的的基础。</p><h2 id="goals"><a class="markdownIt-Anchor" href="#goals"></a> Goals</h2><p>虚拟内存(VM)系统的一个主要目标是透明度。OS应该用一种对运行程序不可见的方式实现虚拟内存。因此，程序不应该意识到内存被虚拟化了；相反，程序应该表现地就像它有自己的私有物理地址一样。</p><p>VM的另一个目标是效率。OS应该努力使得虚拟化尽可能地有效率，无论是就时间而言，还是就空间而言。为实现时间高效的虚拟化，OS必须依赖硬件支持，比如TLBs.</p><p>最后，虚拟化的第三个目标是保护。OS应该确保保护进程不受其他的进程的影响。当一个进程加载、存储或者指令获取时，它应该不能够以任何方式访问或者影响其他程序的内存内容或者OS本身。保护为我们提供隔离进程的属性，每一个进程运行它自己的隔离区。</p><h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2><p>我们已经看到了一个主要的子系统的引入：虚拟内存。VM系统负责提供给程序一个庞大的、稀疏的和私有地址的假象，程序的所有指令和数据都保存在这里面。操作系统在一系列的硬件的帮助下，将会获取每一个虚拟内存的引用，然后把它们转化为实际的物理地址。整个方法需要大量的机制(mechanism)和一些关键的策略才能起作用。</p></div><footer class="post-footer"><div class="post-tags"><a href="/tags/OS/" rel="tag"># OS</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2020/06/01/OS/Scheduling2/" rel="prev" title="Scheduling-part II"><i class="fa fa-chevron-left"></i> Scheduling-part II</a></div><div class="post-nav-item"><a href="/2020/06/05/math/mathematical-analysis/%E6%95%B0%E9%A1%B9%E7%BA%A7%E6%95%B0/" rel="next" title="数项级数">数项级数 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Early Systems 从内存的角度来看，早期的机器没有为用户提供大量的抽象。机器的物理内存基本上如下图所示:  早期的操作系统是一组位于内存中的指令（在物理内存中的起始位置是0），并且当前有一个正在运行的程序位于物理内存中，使用了从物理内存的64k的位置开始的剩余内存。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Abstraction - Address Space">
+<meta property="og:url" content="https://qingyingliu.top/2020/06/04/OS/The-Abstraction-Address-Space/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="Early Systems 从内存的角度来看，早期的机器没有为用户提供大量的抽象。机器的物理内存基本上如下图所示:  早期的操作系统是一组位于内存中的指令（在物理内存中的起始位置是0），并且当前有一个正在运行的程序位于物理内存中，使用了从物理内存的64k的位置开始的剩余内存。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/img/OS/Operating-System-The-Early-Days.png">
+<meta property="og:image" content="https://qingyingliu.top/img/OS/An-Example-Address-Space.png">
+<meta property="og:image" content="https://qingyingliu.top/img/OS/Three-Process-Sharing-Memory.png">
+<meta property="article:published_time" content="2020-06-04T02:57:24.000Z">
+<meta property="article:modified_time" content="2020-06-13T09:51:53.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/img/OS/Operating-System-The-Early-Days.png">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2020/06/04/OS/The-Abstraction-Address-Space/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>The Abstraction - Address Space | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#early-systems"><span class="nav-number">1.</span> <span class="nav-text"> Early Systems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multiprogramming-and-time-sharing"><span class="nav-number">2.</span> <span class="nav-text"> Multiprogramming and Time Sharing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-address-space"><span class="nav-number">3.</span> <span class="nav-text"> The Address Space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goals"><span class="nav-number">4.</span> <span class="nav-text"> Goals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">5.</span> <span class="nav-text"> Summary</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2020/06/04/OS/The-Abstraction-Address-Space/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The Abstraction - Address Space
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-04 10:57:24" itemprop="dateCreated datePublished" datetime="2020-06-04T10:57:24+08:00">2020-06-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-06-13 17:51:53" itemprop="dateModified" datetime="2020-06-13T17:51:53+08:00">2020-06-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="early-systems"><a class="markdownIt-Anchor" href="#early-systems"></a> Early Systems</h2>
+<p>从内存的角度来看，早期的机器没有为用户提供大量的抽象。机器的物理内存基本上如下图所示:</p>
+<p><img src="/img/OS/Operating-System-The-Early-Days.png" alt="Operating-System-The-Early-Days" /></p>
+<p>早期的操作系统是一组位于内存中的指令（在物理内存中的起始位置是0），并且当前有一个正在运行的程序位于物理内存中，使用了从物理内存的64k的位置开始的剩余内存。</p>
+<a id="more"></a>
+<h2 id="multiprogramming-and-time-sharing"><a class="markdownIt-Anchor" href="#multiprogramming-and-time-sharing"></a> Multiprogramming and Time Sharing</h2>
+<p>后面的一段时间，因为机器的价格昂贵，所以人们开始更加有效地share machines. 因此，<strong>multiprogramming</strong>的时代就诞生了，在给定的时间中可以运行多道进程，OS可以切换它们。这样做可以有效提高CPU的占用率。</p>
+<p>很快，人们对机器的需求越来越多，因此time sharing的时代诞生了。特别地，很多人意识到了批处理计算机的局限性。交互性的概念变得非常重要，因为很多用户会并发地（同时）使用一个机器，每个用户都在等待他们当前运行的任务的及时响应。</p>
+<p>实现分时的一个方法是，短时间运行一个进程，让其拥有访问所有内存的权限，然后停止它，保存它的状态到磁盘或者物理内存，再加载其他的处理器状态，运行一段时间。一直重复上面的步骤，从而实现对计算机的某种粗略共享。</p>
+<p>不幸的是，这种方法有一个大问题：这种方法太慢了，特别是随着内存增长。即使保存和恢复寄存器的状态是相当快的，但是保存整个内存的内容到磁盘是残酷的。因此，我们宁愿让进程留在内存中，同时切换它们，使得OS可以更有效地实现分时。</p>
+<p>随着分时技术变得越来越流行，我们对操作系统也提出了新要求。特别地，允许多道程序并发地保留在内存，因此，保护进程的内存访问是一个重要的问题。比如，您不希望某个进程能够读取，或者更糟的是写入其他进程的内存。</p>
+<h2 id="the-address-space"><a class="markdownIt-Anchor" href="#the-address-space"></a> The Address Space</h2>
+<p>我们把物理内存的抽象叫做地址空间。</p>
+<p>进程的内存地址空间包含了正在运行的程序的所有内存状态。 例如，程序的<strong>代码</strong>必须放在内存的某个位置，因此它们是在地址空间里面的。 当程序运行时，使用<strong>栈</strong>来跟踪函数调用链中的位置，以及分配局部变量传递参数以及返回值。最后，<strong>堆</strong>用来动态申请的、用户管理的内存。当然，地址空间中也有其他东西，但是我们在这里假设地址空间由三部分组成: 代码、栈、堆。</p>
+<p><img src="/img/OS/An-Example-Address-Space.png" alt="An-Example-Address-Space" /></p>
+<p>如上图所示，我们有一个很小的地址空间（只有16KB）。程序的代码放在了地址空间的顶部（在这个例子中是从0开始，被打包到了前1K的地址空间中）。代码区是静态的，当程序运行的时候，代码区也不需要更多的空间。</p>
+<p>接下来，我们有两个地址空间的区域，当程序运行时，可能会增长（和收缩）。它们分别是堆(at the top)和栈(at the bottom)，它们增长的方向是相反的。这样，堆就放在了代码区之后，向下增长；栈从16K的位置开始，向上增长。</p>
+<p>当然，当我们描述地址空间时，我们所描述的是OS提供给运行程序的一种抽象。程序并不是真正在物理地址中是0到16KB，反而是被加载到任意的物理地址。</p>
+<p>例如，下图中描述了每一个进程被加载到了内存的不同地址。当OS这样做的时候，我们就说OS正在虚拟化内存，因为运行程序会认为它被加载到了特定的内存地址(0)，拥有非常大的地址空间(32位或者64位)。但是事实却不是这样的。</p>
+<p><img src="/img/OS/Three-Process-Sharing-Memory.png" alt="Three-Process-Sharing-Memory" /></p>
+<p>在上图的例子中，进程A尝试加载程序在地址为0的地方（我们说这是一个虚拟地址），OS会以某种方式，通过硬件的支持，会确保加载的真实物理地址不是0而是320KB的地方。</p>
+<p>内存的虚拟化的关键，是世界上每一个现代计算机系统的的基础。</p>
+<h2 id="goals"><a class="markdownIt-Anchor" href="#goals"></a> Goals</h2>
+<p>虚拟内存(VM)系统的一个主要目标是透明度。OS应该用一种对运行程序不可见的方式实现虚拟内存。因此，程序不应该意识到内存被虚拟化了；相反，程序应该表现地就像它有自己的私有物理地址一样。</p>
+<p>VM的另一个目标是效率。OS应该努力使得虚拟化尽可能地有效率，无论是就时间而言，还是就空间而言。为实现时间高效的虚拟化，OS必须依赖硬件支持，比如TLBs.</p>
+<p>最后，虚拟化的第三个目标是保护。OS应该确保保护进程不受其他的进程的影响。当一个进程加载、存储或者指令获取时，它应该不能够以任何方式访问或者影响其他程序的内存内容或者OS本身。保护为我们提供隔离进程的属性，每一个进程运行它自己的隔离区。</p>
+<h2 id="summary"><a class="markdownIt-Anchor" href="#summary"></a> Summary</h2>
+<p>我们已经看到了一个主要的子系统的引入：虚拟内存。VM系统负责提供给程序一个庞大的、稀疏的和私有地址的假象，程序的所有指令和数据都保存在这里面。操作系统在一系列的硬件的帮助下，将会获取每一个虚拟内存的引用，然后把它们转化为实际的物理地址。整个方法需要大量的机制(mechanism)和一些关键的策略才能起作用。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OS/" rel="tag"># OS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/06/01/OS/Scheduling2/" rel="prev" title="Scheduling-part II">
+                  <i class="fa fa-chevron-left"></i> Scheduling-part II
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/06/05/math/mathematical-analysis/%E6%95%B0%E9%A1%B9%E7%BA%A7%E6%95%B0/" rel="next" title="数项级数">
+                  数项级数 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -16,10 +424,80 @@
       const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }</script></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">Qingying Liu</span></div></div></footer><script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/local-search.js"></script><script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
       quicklink.listen({
         timeout : 300,
         priority: true,
         ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2020/06/04/OS/The-Abstraction-Address-Space/',]
       });
-      });</script></body><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"></html>
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

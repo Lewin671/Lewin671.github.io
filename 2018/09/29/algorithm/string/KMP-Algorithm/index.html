@@ -1,4 +1,699 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"><script class="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"qingyingliu.top",root:"/",scheme:"Pisces",version:"8.0.1",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12},copycode:!0,bookmark:{enable:!0,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},motion:{enable:!0,async:!0,transition:{post_block:"fadeIn",sidebar:"fadeInUp"}},prism:!1,i18n:{placeholder:"Searching...",empty:"We didn't find any results for the search: ${query}",hits_time:"${hits} results found in ${time} ms",hits:"${hits} results found"},path:"/search.xml",localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1}}</script><meta name="description" content="Introduction to KMP KMP算法是一种高效的字符串匹配算法，它的第一次被提出是在1977年由Donald E. Knuth, James H. Morris and Vaughan R. Pratt提出的。这篇博客主要介绍KMP算法的实现及其应用，至于KMP算法的正确性，本博客不涉及，这也是为了让新手能够能加容易看懂。  Two steps to realize KMP KMP"><meta property="og:type" content="article"><meta property="og:title" content="KMP Algorithm"><meta property="og:url" content="https://qingyingliu.top/2018/09/29/algorithm/string/KMP-Algorithm/index.html"><meta property="og:site_name" content="qingying&#39;s blog"><meta property="og:description" content="Introduction to KMP KMP算法是一种高效的字符串匹配算法，它的第一次被提出是在1977年由Donald E. Knuth, James H. Morris and Vaughan R. Pratt提出的。这篇博客主要介绍KMP算法的实现及其应用，至于KMP算法的正确性，本博客不涉及，这也是为了让新手能够能加容易看懂。  Two steps to realize KMP KMP"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://qingyingliu.top/uploads/exampleOfKMP.jpg"><meta property="og:image" content="https://pic1.xuehuaimg.com/proxy/csdn/http://dl.iteye.com/upload/picture/pic/106268/654c396e-75c4-34c7-be81-780284370688.jpg"><meta property="article:published_time" content="2018-09-28T17:56:36.000Z"><meta property="article:modified_time" content="2020-04-27T05:09:02.000Z"><meta property="article:author" content="Qingying Liu"><meta property="article:tag" content="KMP"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://qingyingliu.top/uploads/exampleOfKMP.jpg"><link rel="canonical" href="https://qingyingliu.top/2018/09/29/algorithm/string/KMP-Algorithm/"><script class="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"en"}</script><title>KMP Algorithm | qingying's blog</title><noscript><style>body{margin-top:2rem}.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header,.use-motion .sidebar{visibility:visible}.use-motion .footer,.use-motion .header,.use-motion .site-brand-container .toggle{opacity:initial}.use-motion .custom-logo-image,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line{transform:scaleX(1)}.search-pop-overlay,.sidebar-nav{display:none}.sidebar-panel{display:block}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="Toggle navigation bar"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><h1 class="site-title">qingying's blog</h1><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc">Table of Contents</li><li class="sidebar-nav-overview">Overview</li></ul><section class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-to-kmp"><span class="nav-number">1.</span> <span class="nav-text">Introduction to KMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#two-steps-to-realize-kmp"><span class="nav-number">2.</span> <span class="nav-text">Two steps to realize KMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-get-the-next-array"><span class="nav-number">3.</span> <span class="nav-text">How to get the next array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#definition-of-next-array"><span class="nav-number">3.1.</span> <span class="nav-text">Definition of next array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-and-suffix"><span class="nav-number">3.2.</span> <span class="nav-text">Prefix and Suffix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deduce-the-formula"><span class="nav-number">3.3.</span> <span class="nav-text">Deduce the formula</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#initial-the-next"><span class="nav-number">3.4.</span> <span class="nav-text">Initial the next</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.5.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#example"><span class="nav-number">3.6.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sliding-rule"><span class="nav-number">4.</span> <span class="nav-text">Sliding rule</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rule"><span class="nav-number">4.1.</span> <span class="nav-text">Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-2"><span class="nav-number">4.2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#example-2"><span class="nav-number">4.3.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optimize-kmp"><span class="nav-number">5.</span> <span class="nav-text">Optimize KMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#code-3"><span class="nav-number">5.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application"><span class="nav-number">6.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#poj-3461oulipo"><span class="nav-number">6.1.</span> <span class="nav-text">POJ 3461	Oulipo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poj-2752seek-the-name-seek-the-fame"><span class="nav-number">6.2.</span> <span class="nav-text">POJ 2752	Seek the Name, Seek the Fame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poj-2406power-strings"><span class="nav-number">6.3.</span> <span class="nav-text">POJ 2406	Power Strings</span></a></li></ol></li></ol></div></section><section class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="Qingying Liu" src="/uploads/avatar.gif"><p class="site-author-name" itemprop="name">Qingying Liu</p><div class="site-description" itemprop="description">记录数学和计算机方面的知识</div></div><div class="site-state-wrap site-overview-item animated"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">148</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">30</span> <span class="site-state-item-name">categories</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">71</span> <span class="site-state-item-name">tags</span></a></div></nav></div><div class="links-of-author site-overview-item animated"><span class="links-of-author-item"><a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a></span></div></section></div></aside><div class="sidebar-dimmer"></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a role="button" class="book-mark-link book-mark-link-fixed"></a><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en"><link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/09/29/algorithm/string/KMP-Algorithm/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/uploads/avatar.gif"><meta itemprop="name" content="Qingying Liu"><meta itemprop="description" content="记录数学和计算机方面的知识"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="qingying's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">KMP Algorithm</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Created: 2018-09-29 01:56:36" itemprop="dateCreated datePublished" datetime="2018-09-29T01:56:36+08:00">2018-09-29</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i> </span><span class="post-meta-item-text">Edited on</span> <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">In</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a> </span>, <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a></span></span></div></div></header><div class="post-body" itemprop="articleBody"><h2 id="introduction-to-kmp"><a class="markdownIt-Anchor" href="#introduction-to-kmp"></a> Introduction to KMP</h2><p>KMP算法是一种<strong>高效的字符串匹配算法</strong>，它的第一次被提出是在1977年由Donald E. Knuth, James H. Morris and Vaughan R. Pratt提出的。这篇博客主要介绍KMP算法的实现及其应用，至于KMP算法的正确性，本博客不涉及，这也是为了让新手能够能加容易看懂。</p><h2 id="two-steps-to-realize-kmp"><a class="markdownIt-Anchor" href="#two-steps-to-realize-kmp"></a> Two steps to realize KMP</h2><p>KMP算法一般分为两个步骤：</p><ol><li>计算next数组</li><li>根据next数组进行字符串匹配</li></ol><p>是不是看着一脸懵逼？没有关系，因为上面两个步骤没有清楚得定义next数组和字符串匹配的规则，只是从总体来说，但是实现的细节正是这篇文章的重点。</p><h2 id="how-to-get-the-next-array"><a class="markdownIt-Anchor" href="#how-to-get-the-next-array"></a> How to get the next array</h2><h3 id="definition-of-next-array"><a class="markdownIt-Anchor" href="#definition-of-next-array"></a> Definition of next array</h3><p>首先我们要明确next数组的执行是只依据<strong>模式串（Pattern String）<strong>的，与</strong>主串（Text String)<strong>无关。<strong>下面假设模式串为P[n],主串为T[m],P和T的字符下标从0开始</strong>。<br>下面我们来定义next数组：<br><code>next[j]=i</code>表示P[0,…,j-1]有着</strong>最大</strong>长度为i的前缀字符串F和后缀字符串L,使得F=L。<br>注意：这里我专门强调了最大，比如P=“aaaa”,则P的相同长度的前缀和后缀相等的长度有：1，2，3，分别是&quot;a&quot;,“aa”,“aaa”。但是这里的next[4]=3,而不能取1或2或0;</p><h3 id="prefix-and-suffix"><a class="markdownIt-Anchor" href="#prefix-and-suffix"></a> Prefix and Suffix</h3><p>为了让这篇文章能够让小白也能看得懂，我再这里解释一下什么叫做前缀和后缀：<br>假设字符串为S[0,…,n]，则<br>S的前缀为：<code>&#123;S[0,...,i]:0&lt;=i&lt;n&#125;</code><br>S的后缀为：<code>&#123;S[i,n]:0&lt;i&lt;=n&#125;</code></p><h3 id="deduce-the-formula"><a class="markdownIt-Anchor" href="#deduce-the-formula"></a> Deduce the formula</h3><p>ok,我们已经定义好了next数组的含义，我们接下来就开始寻找计算next数组的方法。<br>假设我们已经知道当前的next[j]=i，那么我们下一步肯定是考虑移动i或者j：</p><ol><li>若next[j]==next[i+1]，那么next[j+1]=i+1,即此时i++,j++；</li><li>若next[j]!=next[i+1],那么P[0,…,i+1]!=P[j-i-1…,j],那么我们就应该<code>i=next[i]</code>( 这里看不懂没有关系，因为这个涉及到KMP的算法，即计算next数组本身也是一个字符匹配的问题，可以先记住这个步骤 )</li></ol><h3 id="initial-the-next"><a class="markdownIt-Anchor" href="#initial-the-next"></a> Initial the next</h3><p>我们可以设定next[0]=-1，这样做的好处是：-1可以作为一个标记，当i=-1时，说明模式串P不可以再向右滑动了，此时j++。<br><code>i=0,j=1</code><br>i=0表示长度最小为0，j=1表示P[0,…j-1]，要使<code>j-1&gt;=0</code>,则j&gt;=1，所以j赋予初值1。</p><h3 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calculateNext</span><span class="params">(<span class="built_in">string</span>&amp; P, <span class="keyword">int</span> *Next)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> length = P.length();</span><br><span class="line">	Next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (j &lt; length)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">-1</span> || P[i] == P[j]) &#123;</span><br><span class="line">			i++;</span><br><span class="line">			j++;</span><br><span class="line">			Next[j] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="example"><a class="markdownIt-Anchor" href="#example"></a> Example</h3><p>假设模式串P=abaabc，下面我们来计算模式串P的next数组：</p><ol><li>初始化i=-1,j=0,next[0]=-1。此时i==-1,所以i++,j++,得到i=0,j=1;所以此时next数组如下：</li></ol><table><thead><tr><th>a</th><th>b</th><th>a</th><th>a</th><th>b</th><th>c</th><th>‘\0’</th></tr></thead><tbody><tr><td>-1</td><td>0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr></tbody></table><ol start="2"><li>P[i]=P[0]=‘a’,P[j]=P[1]=‘b’,所以P[i]!=P[j],i=Next[i]=Next[0]=-1,然后i==-1,跳转到if语句，此时i++,j++,i=0,j=2,所以此时next数组如下：</li></ol><table><thead><tr><th>a</th><th>b</th><th>a</th><th>a</th><th>b</th><th>c</th><th>‘\0’</th></tr></thead><tbody><tr><td>-1</td><td>0</td><td>0</td><td>-</td><td>-</td><td>-</td><td>-</td></tr></tbody></table><ol start="3"><li>P[i]=P[j]=‘a’,所以i++,j++，此时i=1,j=3,next数组为</li></ol><table><thead><tr><th>a</th><th>b</th><th>a</th><th>a</th><th>b</th><th>c</th><th>‘\0’</th></tr></thead><tbody><tr><td>-1</td><td>0</td><td>0</td><td>1</td><td>-</td><td>-</td><td>-</td></tr></tbody></table><ol start="4"><li>P[i]!=P[j],所以i=Next[i]=0,然后P[i]=P[j]=‘a’，所以i++,j++，此时i=1,j=4,Next数组为</li></ol><table><thead><tr><th>a</th><th>b</th><th>a</th><th>a</th><th>b</th><th>c</th><th>‘\0’</th></tr></thead><tbody><tr><td>-1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>-</td><td>-</td></tr></tbody></table><ol start="5"><li>P[i]=P[j]=‘b’,所以i++,j++，此时i=2,j=5,next数组为</li></ol><table><thead><tr><th>a</th><th>b</th><th>a</th><th>a</th><th>b</th><th>c</th><th>‘\0’</th></tr></thead><tbody><tr><td>-1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>2</td><td>-</td></tr></tbody></table><p>6.P[i]!=P[j],i=Next[i]=0,此时P[i]!=P[j],i=Next[i]=-1,所以i++,j++,i=0,j=6,Next[6]=0，此时next数组为：</p><table><thead><tr><th>a</th><th>b</th><th>a</th><th>a</th><th>b</th><th>c</th><th>‘\0’</th></tr></thead><tbody><tr><td>-1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>2</td><td>0</td></tr></tbody></table><ol start="7"><li>跳出循环。Next数组的计算结束。</li></ol><h2 id="sliding-rule"><a class="markdownIt-Anchor" href="#sliding-rule"></a> Sliding rule</h2><h3 id="rule"><a class="markdownIt-Anchor" href="#rule"></a> Rule</h3><p>假设P[0,…,i-1]和T[j-q,j-1]匹配,有以下两种情况：</p><ol><li>若P[i]和T[j]相等，则P[0,…,i]和T[j-q,…,j]匹配</li><li>若P[i]和T[j]不相等，则P[0,…,i]和T[j-q,…,j]不匹配，这时候就需要“将模式串向右滑动尽可能远的距离”，继续匹配。如果不能再继续向右滑动(i==-1)，则j++,i=0。</li></ol><h3 id="code-2"><a class="markdownIt-Anchor" href="#code-2"></a> Code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KMP</span><span class="params">(<span class="built_in">string</span> T, <span class="built_in">string</span> P)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> MAX_SIZE = <span class="number">1000</span>;</span><br><span class="line">	<span class="keyword">int</span> Next[MAX_SIZE];</span><br><span class="line">	calculateNext(P, Next);</span><br><span class="line">	<span class="keyword">int</span> T_length = T.length();</span><br><span class="line">	<span class="keyword">int</span> P_length = P.length();</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (i &lt; P_length)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (j &gt;= T_length)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">-1</span> || T[j] == P[i]) &#123;</span><br><span class="line">			i++; j++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> j - P_length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="example-2"><a class="markdownIt-Anchor" href="#example-2"></a> Example</h3><p>假设T=acabaabaabcacaabc,P=abaabcac,根据上面介绍的计算Next数组的方法，容易计算next数组的值为：</p><p>i|0|1|2|3|4|5|6|7<br>—|---|—|---|—|---|----|—<br>Pattern|a|b|a|a|b|c|a|c<br>next|-1|0|0|1|1|2|0|1</p><p>匹配过程如下：</p><p><img src="/uploads/exampleOfKMP.jpg" alt="exampleOfKMP"></p><h2 id="optimize-kmp"><a class="markdownIt-Anchor" href="#optimize-kmp"></a> Optimize KMP</h2><p>其实在求next数组的时候还可以优化。比如说我们的模式串P=ababc,则next数组应该为：</p><table><thead><tr><th>a</th><th>b</th><th>a</th><th>b</th><th>c</th><th>\0</th></tr></thead><tbody><tr><td>-1</td><td>0</td><td>0</td><td>1</td><td>2</td><td>0</td></tr></tbody></table><p>但是，如果我们在i=3,即P[i]='b’的时候，如果和T[j]匹配不成功，则i=next[i]=1，此时P[i]=‘b’，还是和T[j]不匹配，这就是我们可以优化的地方。<br>所以我们可以这样操作：<br>如果P[i]==P[j],则nextval[j]=nextval[i],否则nextval[j]=i;</p><h3 id="code-3"><a class="markdownIt-Anchor" href="#code-3"></a> Code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* P 为模式串，下标从 0 开始 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetNextval</span><span class="params">(<span class="built_in">string</span> P, <span class="keyword">int</span> nextval[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p_len = P.size();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">-1</span>;   <span class="comment">// P 的下标</span></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;  </span><br><span class="line">    nextval[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (i &lt; p_len - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">-1</span> || P[i] == P[j])</span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">          </span><br><span class="line">            <span class="keyword">if</span> (P[i] != P[j])</span><br><span class="line">                nextval[j] = i;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                nextval[j] = nextval[i];  <span class="comment">// 既然相同就继续往前找真前缀</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            i = nextval[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="application"><a class="markdownIt-Anchor" href="#application"></a> Application</h2><h3 id="poj-3461oulipo"><a class="markdownIt-Anchor" href="#poj-3461oulipo"></a> POJ 3461	Oulipo</h3><p>The French author Georges Perec (1936–1982) once wrote a book, La disparition, without the letter ‘e’. He was a member of the Oulipo group. A quote from the book:</p><p>Tout avait Pair normal, mais tout s’affirmait faux. Tout avait Fair normal, d’abord, puis surgissait l’inhumain, l’affolant. Il aurait voulu savoir où s’articulait l’association qui l’unissait au roman : stir son tapis, assaillant à tout instant son imagination, l’intuition d’un tabou, la vision d’un mal obscur, d’un quoi vacant, d’un non-dit : la vision, l’avision d’un oubli commandant tout, où s’abolissait la raison : tout avait l’air normal mais…</p><p>Perec would probably have scored high (or rather, low) in the following contest. People are asked to write a perhaps even meaningful text on some subject with as few occurrences of a given “word” as possible. Our task is to provide the jury with a program that counts these occurrences, in order to obtain a ranking of the competitors. These competitors often write very long texts with nonsense meaning; a sequence of 500,000 consecutive 'T’s is not unusual. And they never use spaces.</p><p>So we want to quickly find out how often a word, i.e., a given string, occurs in a text. More formally: given the alphabet {‘A’, ‘B’, ‘C’, …, ‘Z’} and two finite strings over that alphabet, a word W and a text T, count the number of occurrences of W in T. All the consecutive characters of W must exactly match consecutive characters of T. Occurrences may overlap.</p><p><strong>Input</strong><br>The first line of the input file contains a single number: the number of test cases to follow. Each test case has the following format:</p><p>One line with the word W, a string over {‘A’, ‘B’, ‘C’, …, ‘Z’}, with 1 ≤ |W| ≤ 10,000 (here |W| denotes the length of the string W).<br>One line with the text T, a string over {‘A’, ‘B’, ‘C’, …, ‘Z’}, with |W| ≤ |T| ≤ 1,000,000.</p><p><strong>Output</strong><br>For every test case in the input file, the output should contain a single number, on a single line: the number of occurrences of the word W in the text T.</p><p><strong>Sample Input</strong><br>3<br>BAPC<br>BAPC<br>AZA<br>AZAZAZA<br>VERDI<br>AVERDXIVYERDIAN<br><strong>Sample Output</strong><br>1<br>3<br>0</p><p><strong>分析：</strong><br>题目的意思就是让我们在文本串T中寻找有多少个模式串P。根据KMP算法，我们可以在匹配成功之后把模式串向右滑动，然后重新匹配。比如T=abcabcabc,P=abc,则在第一次匹配(i=3,j=3)完之后让模式串向右滑动：<code>i=next[i]</code>，此时i=-1,j=3.(i是指向模式串的索引，j是指向T的索引)。</p><p><strong>Accepted code</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_SIZE = <span class="number">1000005</span>;</span><br><span class="line"><span class="keyword">int</span> Next[MAX_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calculateNext</span><span class="params">(<span class="built_in">string</span>&amp; P, <span class="keyword">int</span> *Next)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> length = P.length();</span><br><span class="line">	Next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (j &lt; length)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">-1</span> || P[i] == P[j]) &#123;</span><br><span class="line">			i++;</span><br><span class="line">			j++;</span><br><span class="line">			Next[j] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KMP_Count</span><span class="params">(<span class="built_in">string</span> &amp;T,<span class="built_in">string</span> &amp;P)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	calculateNext(P, Next);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> T_length = T.length();</span><br><span class="line">	<span class="keyword">int</span> P_length = P.length();</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (j &lt; T_length&amp;&amp;i&lt;P_length) &#123;</span><br><span class="line">		<span class="keyword">int</span> k = i;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">-1</span> || T[j] == P[i]) &#123;</span><br><span class="line">			i++; j++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (i == P_length) &#123;</span><br><span class="line">			res++;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span> (t--) &#123;</span><br><span class="line">		<span class="built_in">string</span> T, P;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; P &gt;&gt; T;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; KMP_Count(T, P) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="poj-2752seek-the-name-seek-the-fame"><a class="markdownIt-Anchor" href="#poj-2752seek-the-name-seek-the-fame"></a> POJ 2752	Seek the Name, Seek the Fame</h3><p>The little cat is so famous, that many couples tramp over hill and dale to Byteland, and asked the little cat to give names to their newly-born babies. They seek the name, and at the same time seek the fame. In order to escape from such boring job, the innovative little cat works out an easy but fantastic algorithm:</p><p>Step1. Connect the father’s name and the mother’s name, to a new string S.<br>Step2. Find a proper prefix-suffix string of S (which is not only the prefix, but also the suffix of S).</p><p>Example: Father=‘ala’, Mother=‘la’, we have S = ‘ala’+‘la’ = ‘alala’. Potential prefix-suffix strings of S are {‘a’, ‘ala’, ‘alala’}. Given the string S, could you help the little cat to write a program to calculate the length of possible prefix-suffix strings of S? (He might thank you by giving your baby a name:)</p><p><strong>Input</strong><br>The input contains a number of test cases. Each test case occupies a single line that contains the string S described above.</p><p>Restrictions: Only lowercase letters may appear in the input. 1 &lt;= Length of S &lt;= 400000.</p><p><strong>Output</strong><br>For each test case, output a single line with integer numbers in increasing order, denoting the possible length of the new baby’s name.</p><p><strong>Sample Input</strong><br>ababcababababcabab<br>aaaaa</p><p><strong>Sample Output</strong><br>2 4 9 18<br>1 2 3 4 5</p><p><strong>分析</strong><br>题目的意思是求一个字符串P的所有前缀字符串和后缀字符串相等的长度。我们可以在P中使用KMP算法求得next数组，得到最大长度的满足题目条件前缀字符串S1，然后在字符串S1中继续寻找满足题目条件的前缀字符串S2…，一直递归下去，直到找不到满足题目条件的字符串。然后逆序输出答案即可（递归或者栈）。下面这个图有利于理解：<br><img src="https://pic1.xuehuaimg.com/proxy/csdn/http://dl.iteye.com/upload/picture/pic/106268/654c396e-75c4-34c7-be81-780284370688.jpg" alt="example"></p><p><strong>Accepted code</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> MAX_SIZE=<span class="number">4000005</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> Next[]=<span class="keyword">new</span> <span class="keyword">int</span> [MAX_SIZE];</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span> first=<span class="keyword">true</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getNext</span><span class="params">(String P)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">		Next[<span class="number">0</span>]=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> P_length=P.length();</span><br><span class="line">		<span class="keyword">while</span>(j&lt;P_length) &#123;</span><br><span class="line">			<span class="keyword">if</span>(i==-<span class="number">1</span>||P.charAt(i)==P.charAt(j)) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				j++;</span><br><span class="line">				Next[j]=i;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				i=Next[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printRes</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(i&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> ;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;	</span><br><span class="line">			printRes(Next[i]);</span><br><span class="line">			<span class="keyword">if</span>(first) &#123;</span><br><span class="line">				first=<span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(<span class="string">&quot; &quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.print(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String S;</span><br><span class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">while</span>(in.hasNext()) &#123;</span><br><span class="line">			first=<span class="keyword">true</span>;</span><br><span class="line">			S=in.nextLine();</span><br><span class="line">			getNext(S);</span><br><span class="line">			printRes(S.length());</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="poj-2406power-strings"><a class="markdownIt-Anchor" href="#poj-2406power-strings"></a> POJ 2406	Power Strings</h3><p>Given two strings a and b we define <code>a*b</code> to be their concatenation. For example, if <code>a = &quot;abc&quot;</code> and <code>b = &quot;def&quot;</code> then <code>a*b = &quot;abcdef&quot;</code>. If we think of concatenation as multiplication, exponentiation by a non-negative integer is defined in the normal way: a^0 = “” (the empty string) and a^(n+1) = a*(a^n).</p><p><strong>Input</strong><br>Each test case is a line of input representing s, a string of printable characters. The length of s will be at least 1 and will not exceed 1 million characters. A line containing a period follows the last test case.</p><p><strong>Output</strong><br>For each s you should print the largest n such that s = a^n for some string a.</p><p><strong>Sample Input</strong><br>abcd<br>aaaa<br>ababab<br>.<br><strong>Sample Output</strong><br>1<br>4<br>3</p><p><strong>Hint</strong><br>This problem has huge input, use scanf instead of cin to avoid time limit exceed.</p><p><strong>分析</strong><br>这个题目的意思就是给出一个字符串S，让我们求这个字符串有多少个<strong>最小循环节</strong>。<br>这里给出方法，但是不证明：<br>如果<code>S.length%(S.length-next[S.length])==0</code>,那么答案就是<code>S.length/(S.length-next[S.length])</code>,否则就是1</p><p><strong>Accepted code</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> MAX_SIZE=<span class="number">1000005</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> []next=<span class="keyword">new</span> <span class="keyword">int</span>[MAX_SIZE];</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">calculateNext</span><span class="params">(String P)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> P_length=P.length();</span><br><span class="line">		next[<span class="number">0</span>]=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(j&lt;P_length) &#123;</span><br><span class="line">			<span class="keyword">if</span>(i==-<span class="number">1</span>||P.charAt(i)==P.charAt(j)) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				j++;</span><br><span class="line">				next[j]=i;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				i=next[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123;</span><br><span class="line">		String P;</span><br><span class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">while</span>(in.hasNext()) &#123;</span><br><span class="line">			P=in.nextLine();</span><br><span class="line">			<span class="keyword">if</span>(P.equals(<span class="string">&quot;.&quot;</span>)) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			calculateNext(P);</span><br><span class="line">			<span class="keyword">int</span> P_length=P.length();</span><br><span class="line">			<span class="keyword">int</span> res;</span><br><span class="line">			<span class="keyword">if</span>(P_length%(P_length-next[P_length])==<span class="number">0</span>) &#123;</span><br><span class="line">				res=P_length/(P_length-next[P_length]);</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				res=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(res);</span><br><span class="line">		&#125;</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><footer class="post-footer"><div class="post-tags"><a href="/tags/KMP/" rel="tag"># KMP</a></div><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a href="/2018/10/01/markdown/brief_Markdown/" rel="next" title="breif Markdown">breif Markdown <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Introduction to KMP KMP算法是一种高效的字符串匹配算法，它的第一次被提出是在1977年由Donald E. Knuth, James H. Morris and Vaughan R. Pratt提出的。这篇博客主要介绍KMP算法的实现及其应用，至于KMP算法的正确性，本博客不涉及，这也是为了让新手能够能加容易看懂。  Two steps to realize KMP KMP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KMP Algorithm">
+<meta property="og:url" content="https://qingyingliu.top/2018/09/29/algorithm/string/KMP-Algorithm/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="Introduction to KMP KMP算法是一种高效的字符串匹配算法，它的第一次被提出是在1977年由Donald E. Knuth, James H. Morris and Vaughan R. Pratt提出的。这篇博客主要介绍KMP算法的实现及其应用，至于KMP算法的正确性，本博客不涉及，这也是为了让新手能够能加容易看懂。  Two steps to realize KMP KMP">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/uploads/exampleOfKMP.jpg">
+<meta property="og:image" content="https://pic1.xuehuaimg.com/proxy/csdn/http://dl.iteye.com/upload/picture/pic/106268/654c396e-75c4-34c7-be81-780284370688.jpg">
+<meta property="article:published_time" content="2018-09-28T17:56:36.000Z">
+<meta property="article:modified_time" content="2020-04-27T05:09:02.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="KMP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/uploads/exampleOfKMP.jpg">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2018/09/29/algorithm/string/KMP-Algorithm/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>KMP Algorithm | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-to-kmp"><span class="nav-number">1.</span> <span class="nav-text"> Introduction to KMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#two-steps-to-realize-kmp"><span class="nav-number">2.</span> <span class="nav-text"> Two steps to realize KMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-get-the-next-array"><span class="nav-number">3.</span> <span class="nav-text"> How to get the next array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#definition-of-next-array"><span class="nav-number">3.1.</span> <span class="nav-text"> Definition of next array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefix-and-suffix"><span class="nav-number">3.2.</span> <span class="nav-text"> Prefix and Suffix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deduce-the-formula"><span class="nav-number">3.3.</span> <span class="nav-text"> Deduce the formula</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#initial-the-next"><span class="nav-number">3.4.</span> <span class="nav-text"> Initial the next</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.5.</span> <span class="nav-text"> Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#example"><span class="nav-number">3.6.</span> <span class="nav-text"> Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sliding-rule"><span class="nav-number">4.</span> <span class="nav-text"> Sliding rule</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rule"><span class="nav-number">4.1.</span> <span class="nav-text"> Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-2"><span class="nav-number">4.2.</span> <span class="nav-text"> Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#example-2"><span class="nav-number">4.3.</span> <span class="nav-text"> Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optimize-kmp"><span class="nav-number">5.</span> <span class="nav-text"> Optimize KMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#code-3"><span class="nav-number">5.1.</span> <span class="nav-text"> Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application"><span class="nav-number">6.</span> <span class="nav-text"> Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#poj-3461oulipo"><span class="nav-number">6.1.</span> <span class="nav-text"> POJ 3461	Oulipo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poj-2752seek-the-name-seek-the-fame"><span class="nav-number">6.2.</span> <span class="nav-text"> POJ 2752	Seek the Name, Seek the Fame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poj-2406power-strings"><span class="nav-number">6.3.</span> <span class="nav-text"> POJ 2406	Power Strings</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/09/29/algorithm/string/KMP-Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          KMP Algorithm
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-09-29 01:56:36" itemprop="dateCreated datePublished" datetime="2018-09-29T01:56:36+08:00">2018-09-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithm/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="introduction-to-kmp"><a class="markdownIt-Anchor" href="#introduction-to-kmp"></a> Introduction to KMP</h2>
+<p>KMP算法是一种<strong>高效的字符串匹配算法</strong>，它的第一次被提出是在1977年由Donald E. Knuth, James H. Morris and Vaughan R. Pratt提出的。这篇博客主要介绍KMP算法的实现及其应用，至于KMP算法的正确性，本博客不涉及，这也是为了让新手能够能加容易看懂。</p>
+<h2 id="two-steps-to-realize-kmp"><a class="markdownIt-Anchor" href="#two-steps-to-realize-kmp"></a> Two steps to realize KMP</h2>
+<p>KMP算法一般分为两个步骤：</p>
+<ol>
+<li>计算next数组</li>
+<li>根据next数组进行字符串匹配</li>
+</ol>
+<p>是不是看着一脸懵逼？没有关系，因为上面两个步骤没有清楚得定义next数组和字符串匹配的规则，只是从总体来说，但是实现的细节正是这篇文章的重点。</p>
+<h2 id="how-to-get-the-next-array"><a class="markdownIt-Anchor" href="#how-to-get-the-next-array"></a> How to get the next array</h2>
+<h3 id="definition-of-next-array"><a class="markdownIt-Anchor" href="#definition-of-next-array"></a> Definition of next array</h3>
+<p>首先我们要明确next数组的执行是只依据<strong>模式串（Pattern String）<strong>的，与</strong>主串（Text String)<strong>无关。<strong>下面假设模式串为P[n],主串为T[m],P和T的字符下标从0开始</strong>。<br />
+下面我们来定义next数组：<br />
+<code>next[j]=i</code>表示P[0,…,j-1]有着</strong>最大</strong>长度为i的前缀字符串F和后缀字符串L,使得F=L。<br />
+注意：这里我专门强调了最大，比如P=“aaaa”,则P的相同长度的前缀和后缀相等的长度有：1，2，3，分别是&quot;a&quot;,“aa”,“aaa”。但是这里的next[4]=3,而不能取1或2或0;</p>
+<h3 id="prefix-and-suffix"><a class="markdownIt-Anchor" href="#prefix-and-suffix"></a> Prefix and Suffix</h3>
+<p>为了让这篇文章能够让小白也能看得懂，我再这里解释一下什么叫做前缀和后缀：<br />
+假设字符串为S[0,…,n]，则<br />
+S的前缀为：<code>&#123;S[0,...,i]:0&lt;=i&lt;n&#125;</code><br />
+S的后缀为：<code>&#123;S[i,n]:0&lt;i&lt;=n&#125;</code></p>
+<h3 id="deduce-the-formula"><a class="markdownIt-Anchor" href="#deduce-the-formula"></a> Deduce the formula</h3>
+<p>ok,我们已经定义好了next数组的含义，我们接下来就开始寻找计算next数组的方法。<br />
+假设我们已经知道当前的next[j]=i，那么我们下一步肯定是考虑移动i或者j：</p>
+<ol>
+<li>若next[j]==next[i+1]，那么next[j+1]=i+1,即此时i++,j++；</li>
+<li>若next[j]!=next[i+1],那么P[0,…,i+1]!=P[j-i-1…,j],那么我们就应该<code>i=next[i]</code>( 这里看不懂没有关系，因为这个涉及到KMP的算法，即计算next数组本身也是一个字符匹配的问题，可以先记住这个步骤 )</li>
+</ol>
+<h3 id="initial-the-next"><a class="markdownIt-Anchor" href="#initial-the-next"></a> Initial the next</h3>
+<p>我们可以设定next[0]=-1，这样做的好处是：-1可以作为一个标记，当i=-1时，说明模式串P不可以再向右滑动了，此时j++。<br />
+<code>i=0,j=1</code><br />
+i=0表示长度最小为0，j=1表示P[0,…j-1]，要使<code>j-1&gt;=0</code>,则j&gt;=1，所以j赋予初值1。</p>
+<h3 id="code"><a class="markdownIt-Anchor" href="#code"></a> Code</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calculateNext</span><span class="params">(<span class="built_in">string</span>&amp; P, <span class="keyword">int</span> *Next)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> length = P.length();</span><br><span class="line">	Next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (j &lt; length)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">-1</span> || P[i] == P[j]) &#123;</span><br><span class="line">			i++;</span><br><span class="line">			j++;</span><br><span class="line">			Next[j] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="example"><a class="markdownIt-Anchor" href="#example"></a> Example</h3>
+<p>假设模式串P=abaabc，下面我们来计算模式串P的next数组：</p>
+<ol>
+<li>初始化i=-1,j=0,next[0]=-1。此时i==-1,所以i++,j++,得到i=0,j=1;所以此时next数组如下：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>‘\0’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>P[i]=P[0]=‘a’,P[j]=P[1]=‘b’,所以P[i]!=P[j],i=Next[i]=Next[0]=-1,然后i==-1,跳转到if语句，此时i++,j++,i=0,j=2,所以此时next数组如下：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>‘\0’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>P[i]=P[j]=‘a’,所以i++,j++，此时i=1,j=3,next数组为</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>‘\0’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li>P[i]!=P[j],所以i=Next[i]=0,然后P[i]=P[j]=‘a’，所以i++,j++，此时i=1,j=4,Next数组为</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>‘\0’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ol start="5">
+<li>P[i]=P[j]=‘b’,所以i++,j++，此时i=2,j=5,next数组为</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>‘\0’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p>6.P[i]!=P[j],i=Next[i]=0,此时P[i]!=P[j],i=Next[i]=-1,所以i++,j++,i=0,j=6,Next[6]=0，此时next数组为：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>‘\0’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ol start="7">
+<li>跳出循环。Next数组的计算结束。</li>
+</ol>
+<h2 id="sliding-rule"><a class="markdownIt-Anchor" href="#sliding-rule"></a> Sliding rule</h2>
+<h3 id="rule"><a class="markdownIt-Anchor" href="#rule"></a> Rule</h3>
+<p>假设P[0,…,i-1]和T[j-q,j-1]匹配,有以下两种情况：</p>
+<ol>
+<li>若P[i]和T[j]相等，则P[0,…,i]和T[j-q,…,j]匹配</li>
+<li>若P[i]和T[j]不相等，则P[0,…,i]和T[j-q,…,j]不匹配，这时候就需要“将模式串向右滑动尽可能远的距离”，继续匹配。如果不能再继续向右滑动(i==-1)，则j++,i=0。</li>
+</ol>
+<h3 id="code-2"><a class="markdownIt-Anchor" href="#code-2"></a> Code</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KMP</span><span class="params">(<span class="built_in">string</span> T, <span class="built_in">string</span> P)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> MAX_SIZE = <span class="number">1000</span>;</span><br><span class="line">	<span class="keyword">int</span> Next[MAX_SIZE];</span><br><span class="line">	calculateNext(P, Next);</span><br><span class="line">	<span class="keyword">int</span> T_length = T.length();</span><br><span class="line">	<span class="keyword">int</span> P_length = P.length();</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (i &lt; P_length)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (j &gt;= T_length)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">-1</span> || T[j] == P[i]) &#123;</span><br><span class="line">			i++; j++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> j - P_length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="example-2"><a class="markdownIt-Anchor" href="#example-2"></a> Example</h3>
+<p>假设T=acabaabaabcacaabc,P=abaabcac,根据上面介绍的计算Next数组的方法，容易计算next数组的值为：</p>
+<p>i|0|1|2|3|4|5|6|7<br />
+—|---|—|---|—|---|----|—<br />
+Pattern|a|b|a|a|b|c|a|c<br />
+next|-1|0|0|1|1|2|0|1</p>
+<p>匹配过程如下：</p>
+<p><img src="/uploads/exampleOfKMP.jpg" alt="exampleOfKMP" /></p>
+<h2 id="optimize-kmp"><a class="markdownIt-Anchor" href="#optimize-kmp"></a> Optimize KMP</h2>
+<p>其实在求next数组的时候还可以优化。比如说我们的模式串P=ababc,则next数组应该为：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+<th>\0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>但是，如果我们在i=3,即P[i]='b’的时候，如果和T[j]匹配不成功，则i=next[i]=1，此时P[i]=‘b’，还是和T[j]不匹配，这就是我们可以优化的地方。<br />
+所以我们可以这样操作：<br />
+如果P[i]==P[j],则nextval[j]=nextval[i],否则nextval[j]=i;</p>
+<h3 id="code-3"><a class="markdownIt-Anchor" href="#code-3"></a> Code</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* P 为模式串，下标从 0 开始 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetNextval</span><span class="params">(<span class="built_in">string</span> P, <span class="keyword">int</span> nextval[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p_len = P.size();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">-1</span>;   <span class="comment">// P 的下标</span></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;  </span><br><span class="line">    nextval[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (i &lt; p_len - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">-1</span> || P[i] == P[j])</span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">          </span><br><span class="line">            <span class="keyword">if</span> (P[i] != P[j])</span><br><span class="line">                nextval[j] = i;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                nextval[j] = nextval[i];  <span class="comment">// 既然相同就继续往前找真前缀</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            i = nextval[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="application"><a class="markdownIt-Anchor" href="#application"></a> Application</h2>
+<h3 id="poj-3461oulipo"><a class="markdownIt-Anchor" href="#poj-3461oulipo"></a> POJ 3461	Oulipo</h3>
+<p>The French author Georges Perec (1936–1982) once wrote a book, La disparition, without the letter ‘e’. He was a member of the Oulipo group. A quote from the book:</p>
+<p>Tout avait Pair normal, mais tout s’affirmait faux. Tout avait Fair normal, d’abord, puis surgissait l’inhumain, l’affolant. Il aurait voulu savoir où s’articulait l’association qui l’unissait au roman : stir son tapis, assaillant à tout instant son imagination, l’intuition d’un tabou, la vision d’un mal obscur, d’un quoi vacant, d’un non-dit : la vision, l’avision d’un oubli commandant tout, où s’abolissait la raison : tout avait l’air normal mais…</p>
+<p>Perec would probably have scored high (or rather, low) in the following contest. People are asked to write a perhaps even meaningful text on some subject with as few occurrences of a given “word” as possible. Our task is to provide the jury with a program that counts these occurrences, in order to obtain a ranking of the competitors. These competitors often write very long texts with nonsense meaning; a sequence of 500,000 consecutive 'T’s is not unusual. And they never use spaces.</p>
+<p>So we want to quickly find out how often a word, i.e., a given string, occurs in a text. More formally: given the alphabet {‘A’, ‘B’, ‘C’, …, ‘Z’} and two finite strings over that alphabet, a word W and a text T, count the number of occurrences of W in T. All the consecutive characters of W must exactly match consecutive characters of T. Occurrences may overlap.</p>
+<p><strong>Input</strong><br />
+The first line of the input file contains a single number: the number of test cases to follow. Each test case has the following format:</p>
+<p>One line with the word W, a string over {‘A’, ‘B’, ‘C’, …, ‘Z’}, with 1 ≤ |W| ≤ 10,000 (here |W| denotes the length of the string W).<br />
+One line with the text T, a string over {‘A’, ‘B’, ‘C’, …, ‘Z’}, with |W| ≤ |T| ≤ 1,000,000.</p>
+<p><strong>Output</strong><br />
+For every test case in the input file, the output should contain a single number, on a single line: the number of occurrences of the word W in the text T.</p>
+<p><strong>Sample Input</strong><br />
+3<br />
+BAPC<br />
+BAPC<br />
+AZA<br />
+AZAZAZA<br />
+VERDI<br />
+AVERDXIVYERDIAN<br />
+<strong>Sample Output</strong><br />
+1<br />
+3<br />
+0</p>
+<p><strong>分析：</strong><br />
+题目的意思就是让我们在文本串T中寻找有多少个模式串P。根据KMP算法，我们可以在匹配成功之后把模式串向右滑动，然后重新匹配。比如T=abcabcabc,P=abc,则在第一次匹配(i=3,j=3)完之后让模式串向右滑动：<code>i=next[i]</code>，此时i=-1,j=3.(i是指向模式串的索引，j是指向T的索引)。</p>
+<p><strong>Accepted code</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_SIZE = <span class="number">1000005</span>;</span><br><span class="line"><span class="keyword">int</span> Next[MAX_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calculateNext</span><span class="params">(<span class="built_in">string</span>&amp; P, <span class="keyword">int</span> *Next)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> length = P.length();</span><br><span class="line">	Next[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span> (j &lt; length)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">-1</span> || P[i] == P[j]) &#123;</span><br><span class="line">			i++;</span><br><span class="line">			j++;</span><br><span class="line">			Next[j] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KMP_Count</span><span class="params">(<span class="built_in">string</span> &amp;T,<span class="built_in">string</span> &amp;P)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	calculateNext(P, Next);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> T_length = T.length();</span><br><span class="line">	<span class="keyword">int</span> P_length = P.length();</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (j &lt; T_length&amp;&amp;i&lt;P_length) &#123;</span><br><span class="line">		<span class="keyword">int</span> k = i;</span><br><span class="line">		<span class="keyword">if</span> (i == <span class="number">-1</span> || T[j] == P[i]) &#123;</span><br><span class="line">			i++; j++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (i == P_length) &#123;</span><br><span class="line">			res++;</span><br><span class="line">			i = Next[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span> (t--) &#123;</span><br><span class="line">		<span class="built_in">string</span> T, P;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; P &gt;&gt; T;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; KMP_Count(T, P) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="poj-2752seek-the-name-seek-the-fame"><a class="markdownIt-Anchor" href="#poj-2752seek-the-name-seek-the-fame"></a> POJ 2752	Seek the Name, Seek the Fame</h3>
+<p>The little cat is so famous, that many couples tramp over hill and dale to Byteland, and asked the little cat to give names to their newly-born babies. They seek the name, and at the same time seek the fame. In order to escape from such boring job, the innovative little cat works out an easy but fantastic algorithm:</p>
+<p>Step1. Connect the father’s name and the mother’s name, to a new string S.<br />
+Step2. Find a proper prefix-suffix string of S (which is not only the prefix, but also the suffix of S).</p>
+<p>Example: Father=‘ala’, Mother=‘la’, we have S = ‘ala’+‘la’ = ‘alala’. Potential prefix-suffix strings of S are {‘a’, ‘ala’, ‘alala’}. Given the string S, could you help the little cat to write a program to calculate the length of possible prefix-suffix strings of S? (He might thank you by giving your baby a name:)</p>
+<p><strong>Input</strong><br />
+The input contains a number of test cases. Each test case occupies a single line that contains the string S described above.</p>
+<p>Restrictions: Only lowercase letters may appear in the input. 1 &lt;= Length of S &lt;= 400000.</p>
+<p><strong>Output</strong><br />
+For each test case, output a single line with integer numbers in increasing order, denoting the possible length of the new baby’s name.</p>
+<p><strong>Sample Input</strong><br />
+ababcababababcabab<br />
+aaaaa</p>
+<p><strong>Sample Output</strong><br />
+2 4 9 18<br />
+1 2 3 4 5</p>
+<p><strong>分析</strong><br />
+题目的意思是求一个字符串P的所有前缀字符串和后缀字符串相等的长度。我们可以在P中使用KMP算法求得next数组，得到最大长度的满足题目条件前缀字符串S1，然后在字符串S1中继续寻找满足题目条件的前缀字符串S2…，一直递归下去，直到找不到满足题目条件的字符串。然后逆序输出答案即可（递归或者栈）。下面这个图有利于理解：<br />
+<img src="https://pic1.xuehuaimg.com/proxy/csdn/http://dl.iteye.com/upload/picture/pic/106268/654c396e-75c4-34c7-be81-780284370688.jpg" alt="example" /></p>
+<p><strong>Accepted code</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> MAX_SIZE=<span class="number">4000005</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> Next[]=<span class="keyword">new</span> <span class="keyword">int</span> [MAX_SIZE];</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">boolean</span> first=<span class="keyword">true</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getNext</span><span class="params">(String P)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">		Next[<span class="number">0</span>]=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> P_length=P.length();</span><br><span class="line">		<span class="keyword">while</span>(j&lt;P_length) &#123;</span><br><span class="line">			<span class="keyword">if</span>(i==-<span class="number">1</span>||P.charAt(i)==P.charAt(j)) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				j++;</span><br><span class="line">				Next[j]=i;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				i=Next[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printRes</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(i&lt;=<span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> ;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;	</span><br><span class="line">			printRes(Next[i]);</span><br><span class="line">			<span class="keyword">if</span>(first) &#123;</span><br><span class="line">				first=<span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(<span class="string">&quot; &quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.print(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String S;</span><br><span class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">while</span>(in.hasNext()) &#123;</span><br><span class="line">			first=<span class="keyword">true</span>;</span><br><span class="line">			S=in.nextLine();</span><br><span class="line">			getNext(S);</span><br><span class="line">			printRes(S.length());</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="poj-2406power-strings"><a class="markdownIt-Anchor" href="#poj-2406power-strings"></a> POJ 2406	Power Strings</h3>
+<p>Given two strings a and b we define <code>a*b</code> to be their concatenation. For example, if <code>a = &quot;abc&quot;</code> and <code>b = &quot;def&quot;</code> then <code>a*b = &quot;abcdef&quot;</code>. If we think of concatenation as multiplication, exponentiation by a non-negative integer is defined in the normal way: a^0 = “” (the empty string) and a^(n+1) = a*(a^n).</p>
+<p><strong>Input</strong><br />
+Each test case is a line of input representing s, a string of printable characters. The length of s will be at least 1 and will not exceed 1 million characters. A line containing a period follows the last test case.</p>
+<p><strong>Output</strong><br />
+For each s you should print the largest n such that s = a^n for some string a.</p>
+<p><strong>Sample Input</strong><br />
+abcd<br />
+aaaa<br />
+ababab<br />
+.<br />
+<strong>Sample Output</strong><br />
+1<br />
+4<br />
+3</p>
+<p><strong>Hint</strong><br />
+This problem has huge input, use scanf instead of cin to avoid time limit exceed.</p>
+<p><strong>分析</strong><br />
+这个题目的意思就是给出一个字符串S，让我们求这个字符串有多少个<strong>最小循环节</strong>。<br />
+这里给出方法，但是不证明：<br />
+如果<code>S.length%(S.length-next[S.length])==0</code>,那么答案就是<code>S.length/(S.length-next[S.length])</code>,否则就是1</p>
+<p><strong>Accepted code</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> MAX_SIZE=<span class="number">1000005</span>;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> []next=<span class="keyword">new</span> <span class="keyword">int</span>[MAX_SIZE];</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">calculateNext</span><span class="params">(String P)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> P_length=P.length();</span><br><span class="line">		next[<span class="number">0</span>]=-<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(j&lt;P_length) &#123;</span><br><span class="line">			<span class="keyword">if</span>(i==-<span class="number">1</span>||P.charAt(i)==P.charAt(j)) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				j++;</span><br><span class="line">				next[j]=i;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				i=next[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123;</span><br><span class="line">		String P;</span><br><span class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="keyword">while</span>(in.hasNext()) &#123;</span><br><span class="line">			P=in.nextLine();</span><br><span class="line">			<span class="keyword">if</span>(P.equals(<span class="string">&quot;.&quot;</span>)) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			calculateNext(P);</span><br><span class="line">			<span class="keyword">int</span> P_length=P.length();</span><br><span class="line">			<span class="keyword">int</span> res;</span><br><span class="line">			<span class="keyword">if</span>(P_length%(P_length-next[P_length])==<span class="number">0</span>) &#123;</span><br><span class="line">				res=P_length/(P_length-next[P_length]);</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				res=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println(res);</span><br><span class="line">		&#125;</span><br><span class="line">		in.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/KMP/" rel="tag"># KMP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/10/01/markdown/brief_Markdown/" rel="next" title="breif Markdown">
+                  breif Markdown <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -16,10 +711,80 @@
       const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }</script></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">Qingying Liu</span></div></div></footer><script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/local-search.js"></script><script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
       quicklink.listen({
         timeout : 300,
         priority: true,
         ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2018/09/29/algorithm/string/KMP-Algorithm/',]
       });
-      });</script></body><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"></html>
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

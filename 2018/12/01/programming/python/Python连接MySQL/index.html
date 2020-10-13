@@ -1,4 +1,461 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"><script class="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"qingyingliu.top",root:"/",scheme:"Pisces",version:"8.0.1",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12},copycode:!0,bookmark:{enable:!0,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},motion:{enable:!0,async:!0,transition:{post_block:"fadeIn",sidebar:"fadeInUp"}},prism:!1,i18n:{placeholder:"Searching...",empty:"We didn't find any results for the search: ${query}",hits_time:"${hits} results found in ${time} ms",hits:"${hits} results found"},path:"/search.xml",localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1}}</script><meta name="description" content="安装PyMySQL 直接在终端输入： pip install PyMySQL。 注意：如果没有安装pip的，需要先按照pip。如果安装了pip的还是出错，那应该就是有多个Python的版本，应该使用相应的Python。  获取连接对象 我们首先需要获取连接对象，使用的是connect()函数。connect的参数如下：    参数序号 参数含义     1 主机名或IP   2 用户名   3"><meta property="og:type" content="article"><meta property="og:title" content="Python连接MySQL"><meta property="og:url" content="https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/index.html"><meta property="og:site_name" content="qingying&#39;s blog"><meta property="og:description" content="安装PyMySQL 直接在终端输入： pip install PyMySQL。 注意：如果没有安装pip的，需要先按照pip。如果安装了pip的还是出错，那应该就是有多个Python的版本，应该使用相应的Python。  获取连接对象 我们首先需要获取连接对象，使用的是connect()函数。connect的参数如下：    参数序号 参数含义     1 主机名或IP   2 用户名   3"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2018-12-01T14:26:02.000Z"><meta property="article:modified_time" content="2020-04-27T05:09:02.000Z"><meta property="article:author" content="Qingying Liu"><meta property="article:tag" content="Python"><meta property="article:tag" content="DataBase"><meta name="twitter:card" content="summary"><link rel="canonical" href="https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/"><script class="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"en"}</script><title>Python连接MySQL | qingying's blog</title><noscript><style>body{margin-top:2rem}.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header,.use-motion .sidebar{visibility:visible}.use-motion .footer,.use-motion .header,.use-motion .site-brand-container .toggle{opacity:initial}.use-motion .custom-logo-image,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line{transform:scaleX(1)}.search-pop-overlay,.sidebar-nav{display:none}.sidebar-panel{display:block}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="Toggle navigation bar"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><h1 class="site-title">qingying's blog</h1><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc">Table of Contents</li><li class="sidebar-nav-overview">Overview</li></ul><section class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85pymysql"><span class="nav-number">1.</span> <span class="nav-text">安装PyMySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">获取连接对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">连接对象的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%A0%87%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">游标对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol></div></section><section class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="Qingying Liu" src="/uploads/avatar.gif"><p class="site-author-name" itemprop="name">Qingying Liu</p><div class="site-description" itemprop="description">记录数学和计算机方面的知识</div></div><div class="site-state-wrap site-overview-item animated"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">148</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">30</span> <span class="site-state-item-name">categories</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">71</span> <span class="site-state-item-name">tags</span></a></div></nav></div><div class="links-of-author site-overview-item animated"><span class="links-of-author-item"><a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a></span></div></section></div></aside><div class="sidebar-dimmer"></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a role="button" class="book-mark-link book-mark-link-fixed"></a><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en"><link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/uploads/avatar.gif"><meta itemprop="name" content="Qingying Liu"><meta itemprop="description" content="记录数学和计算机方面的知识"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="qingying's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Python连接MySQL</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Created: 2018-12-01 22:26:02" itemprop="dateCreated datePublished" datetime="2018-12-01T22:26:02+08:00">2018-12-01</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i> </span><span class="post-meta-item-text">Edited on</span> <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">In</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a> </span>, <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span></span></div></div></header><div class="post-body" itemprop="articleBody"><h3 id="安装pymysql"><a class="markdownIt-Anchor" href="#安装pymysql"></a> 安装PyMySQL</h3><p>直接在终端输入： <code>pip install PyMySQL</code>。<br>注意：如果没有安装pip的，需要先按照pip。如果安装了pip的还是出错，那应该就是有多个Python的版本，应该使用相应的Python。</p><h3 id="获取连接对象"><a class="markdownIt-Anchor" href="#获取连接对象"></a> 获取连接对象</h3><p>我们首先需要获取连接对象，使用的是connect()函数。connect的参数如下：</p><table><thead><tr><th>参数序号</th><th>参数含义</th></tr></thead><tbody><tr><td>1</td><td>主机名或IP</td></tr><tr><td>2</td><td>用户名</td></tr><tr><td>3</td><td>密码</td></tr><tr><td>4</td><td>数据库名称</td></tr></tbody></table><p>注：如果我们再加一个参数: <code>charset='utf-8'</code>可以防止插入中文出错。</p><p>比如：<code>db=pymysql.connect('localhost','Lewin','root','Lewin',charset='utf=8')</code></p><a id="more"></a><h3 id="连接对象的方法"><a class="markdownIt-Anchor" href="#连接对象的方法"></a> 连接对象的方法</h3><table><thead><tr><th>方法名</th><th>说明</th></tr></thead><tbody><tr><td>close()</td><td>关闭数据库连接</td></tr><tr><td>commit()</td><td>提交事务</td></tr><tr><td>rollback()</td><td>回滚事务</td></tr><tr><td>cursor()</td><td>获取游标对象，操作数据库</td></tr></tbody></table><h3 id="游标对象"><a class="markdownIt-Anchor" href="#游标对象"></a> 游标对象</h3><p>游标(cursor object)代表数据库中的游标，用于指示抓取数据操作的上下文，主要执行SQL语句、调用存储对象和获取查询结果等方法。</p><center>游标对象的方法</center>方法名|说明 ---|--- callproc(procname,[parmeters])|调用存储过程，需要数据库支持 close()|关闭当前游标 execute(operation[,parmeters])|执行数据库操作，SQL语句或者数据库命令 executemany(operation,seq_of_parameters)|批量操作 fetchone()|获取查询结果集合中的下一条记录 fetchmany(size)|获取指定数量的记录<p>注意：为了防止SQL插入，在使用insert语句插入数据的时候，使用<code>%s</code>作为占位符，可以防止sql注入。比如：<br><code>cursor.executemany(&quot;insert into books values (%s,%s,%s)&quot;,data)</code></p><h3 id="实例"><a class="markdownIt-Anchor" href="#实例"></a> 实例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开数据库连接</span></span><br><span class="line">db = pymysql.connect(<span class="string">&#x27;localhost&#x27;</span>,<span class="string">&#x27;root&#x27;</span>,<span class="string">&#x27;root&#x27;</span>,<span class="string">&#x27;mrsoft&#x27;</span>,charset=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用cursor()方法获取操作游标</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据列表</span></span><br><span class="line">data = [(<span class="string">&#x27;零基础学Python&#x27;</span>,<span class="string">&#x27;Python&#x27;</span>,<span class="string">&#x27;79&#x27;</span>,<span class="string">&#x27;80&#x27;</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    cursor.execute(<span class="string">&#x27;insert into books values(%s,%s,%s,%s),data)</span></span><br><span class="line"><span class="string">    # 提交数据</span></span><br><span class="line"><span class="string">    db.commit()</span></span><br><span class="line"><span class="string">except:</span></span><br><span class="line"><span class="string">    # 发生错误则回滚</span></span><br><span class="line"><span class="string">    db.rollback()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 关闭数据库</span></span><br><span class="line"><span class="string">db.close()</span></span><br></pre></td></tr></table></figure></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Python/" rel="tag"># Python</a> <a href="/tags/DataBase/" rel="tag"># DataBase</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2018/12/01/others/regular-expression/" rel="prev" title="regular expression"><i class="fa fa-chevron-left"></i> regular expression</a></div><div class="post-nav-item"><a href="/2018/12/03/programming/python/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="next" title="Python多线程">Python多线程 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="安装PyMySQL 直接在终端输入： pip install PyMySQL。 注意：如果没有安装pip的，需要先按照pip。如果安装了pip的还是出错，那应该就是有多个Python的版本，应该使用相应的Python。  获取连接对象 我们首先需要获取连接对象，使用的是connect()函数。connect的参数如下：    参数序号 参数含义     1 主机名或IP   2 用户名   3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python连接MySQL">
+<meta property="og:url" content="https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="安装PyMySQL 直接在终端输入： pip install PyMySQL。 注意：如果没有安装pip的，需要先按照pip。如果安装了pip的还是出错，那应该就是有多个Python的版本，应该使用相应的Python。  获取连接对象 我们首先需要获取连接对象，使用的是connect()函数。connect的参数如下：    参数序号 参数含义     1 主机名或IP   2 用户名   3">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-12-01T14:26:02.000Z">
+<meta property="article:modified_time" content="2020-04-27T05:09:02.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="DataBase">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python连接MySQL | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85pymysql"><span class="nav-number">1.</span> <span class="nav-text"> 安装PyMySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text"> 获取连接对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text"> 连接对象的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%A0%87%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text"> 游标对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text"> 实例</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python连接MySQL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-01 22:26:02" itemprop="dateCreated datePublished" datetime="2018-12-01T22:26:02+08:00">2018-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="安装pymysql"><a class="markdownIt-Anchor" href="#安装pymysql"></a> 安装PyMySQL</h3>
+<p>直接在终端输入： <code>pip install PyMySQL</code>。<br />
+注意：如果没有安装pip的，需要先按照pip。如果安装了pip的还是出错，那应该就是有多个Python的版本，应该使用相应的Python。</p>
+<h3 id="获取连接对象"><a class="markdownIt-Anchor" href="#获取连接对象"></a> 获取连接对象</h3>
+<p>我们首先需要获取连接对象，使用的是connect()函数。connect的参数如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数序号</th>
+<th>参数含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>主机名或IP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>3</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>4</td>
+<td>数据库名称</td>
+</tr>
+</tbody>
+</table>
+<p>注：如果我们再加一个参数: <code>charset='utf-8'</code>可以防止插入中文出错。</p>
+<p>比如：<code>db=pymysql.connect('localhost','Lewin','root','Lewin',charset='utf=8')</code></p>
+<a id="more"></a>
+<h3 id="连接对象的方法"><a class="markdownIt-Anchor" href="#连接对象的方法"></a> 连接对象的方法</h3>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>close()</td>
+<td>关闭数据库连接</td>
+</tr>
+<tr>
+<td>commit()</td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td>rollback()</td>
+<td>回滚事务</td>
+</tr>
+<tr>
+<td>cursor()</td>
+<td>获取游标对象，操作数据库</td>
+</tr>
+</tbody>
+</table>
+<h3 id="游标对象"><a class="markdownIt-Anchor" href="#游标对象"></a> 游标对象</h3>
+<p>游标(cursor object)代表数据库中的游标，用于指示抓取数据操作的上下文，主要执行SQL语句、调用存储对象和获取查询结果等方法。</p>
+<center>游标对象的方法</center>
+方法名|说明
+---|---
+callproc(procname,[parmeters])|调用存储过程，需要数据库支持
+close()|关闭当前游标
+execute(operation[,parmeters])|执行数据库操作，SQL语句或者数据库命令
+executemany(operation,seq_of_parameters)|批量操作
+fetchone()|获取查询结果集合中的下一条记录
+fetchmany(size)|获取指定数量的记录
+<p>注意：为了防止SQL插入，在使用insert语句插入数据的时候，使用<code>%s</code>作为占位符，可以防止sql注入。比如：<br />
+<code>cursor.executemany(&quot;insert into books values (%s,%s,%s)&quot;,data)</code></p>
+<h3 id="实例"><a class="markdownIt-Anchor" href="#实例"></a> 实例</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开数据库连接</span></span><br><span class="line">db = pymysql.connect(<span class="string">&#x27;localhost&#x27;</span>,<span class="string">&#x27;root&#x27;</span>,<span class="string">&#x27;root&#x27;</span>,<span class="string">&#x27;mrsoft&#x27;</span>,charset=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用cursor()方法获取操作游标</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据列表</span></span><br><span class="line">data = [(<span class="string">&#x27;零基础学Python&#x27;</span>,<span class="string">&#x27;Python&#x27;</span>,<span class="string">&#x27;79&#x27;</span>,<span class="string">&#x27;80&#x27;</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    cursor.execute(<span class="string">&#x27;insert into books values(%s,%s,%s,%s),data)</span></span><br><span class="line"><span class="string">    # 提交数据</span></span><br><span class="line"><span class="string">    db.commit()</span></span><br><span class="line"><span class="string">except:</span></span><br><span class="line"><span class="string">    # 发生错误则回滚</span></span><br><span class="line"><span class="string">    db.rollback()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 关闭数据库</span></span><br><span class="line"><span class="string">db.close()</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/DataBase/" rel="tag"># DataBase</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/12/01/others/regular-expression/" rel="prev" title="regular expression">
+                  <i class="fa fa-chevron-left"></i> regular expression
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/03/programming/python/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="next" title="Python多线程">
+                  Python多线程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -16,10 +473,80 @@
       const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }</script></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">Qingying Liu</span></div></div></footer><script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/local-search.js"></script><script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
       quicklink.listen({
         timeout : 300,
         priority: true,
         ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/',]
       });
-      });</script></body><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"></html>
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

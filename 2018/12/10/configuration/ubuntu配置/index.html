@@ -1,4 +1,507 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"><script class="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"qingyingliu.top",root:"/",scheme:"Pisces",version:"8.0.1",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12},copycode:!0,bookmark:{enable:!0,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},motion:{enable:!0,async:!0,transition:{post_block:"fadeIn",sidebar:"fadeInUp"}},prism:!1,i18n:{placeholder:"Searching...",empty:"We didn't find any results for the search: ${query}",hits_time:"${hits} results found in ${time} ms",hits:"${hits} results found"},path:"/search.xml",localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1}}</script><meta name="description" content="下载源设置 将下载源设置为国内的清华源: https:&#x2F;&#x2F;mirror.tuna.tsinghua.edu.cn&#x2F;help&#x2F;ubuntu&#x2F;  搜狗输入法 先去搜狗输入法官网下载安装包,然后使用dpkg -i命令安装，如果安装过程有错，则运行sudo apt-get --fix-broken install。 接着去设置那里设置keyboard input method system为fcitx。"><meta property="og:type" content="article"><meta property="og:title" content="linux配置"><meta property="og:url" content="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/index.html"><meta property="og:site_name" content="qingying&#39;s blog"><meta property="og:description" content="下载源设置 将下载源设置为国内的清华源: https:&#x2F;&#x2F;mirror.tuna.tsinghua.edu.cn&#x2F;help&#x2F;ubuntu&#x2F;  搜狗输入法 先去搜狗输入法官网下载安装包,然后使用dpkg -i命令安装，如果安装过程有错，则运行sudo apt-get --fix-broken install。 接着去设置那里设置keyboard input method system为fcitx。"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://static.zybuluo.com/xiangwanpeng/p81fqgz0k1782qpwbrtnhmce/image_1b6gfob7m1u4f2i0av11afd92m9.png"><meta property="og:image" content="https://qingyingliu.top/img/Configuration/beauty-gnome.png"><meta property="article:published_time" content="2018-12-10T11:55:07.000Z"><meta property="article:modified_time" content="2020-04-27T05:09:02.000Z"><meta property="article:author" content="Qingying Liu"><meta property="article:tag" content="Ubuntu"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://static.zybuluo.com/xiangwanpeng/p81fqgz0k1782qpwbrtnhmce/image_1b6gfob7m1u4f2i0av11afd92m9.png"><link rel="canonical" href="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/"><script class="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"en"}</script><title>linux配置 | qingying's blog</title><noscript><style>body{margin-top:2rem}.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header,.use-motion .sidebar{visibility:visible}.use-motion .footer,.use-motion .header,.use-motion .site-brand-container .toggle{opacity:initial}.use-motion .custom-logo-image,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line{transform:scaleX(1)}.search-pop-overlay,.sidebar-nav{display:none}.sidebar-panel{display:block}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="Toggle navigation bar"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><h1 class="site-title">qingying's blog</h1><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc">Table of Contents</li><li class="sidebar-nav-overview">Overview</li></ul><section class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%BA%90%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">下载源设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%8B%97%E8%BE%93%E5%85%A5%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">搜狗输入法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">代理命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#visual-stdio-code"><span class="nav-number">4.</span> <span class="nav-text">Visual Stdio Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goole-chrome"><span class="nav-number">5.</span> <span class="nav-text">goole chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v2ray%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">6.</span> <span class="nav-text">V2ray客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pip-and-pip3"><span class="nav-number">7.</span> <span class="nav-text">pip and pip3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7"><span class="nav-number">8.</span> <span class="nav-text">远程工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim"><span class="nav-number">9.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eclipse"><span class="nav-number">10.</span> <span class="nav-text">eclipse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nextcloud%E7%BD%91%E7%9B%98"><span class="nav-number">11.</span> <span class="nav-text">nextcloud网盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql%E5%AE%89%E8%A3%85"><span class="nav-number">12.</span> <span class="nav-text">mysql安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#albert%E5%8F%91%E5%B0%84%E5%99%A8"><span class="nav-number">13.</span> <span class="nav-text">Albert发射器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E7%AE%A1%E7%90%86"><span class="nav-number">14.</span> <span class="nav-text">主题管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh%E5%92%8Coh-my-zsh"><span class="nav-number">15.</span> <span class="nav-text">zsh和oh-my-zsh</span></a></li></ol></div></section><section class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="Qingying Liu" src="/uploads/avatar.gif"><p class="site-author-name" itemprop="name">Qingying Liu</p><div class="site-description" itemprop="description">记录数学和计算机方面的知识</div></div><div class="site-state-wrap site-overview-item animated"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">148</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">30</span> <span class="site-state-item-name">categories</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">71</span> <span class="site-state-item-name">tags</span></a></div></nav></div><div class="links-of-author site-overview-item animated"><span class="links-of-author-item"><a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a></span></div></section></div></aside><div class="sidebar-dimmer"></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a role="button" class="book-mark-link book-mark-link-fixed"></a><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en"><link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/uploads/avatar.gif"><meta itemprop="name" content="Qingying Liu"><meta itemprop="description" content="记录数学和计算机方面的知识"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="qingying's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">linux配置</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Created: 2018-12-10 19:55:07" itemprop="dateCreated datePublished" datetime="2018-12-10T19:55:07+08:00">2018-12-10</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i> </span><span class="post-meta-item-text">Edited on</span> <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">In</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a></span></span></div></div></header><div class="post-body" itemprop="articleBody"><h3 id="下载源设置"><a class="markdownIt-Anchor" href="#下载源设置"></a> 下载源设置</h3><p>将下载源设置为国内的清华源: <code>https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/</code></p><h3 id="搜狗输入法"><a class="markdownIt-Anchor" href="#搜狗输入法"></a> 搜狗输入法</h3><p>先去搜狗输入法官网下载安装包,然后使用<code>dpkg -i</code>命令安装，如果安装过程有错，则运行<code>sudo apt-get --fix-broken install</code>。</p><p>接着去设置那里设置keyboard input method system为fcitx。</p><h3 id="代理命令行"><a class="markdownIt-Anchor" href="#代理命令行"></a> 代理命令行</h3><p>下载proxychains: <code>sudo apt-get install proxychains</code></p><h3 id="visual-stdio-code"><a class="markdownIt-Anchor" href="#visual-stdio-code"></a> Visual Stdio Code</h3><p>注意，安装Visual Studio Code不要从默认的应用商店下载，因为这样会导致无法在VS Code中输入中文，而是应该从官网下载最新的deb包，然后再安装。</p><h3 id="goole-chrome"><a class="markdownIt-Anchor" href="#goole-chrome"></a> goole chrome</h3><ol><li><p>add key:<br><code>wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -</code></p></li><li><p>set repository:<br><code>echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list</code></p></li><li><p>install package:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install google-chrome-stable</span><br></pre></td></tr></table></figure></li></ol><p>​	注意，如果需要登录谷歌账号，则需要在设置里面设置全局代理。然后设置代理规则: <code>https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</code>。</p><a id="more"></a><h3 id="v2ray客户端"><a class="markdownIt-Anchor" href="#v2ray客户端"></a> V2ray客户端</h3><p>在全局代理模式下，运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -L -s https://install.direct/go.sh)</span><br></pre></td></tr></table></figure><p>就安装好了v2ray的客户端。</p><p>此脚本会自动安装以下文件：</p><ul><li><code>/usr/bin/v2ray/v2ray</code>：V2Ray 程序；</li><li><code>/usr/bin/v2ray/v2ctl</code>：V2Ray 工具；</li><li><code>/etc/v2ray/config.json</code>：配置文件；</li><li><code>/usr/bin/v2ray/geoip.dat</code>：IP 数据文件</li><li><code>/usr/bin/v2ray/geosite.dat</code>：域名数据文件</li></ul><p>此脚本会配置自动运行脚本。自动运行脚本会在系统重启之后，自动运行 V2Ray。目前自动运行脚本只支持带有 Systemd 的系统，以及 Debian / Ubuntu 全系列。</p><p>脚本运行完成后，你需要：</p><ol><li>编辑 <code>/etc/v2ray/config.json</code> 文件来配置你需要的代理方式；</li><li>运行 <code>service v2ray start</code> 来启动 V2Ray 进程；</li><li>之后可以使用 <code>service v2ray start|stop|status|reload|restart|force-reload</code> 控制 V2Ray 的运行。</li></ol><h3 id="pip-and-pip3"><a class="markdownIt-Anchor" href="#pip-and-pip3"></a> pip and pip3</h3><p>在使用apt安装任何软件包之前，建议使用以下命令更新软件包列表：<br>sudo apt update</p><p>安装Python2的pip:<br><code>sudo apt install python-pip</code></p><p>安装Python3的pip:<br><code>sudo apt install python3-pip</code></p><p>加速pip下载:<br>在<code>~/.pip/pip.conf</code>(没有就创建)添加下面的配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;pypi&#x2F;simple</span><br><span class="line"></span><br><span class="line">[install]</span><br><span class="line">trusted-host&#x3D;mirrors.aliyun.com</span><br></pre></td></tr></table></figure><h3 id="远程工具"><a class="markdownIt-Anchor" href="#远程工具"></a> 远程工具</h3><p>我们可以使用putty和filezilla来远程操作linux服务器和传输文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install putty</span><br></pre></td></tr></table></figure><h3 id="vim"><a class="markdownIt-Anchor" href="#vim"></a> vim</h3><p><code>sudo apt get install vim</code></p><h3 id="eclipse"><a class="markdownIt-Anchor" href="#eclipse"></a> eclipse</h3><p>先从官网下载安装包，解压后在线安装（在eclipse的eclipse的eclise installer目录的eclipse-inst运行文件。<br>如果出现Gtk-Message: Failed to load module &quot;canberra-gtk-module&quot;的错误，则在终端运行：<br><code>sudo apt-get install libcanberra-gtk-module</code></p><p>然后选择你想要的eclipse编译器，安装即可。</p><p>最后，我们需要把应用程序放在桌面上，只需要运行下面的命令行：<br><code>sudo gedit /usr/share/applications/eclipse.desktop</code><br>其中文件的内容为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding&#x3D;UTF-8</span><br><span class="line">Name&#x3D;Eclipse Platfrom          &#x2F;&#x2F;图标名字，可改</span><br><span class="line">Comment&#x3D;Eclipse IDE</span><br><span class="line">Exec&#x3D;&#x2F;java&#x2F;eclipse&#x2F;eclipse      &#x2F;&#x2F;Eclipse文件夹下eclipse的路径</span><br><span class="line">Icon&#x3D;&#x2F;java&#x2F;eclipse&#x2F;icon.xpm    &#x2F;&#x2F;Eclipse文件夹下图标icon.xpm的路径</span><br><span class="line">Terminal&#x3D;false</span><br><span class="line">StartupNotify&#x3D;true</span><br><span class="line">Type&#x3D;Application</span><br><span class="line">Categories&#x3D;Application;Development;</span><br></pre></td></tr></table></figure><p>还要对文件进行赋予权限：<br><code>chmod u+x /usr/share/applications/eclipse.desktop</code><br>这时eclipse就添加到我们的workspace里面了。</p><h3 id="nextcloud网盘"><a class="markdownIt-Anchor" href="#nextcloud网盘"></a> nextcloud网盘</h3><p>最方便的做法就是使用snap命令安装.<br>在国内一般snap下载的网速会很慢，一般是使用代理，代理的设置方法是在<code>/etc/environment</code>添加</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http_proxy&#x3D;&quot;socks5:&#x2F;&#x2F;127.0.0.1:1080&quot;</span><br><span class="line">https_proxy&#x3D;&quot;socks5:&#x2F;&#x2F;127.0.0.1:1080&quot;</span><br></pre></td></tr></table></figure><p>如果没有安装snap，则需要先安装snap：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install snap</span><br><span class="line">sudo apt-get install snapd</span><br></pre></td></tr></table></figure><p>然后再安装nextcloud:<br><code>sudo snap install nextcloud</code><br>然后创建用户<br>访问本机ip (http://&lt;您的 CVM IP 地址&gt;/) 即可进入 nextCloud 的安装页面。<br>根据个人需求输入用户名创建用户即可。</p><p>常见问题:<br>nextcloud网盘无法安装应用.<br>解决办法：</p><ol><li>在<code>https://apps.nextcloud.com/</code>找到应用,找到下载链接，下载对应版本</li><li>解压文件，并移动至extra-apps目录.</li></ol><p>注意，snap安装的应用放在了<code>/var/snap</code>中.</p><h3 id="mysql安装"><a class="markdownIt-Anchor" href="#mysql安装"></a> mysql安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br><span class="line">sudo apt install mysql-client</span><br><span class="line">sudo apt install libmysqlclient-dev</span><br></pre></td></tr></table></figure><p>安装成功后可以通过下面的命令测试是否安装成功：<br><code>sudo netstat -tap | grep mysql</code><br>出现如下信息证明安装成功：<br><img src="http://static.zybuluo.com/xiangwanpeng/p81fqgz0k1782qpwbrtnhmce/image_1b6gfob7m1u4f2i0av11afd92m9.png" alt=""></p><h3 id="albert发射器"><a class="markdownIt-Anchor" href="#albert发射器"></a> Albert发射器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:noobslab/macbuntu</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install albert</span><br></pre></td></tr></table></figure><h3 id="主题管理"><a class="markdownIt-Anchor" href="#主题管理"></a> 主题管理</h3><ol><li>安装tweak工具</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool</span><br><span class="line">sudo apt install gnome-shell-extensions</span><br><span class="line">sudo apt-get install  gnome-shell-extension-dashtodock</span><br></pre></td></tr></table></figure><ol start="2"><li>安装Sierra主题</li><li>安装Mojave-CT-Classic图标</li><li>设置<code>tweak</code>中的<code>dash to dock</code>，使其居中.</li></ol><p>主题和图标都可以在<code>https://www.gnome-look.org/</code>中下载.</p><p>最终的配置情况如下:<br><img src="/img/Configuration/beauty-gnome.png" alt="beautify-gnome"></p><h3 id="zsh和oh-my-zsh"><a class="markdownIt-Anchor" href="#zsh和oh-my-zsh"></a> zsh和oh-my-zsh</h3><ol><li>安装zsh: <code>sudo apt-get install zsh</code></li><li>安装oh-my-zsh: <code>wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</code></li><li><code>chsh -s /bin/zsh</code> 将默认的shell从bash改为zsh</li><li><code>sudo reboot</code> 重新启动</li></ol><p>注意:</p><ol><li>主题的地址: <code>https://github.com/robbyrussell/oh-my-zsh/wiki/themes</code></li><li>主题的路径在<code>~/.oh-my-zsh/themes</code>, 使某一主题生效的文件为<code>~/.zshrc</code>文件，找到<code>ZSH_THEME=&quot;robbyrussell&quot;</code>一行（大概11行左右），把其注释掉，在下面添一行<code>ZSH_THEME=&quot;ys&quot;</code>，之后关闭终端，再重启就好了</li></ol></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2018/12/08/algorithm/dp/%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6/" rel="prev" title="石子合并"><i class="fa fa-chevron-left"></i> 石子合并</a></div><div class="post-nav-item"><a href="/2018/12/12/programming/python/%E5%88%9D%E5%A7%8Bscrapy/" rel="next" title="初始scrapy">初始scrapy <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="下载源设置 将下载源设置为国内的清华源: https:&#x2F;&#x2F;mirror.tuna.tsinghua.edu.cn&#x2F;help&#x2F;ubuntu&#x2F;  搜狗输入法 先去搜狗输入法官网下载安装包,然后使用dpkg -i命令安装，如果安装过程有错，则运行sudo apt-get --fix-broken install。 接着去设置那里设置keyboard input method system为fcitx。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux配置">
+<meta property="og:url" content="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="下载源设置 将下载源设置为国内的清华源: https:&#x2F;&#x2F;mirror.tuna.tsinghua.edu.cn&#x2F;help&#x2F;ubuntu&#x2F;  搜狗输入法 先去搜狗输入法官网下载安装包,然后使用dpkg -i命令安装，如果安装过程有错，则运行sudo apt-get --fix-broken install。 接着去设置那里设置keyboard input method system为fcitx。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://static.zybuluo.com/xiangwanpeng/p81fqgz0k1782qpwbrtnhmce/image_1b6gfob7m1u4f2i0av11afd92m9.png">
+<meta property="og:image" content="https://qingyingliu.top/img/Configuration/beauty-gnome.png">
+<meta property="article:published_time" content="2018-12-10T11:55:07.000Z">
+<meta property="article:modified_time" content="2020-04-27T05:09:02.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://static.zybuluo.com/xiangwanpeng/p81fqgz0k1782qpwbrtnhmce/image_1b6gfob7m1u4f2i0av11afd92m9.png">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>linux配置 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%BA%90%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text"> 下载源设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%8B%97%E8%BE%93%E5%85%A5%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text"> 搜狗输入法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">3.</span> <span class="nav-text"> 代理命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#visual-stdio-code"><span class="nav-number">4.</span> <span class="nav-text"> Visual Stdio Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goole-chrome"><span class="nav-number">5.</span> <span class="nav-text"> goole chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v2ray%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">6.</span> <span class="nav-text"> V2ray客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pip-and-pip3"><span class="nav-number">7.</span> <span class="nav-text"> pip and pip3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7"><span class="nav-number">8.</span> <span class="nav-text"> 远程工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim"><span class="nav-number">9.</span> <span class="nav-text"> vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eclipse"><span class="nav-number">10.</span> <span class="nav-text"> eclipse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nextcloud%E7%BD%91%E7%9B%98"><span class="nav-number">11.</span> <span class="nav-text"> nextcloud网盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql%E5%AE%89%E8%A3%85"><span class="nav-number">12.</span> <span class="nav-text"> mysql安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#albert%E5%8F%91%E5%B0%84%E5%99%A8"><span class="nav-number">13.</span> <span class="nav-text"> Albert发射器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E7%AE%A1%E7%90%86"><span class="nav-number">14.</span> <span class="nav-text"> 主题管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh%E5%92%8Coh-my-zsh"><span class="nav-number">15.</span> <span class="nav-text"> zsh和oh-my-zsh</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux配置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-10 19:55:07" itemprop="dateCreated datePublished" datetime="2018-12-10T19:55:07+08:00">2018-12-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="下载源设置"><a class="markdownIt-Anchor" href="#下载源设置"></a> 下载源设置</h3>
+<p>将下载源设置为国内的清华源: <code>https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/</code></p>
+<h3 id="搜狗输入法"><a class="markdownIt-Anchor" href="#搜狗输入法"></a> 搜狗输入法</h3>
+<p>先去搜狗输入法官网下载安装包,然后使用<code>dpkg -i</code>命令安装，如果安装过程有错，则运行<code>sudo apt-get --fix-broken install</code>。</p>
+<p>接着去设置那里设置keyboard input method system为fcitx。</p>
+<h3 id="代理命令行"><a class="markdownIt-Anchor" href="#代理命令行"></a> 代理命令行</h3>
+<p>下载proxychains: <code>sudo apt-get install proxychains</code></p>
+<h3 id="visual-stdio-code"><a class="markdownIt-Anchor" href="#visual-stdio-code"></a> Visual Stdio Code</h3>
+<p>注意，安装Visual Studio Code不要从默认的应用商店下载，因为这样会导致无法在VS Code中输入中文，而是应该从官网下载最新的deb包，然后再安装。</p>
+<h3 id="goole-chrome"><a class="markdownIt-Anchor" href="#goole-chrome"></a> goole chrome</h3>
+<ol>
+<li>
+<p>add key:<br />
+<code>wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -</code></p>
+</li>
+<li>
+<p>set repository:<br />
+<code>echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list</code></p>
+</li>
+<li>
+<p>install package:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install google-chrome-stable</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>​	注意，如果需要登录谷歌账号，则需要在设置里面设置全局代理。然后设置代理规则: <code>https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</code>。</p>
+<a id="more"></a>
+<h3 id="v2ray客户端"><a class="markdownIt-Anchor" href="#v2ray客户端"></a> V2ray客户端</h3>
+<p>在全局代理模式下，运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -L -s https://install.direct/go.sh)</span><br></pre></td></tr></table></figure>
+<p>就安装好了v2ray的客户端。</p>
+<p>此脚本会自动安装以下文件：</p>
+<ul>
+<li><code>/usr/bin/v2ray/v2ray</code>：V2Ray 程序；</li>
+<li><code>/usr/bin/v2ray/v2ctl</code>：V2Ray 工具；</li>
+<li><code>/etc/v2ray/config.json</code>：配置文件；</li>
+<li><code>/usr/bin/v2ray/geoip.dat</code>：IP 数据文件</li>
+<li><code>/usr/bin/v2ray/geosite.dat</code>：域名数据文件</li>
+</ul>
+<p>此脚本会配置自动运行脚本。自动运行脚本会在系统重启之后，自动运行 V2Ray。目前自动运行脚本只支持带有 Systemd 的系统，以及 Debian / Ubuntu 全系列。</p>
+<p>脚本运行完成后，你需要：</p>
+<ol>
+<li>编辑 <code>/etc/v2ray/config.json</code> 文件来配置你需要的代理方式；</li>
+<li>运行 <code>service v2ray start</code> 来启动 V2Ray 进程；</li>
+<li>之后可以使用 <code>service v2ray start|stop|status|reload|restart|force-reload</code> 控制 V2Ray 的运行。</li>
+</ol>
+<h3 id="pip-and-pip3"><a class="markdownIt-Anchor" href="#pip-and-pip3"></a> pip and pip3</h3>
+<p>在使用apt安装任何软件包之前，建议使用以下命令更新软件包列表：<br />
+sudo apt update</p>
+<p>安装Python2的pip:<br />
+<code>sudo apt install python-pip</code></p>
+<p>安装Python3的pip:<br />
+<code>sudo apt install python3-pip</code></p>
+<p>加速pip下载:<br />
+在<code>~/.pip/pip.conf</code>(没有就创建)添加下面的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;pypi&#x2F;simple</span><br><span class="line"></span><br><span class="line">[install]</span><br><span class="line">trusted-host&#x3D;mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+<h3 id="远程工具"><a class="markdownIt-Anchor" href="#远程工具"></a> 远程工具</h3>
+<p>我们可以使用putty和filezilla来远程操作linux服务器和传输文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install putty</span><br></pre></td></tr></table></figure>
+<h3 id="vim"><a class="markdownIt-Anchor" href="#vim"></a> vim</h3>
+<p><code>sudo apt get install vim</code></p>
+<h3 id="eclipse"><a class="markdownIt-Anchor" href="#eclipse"></a> eclipse</h3>
+<p>先从官网下载安装包，解压后在线安装（在eclipse的eclipse的eclise installer目录的eclipse-inst运行文件。<br />
+如果出现Gtk-Message: Failed to load module &quot;canberra-gtk-module&quot;的错误，则在终端运行：<br />
+<code>sudo apt-get install libcanberra-gtk-module</code></p>
+<p>然后选择你想要的eclipse编译器，安装即可。</p>
+<p>最后，我们需要把应用程序放在桌面上，只需要运行下面的命令行：<br />
+<code>sudo gedit /usr/share/applications/eclipse.desktop</code><br />
+其中文件的内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding&#x3D;UTF-8</span><br><span class="line">Name&#x3D;Eclipse Platfrom          &#x2F;&#x2F;图标名字，可改</span><br><span class="line">Comment&#x3D;Eclipse IDE</span><br><span class="line">Exec&#x3D;&#x2F;java&#x2F;eclipse&#x2F;eclipse      &#x2F;&#x2F;Eclipse文件夹下eclipse的路径</span><br><span class="line">Icon&#x3D;&#x2F;java&#x2F;eclipse&#x2F;icon.xpm    &#x2F;&#x2F;Eclipse文件夹下图标icon.xpm的路径</span><br><span class="line">Terminal&#x3D;false</span><br><span class="line">StartupNotify&#x3D;true</span><br><span class="line">Type&#x3D;Application</span><br><span class="line">Categories&#x3D;Application;Development;</span><br></pre></td></tr></table></figure>
+<p>还要对文件进行赋予权限：<br />
+<code>chmod u+x /usr/share/applications/eclipse.desktop</code><br />
+这时eclipse就添加到我们的workspace里面了。</p>
+<h3 id="nextcloud网盘"><a class="markdownIt-Anchor" href="#nextcloud网盘"></a> nextcloud网盘</h3>
+<p>最方便的做法就是使用snap命令安装.<br />
+在国内一般snap下载的网速会很慢，一般是使用代理，代理的设置方法是在<code>/etc/environment</code>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http_proxy&#x3D;&quot;socks5:&#x2F;&#x2F;127.0.0.1:1080&quot;</span><br><span class="line">https_proxy&#x3D;&quot;socks5:&#x2F;&#x2F;127.0.0.1:1080&quot;</span><br></pre></td></tr></table></figure>
+<p>如果没有安装snap，则需要先安装snap：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install snap</span><br><span class="line">sudo apt-get install snapd</span><br></pre></td></tr></table></figure>
+<p>然后再安装nextcloud:<br />
+<code>sudo snap install nextcloud</code><br />
+然后创建用户<br />
+访问本机ip (http://&lt;您的 CVM IP 地址&gt;/) 即可进入 nextCloud 的安装页面。<br />
+根据个人需求输入用户名创建用户即可。</p>
+<p>常见问题:<br />
+nextcloud网盘无法安装应用.<br />
+解决办法：</p>
+<ol>
+<li>在<code>https://apps.nextcloud.com/</code>找到应用,找到下载链接，下载对应版本</li>
+<li>解压文件，并移动至extra-apps目录.</li>
+</ol>
+<p>注意，snap安装的应用放在了<code>/var/snap</code>中.</p>
+<h3 id="mysql安装"><a class="markdownIt-Anchor" href="#mysql安装"></a> mysql安装</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br><span class="line">sudo apt install mysql-client</span><br><span class="line">sudo apt install libmysqlclient-dev</span><br></pre></td></tr></table></figure>
+<p>安装成功后可以通过下面的命令测试是否安装成功：<br />
+<code>sudo netstat -tap | grep mysql</code><br />
+出现如下信息证明安装成功：<br />
+<img src="http://static.zybuluo.com/xiangwanpeng/p81fqgz0k1782qpwbrtnhmce/image_1b6gfob7m1u4f2i0av11afd92m9.png" alt="" /></p>
+<h3 id="albert发射器"><a class="markdownIt-Anchor" href="#albert发射器"></a> Albert发射器</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:noobslab/macbuntu</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install albert</span><br></pre></td></tr></table></figure>
+<h3 id="主题管理"><a class="markdownIt-Anchor" href="#主题管理"></a> 主题管理</h3>
+<ol>
+<li>安装tweak工具</li>
+</ol>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool</span><br><span class="line">sudo apt install gnome-shell-extensions</span><br><span class="line">sudo apt-get install  gnome-shell-extension-dashtodock</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>安装Sierra主题</li>
+<li>安装Mojave-CT-Classic图标</li>
+<li>设置<code>tweak</code>中的<code>dash to dock</code>，使其居中.</li>
+</ol>
+<p>主题和图标都可以在<code>https://www.gnome-look.org/</code>中下载.</p>
+<p>最终的配置情况如下:<br />
+<img src="/img/Configuration/beauty-gnome.png" alt="beautify-gnome" /></p>
+<h3 id="zsh和oh-my-zsh"><a class="markdownIt-Anchor" href="#zsh和oh-my-zsh"></a> zsh和oh-my-zsh</h3>
+<ol>
+<li>安装zsh: <code>sudo apt-get install zsh</code></li>
+<li>安装oh-my-zsh: <code>wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</code></li>
+<li><code>chsh -s /bin/zsh</code> 将默认的shell从bash改为zsh</li>
+<li><code>sudo reboot</code> 重新启动</li>
+</ol>
+<p>注意:</p>
+<ol>
+<li>主题的地址: <code>https://github.com/robbyrussell/oh-my-zsh/wiki/themes</code></li>
+<li>主题的路径在<code>~/.oh-my-zsh/themes</code>, 使某一主题生效的文件为<code>~/.zshrc</code>文件，找到<code>ZSH_THEME=&quot;robbyrussell&quot;</code>一行（大概11行左右），把其注释掉，在下面添一行<code>ZSH_THEME=&quot;ys&quot;</code>，之后关闭终端，再重启就好了</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/12/08/algorithm/dp/%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6/" rel="prev" title="石子合并">
+                  <i class="fa fa-chevron-left"></i> 石子合并
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/12/programming/python/%E5%88%9D%E5%A7%8Bscrapy/" rel="next" title="初始scrapy">
+                  初始scrapy <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -16,10 +519,80 @@
       const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }</script></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">Qingying Liu</span></div></div></footer><script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/local-search.js"></script><script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
       quicklink.listen({
         timeout : 300,
         priority: true,
         ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/',]
       });
-      });</script></body><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"></html>
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>

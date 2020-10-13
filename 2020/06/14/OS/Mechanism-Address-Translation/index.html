@@ -1,4 +1,428 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css"><script class="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"qingyingliu.top",root:"/",scheme:"Pisces",version:"8.0.1",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12},copycode:!0,bookmark:{enable:!0,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},motion:{enable:!0,async:!0,transition:{post_block:"fadeIn",sidebar:"fadeInUp"}},prism:!1,i18n:{placeholder:"Searching...",empty:"We didn't find any results for the search: ${query}",hits_time:"${hits} results found in ${time} ms",hits:"${hits} results found"},path:"/search.xml",localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1}}</script><meta name="description" content="为了实现虚拟化内存，我们采用一种和&quot;limited direct execution&quot;类似的策略，获得高效和控制并且提供想要的虚拟化。我们将要用到的通用技巧，可以被认为是LDE的补充，叫做&quot;hardware-based address translation&quot;或者&quot;address translation&quot;。 通过使用address tra"><meta property="og:type" content="article"><meta property="og:title" content="Mechanism-Address-Translation"><meta property="og:url" content="https://qingyingliu.top/2020/06/14/OS/Mechanism-Address-Translation/index.html"><meta property="og:site_name" content="qingying&#39;s blog"><meta property="og:description" content="为了实现虚拟化内存，我们采用一种和&quot;limited direct execution&quot;类似的策略，获得高效和控制并且提供想要的虚拟化。我们将要用到的通用技巧，可以被认为是LDE的补充，叫做&quot;hardware-based address translation&quot;或者&quot;address translation&quot;。 通过使用address tra"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/OS/Example-of-Address-Space.png"><meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/OS/Physical-Memory-With-A-Single-Relocated-Proccess.png"><meta property="article:published_time" content="2020-06-14T03:41:45.000Z"><meta property="article:modified_time" content="2020-06-14T09:43:46.000Z"><meta property="article:author" content="Qingying Liu"><meta property="article:tag" content="OS"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/OS/Example-of-Address-Space.png"><link rel="canonical" href="https://qingyingliu.top/2020/06/14/OS/Mechanism-Address-Translation/"><script class="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"en"}</script><title>Mechanism-Address-Translation | qingying's blog</title><noscript><style>body{margin-top:2rem}.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header,.use-motion .sidebar{visibility:visible}.use-motion .footer,.use-motion .header,.use-motion .site-brand-container .toggle{opacity:initial}.use-motion .custom-logo-image,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line{transform:scaleX(1)}.search-pop-overlay,.sidebar-nav{display:none}.sidebar-panel{display:block}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="Toggle navigation bar"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><h1 class="site-title">qingying's blog</h1><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="Searching..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc">Table of Contents</li><li class="sidebar-nav-overview">Overview</li></ul><section class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#assumption"><span class="nav-number">1.</span> <span class="nav-text">Assumption</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an-example"><span class="nav-number">2.</span> <span class="nav-text">An Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dyunamichardware-based-relocation"><span class="nav-number">3.</span> <span class="nav-text">Dyunamic(Hardware-based) Relocation</span></a></li></ol></div></section><section class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="Qingying Liu" src="/uploads/avatar.gif"><p class="site-author-name" itemprop="name">Qingying Liu</p><div class="site-description" itemprop="description">记录数学和计算机方面的知识</div></div><div class="site-state-wrap site-overview-item animated"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">148</span> <span class="site-state-item-name">posts</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">30</span> <span class="site-state-item-name">categories</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">71</span> <span class="site-state-item-name">tags</span></a></div></nav></div><div class="links-of-author site-overview-item animated"><span class="links-of-author-item"><a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a></span></div></section></div></aside><div class="sidebar-dimmer"></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a role="button" class="book-mark-link book-mark-link-fixed"></a><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en"><link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2020/06/14/OS/Mechanism-Address-Translation/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/uploads/avatar.gif"><meta itemprop="name" content="Qingying Liu"><meta itemprop="description" content="记录数学和计算机方面的知识"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="qingying's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Mechanism-Address-Translation</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">Posted on</span> <time title="Created: 2020-06-14 11:41:45 / Modified: 17:43:46" itemprop="dateCreated datePublished" datetime="2020-06-14T11:41:45+08:00">2020-06-14</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">In</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a></span></span></div></div></header><div class="post-body" itemprop="articleBody"><p>为了实现虚拟化内存，我们采用一种和&quot;limited direct execution&quot;类似的策略，获得高效和控制并且提供想要的虚拟化。我们将要用到的通用技巧，可以被认为是LDE的补充，叫做&quot;hardware-based address translation&quot;或者&quot;address translation&quot;。 通过使用address translation的技巧，硬件在每一个内存访问中将指令提供的虚拟地址转化为实际的物理地址。</p><p>当然，单单是硬件无法实现虚拟化内存，因为它只提供了低级机制来实现<strong>高效</strong>。 因此，OS必须参与设置硬件的关键点以至于能够正确地翻译地址，OS也必须管理地址，记录哪些地方是空闲的，哪些地方是在使用的，然后参与<strong>控制</strong>内存的使用。</p><blockquote><p>注: 高效和控制是现代计算机的两个主要目标。</p></blockquote><p>我们的工作的目标都是为了能够制造出一个完美的假象(illusion)： 程序拥有它自己的内存，它的代码和数据都保存在这个内存中。 虚拟的背后隐藏着丑陋的物理显示： 当CPU切换运行的程序到下一个程序的时候，许多程序实际上是同时共享内存的。通过虚拟化，OS（通过硬件的帮助）就可以把丑陋的机器转变为一个有用的、强大的和易于使用的抽象。</p><a id="more"></a><h3 id="assumption"><a class="markdownIt-Anchor" href="#assumption"></a> Assumption</h3><p>我们假设:</p><ul><li>用户地址空间必须放在连续的物理内存。</li><li>地址空间的大小不会太大，特别地，小于物理内存的大小。</li><li>每个地址空间的大小相同。</li></ul><p>不用担心这些假设听起来不现实，当我们继续学习的时候，我们将会松弛它们，从而实现一个切实可行的内存虚拟化。</p><h3 id="an-example"><a class="markdownIt-Anchor" href="#an-example"></a> An Example</h3><p>为了更好地理解我们需要什么取实现地址翻译，和为什么我们需要这样的一个机制，让我们一起看一个简单的例子。</p><p>想象这里有一个进程，它的地址空间如下图所示:</p><p><img src="/Users/qingyingliu/Desktop/Blog/source/img/OS/Example-of-Address-Space.png" alt="Example-of-Address-Space"></p><p>我们将要在这里检验的是一份很短的代码序列，它从内存中加载一个值，加3，然后将这个值保存回内存。你可以想象一下这个代码的C语言表达也许像这样:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	x = x+<span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>计算机通过反汇编工具如objdump将上述代码反汇编，得到:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">128: movl 0x0(%ebx), %eax</span><br><span class="line">132: addl $0x03, %eax</span><br><span class="line">135: movl %eax, 0x0(%ebx)</span><br></pre></td></tr></table></figure><p>这个代码片段是相当直接的，它提前假设<code>x</code>的地址是被放置在寄存器<code>ebx</code>，然后通过<code>movl</code>指令加载那个地址的值到通用目的寄存器<code>eax</code>。下一个指令是添加3到<code>eax</code>，然后最后一个指令是将存储在<code>eax</code>的值保存到那个相同地方的内存。</p><p>在上图中，你可以看到代码和数据是如何在地址空间中放置的。三条指令的代码序列位于地址128，变量<code>x</code>的值在地址15KB。正如上图所示，从栈的位置可以看到，<code>x</code>的初始值为3000。</p><p>从进程的角度来看，当这些指令执行的时候，下面的内存访问会发生:</p><ul><li>从地址128获取指令</li><li>执行这条指令(从地址15KB加载变量)</li><li>从地址132获取指令</li><li>执行这条指令（没有内存引用）</li><li>从地址135获取指令</li><li>执行这条指令（将变量存回到地址15KB)</li></ul><p>从程序的角度来看，它的地址空间从0开始，增长到最大值16KB。 它生成的所有的内存引用都应该在这些范围里面。然后，为了虚拟化内存，OS想要把进程放在物理内存的其他地方，不必放在地址0的位置。</p><p>因此，我们就有一个问题了： 我们如何以一种对程序透明的方式去重定位这些在内存中的进程？当在地址空间是被加载到其他的物理地址的时候，我们如何提供虚拟地址空间从0开始的假象？</p><p>一旦进程的地址空间被放在了内存中，物理内存也许像下图所示。</p><p><img src="/Users/qingyingliu/Desktop/Blog/source/img/OS/Physical-Memory-With-A-Single-Relocated-Proccess.png" alt="Physical-Memory-With-A-Single-Relocated-Proccess"></p><p>在这张图中，你可以看到OS使用了内存的第一个slot，它重定位了上面例子中的进程到从物理地址为32KB起始的slot中，另外两个的slots是空闲的。</p><h3 id="dyunamichardware-based-relocation"><a class="markdownIt-Anchor" href="#dyunamichardware-based-relocation"></a> Dyunamic(Hardware-based) Relocation</h3><p>一般地，我们需要在每一个CPU中的两个硬件寄存器： 一个叫做base register，另一个叫做bounds(有时也叫做limit register)。这对寄存器(base and bounds register)使我们可以放置地址空间到物理内存中的任何我们想要的位置，这样做保证了进程只能访问它自己的地址空间。</p><p>当任意的内存访问被进程生成的时候，它就被处理器按照如下的方式翻译:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">physical address &#x3D; virtual address + base</span><br></pre></td></tr></table></figure><p>进程所生成的每一个内存引用都是虚拟地址，硬件将通过加上base register的值到这个地址来得到一个可以发布到内存系统的物理地址。</p><p>为了更好地列级这一点，让我们记录当单条指令被执行的时候会发生什么。具体地，让我们来看一下之前的一条指令:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">128: movl 0x0(%eax), %eax</span><br></pre></td></tr></table></figure><p>当硬件需要获取这条指令的时候，程序计数器PC被设置为128，它首先添加base register的值32KB从而得到一个物理地址32896，硬件然后从那个物理地址中获取指令。接着，处理器开始执行指令，同时，处理器发起一个从15KB的虚拟地址的加载，处理器再一次添加base register(32KB)到%eax，得到最终的物理地址47KB，从而得到想要的内容。</p><p>我们把转变虚拟地址为物理地址称为address translation的技巧。由于这种地址的重定位发生在运行时期，即使进程已经开始我们仍然可以移动地址空间，这种技巧我们有时也叫做动态重定位(dynamic relocation)。</p><p>下面介绍bounds寄存器。它的作用是为了保护。特别地，处理器首先会检查内存引用是否在边界内，从而确保引用合法。在上面的例子中，bounds寄存器将会一直被设置为16KB。</p><p>人们称帮助地址转换的处理器的部分叫做memory management unit(MMU)。</p><p>在这里，我们把bounds register定义为the size of address space，因此硬件将会在添加base之前检查虚拟地址是否合法。</p></div><footer class="post-footer"><div class="post-tags"><a href="/tags/OS/" rel="tag"># OS</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2020/06/13/math/mathematical-analysis/%E5%87%BD%E6%95%B0%E5%88%97%E4%B8%8E%E5%87%BD%E6%95%B0%E9%A1%B9%E7%BA%A7%E6%95%B0/" rel="prev" title="函数列与函数项级数"><i class="fa fa-chevron-left"></i> 函数列与函数项级数</a></div><div class="post-nav-item"><a href="/2020/06/18/math/mathematical-analysis/%E5%B9%82%E7%BA%A7%E6%95%B0/" rel="next" title="幂级数">幂级数 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="为了实现虚拟化内存，我们采用一种和&quot;limited direct execution&quot;类似的策略，获得高效和控制并且提供想要的虚拟化。我们将要用到的通用技巧，可以被认为是LDE的补充，叫做&quot;hardware-based address translation&quot;或者&quot;address translation&quot;。 通过使用address tra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mechanism-Address-Translation">
+<meta property="og:url" content="https://qingyingliu.top/2020/06/14/OS/Mechanism-Address-Translation/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="为了实现虚拟化内存，我们采用一种和&quot;limited direct execution&quot;类似的策略，获得高效和控制并且提供想要的虚拟化。我们将要用到的通用技巧，可以被认为是LDE的补充，叫做&quot;hardware-based address translation&quot;或者&quot;address translation&quot;。 通过使用address tra">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/OS/Example-of-Address-Space.png">
+<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/OS/Physical-Memory-With-A-Single-Relocated-Proccess.png">
+<meta property="article:published_time" content="2020-06-14T03:41:45.000Z">
+<meta property="article:modified_time" content="2020-06-14T09:43:46.000Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/OS/Example-of-Address-Space.png">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2020/06/14/OS/Mechanism-Address-Translation/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Mechanism-Address-Translation | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#assumption"><span class="nav-number">1.</span> <span class="nav-text"> Assumption</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#an-example"><span class="nav-number">2.</span> <span class="nav-text"> An Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dyunamichardware-based-relocation"><span class="nav-number">3.</span> <span class="nav-text"> Dyunamic(Hardware-based) Relocation</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2020/06/14/OS/Mechanism-Address-Translation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mechanism-Address-Translation
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2020-06-14 11:41:45 / Modified: 17:43:46" itemprop="dateCreated datePublished" datetime="2020-06-14T11:41:45+08:00">2020-06-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>为了实现虚拟化内存，我们采用一种和&quot;limited direct execution&quot;类似的策略，获得高效和控制并且提供想要的虚拟化。我们将要用到的通用技巧，可以被认为是LDE的补充，叫做&quot;hardware-based address translation&quot;或者&quot;address translation&quot;。 通过使用address translation的技巧，硬件在每一个内存访问中将指令提供的虚拟地址转化为实际的物理地址。</p>
+<p>当然，单单是硬件无法实现虚拟化内存，因为它只提供了低级机制来实现<strong>高效</strong>。 因此，OS必须参与设置硬件的关键点以至于能够正确地翻译地址，OS也必须管理地址，记录哪些地方是空闲的，哪些地方是在使用的，然后参与<strong>控制</strong>内存的使用。</p>
+<blockquote>
+<p>注: 高效和控制是现代计算机的两个主要目标。</p>
+</blockquote>
+<p>我们的工作的目标都是为了能够制造出一个完美的假象(illusion)： 程序拥有它自己的内存，它的代码和数据都保存在这个内存中。 虚拟的背后隐藏着丑陋的物理显示： 当CPU切换运行的程序到下一个程序的时候，许多程序实际上是同时共享内存的。通过虚拟化，OS（通过硬件的帮助）就可以把丑陋的机器转变为一个有用的、强大的和易于使用的抽象。</p>
+<a id="more"></a>
+<h3 id="assumption"><a class="markdownIt-Anchor" href="#assumption"></a> Assumption</h3>
+<p>我们假设:</p>
+<ul>
+<li>用户地址空间必须放在连续的物理内存。</li>
+<li>地址空间的大小不会太大，特别地，小于物理内存的大小。</li>
+<li>每个地址空间的大小相同。</li>
+</ul>
+<p>不用担心这些假设听起来不现实，当我们继续学习的时候，我们将会松弛它们，从而实现一个切实可行的内存虚拟化。</p>
+<h3 id="an-example"><a class="markdownIt-Anchor" href="#an-example"></a> An Example</h3>
+<p>为了更好地理解我们需要什么取实现地址翻译，和为什么我们需要这样的一个机制，让我们一起看一个简单的例子。</p>
+<p>想象这里有一个进程，它的地址空间如下图所示:</p>
+<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/OS/Example-of-Address-Space.png" alt="Example-of-Address-Space" /></p>
+<p>我们将要在这里检验的是一份很短的代码序列，它从内存中加载一个值，加3，然后将这个值保存回内存。你可以想象一下这个代码的C语言表达也许像这样:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x;</span><br><span class="line">	x = x+<span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>计算机通过反汇编工具如objdump将上述代码反汇编，得到:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">128: movl 0x0(%ebx), %eax</span><br><span class="line">132: addl $0x03, %eax</span><br><span class="line">135: movl %eax, 0x0(%ebx)</span><br></pre></td></tr></table></figure>
+<p>这个代码片段是相当直接的，它提前假设<code>x</code>的地址是被放置在寄存器<code>ebx</code>，然后通过<code>movl</code>指令加载那个地址的值到通用目的寄存器<code>eax</code>。下一个指令是添加3到<code>eax</code>，然后最后一个指令是将存储在<code>eax</code>的值保存到那个相同地方的内存。</p>
+<p>在上图中，你可以看到代码和数据是如何在地址空间中放置的。三条指令的代码序列位于地址128，变量<code>x</code>的值在地址15KB。正如上图所示，从栈的位置可以看到，<code>x</code>的初始值为3000。</p>
+<p>从进程的角度来看，当这些指令执行的时候，下面的内存访问会发生:</p>
+<ul>
+<li>从地址128获取指令</li>
+<li>执行这条指令(从地址15KB加载变量)</li>
+<li>从地址132获取指令</li>
+<li>执行这条指令（没有内存引用）</li>
+<li>从地址135获取指令</li>
+<li>执行这条指令（将变量存回到地址15KB)</li>
+</ul>
+<p>从程序的角度来看，它的地址空间从0开始，增长到最大值16KB。 它生成的所有的内存引用都应该在这些范围里面。然后，为了虚拟化内存，OS想要把进程放在物理内存的其他地方，不必放在地址0的位置。</p>
+<p>因此，我们就有一个问题了： 我们如何以一种对程序透明的方式去重定位这些在内存中的进程？当在地址空间是被加载到其他的物理地址的时候，我们如何提供虚拟地址空间从0开始的假象？</p>
+<p>一旦进程的地址空间被放在了内存中，物理内存也许像下图所示。</p>
+<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/OS/Physical-Memory-With-A-Single-Relocated-Proccess.png" alt="Physical-Memory-With-A-Single-Relocated-Proccess" /></p>
+<p>在这张图中，你可以看到OS使用了内存的第一个slot，它重定位了上面例子中的进程到从物理地址为32KB起始的slot中，另外两个的slots是空闲的。</p>
+<h3 id="dyunamichardware-based-relocation"><a class="markdownIt-Anchor" href="#dyunamichardware-based-relocation"></a> Dyunamic(Hardware-based) Relocation</h3>
+<p>一般地，我们需要在每一个CPU中的两个硬件寄存器： 一个叫做base register，另一个叫做bounds(有时也叫做limit register)。这对寄存器(base and bounds register)使我们可以放置地址空间到物理内存中的任何我们想要的位置，这样做保证了进程只能访问它自己的地址空间。</p>
+<p>当任意的内存访问被进程生成的时候，它就被处理器按照如下的方式翻译:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">physical address &#x3D; virtual address + base</span><br></pre></td></tr></table></figure>
+<p>进程所生成的每一个内存引用都是虚拟地址，硬件将通过加上base register的值到这个地址来得到一个可以发布到内存系统的物理地址。</p>
+<p>为了更好地列级这一点，让我们记录当单条指令被执行的时候会发生什么。具体地，让我们来看一下之前的一条指令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">128: movl 0x0(%eax), %eax</span><br></pre></td></tr></table></figure>
+<p>当硬件需要获取这条指令的时候，程序计数器PC被设置为128，它首先添加base register的值32KB从而得到一个物理地址32896，硬件然后从那个物理地址中获取指令。接着，处理器开始执行指令，同时，处理器发起一个从15KB的虚拟地址的加载，处理器再一次添加base register(32KB)到%eax，得到最终的物理地址47KB，从而得到想要的内容。</p>
+<p>我们把转变虚拟地址为物理地址称为address translation的技巧。由于这种地址的重定位发生在运行时期，即使进程已经开始我们仍然可以移动地址空间，这种技巧我们有时也叫做动态重定位(dynamic relocation)。</p>
+<p>下面介绍bounds寄存器。它的作用是为了保护。特别地，处理器首先会检查内存引用是否在边界内，从而确保引用合法。在上面的例子中，bounds寄存器将会一直被设置为16KB。</p>
+<p>人们称帮助地址转换的处理器的部分叫做memory management unit(MMU)。</p>
+<p>在这里，我们把bounds register定义为the size of address space，因此硬件将会在添加base之前检查虚拟地址是否合法。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OS/" rel="tag"># OS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/06/13/math/mathematical-analysis/%E5%87%BD%E6%95%B0%E5%88%97%E4%B8%8E%E5%87%BD%E6%95%B0%E9%A1%B9%E7%BA%A7%E6%95%B0/" rel="prev" title="函数列与函数项级数">
+                  <i class="fa fa-chevron-left"></i> 函数列与函数项级数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/06/18/math/mathematical-analysis/%E5%B9%82%E7%BA%A7%E6%95%B0/" rel="next" title="幂级数">
+                  幂级数 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
     let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
@@ -16,10 +440,80 @@
       const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
-  }</script></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">Qingying Liu</span></div></div></footer><script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script><script src="/js/local-search.js"></script><script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
       quicklink.listen({
         timeout : 300,
         priority: true,
         ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2020/06/14/OS/Mechanism-Address-Translation/',]
       });
-      });</script></body><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"></html>
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>
