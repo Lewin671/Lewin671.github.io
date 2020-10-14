@@ -22,21 +22,25 @@
     var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="计算机网络是一种数据通信网络，这里主要介绍数据通信的一些基础知识。  数据通信系统 一个数据通信系统的模型如下图所示  简单地来说就是由5个部分组成: 信号源、发送设备、传输系统、接受设备和信宿。">
+  <meta name="description" content="计算机网络是一种数据通信网络，这里主要介绍数据通信的一些基础知识。  数据通信系统 一个数据通信系统由5个部分组成: 信号源、发送设备、传输系统、接受设备和信宿。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据通信基础">
 <meta property="og:url" content="https://qingyingliu.top/2020/10/12/network/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="qingying&#39;s blog">
-<meta property="og:description" content="计算机网络是一种数据通信网络，这里主要介绍数据通信的一些基础知识。  数据通信系统 一个数据通信系统的模型如下图所示  简单地来说就是由5个部分组成: 信号源、发送设备、传输系统、接受设备和信宿。">
+<meta property="og:description" content="计算机网络是一种数据通信网络，这里主要介绍数据通信的一些基础知识。  数据通信系统 一个数据通信系统由5个部分组成: 信号源、发送设备、传输系统、接受设备和信宿。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://qingyingliu.top/img/network/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%88%90.jpg">
 <meta property="og:image" content="https://qingyingliu.top/img/network/%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E7%82%B9%E5%88%B0%E7%82%B9%E8%BF%9E%E6%8E%A5.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E5%A4%9A%E7%82%B9%E8%BF%9E%E6%8E%A5.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/Half-Duplex-Mode.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/network/Full-Duplex-Mode.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E5%B9%B6%E8%A1%8C%E5%92%8C%E4%B8%B2%E8%A1%8C%E4%BC%A0%E8%BE%93.jpg">
 <meta property="article:published_time" content="2020-10-12T14:40:49.000Z">
-<meta property="article:modified_time" content="2020-10-13T14:48:29.145Z">
+<meta property="article:modified_time" content="2020-10-14T11:03:40.187Z">
 <meta property="article:author" content="Qingying Liu">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qingyingliu.top/img/network/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%88%90.jpg">
+<meta name="twitter:image" content="https://qingyingliu.top/img/network/%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7.jpg">
 
 
 <link rel="canonical" href="https://qingyingliu.top/2020/10/12/network/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80/">
@@ -208,7 +212,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text"> 数据通信系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text"> 数字信号和模拟信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.1.</span> <span class="nav-text"> 模拟信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.2.</span> <span class="nav-text"> 数字信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%88%E5%A5%8E%E6%96%AF%E7%89%B9%E5%87%86%E5%88%99"><span class="nav-number">2.3.</span> <span class="nav-text"> 奈奎斯特准则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%99%E5%86%9C%E5%AE%9A%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text"> 香农定理</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text"> 数据通信系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text"> 数字信号和模拟信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.1.</span> <span class="nav-text"> 模拟信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7"><span class="nav-number">2.2.</span> <span class="nav-text"> 数字信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%88%E5%A5%8E%E6%96%AF%E7%89%B9%E5%87%86%E5%88%99"><span class="nav-number">2.3.</span> <span class="nav-text"> 奈奎斯特准则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%99%E5%86%9C%E5%AE%9A%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text"> 香农定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E8%B7%AF%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text"> 线路配置和传输模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E8%B7%AF%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text"> 线路配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> 传输模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="nav-number">4.</span> <span class="nav-text"> 多路复用技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2%E6%8A%80%E6%9C%AF"><span class="nav-number">5.</span> <span class="nav-text"> 数据交换技术</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -317,7 +321,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-13 22:48:29" itemprop="dateModified" datetime="2020-10-13T22:48:29+08:00">2020-10-13</time>
+        <time title="Modified: 2020-10-14 19:03:40" itemprop="dateModified" datetime="2020-10-14T19:03:40+08:00">2020-10-14</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -341,9 +345,7 @@
     <div class="post-body" itemprop="articleBody">
         <p>计算机网络是一种数据通信网络，这里主要介绍数据通信的一些基础知识。</p>
 <h2 id="数据通信系统"><a class="markdownIt-Anchor" href="#数据通信系统"></a> 数据通信系统</h2>
-<p>一个数据通信系统的模型如下图所示</p>
-<p><img src="/img/network/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%84%E6%88%90.jpg" alt="img" /></p>
-<p>简单地来说就是由5个部分组成: 信号源、发送设备、传输系统、接受设备和信宿。</p>
+<p>一个数据通信系统由5个部分组成: 信号源、发送设备、传输系统、接受设备和信宿。</p>
 <a id="more"></a>
 <p>数据通信的主要技术指标有:</p>
 <ol>
@@ -399,6 +401,43 @@
 <p>例如,音频电话连接支持的频率范围是300Hz到3300Hz，则信道带宽W = 3000Hz。而一般链路典型的噪声功率是30dB，即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi mathvariant="normal">/</mi><mi>N</mi><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">S / N = 1000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span>，因此</p>
 <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>3000</mn><mo>×</mo><msub><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mn>1000</mn><mo stretchy="false">)</mo><mo>≈</mo><mn>30</mn><mrow><mi mathvariant="normal">K</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">p</mi><mi mathvariant="normal">s</mi></mrow></mrow><annotation encoding="application/x-tex">R_{max} = 3000 \times \log_{2}(1 + 1000) \approx 30 \mathrm{Kbps}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.20696799999999996em;"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24414em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">3</span><span class="mord">0</span><span class="mord"><span class="mord mathrm">K</span><span class="mord mathrm">b</span><span class="mord mathrm">p</span><span class="mord mathrm">s</span></span></span></span></span></span></p>
+<h2 id="线路配置和传输模式"><a class="markdownIt-Anchor" href="#线路配置和传输模式"></a> 线路配置和传输模式</h2>
+<h3 id="线路配置"><a class="markdownIt-Anchor" href="#线路配置"></a> 线路配置</h3>
+<p><strong>线路配置</strong>是指两个或者两个以上的设备连接到链路的方式。 一条链路是数据从一个设备传输到另一个设备的物理路径。为了实现通信，两个设备必须以某种方式同时连接到同一条链路上。</p>
+<p>有两种线路配置方式： <strong>点到点连接</strong>和<strong>多点连接</strong>。</p>
+<p><img src="/img/network/%E7%82%B9%E5%88%B0%E7%82%B9%E8%BF%9E%E6%8E%A5.jpg" alt="img" /></p>
+<p><img src="/img/network/%E5%A4%9A%E7%82%B9%E8%BF%9E%E6%8E%A5.png" alt="Multipoint Configuration" /></p>
+<h3 id="传输模式"><a class="markdownIt-Anchor" href="#传输模式"></a> 传输模式</h3>
+<p>传输模式定义了一个比特流从一个设备传输到另一个设备的方式，有以下几种传输模式:</p>
+<ol>
+<li>
+<p>单工、半双工、全双工通信模式.</p>
+<ul>
+<li>单工通信模式中，通信是单向进行的，一条链路的两个站点中只有一个可以进行传输，另一个只能接收。</li>
+<li>在半双工模式中，每个站点都可以发送和接受，但是不能同时发送和接受。</li>
+<li>在全双工通信模式中，两个站点可以同时进行发送和接受，两个方向的信号共享链路。</li>
+</ul>
+<p><img src="/img/network/Half-Duplex-Mode.jpg" alt="Half Duplex Mode" /></p>
+<p><img src="/img/network/Full-Duplex-Mode.jpg" alt="Full Duplex Mode" /></p>
+</li>
+<li>
+<p>串行和并行传输模式</p>
+<p>在并行传输模式中，每个时钟脉冲到来时多个比特被同时发送，每个比特使用单独的一条线路。</p>
+<p>在串行传输中，每个时钟脉冲只发送一个比特，它只是用一条线路逐个传输每个比特。</p>
+<p><img src="/img/network/%E5%B9%B6%E8%A1%8C%E5%92%8C%E4%B8%B2%E8%A1%8C%E4%BC%A0%E8%BE%93.jpg" alt="串行和并行传输" /></p>
+<p>并行传输的特点: 可以同时传输多个比特，速度快，线路昂贵，常用于近距离传输。</p>
+<p>串行传输特点: 每次只能发送一个比特位，所以速度比较慢，但是这种方式比较便宜。</p>
+</li>
+</ol>
+<h2 id="多路复用技术"><a class="markdownIt-Anchor" href="#多路复用技术"></a> 多路复用技术</h2>
+<p>多路复用技术是利用一条链路同时传输多路信号的技术。 使用多路复用技术可以最大限度地利用系统所具有的传输能力。</p>
+<p>频分多路复用(FDM)是一种模拟技术，适用于模拟信号。</p>
+<p>时分多路复用TDM，适用于数字信号。</p>
+<p>波分多路复用WDM，是一种光纤传送技术，就是光的频分多路复用。</p>
+<p>码分多路复用CDM，根据码型结构的不同来实现信号分割的多路复用，也称为码分多址(CDMA)复用。在CDMA系统中，所有的用户使用同一频率，占用相同的带宽。各用户可以同时发送和接受信号，且各用户的不同信号是用各自不同的地址码序列来区分，或者说靠信号的不同波形来区分。</p>
+<p>在CDMA中，每个站点被指定一个唯一的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span>为码片（码型）。当地址发送比特1时，站点就发送其码片。想发送0时，站点就发送其码片的反码。</p>
+<p>比如，S站的8 bit的码片序列是00011011，发送比特1时，就发送序列00011011，发送0时，就发送序列11100100.</p>
+<h2 id="数据交换技术"><a class="markdownIt-Anchor" href="#数据交换技术"></a> 数据交换技术</h2>
 
     </div>
 
