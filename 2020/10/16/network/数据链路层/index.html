@@ -29,11 +29,21 @@
 <meta property="og:site_name" content="qingying&#39;s blog">
 <meta property="og:description" content="数据链路层的任务是提供两个相邻结点或主机及其相连的网络结点之间可靠通信。 数据链路层提供的主要服务是线路规程、差错控制和流量控制。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E8%AF%A2%E9%97%AE%E7%A1%AE%E8%AE%A4%E7%BA%BF%E8%B7%AF%E8%A7%84%E7%A8%8B.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E8%BD%AE%E8%AF%A2%E9%80%89%E6%8B%A9%E6%A8%A1%E5%BC%8F.emf.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E5%A4%9A%E7%82%B9%E9%80%89%E6%8B%A9.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E8%BD%AE%E8%AF%A2.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AE.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AE%E5%AE%8C%E6%88%90%E4%B8%80%E5%B8%A7%E7%9A%84%E5%8F%91%E9%80%81%E6%97%B6%E9%97%B4.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E8%87%AA%E5%8A%A8%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E5%8F%91%E9%80%81%E6%96%B9%E7%AA%97%E5%8F%A3.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E6%8E%A5%E6%94%B6%E6%96%B9%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.png">
 <meta property="article:published_time" content="2020-10-16T14:27:04.000Z">
-<meta property="article:modified_time" content="2020-10-16T15:37:44.581Z">
+<meta property="article:modified_time" content="2020-10-17T15:57:40.870Z">
 <meta property="article:author" content="Qingying Liu">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/img/network/%E8%AF%A2%E9%97%AE%E7%A1%AE%E8%AE%A4%E7%BA%BF%E8%B7%AF%E8%A7%84%E7%A8%8B.png">
 
 
 <link rel="canonical" href="https://qingyingliu.top/2020/10/16/network/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/">
@@ -205,7 +215,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E8%B7%AF%E8%A7%84%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text"> 线路规程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A2%E9%97%AE%E5%BA%94%E7%AD%94%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text"> 询问&#x2F;应答模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AE%E8%AF%A2%E9%80%89%E6%8B%A9%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text"> 轮询&#x2F;选择模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text"> 流量控制与差错控制</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E8%B7%AF%E8%A7%84%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text"> 线路规程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A2%E9%97%AE%E5%BA%94%E7%AD%94%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text"> 询问&#x2F;应答模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AE%E8%AF%A2%E9%80%89%E6%8B%A9%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text"> 轮询&#x2F;选择模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E4%B8%8E%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text"> 流量控制与差错控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.</span> <span class="nav-text"> 停止等待协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 流量控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6"><span class="nav-number">2.1.2.</span> <span class="nav-text"> 差错控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.</span> <span class="nav-text"> 滑动窗口协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6-2"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 流量控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E7%AA%97%E5%8F%A3%E7%A7%BB%E5%8A%A8%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 发送窗口移动的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E7%AA%97%E5%8F%A3%E7%A7%BB%E5%8A%A8%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">2.2.3.</span> <span class="nav-text"> 接收窗口移动的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6-2"><span class="nav-number">2.2.4.</span> <span class="nav-text"> 差错控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E9%80%80n%E8%87%AA%E5%8A%A8%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82"><span class="nav-number">2.2.5.</span> <span class="nav-text"> 回退n自动重复请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8B%92%E7%BB%9D%E8%87%AA%E5%8A%A8%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82"><span class="nav-number">2.2.6.</span> <span class="nav-text"> 选择拒绝自动重复请求</span></a></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -306,10 +316,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-10-16 22:27:04 / Modified: 23:37:44" itemprop="dateCreated datePublished" datetime="2020-10-16T22:27:04+08:00">2020-10-16</time>
+      <time title="Created: 2020-10-16 22:27:04" itemprop="dateCreated datePublished" datetime="2020-10-16T22:27:04+08:00">2020-10-16</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-17 23:57:40" itemprop="dateModified" datetime="2020-10-17T23:57:40+08:00">2020-10-17</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -340,9 +356,16 @@
 <p>询问/应答模式负责协调哪个设备可以开始传输以及预期的接收方是否已经就绪并可以进行接收。采用ENQ/ACK模式，只要一条链路两头的设备级别相同，任意一个设备都可以启动一个会话过程。</p>
 <p>询问/应答模式的工作方式为: 启动方首先发送一个询问帧(ENQ)，询问接收方是否可以就收数据。接收方如果已经准备好接收，必须回答一个应答帧(ACK)。 如果没有准备好，则必须回答一个否定应答帧(NAK)。发送方发送一个询问帧之后，会有三种可能的情况:</p>
 <ul>
-<li>没有回应. 如果在一定的时间期限内既没有接收到应答帧也没有接收到否定帧，启动方就假定询问帧在传输中丢失了，断开连接并重新发送一个副本。 一个启动系统通常在放弃努力之前为建立链路进行三次这样的尝试。</li>
-<li>回应是否定的。 如果对ENQ帧的回应是否定的，并尝试三次都失败了，启动方就断开连接，并在另一个时刻重新开始整个过程。</li>
-<li>回应是肯定的。如果回应是肯定的，启动方就可以随时发送数据了。一旦将所有数据都发送完毕，发送系统以一个传输结束帧(EOT)结束传输。</li>
+<li>
+<p>没有回应. 如果在一定的时间期限内既没有接收到应答帧也没有接收到否定帧，启动方就假定询问帧在传输中丢失了，断开连接并重新发送一个副本。 一个启动系统通常在放弃努力之前为建立链路进行三次这样的尝试。</p>
+</li>
+<li>
+<p>回应是否定的。 如果对ENQ帧的回应是否定的，并尝试三次都失败了，启动方就断开连接，并在另一个时刻重新开始整个过程。</p>
+</li>
+<li>
+<p>回应是肯定的。如果回应是肯定的，启动方就可以随时发送数据了。一旦将所有数据都发送完毕，发送系统以一个传输结束帧(EOT)结束传输。</p>
+<p><img src="/img/network/%E8%AF%A2%E9%97%AE%E7%A1%AE%E8%AE%A4%E7%BA%BF%E8%B7%AF%E8%A7%84%E7%A8%8B.png" alt="询问确认线路规程" /></p>
+</li>
 </ul>
 <h3 id="轮询选择模式"><a class="markdownIt-Anchor" href="#轮询选择模式"></a> 轮询/选择模式</h3>
 <p>轮询/选择模式是将一个设备设计为主设备，而其他设备作为从设备的拓扑结构中采用的。多点连接系统必在多个站点，而不仅是两个站点之间进行协调。因此，在这类情形下，问题不仅仅是确定设备是否就绪，还要确定哪一个站点有权使用信道。</p>
@@ -350,6 +373,7 @@
 <li>
 <p>工作方式</p>
 <p>一个多点连接由使用同一条传输线路的一个主设备和若干从设备组成，所有的信息交换都必须通过主设备进行。主设备负责控制链路，从设备遵从其指令。必须由主设备来决定在给定时刻哪一个设备有权使用信道，因此主设备是会话的发起者。如果主设备希望接收数据，它告知目标从设备准备好接收数据，这个功能称为<strong>选择</strong>。</p>
+<p><img src="/img/network/%E8%BD%AE%E8%AF%A2%E9%80%89%E6%8B%A9%E6%A8%A1%E5%BC%8F.emf.png" alt="轮询选择模式.emf" /></p>
 </li>
 <li>
 <p>地址问题</p>
@@ -357,23 +381,86 @@
 </li>
 <li>
 <p>选择</p>
-<p>每当主设备有数据发送时就采用选择模式。主设备虽然控制着链路，但是它不知道接收数据的设备是否准备好接收数据。因此，主设备必须告知从设备将有数据到来，然后等待从设备处于接收就绪的应答信号。</p>
+<p><strong>每当主设备有数据发送时就采用选择模式</strong>。主设备虽然控制着链路，但是它不知道接收数据的设备是否准备好接收数据。因此，主设备必须告知从设备将有数据到来，然后等待从设备处于接收就绪的应答信号。</p>
 <p>在发送数据之前，主设备产生并发送一个选择帧(SSL)，并在帧的地址域中填入接收数据的从设备地址。 多点拓扑在多个设备间共用一条链路，所以链路上的任何一帧都可以被链路上的任何一个设备接收。 当帧沿着链路传输时，每个设备都检验其中的地址域。 只有当一个设备发现该地址域是自身时才打开该帧并读取数据。</p>
+<p><img src="/img/network/%E5%A4%9A%E7%82%B9%E9%80%89%E6%8B%A9.png" alt="多点选择" /></p>
 </li>
 <li>
 <p>轮询</p>
-<p>轮询功能是主设备请求从设备进行传输。在没有接收到请求前，从设备是不允许发送数据的。所有的控制都集中在主设备。 当主设备准备好接收数据时，它必须依次询问从设备是否有数据发送，被询问到的设备如果有数据发送则发送数据帧，如果没有数据发送则以否定应答帧作为回答。</p>
+<p><strong>轮询功能是主设备请求从设备进行传输</strong>。在没有接收到请求前，从设备是不允许发送数据的。所有的控制都集中在主设备。 当主设备准备好接收数据时，它必须依次询问从设备是否有数据发送，被询问到的设备如果有数据发送则发送数据帧，如果没有数据发送则以否定应答帧作为回答。</p>
+<p><img src="/img/network/%E8%BD%AE%E8%AF%A2.png" alt="轮询" /></p>
 </li>
 </ol>
 <h2 id="流量控制与差错控制"><a class="markdownIt-Anchor" href="#流量控制与差错控制"></a> 流量控制与差错控制</h2>
 <p>流量控制有两个要点:</p>
 <ul>
 <li>数据流不能使接收方过载。</li>
-<li>应答。随着数据帧的到来，接收方对它们进行应答，可以每接收一帧给一个应答，也可以一次对若干帧进行应答。 如果一个帧到达时已经破坏，接收方发送一个否定应答帧。</li>
+<li>接收方对数据进行确认应答。</li>
 </ul>
 <p>差错控制主要指错误检测和重传方法。一个帧中出现任何一个错误，接收方就返回一个否定应答帧，出错的帧就被发送方重新传送，这个过程称为自动重传。</p>
 <p>数据被重传有三种情况: 帧破坏、帧丢失和应答帧丢失。</p>
 <p>流量控制和差错控制是结合在一起实现的，主要有两种实现协议： 停止等待协议和滑动窗口协议。</p>
+<h3 id="停止等待协议"><a class="markdownIt-Anchor" href="#停止等待协议"></a> 停止等待协议</h3>
+<h4 id="流量控制"><a class="markdownIt-Anchor" href="#流量控制"></a> 流量控制</h4>
+<p>在停止等待协议中，发送方每发送一帧后就等待一个应答帧。只有当接收到应答帧之后，发送方才接受下一帧。 这种发送和等待交替的过程不断重复，直到发送方发送一个传输结束符。</p>
+<p><img src="/img/network/%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AE.png" alt="停止等待协议" /></p>
+<p>优点: 协议简单</p>
+<p>缺点: 效率低</p>
+<p><img src="/img/network/%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AE%E5%AE%8C%E6%88%90%E4%B8%80%E5%B8%A7%E7%9A%84%E5%8F%91%E9%80%81%E6%97%B6%E9%97%B4.png" alt="停止等待协议完成一帧的发送时间" /></p>
+<p>从上图可知，在无差错的情况下，完成一帧的发送至少需要如下一个<strong>窗口时间</strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>W</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">W_{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，其中</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>W</mi><mi>T</mi></msub><mo>=</mo><msub><mi>t</mi><mi>I</mi></msub><mo>+</mo><mn>2</mn><msub><mi>t</mi><mi>P</mi></msub><mo>+</mo><mn>2</mn><msub><mi>t</mi><mrow><mi>P</mi><mi>r</mi><mi>o</mi><mi>c</mi></mrow></msub><mo>+</mo><msub><mi>t</mi><mi>S</mi></msub></mrow><annotation encoding="application/x-tex">W_{T} = t_{I} + 2t_{P} + 2t_{Proc} + t_{S}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07847em;">I</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.79444em;vertical-align:-0.15em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.79444em;vertical-align:-0.15em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mi>I</mi></msub></mrow><annotation encoding="application/x-tex">t_{I}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07847em;">I</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是发送一个数据帧的时间，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mi>P</mi></msub></mrow><annotation encoding="application/x-tex">t_{P}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是电信号在物理链路上的传输延迟，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mi>S</mi></msub></mrow><annotation encoding="application/x-tex">t_{S}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是应答帧的发送时间，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mrow><mi>P</mi><mi>r</mi><mi>o</mi><mi>c</mi></mrow></msub></mrow><annotation encoding="application/x-tex">t_{Proc}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是收到数据帧后的处理时间。</p>
+<h4 id="差错控制"><a class="markdownIt-Anchor" href="#差错控制"></a> 差错控制</h4>
+<p>为了实现差错控制，停止等待协议采用ARQ技术，ARQ技术处理错误的三种情况:</p>
+<ul>
+<li>帧破坏（校验码）</li>
+<li>数据帧丢失（超时）</li>
+<li>应答帧丢失（超时）</li>
+</ul>
+<p>停止等待协议中的差错控制的要求如下:</p>
+<ol>
+<li>发送设备要保留数据帧的备份，直到数据帧被正确接收位置</li>
+<li>数据帧和应答帧都必须交替的标识为0和1。一个标号为1的数据帧被一个标号为0的应答帧所确认，说明当前接收方已经接收到了数据帧1，期望接收数据帧0. 如果接收方收到了两个相邻的数据帧，且标号相同，说明接收方收到了一个重复帧，应当丢弃一个重复帧。</li>
+<li>如果在数据帧中发现一个错误，说明该帧在传输中发生了错误，就会返回一个否定应答帧。 <strong>否定应答帧是不编号的</strong>，它通知发送方重新发送最近的一帧。</li>
+<li>发送设备安装一个定时器。如果在规定时间内不能收到预期的应答信息，发送方就假定最近的一帧数据已经在传输过程中丢失并再次发送它。</li>
+</ol>
+<p><img src="/img/network/%E5%81%9C%E6%AD%A2%E7%AD%89%E5%BE%85%E8%87%AA%E5%8A%A8%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82.png" alt="停止等待自动重复请求" /></p>
+<h3 id="滑动窗口协议"><a class="markdownIt-Anchor" href="#滑动窗口协议"></a> 滑动窗口协议</h3>
+<h4 id="流量控制-2"><a class="markdownIt-Anchor" href="#流量控制-2"></a> 流量控制</h4>
+<p>在流量控制的滑动窗口协议中，发送方在收到应答消息前可以发送若干帧。帧可以直接依次发送，这意味着链路上可能同时存在几个数据帧，从而充分利用了链路的传输能力。</p>
+<p>在发送方，只要窗口未被填满就可以在未收到应答帧的情况下继续发送数据帧。发送窗口用于存放已发送但未收到应答的数据帧和在收到应答之前可以发送的数据帧。而接收窗口用于存放已接收但未给应答的数据帧。</p>
+<p>在滑动窗口协议中，数据帧的编号以模<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>方式编号。也就是说，编号从<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。窗口的大小是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>。</p>
+<blockquote>
+<p>注意： 窗口的大小不是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>.</p>
+</blockquote>
+<p>接收方发送的应答帧编号是接收方希望接收到的下一帧的编号。例如，接收方发送了一个编号为5的应答帧，表示接收方接收到了5号以前的数据帧，希望接收方发送5号帧。</p>
+<h4 id="发送窗口移动的例子"><a class="markdownIt-Anchor" href="#发送窗口移动的例子"></a> 发送窗口移动的例子</h4>
+<p>发送窗口分为两部分，左边部分已经发送但是还没有收到信息的数据帧，右边部分还未发送但是可以发送的数据帧。 <strong>每发送一帧，左右两部分的分界就向右移一帧，每收到一个应答帧，整个发送窗口就右移若干帧</strong>. 移动的距离是最后一次银达镇的编号和现在接收到的应答帧的编号的差值（模n）.</p>
+<p><img src="/img/network/%E5%8F%91%E9%80%81%E6%96%B9%E7%AA%97%E5%8F%A3.png" alt="发送方窗口" /></p>
+<p>上图显示了一个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>8</mn></mrow><annotation encoding="application/x-tex">8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span>的发送方的滑动窗口，窗口大小为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn><mo>=</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">n-1=7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span></span></span></span>。</p>
+<p>开始时，未发送任何数据，窗口时空的，窗口中的号码是可以发送的数据帧编号。（图a)</p>
+<p>当发送方发送了4帧后，窗口中只剩下3个空位置，可以继续发送4、5、6号帧。（图b)</p>
+<p>当收到了编号为3的应答帧之后，表示接收方已经收到了3号之前的所有数据帧，因此窗口往右移3格。（图c)</p>
+<p>当发送方又继续发送5帧后，此时发送窗口如图d所示.</p>
+<h4 id="接收窗口移动的例子"><a class="markdownIt-Anchor" href="#接收窗口移动的例子"></a> 接收窗口移动的例子</h4>
+<p>接受窗口也分成两个部分，左边部分是已经接受但是还没有发送应答信息的数据帧，右边部分是可以被接受的数据帧。 只有编号处于窗口内的帧才是可以被接受的帧。每接收一帧，左右两部分的分界就往右移一帧；每发送一个应答帧，整个接收窗口就向右移若干帧。移动的距离是最后一次应答帧的编号和现在发送的应答帧的编号的差值模<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>。</p>
+<p><img src="/img/network/%E6%8E%A5%E6%94%B6%E6%96%B9%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.png" alt="接收方滑动窗口" /></p>
+<p>上图展示了一个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">n=8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span>时的接收方滑动窗口，滑动窗口大小为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>7</mn></mrow><annotation encoding="application/x-tex">7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span></span></span></span>。</p>
+<p>开始时，接收方没有接收到任何数据帧，窗口时空的，如图(a)所示。</p>
+<p>当接收到4帧后，左右分界线右移4帧，如图(b)所示。此时还可以继续接收4、5、6号的数据帧。</p>
+<p>当发送了编号为3的应答帧后，表示3号之前的数据帧都已经被检验为正确的，整个接收窗口右移3帧。此时如图©所示。</p>
+<p>又接收5个新的帧后，如图(d)所示。</p>
+<h4 id="差错控制-2"><a class="markdownIt-Anchor" href="#差错控制-2"></a> 差错控制</h4>
+<p>下面开始解决滑动窗口协议的差错控制，有两种技术: 回退n自动重复请求和选择拒绝自动重复请求。</p>
+<p>为了解决帧丢失和损坏帧的重发问题，需要在基本的滑动窗口流量控制上增加3个特性:</p>
+<ol>
+<li>在发送出去的帧被应答信息确认前保持它们所有的备份。这就是前面所说的，帧被发送后未被确认前仍留在滑动窗口中的原因。</li>
+<li>除了应答帧外，接收方还可以发送否定应答帧以通知发送方重新发送一个损坏的帧。因为滑动窗口是一个连续传输的机制，应答帧和否定帧都必须带有编号以便识别；应答帧带有期望收到的数据帧的编号，而否定帧带有损坏帧的编号，都是接收方期望接收的数据帧的编号。</li>
+<li>和停止等待协议自动重复请求ARQ类似，在滑动窗口自动重复请求协议中，发送设备具有一个定时器来使得发送方可以处理帧丢失的情况。</li>
+</ol>
+<h4 id="回退n自动重复请求"><a class="markdownIt-Anchor" href="#回退n自动重复请求"></a> 回退n自动重复请求</h4>
+<h4 id="选择拒绝自动重复请求"><a class="markdownIt-Anchor" href="#选择拒绝自动重复请求"></a> 选择拒绝自动重复请求</h4>
 
     </div>
 
