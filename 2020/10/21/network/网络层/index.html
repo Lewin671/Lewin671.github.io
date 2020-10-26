@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="网络层的功能和服务 为了实现端到端的传递，网络层提供了两种主要功能： 交换和路由。 交换是在两个或多个设备之间建立临时连接，使得没有物理链路直接连接的两个或多个设备之间可以通信。 路由意味着在有多于一条路径可选时，选择从一点到另一点发送数据包的最佳路径。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络层">
+<meta property="og:url" content="https://qingyingliu.top/2020/10/21/network/%E7%BD%91%E7%BB%9C%E5%B1%82/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="网络层的功能和服务 为了实现端到端的传递，网络层提供了两种主要功能： 交换和路由。 交换是在两个或多个设备之间建立临时连接，使得没有物理链路直接连接的两个或多个设备之间可以通信。 路由意味着在有多于一条路径可选时，选择从一点到另一点发送数据包的最佳路径。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%E4%BE%8B%E5%AD%90.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E7%AE%97%E6%B3%95%E8%B7%AF%E7%94%B1%E8%A1%A81.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%9A%84%E8%B4%B9%E7%94%A8.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E6%95%B0%E6%8D%AE%E5%BA%93.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E8%B7%AF%E7%94%B1%E5%99%A8A%E7%9A%84%E8%B7%AF%E7%94%B1%E8%A1%A8.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/IP%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E5%8F%AF%E5%88%86%E9%85%8DIP%E4%B8%AA%E6%95%B0.png">
+<meta property="article:published_time" content="2020-10-21T08:45:03.000Z">
+<meta property="article:modified_time" content="2020-10-26T14:30:39.600Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="network">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/img/network/%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%E4%BE%8B%E5%AD%90.png">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2020/10/21/network/%E7%BD%91%E7%BB%9C%E5%B1%82/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>网络层 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text"> 网络层的功能和服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> 路由选择原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 距离向量路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 链路状态路由算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%9A%84%E4%BF%A1%E6%81%AF%E5%85%B1%E4%BA%AB"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 链路状态的信息共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8dijkstra%E7%AE%97%E6%B3%95%E8%AE%A1%E7%AE%97%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 使用Dijkstra算法计算路由表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip%E5%9C%B0%E5%9D%80"><span class="nav-number">3.</span> <span class="nav-text"> IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80%E7%9A%84ipv4"><span class="nav-number">3.1.</span> <span class="nav-text"> 分类编址的IPV4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91%E7%9A%84ipv4%E7%BC%96%E5%9D%80"><span class="nav-number">3.2.</span> <span class="nav-text"> 划分子网的IPV4编址</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">143</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2020/10/21/network/%E7%BD%91%E7%BB%9C%E5%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络层
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-21 16:45:03" itemprop="dateCreated datePublished" datetime="2020-10-21T16:45:03+08:00">2020-10-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-26 22:30:39" itemprop="dateModified" datetime="2020-10-26T22:30:39+08:00">2020-10-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="网络层的功能和服务"><a class="markdownIt-Anchor" href="#网络层的功能和服务"></a> 网络层的功能和服务</h2>
+<p>为了实现端到端的传递，网络层提供了两种<strong>主要功能</strong>： 交换和路由。</p>
+<p>交换是在两个或多个设备之间建立临时连接，使得没有物理链路直接连接的两个或多个设备之间可以通信。</p>
+<p>路由意味着在有多于一条路径可选时，选择从一点到另一点发送数据包的最佳路径。</p>
+<a id="more"></a>
+<p>网络层的具体功能如下:</p>
+<ul>
+<li>信源到信宿的传输。</li>
+<li>逻辑寻址。</li>
+<li>路由。</li>
+<li>地址转换。</li>
+<li>复用。</li>
+<li>流量和拥塞控制。</li>
+<li>网络互连。</li>
+</ul>
+<p>在OSI模型中，网络层提供了两种类型的服务: 面向连接的网络服务和无连接的网络服务。而在TCP/IP协议中，网络层只提供无连接的网络服务。</p>
+<h2 id="路由选择原理"><a class="markdownIt-Anchor" href="#路由选择原理"></a> 路由选择原理</h2>
+<p>路由选择就是网络中各个节点为到来的数据包选择一条输出链路。一个理想的路由选择算法应该满足以下基本要求:</p>
+<ul>
+<li>正确性</li>
+<li>简单性</li>
+<li>坚定性(是指可靠性，长时间运行不会出现整个系统的故障)</li>
+<li>稳定性</li>
+<li>公平性</li>
+<li>最佳性</li>
+</ul>
+<p>在路由中，具有最短距离的路径是最佳的路径。 距离最短的标准是可以费用最小、传输延迟最小、数据传输速率最大以及这些因素的一种组合。</p>
+<h3 id="距离向量路由算法"><a class="markdownIt-Anchor" href="#距离向量路由算法"></a> 距离向量路由算法</h3>
+<p>在距离向量路由算法中，每个路由周期性地将自己关于整个网络的信息发送给它的邻居。理解这个算法的关键有三个方面:</p>
+<ul>
+<li>每个路由保存关于整个网络的信息。</li>
+<li>仅仅和邻居交换网络信息。</li>
+<li>信息的交换是通过有规律的时间间隔来进行的。例如，每隔30s，每个路由器都会把自己知道的关于整个网络的信息发送给邻居。</li>
+</ul>
+<blockquote>
+<p>注意, ttl大于等于16就表示距离为无穷了。</p>
+</blockquote>
+<p>距离向量路由算法的路由表中的每一项一般都具有格式:<code>NetID:Distance:Nexthop</code>。例如，在这个网络中，我们的路由表变化如下:</p>
+<p><img src="/img/network/%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95%E4%BE%8B%E5%AD%90.png" alt="网络" /></p>
+<p>前三次交换路由数据时，每个路由器的路由表如下:</p>
+<p><img src="/img/network/%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E7%AE%97%E6%B3%95%E8%B7%AF%E7%94%B1%E8%A1%A81.png" alt="路由表的编号" /></p>
+<h3 id="链路状态路由算法"><a class="markdownIt-Anchor" href="#链路状态路由算法"></a> 链路状态路由算法</h3>
+<p>在链路状态路由中，每个路由器和互联网络中的所有其他路由器共享关于其邻居的信息。理解链路状态可以从以下三个方面入手:</p>
+<ul>
+<li>共享关于邻居的信息。 路由器仅仅发送关于自己邻居的信息，而不是像距离向量路由那样发送整个路由表。</li>
+<li>共享的信息发送给所有的路由器，而不是像距离向量路由那样仅仅发送给它的邻居。</li>
+<li>信息的共享在有规律的时间间隔内进行。链路状态路由中的时间间隔通常比距离向量路由中的时间间隔要长。链路状态路由中的时间间隔通常是30分钟，而距离向量路由中的时间间隔通常是30s。</li>
+</ul>
+<h4 id="链路状态的信息共享"><a class="markdownIt-Anchor" href="#链路状态的信息共享"></a> 链路状态的信息共享</h4>
+<ol>
+<li>路由器传输包的费用。在链路状态路由中，费用是许多因素的加权值。这些因素包括安全级别、流量和链路的传输速率等。 为了决定一条路由，一个路由器到拎一个路由器的费用是这样计算的。加入路由器A和路由器B通过Net1相连，A到B的费用等于A到net1的费用，而Net1到路由器B的费用则忽略不计。这是因为，当A发送的数据包到达Net1时，Net1的所有站点都可以收到这个包，包括路由器B。</li>
+<li>链路状态包。路由器通过向整个互联网络中的所有路由器发送链路状态包(Link State Packet, LSP)来扩散关于自己邻居的信息。 一个LSP通常包括4个信息域: 广告者（发送者）的ID、所影响目标网络的ID、费用和邻居路由器的ID。</li>
+<li>获得关于邻居路由的信息。每个路由器都周期性地发送一个简短的问候包来获得关于它们邻居的信息。这些问候包很小，只占很小的网络资源。</li>
+<li>初始化。每个路由器启动时向它的所有邻居发送一个问候包来获取每条链路的状态信息，然后它基于这些问候准备一个LSP，并将它扩散到整个网络。</li>
+<li>链路状态数据库。每个路由器接受每个其他路由器发送来的LSP，并将它们的信息存放到一个链路状态数据库中。由于每个路由器接收相同的LSP，每个路由器将创建相同的链路状态数据库。如果一个路由器被删除或者被加入到网络中，所有的链路状态数据库将被更新。</li>
+</ol>
+<p><img src="/img/network/%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%9A%84%E8%B4%B9%E7%94%A8.png" alt="链路状态的费用" /></p>
+<p><img src="/img/network/%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E6%95%B0%E6%8D%AE%E5%BA%93.png" alt="链路状态数据库" /></p>
+<h4 id="使用dijkstra算法计算路由表"><a class="markdownIt-Anchor" href="#使用dijkstra算法计算路由表"></a> 使用Dijkstra算法计算路由表</h4>
+<p>Dijkstra算法使用由结点和弧组成你的图计算网络中两点之间的最短路径。结点有两种类型：网络和路由器。弧也有两种类型：路由器到网络的链路和网络到路由器的链路。在Dijkstra算法中，从路由器到网络的链路的费用才有效，而从网络到路由器的链路费用总是0。</p>
+<p>每个路由器在使用Dijstra算法时，根据下面4个步骤来形成自己的最短路径树。</p>
+<ol>
+<li>选择自己作为树根，并将跟标识为永久性结点。算法接着从根出发，连接它的所有邻接结点，这种连接是临时性的。</li>
+<li>算法比较所有的临时连接，找出费用最小的路径，这个路径上的所有弧和结点都被标记为最短路径树上的永久部分。</li>
+<li>算法考察链路状态数据库，找出从这个选定的最短路径向外延伸能连接的所有非永久性结点，将这些结点临时性地加到最短路径树上。</li>
+<li>如果所有的结点已经成为最短路径树上的永久部分，则算法结束，去掉非永久性的弧。否则，转步骤2继续执行。</li>
+</ol>
+<p>对上图中的路由器A进行Dijkstra算法，得到如下的路由表</p>
+<p><img src="/img/network/%E8%B7%AF%E7%94%B1%E5%99%A8A%E7%9A%84%E8%B7%AF%E7%94%B1%E8%A1%A8.png" alt="路由器A的路由表" /></p>
+<h2 id="ip地址"><a class="markdownIt-Anchor" href="#ip地址"></a> IP地址</h2>
+<h3 id="分类编址的ipv4"><a class="markdownIt-Anchor" href="#分类编址的ipv4"></a> 分类编址的IPV4</h3>
+<p>网络中每个独立主机的每个接口都必须有一个唯一的Internet地址，也称为IP地址。</p>
+<p>P地址由两部分组成，即网络地址和主机地址。</p>
+<ol>
+<li>网络号 net-id，它标志主机（或路由器）所连接到的网络，网络地址表示其属于互联网的哪一个网络。</li>
+<li>主机号 host-id，它标志该主机（或路由器），主机地址表示其属于该网络中的哪一台主机。</li>
+</ol>
+<p>IP（这里指IPV4）地址的长度为32位。IP地址按层次结构划分为5类。</p>
+<p><img src="/img/network/IP%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB.png" alt="IP网络分类" /></p>
+<p>32位的IP地址通常写成点分的4个十进制数，其中每个十进制整数对应一个字节，这种表示方法称为点分十进制表示法。下面给出各类IP地址的范围:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A</td>
+<td style="text-align:center">0.0.0.0到127.255.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">B</td>
+<td style="text-align:center">128.0.0.0到191.255.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">C</td>
+<td style="text-align:center">192.0.0.0到223.255.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">D</td>
+<td style="text-align:center">224.0.0.0到239.255.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td style="text-align:center">240.0.0.0到247.255.255.255</td>
+</tr>
+</tbody>
+</table>
+<p>管理分配IP地址的机构是InterNIC，InterNIC只分配网络号，主机号的分配由本地的网络管理员负责。</p>
+<p><img src="/img/network/%E5%8F%AF%E5%88%86%E9%85%8DIP%E4%B8%AA%E6%95%B0.png" alt="可分配IP个数" /></p>
+<p>A类地址中主机号全是0的IP地址表示是“本主机”所连接到的单个网络。主机号全是1的IP地址表示是该网络上的所有主机。</p>
+<p>B类地址网络号为128.0（1000 000  0000 0000）的IP地址是不指派的，所以可指派的网络号需要减一。</p>
+<p>C类地址网络号为192.0.0（1000 000  0000 0000  0000 0000）的IP地址是不指派的，所以可指派的网络号需要减一。</p>
+<p>主机号全是0的IP地址表示是“本主机”所连接到的单个网络。</p>
+<p>主机号全是1的IP地址表示是该网络上的所有主机。</p>
+<h3 id="划分子网的ipv4编址"><a class="markdownIt-Anchor" href="#划分子网的ipv4编址"></a> 划分子网的IPV4编址</h3>
+<p>目前所有的主机都要求支持子网编址。子网编址不是把IP地址看成由单纯的一个网络号和一个主机号组成，而是把主机号进一步划分为一个子网号和一个主机号。</p>
+<p>这样做的原因是，A,B类IP地址为主机号分配了太多的空间，课分别容纳的主机数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>24</mn></msup><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2^{24} - 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>16</mn></msup><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2^{16} - 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>。事实上，在一个网络中不可能安排如此多的主机。在InterNIC获得某类IP网络号后，就由网络系统管理员来进行分配。网络系统管理员决定是否建立子网，以及分配多少比特给子网号和主机号。例如，有一个B类网络地址138.123，在剩余的16个比特中，8比特用于子网号，8比特用于主机号。这样就允许有254个子网，每个子网有254台主机.</p>
+<p>通过IP地址，可以知道它是否是A,B还是C类，也就知道了网络号和子网号之间的分界线，通过子网掩码，可以得到子网号和主机号的分界线。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/network/" rel="tag"># network</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/19/git/gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E8%A7%84%E5%88%99/" rel="prev" title="gitignore文件的规则">
+                  <i class="fa fa-chevron-left"></i> gitignore文件的规则
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2020/10/21/network/%E7%BD%91%E7%BB%9C%E5%B1%82/',]
+      });
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css"><link href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css">
+
+</html>
