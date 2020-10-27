@@ -33,11 +33,12 @@
 <meta property="og:image" content="https://qingyingliu.top/img/network/%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E7%AE%97%E6%B3%95%E8%B7%AF%E7%94%B1%E8%A1%A81.png">
 <meta property="og:image" content="https://qingyingliu.top/img/network/%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%9A%84%E8%B4%B9%E7%94%A8.png">
 <meta property="og:image" content="https://qingyingliu.top/img/network/%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E6%95%B0%E6%8D%AE%E5%BA%93.png">
-<meta property="og:image" content="https://qingyingliu.top/img/network/%E8%B7%AF%E7%94%B1%E5%99%A8A%E7%9A%84%E8%B7%AF%E7%94%B1%E8%A1%A8.png">
 <meta property="og:image" content="https://qingyingliu.top/img/network/IP%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB.png">
 <meta property="og:image" content="https://qingyingliu.top/img/network/%E5%8F%AF%E5%88%86%E9%85%8DIP%E4%B8%AA%E6%95%B0.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E7%89%B9%E6%AE%8A%E7%9A%84IP%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/IPv4%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
 <meta property="article:published_time" content="2020-10-21T08:45:03.000Z">
-<meta property="article:modified_time" content="2020-10-26T14:30:39.600Z">
+<meta property="article:modified_time" content="2020-10-27T15:38:57.645Z">
 <meta property="article:author" content="Qingying Liu">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
@@ -213,7 +214,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text"> 网络层的功能和服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> 路由选择原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 距离向量路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 链路状态路由算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%9A%84%E4%BF%A1%E6%81%AF%E5%85%B1%E4%BA%AB"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 链路状态的信息共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8dijkstra%E7%AE%97%E6%B3%95%E8%AE%A1%E7%AE%97%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 使用Dijkstra算法计算路由表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip%E5%9C%B0%E5%9D%80"><span class="nav-number">3.</span> <span class="nav-text"> IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80%E7%9A%84ipv4"><span class="nav-number">3.1.</span> <span class="nav-text"> 分类编址的IPV4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91%E7%9A%84ipv4%E7%BC%96%E5%9D%80"><span class="nav-number">3.2.</span> <span class="nav-text"> 划分子网的IPV4编址</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text"> 网络层的功能和服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> 路由选择原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 距离向量路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 链路状态路由算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%9A%84%E4%BF%A1%E6%81%AF%E5%85%B1%E4%BA%AB"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 链路状态的信息共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8dijkstra%E7%AE%97%E6%B3%95%E8%AE%A1%E7%AE%97%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 使用Dijkstra算法计算路由表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text"> IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ip%E5%9C%B0%E5%9D%80"><span class="nav-number">3.1.</span> <span class="nav-text"> IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80%E7%9A%84ipv4"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 分类编址的IPV4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91%E7%9A%84ipv4%E7%BC%96%E5%9D%80"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 划分子网的IPV4编址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 子网掩码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84ip%E5%9C%B0%E5%9D%80"><span class="nav-number">3.1.4.</span> <span class="nav-text"> 特殊的IP地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv4%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> IPv4报文格式</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -322,7 +323,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-26 22:30:39" itemprop="dateModified" datetime="2020-10-26T22:30:39+08:00">2020-10-26</time>
+        <time title="Modified: 2020-10-27 23:38:57" itemprop="dateModified" datetime="2020-10-27T23:38:57+08:00">2020-10-27</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -412,9 +413,55 @@
 <li>如果所有的结点已经成为最短路径树上的永久部分，则算法结束，去掉非永久性的弧。否则，转步骤2继续执行。</li>
 </ol>
 <p>对上图中的路由器A进行Dijkstra算法，得到如下的路由表</p>
-<p><img src="/img/network/%E8%B7%AF%E7%94%B1%E5%99%A8A%E7%9A%84%E8%B7%AF%E7%94%B1%E8%A1%A8.png" alt="路由器A的路由表" /></p>
-<h2 id="ip地址"><a class="markdownIt-Anchor" href="#ip地址"></a> IP地址</h2>
-<h3 id="分类编址的ipv4"><a class="markdownIt-Anchor" href="#分类编址的ipv4"></a> 分类编址的IPV4</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">目标网络</th>
+<th style="text-align:center">费用</th>
+<th style="text-align:center">下一个路由器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">B</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">F</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">B</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">E</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ip协议"><a class="markdownIt-Anchor" href="#ip协议"></a> IP协议</h2>
+<h3 id="ip地址"><a class="markdownIt-Anchor" href="#ip地址"></a> IP地址</h3>
+<h4 id="分类编址的ipv4"><a class="markdownIt-Anchor" href="#分类编址的ipv4"></a> 分类编址的IPV4</h4>
 <p>网络中每个独立主机的每个接口都必须有一个唯一的Internet地址，也称为IP地址。</p>
 <p>P地址由两部分组成，即网络地址和主机地址。</p>
 <ol>
@@ -461,10 +508,70 @@
 <p>C类地址网络号为192.0.0（1000 000  0000 0000  0000 0000）的IP地址是不指派的，所以可指派的网络号需要减一。</p>
 <p>主机号全是0的IP地址表示是“本主机”所连接到的单个网络。</p>
 <p>主机号全是1的IP地址表示是该网络上的所有主机。</p>
-<h3 id="划分子网的ipv4编址"><a class="markdownIt-Anchor" href="#划分子网的ipv4编址"></a> 划分子网的IPV4编址</h3>
+<h4 id="划分子网的ipv4编址"><a class="markdownIt-Anchor" href="#划分子网的ipv4编址"></a> 划分子网的IPV4编址</h4>
 <p>目前所有的主机都要求支持子网编址。子网编址不是把IP地址看成由单纯的一个网络号和一个主机号组成，而是把主机号进一步划分为一个子网号和一个主机号。</p>
 <p>这样做的原因是，A,B类IP地址为主机号分配了太多的空间，课分别容纳的主机数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>24</mn></msup><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2^{24} - 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">4</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mn>16</mn></msup><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2^{16} - 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>。事实上，在一个网络中不可能安排如此多的主机。在InterNIC获得某类IP网络号后，就由网络系统管理员来进行分配。网络系统管理员决定是否建立子网，以及分配多少比特给子网号和主机号。例如，有一个B类网络地址138.123，在剩余的16个比特中，8比特用于子网号，8比特用于主机号。这样就允许有254个子网，每个子网有254台主机.</p>
-<p>通过IP地址，可以知道它是否是A,B还是C类，也就知道了网络号和子网号之间的分界线，通过子网掩码，可以得到子网号和主机号的分界线。</p>
+<h4 id="子网掩码"><a class="markdownIt-Anchor" href="#子网掩码"></a> 子网掩码</h4>
+<p>子网掩码是一个32比特的数值，其中值1的比特用于网络号和子网号，为0的比特留给主机号。</p>
+<p>通过IP地址和子网掩码，主机就可以判断数据报的目的地址为:</p>
+<ol>
+<li>本子网的主机</li>
+<li>本网络中其他子网的主机。</li>
+<li>其他网络的主机。</li>
+</ol>
+<p>通过IP地址，可以知道它是否是A,B还是C类，也就知道了<strong>网络号和子网号之间的分界线</strong>，通过子网掩码，可以得到<strong>子网号和主机号的分界线</strong>。</p>
+<h4 id="特殊的ip地址"><a class="markdownIt-Anchor" href="#特殊的ip地址"></a> 特殊的IP地址</h4>
+<p><img src="/img/network/%E7%89%B9%E6%AE%8A%E7%9A%84IP%E5%9C%B0%E5%9D%80.png" alt="特殊的IP地址" /></p>
+<p>如果主机号全0，IP地址代表仅网络号指向的那个网段，该IP代表一个网段。</p>
+<p>如果主机号全1，则表示该IP地址是一个广播地址。</p>
+<h3 id="ipv4报文格式"><a class="markdownIt-Anchor" href="#ipv4报文格式"></a> IPv4报文格式</h3>
+<p>IPv4数据报的格式如下图所示。如果不包含选项字段，IP报头长度为20字节。网络字节序是big endian序，如果是little endian格式的数据，则需要在传输数据之前把报头转换成网络字节序。</p>
+<p><img src="/img/network/IPv4%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png" alt="IPv4数据报格式以及报头中的各个字段" /></p>
+<ol>
+<li>
+<p>版本号字段。这里的IP协议的版本号为4，因此成为IPv4。</p>
+</li>
+<li>
+<p>首部长度（报头长度）字段。报头长度指的是报头占32bit的数量。由于它是一个4比特字段，因此报头最长为60字节。对于一般数据报（没有可选字段），该字段的值是5，即报头长度为20字节。</p>
+</li>
+<li>
+<p>总长度字段。总长度字段是指整个IP数据报的长度，以字节为单位。由于该字段长度为16比特，因此IP数据报的最大长度可达65535字节。但是，大多数的数据链路层都会对它进行分段处理。</p>
+</li>
+<li>
+<p>标识字段(Identification)。一个数据报在通过不同网络时可能被分段，以适应不同网络帧的大小。当这种情况发生的时候，同一数据报的每个分段将在这个域中使用一个相同的序列号来识别。通常每发送一个报文，其值自动加1。</p>
+</li>
+<li>
+<p>标志字段(Flags)。</p>
+<ul>
+<li>bit 0: Reserved; must be zero.</li>
+<li>bit 1: Don’t Fragment (DF)</li>
+<li>bit 2: More Fragments (MF)</li>
+</ul>
+<p>如果DF位被置为1，则表示不分段，0表示分段。</p>
+<p>如果MF为被置为1，则表示接受到的报文是某个报文分段的一部分，其后面还有同一个报文的分段。MF为0表示后面没有同一个报文的分段。</p>
+</li>
+<li>
+<p>Fragment Offset。分段偏移说明该分段在当前数据报的什么位置。分段偏移以8字节为单位，这样偏移量为1对应字节号8，偏移量2表示字节号16，以此类推。</p>
+</li>
+<li>
+<p>Time To Live (TTL)。An eight-bit time to live field helps prevent datagrams from persisting (e.g. going in circles) on an internet. This field limits a datagram’s lifetime. It is specified in seconds, but time intervals less than 1 second are rounded up to 1. In practice, the field has become a hop count—when the datagram arrives at a router, the router decrements the TTL field by one. When the TTL field hits zero, the router discards the packet and typically sends an ICMP Time Exceeded message to the sender.</p>
+</li>
+<li>
+<p>协议字段。IP使用协议字段对数据报进行分类，根据它的值可以确定是哪个协议向IP发送数据报，如TCP为6、UDP为17、ICMP为1.</p>
+</li>
+<li>
+<p>报头检查和字段。16比特的IPv4报头检查和用于报头的错误检查，它只检查首部的检查和，它不对报头后面的数据进行计算。</p>
+</li>
+<li>
+<p>源地址和目的地址。每个数据报都包含源IP地址和目的IP地址，它们的长度都是32比特。</p>
+</li>
+<li>
+<p>任何字段都是以32比特作为界限，在必要时插入0填充字节，这样就能保证IP首部始终是32比特的整数倍（这是首部长度字段要求的）。</p>
+<blockquote>
+<p>The IPv4 Options field may vary in length. The “<strong>Padding</strong>” field provides additional zero bits so that the total header length is an exact multiple of 32 bits.</p>
+</blockquote>
+</li>
+</ol>
 
     </div>
 
