@@ -37,8 +37,9 @@
 <meta property="og:image" content="https://qingyingliu.top/img/network/%E5%8F%AF%E5%88%86%E9%85%8DIP%E4%B8%AA%E6%95%B0.png">
 <meta property="og:image" content="https://qingyingliu.top/img/network/%E7%89%B9%E6%AE%8A%E7%9A%84IP%E5%9C%B0%E5%9D%80.png">
 <meta property="og:image" content="https://qingyingliu.top/img/network/IPv4%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/ICMP%E6%8A%A5%E6%96%87%E5%B0%81%E8%A3%85%E5%9C%A8IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E4%B8%AD.png">
 <meta property="article:published_time" content="2020-10-21T08:45:03.000Z">
-<meta property="article:modified_time" content="2020-10-27T15:38:57.645Z">
+<meta property="article:modified_time" content="2020-10-28T14:06:02.992Z">
 <meta property="article:author" content="Qingying Liu">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
@@ -214,7 +215,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text"> 网络层的功能和服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> 路由选择原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 距离向量路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 链路状态路由算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%9A%84%E4%BF%A1%E6%81%AF%E5%85%B1%E4%BA%AB"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 链路状态的信息共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8dijkstra%E7%AE%97%E6%B3%95%E8%AE%A1%E7%AE%97%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 使用Dijkstra算法计算路由表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text"> IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ip%E5%9C%B0%E5%9D%80"><span class="nav-number">3.1.</span> <span class="nav-text"> IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80%E7%9A%84ipv4"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 分类编址的IPV4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91%E7%9A%84ipv4%E7%BC%96%E5%9D%80"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 划分子网的IPV4编址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 子网掩码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84ip%E5%9C%B0%E5%9D%80"><span class="nav-number">3.1.4.</span> <span class="nav-text"> 特殊的IP地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv4%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> IPv4报文格式</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text"> 网络层的功能和服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> 路由选择原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB%E5%90%91%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 距离向量路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text"> 链路状态路由算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E8%B7%AF%E7%8A%B6%E6%80%81%E7%9A%84%E4%BF%A1%E6%81%AF%E5%85%B1%E4%BA%AB"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 链路状态的信息共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8dijkstra%E7%AE%97%E6%B3%95%E8%AE%A1%E7%AE%97%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 使用Dijkstra算法计算路由表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text"> IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ip%E5%9C%B0%E5%9D%80"><span class="nav-number">3.1.</span> <span class="nav-text"> IP地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E7%BC%96%E5%9D%80%E7%9A%84ipv4"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 分类编址的IPV4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91%E7%9A%84ipv4%E7%BC%96%E5%9D%80"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 划分子网的IPV4编址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 子网掩码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84ip%E5%9C%B0%E5%9D%80"><span class="nav-number">3.1.4.</span> <span class="nav-text"> 特殊的IP地址</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv4%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> IPv4报文格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arp%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.</span> <span class="nav-text"> ARP地址解析协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFarp%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.1.</span> <span class="nav-text"> 什么是ARP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81arp%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.2.</span> <span class="nav-text"> 为什么需要ARP协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#icmp%E5%8D%8F%E8%AE%AE"><span class="nav-number">5.</span> <span class="nav-text"> ICMP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#icmp%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F%E5%92%8C%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text"> ICMP报文格式和类型</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -323,7 +324,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-27 23:38:57" itemprop="dateModified" datetime="2020-10-27T23:38:57+08:00">2020-10-27</time>
+        <time title="Modified: 2020-10-28 22:06:02" itemprop="dateModified" datetime="2020-10-28T22:06:02+08:00">2020-10-28</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -460,6 +461,7 @@
 </tbody>
 </table>
 <h2 id="ip协议"><a class="markdownIt-Anchor" href="#ip协议"></a> IP协议</h2>
+<p>IP协议是TCP/IP协议族中的核心协议，所有的TCP、UDP、ICMP、IGMP数据都封装在IP数据报中传输。IP协议为高层提供不可靠、无连接的数据报通信。</p>
 <h3 id="ip地址"><a class="markdownIt-Anchor" href="#ip地址"></a> IP地址</h3>
 <h4 id="分类编址的ipv4"><a class="markdownIt-Anchor" href="#分类编址的ipv4"></a> 分类编址的IPV4</h4>
 <p>网络中每个独立主机的每个接口都必须有一个唯一的Internet地址，也称为IP地址。</p>
@@ -572,6 +574,43 @@
 </blockquote>
 </li>
 </ol>
+<h2 id="arp地址解析协议"><a class="markdownIt-Anchor" href="#arp地址解析协议"></a> ARP地址解析协议</h2>
+<h3 id="什么是arp协议"><a class="markdownIt-Anchor" href="#什么是arp协议"></a> 什么是ARP协议</h3>
+<p>地址解析协议(Address Resolution Protocol, ARP)是<strong>根据IP地址获取物理地址</strong>的协议。</p>
+<p>主机发送信息时将包含目标IP地址的ARP请求<strong>广播</strong>到网络上的所有主机，并接收返回消息，以此确定目标的物理地址。 收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一段时间，下次请求时直接查询ARP缓存以节约资源。</p>
+<h3 id="为什么需要arp协议"><a class="markdownIt-Anchor" href="#为什么需要arp协议"></a> 为什么需要ARP协议</h3>
+<p>IP地址再网络层，MAC地址在数据链路层。例如在通过以太网发送IP数据包时，需要在网络层封装32位IP地址、在数据链路层封装48位MAC地址，但由于发送时只知道目标IP地址，不知道其MAC地址，所以需要使用地址解析协议。</p>
+<h2 id="icmp协议"><a class="markdownIt-Anchor" href="#icmp协议"></a> ICMP协议</h2>
+<p>Internet控制报文协议(Internet Control Message Protocol, ICMP)经常被认为是IP层的一个组成部分，它<strong>传送差错报文以及其他控制信息</strong>。ICMP报文通常被IP层或者更高层协议使用（如TCP协议），还有一些ICMP报文把差错报文返回给用户进程。</p>
+<p>ping 和 tracert是两个常用网络管理命令，ping 用来测试网络可达性，tracert 用来显示到达目的主机的路径。ping和 tracert 都利用 ICMP 协议来实现网络功能，它们是把网络协议应用到日常网络管理的典型实例。</p>
+<h3 id="icmp报文格式和类型"><a class="markdownIt-Anchor" href="#icmp报文格式和类型"></a> ICMP报文格式和类型</h3>
+<p>ICMP报文是封装在IP数据报中被传输的，ICMP报文的格式如下图所示。</p>
+<p><img src="/img/network/ICMP%E6%8A%A5%E6%96%87%E5%B0%81%E8%A3%85%E5%9C%A8IP%E6%95%B0%E6%8D%AE%E6%8A%A5%E4%B8%AD.png" alt="ICMP报文" /></p>
+<p>所有的ICMP报文的前4个字节都是一样的，其余字节不同。</p>
+<ol>
+<li>类型字段可以选取15个不同的值，每个值描述了一种特定类型的ICMP报文。</li>
+<li>代码字段用于进一步描述不同的条件。</li>
+<li>检查和字段覆盖整个ICMP报文，使用的算法和IP报头检查和算法相同。对于ICMP报文，检查和字段是必须具有的。</li>
+<li>根据类型字段和代码字段的值不同，ICMP报文有很多种，比较常用的有地址掩码请求和应答、时间戳请求和应答以及不可达端口。</li>
+</ol>
+<p>ICMP报文可分为两大类</p>
+<ol>
+<li>有关信息采集和配置的ICMP报文(称为<strong>查询报文</strong>或者<strong>信息类报文</strong>(information message)</li>
+<li>有关IP数据报传递的ICMP报文（称为<strong>差错报文</strong>）。</li>
+</ol>
+<p>ICMP <strong>差错报告报文</strong>有许多种比如 ：</p>
+<ul>
+<li>终点不可达；比如传输数据过程中，中间某一路由器不知道到目标地址怎么走，该路由器就会发回该报文。</li>
+<li>源点抑制(Source quench)； 即反馈发包速度过快；</li>
+<li>时间超过 ；</li>
+<li>参数问题 ；</li>
+<li>改变路由（重定向）(Redirect)</li>
+</ul>
+<p>下面各种情况都不会导致产生<code>ICMP</code>差错报文：</p>
+<ol>
+<li><code>ICMP</code>差错报文（但是，<code>ICMP</code>查询报文可能会产生<code>ICMP</code>差错报文）。 2) 目的地址是广播地址或多播地址的<code>IP</code>数据报。 3) 作为链路层广播的数据报。 4) 不是<code>IP</code>分片的第一片。 5) 源地址为零地址、环回地址、广播地址或多播地址。</li>
+</ol>
+<p>这些规则是为了防止过去允许<code>ICMP</code>差错报文对广播分组响应所带来的广播风暴。</p>
 
     </div>
 
