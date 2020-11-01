@@ -3014,25 +3014,6 @@ mark.search-keyword {
     margin-bottom: 10px;
   }
 }
-body {
-  background: url("/img/bg.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: 50% 50%;
-}
 .site-brand-container {
   background: #1f3144;
-}
-.main-inner {
-  opacity: 0.8;
-}
-.sidebar {
-  opacity: 0.8;
-}
-.header-inner {
-  background: rgba(255,255,255,0.8);
-}
-.popup {
-  opacity: 0.8;
 }
