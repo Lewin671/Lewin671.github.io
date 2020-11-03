@@ -28,14 +28,14 @@
 <meta property="og:site_name" content="qingying&#39;s blog">
 <meta property="og:description" content="传输层(Transport Layer)又称为运输层，是在ISO&#x2F;OSI参考模型中最核心的一层，它正好处于通信子网和资源子网之间。 该层的协议为应用进程提供端到端的通信服务。它提供面向连接的数据流支持、可靠性、流量控制和多路复用等服务。这里主要介绍两个重要的传输层协议: UDP和TCP。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/network/UDP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
-<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/network/UDP%E6%A3%80%E6%9F%A5%E5%92%8C%E8%AE%A1%E7%AE%97%E7%9A%84%E4%BE%8B%E5%AD%90.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/network/UDP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/UDP%E6%A3%80%E6%9F%A5%E5%92%8C%E8%AE%A1%E7%AE%97%E7%9A%84%E4%BE%8B%E5%AD%90.jpg">
 <meta property="article:published_time" content="2020-11-03T08:19:19.000Z">
-<meta property="article:modified_time" content="2020-11-03T08:54:17.416Z">
+<meta property="article:modified_time" content="2020-11-03T09:08:29.610Z">
 <meta property="article:author" content="Qingying Liu">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/network/UDP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
+<meta name="twitter:image" content="https://qingyingliu.top/img/network/UDP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
 
 
 <link rel="canonical" href="https://qingyingliu.top/2020/11/03/network/%E4%BC%A0%E8%BE%93%E5%B1%82/">
@@ -309,7 +309,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2020-11-03 16:19:19 / Modified: 16:54:17" itemprop="dateCreated datePublished" datetime="2020-11-03T16:19:19+08:00">2020-11-03</time>
+      <time title="Created: 2020-11-03 16:19:19 / Modified: 17:08:29" itemprop="dateCreated datePublished" datetime="2020-11-03T16:19:19+08:00">2020-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -337,7 +337,7 @@
 <p>用户数据报协议(User Datagram Protocal, UDP)是一个简单的面向数据报的通信协议。UDP只提供数据的不可靠传递，它一旦把应用程序发给网络层的数据发送出去，就不保留数据备份。 UDP适用于不需要或在程序中执行错误检查的应用，它避免了协议栈中此类的开销。对时间有较高要求的应用程序通常使用UDP，因为丢弃数据报比等待或者重传导致的延迟更可取。</p>
 <h4 id="udp报文格式"><a class="markdownIt-Anchor" href="#udp报文格式"></a> UDP报文格式</h4>
 <p>下图列出了UDP报头的各个域。</p>
-<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/network/UDP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png" alt="UDP报文格式" /></p>
+<p><img src="/img/network/UDP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png" alt="UDP报文格式" /></p>
 <p>源端口和目的端口都很容易理解。需要注意的是，TCP端口号由TCP查看，UDP端口由UDP查看，TCP端口号和UDP端口号无关。</p>
 <p>长度：该字段占据 16 位，表示 UDP 数据报长度，<strong>包含 UDP 报文头和 UDP 数据长度</strong>。因为 UDP 报文头长度是 8 个字节，所以这个值最小为8。</p>
 <h4 id="udp检查和"><a class="markdownIt-Anchor" href="#udp检查和"></a> UDP检查和</h4>
@@ -349,7 +349,7 @@
 <p>另外，UDP和TCP均在报文中包含一个12字节的伪报文头以计算检查和。该伪报文头包含IP报头的某些域，目的是让UDP监测数据确已到达正确的目的端。</p>
 <p>如果发送者的确计算了检查和并检测出错误，则该UDP数据报会被简单丢弃，而不产生错误信息。</p>
 <p>检查和的计算和前面介绍的算法是一样的: 按16位字二进制反码加法，然后再对结果进行取反。</p>
-<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/network/UDP%E6%A3%80%E6%9F%A5%E5%92%8C%E8%AE%A1%E7%AE%97%E7%9A%84%E4%BE%8B%E5%AD%90.jpg" alt="UDP检查和计算的例子" /></p>
+<p><img src="/img/network/UDP%E6%A3%80%E6%9F%A5%E5%92%8C%E8%AE%A1%E7%AE%97%E7%9A%84%E4%BE%8B%E5%AD%90.jpg" alt="UDP检查和计算的例子" /></p>
 <blockquote>
 <p>注意，伪首部也参与UDP的计算。 如果UDP数据部分不是16字节的整数，则用0来填充。</p>
 </blockquote>
