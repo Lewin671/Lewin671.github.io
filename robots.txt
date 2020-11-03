@@ -3,11 +3,11 @@ User-agent: *
 Allow: /
 Allow: /archives/ 
 
-#Disallow: /js/
-#Disallow: /css/
-#Disallow: /fonts/
-#Disallow: /vendors/
-#Disallow: /fancybox/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
 
 Sitemap: http://Lewin671.github.io/sitemap.xml
 Sitemap: http://lewin671.github.io/baidusitemap.xml

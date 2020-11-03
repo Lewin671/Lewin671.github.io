@@ -1913,7 +1913,18 @@ pre code {
   margin-top: 40px;
   text-align: center;
 }
+.use-motion .post-block,
+.use-motion .pagination,
+.use-motion .comments {
+  visibility: hidden;
+}
 .use-motion .post-header {
+  visibility: hidden;
+}
+.use-motion .post-body {
+  visibility: hidden;
+}
+.use-motion .collection-header {
   visibility: hidden;
 }
 .posts-collapse .post-content {
@@ -3016,4 +3027,7 @@ mark.search-keyword {
 }
 .site-brand-container {
   background: #1f3144;
+}
+img {
+  background-color: #fff;
 }
