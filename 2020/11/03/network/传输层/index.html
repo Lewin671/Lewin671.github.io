@@ -30,8 +30,12 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qingyingliu.top/img/network/UDP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
 <meta property="og:image" content="https://qingyingliu.top/img/network/UDP%E6%A3%80%E6%9F%A5%E5%92%8C%E8%AE%A1%E7%AE%97%E7%9A%84%E4%BE%8B%E5%AD%90.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/network/TCP%E6%8A%A5%E5%A4%B4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/TCP%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/TCP%E7%9A%84%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png">
+<meta property="og:image" content="https://qingyingliu.top/img/network/%E6%85%A2%E5%90%AF%E5%8A%A8%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D%E8%BF%87%E7%A8%8B.png">
 <meta property="article:published_time" content="2020-11-03T08:19:19.000Z">
-<meta property="article:modified_time" content="2020-11-03T09:08:29.610Z">
+<meta property="article:modified_time" content="2020-11-04T15:12:34.159Z">
 <meta property="article:author" content="Qingying Liu">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
@@ -207,7 +211,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text"> 用户数据报协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#udp%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text"> UDP报文格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#udp%E6%A3%80%E6%9F%A5%E5%92%8C"><span class="nav-number">1.2.</span> <span class="nav-text"> UDP检查和</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text"> 用户数据报协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#udp%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text"> UDP报文格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#udp%E6%A3%80%E6%9F%A5%E5%92%8C"><span class="nav-number">1.2.</span> <span class="nav-text"> UDP检查和</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.</span> <span class="nav-text"> 传输控制协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.1.</span> <span class="nav-text"> TCP提供的服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp%E7%9A%84%E6%8A%A5%E5%A4%B4%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text"> TCP的报头格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp%E7%9A%84%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.3.</span> <span class="nav-text"> TCP的建立连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp%E7%9A%84%E9%87%8A%E6%94%BE%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.4.</span> <span class="nav-text"> TCP的释放连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">2.5.</span> <span class="nav-text"> 流量控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">2.6.</span> <span class="nav-text"> 拥塞控制</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -307,10 +311,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-11-03 16:19:19 / Modified: 17:08:29" itemprop="dateCreated datePublished" datetime="2020-11-03T16:19:19+08:00">2020-11-03</time>
+      <time title="Created: 2020-11-03 16:19:19" itemprop="dateCreated datePublished" datetime="2020-11-03T16:19:19+08:00">2020-11-03</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-04 23:12:34" itemprop="dateModified" datetime="2020-11-04T23:12:34+08:00">2020-11-04</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -353,6 +363,138 @@
 <blockquote>
 <p>注意，伪首部也参与UDP的计算。 如果UDP数据部分不是16字节的整数，则用0来填充。</p>
 </blockquote>
+<h3 id="传输控制协议"><a class="markdownIt-Anchor" href="#传输控制协议"></a> 传输控制协议</h3>
+<p><strong>传输控制协议</strong>（英语：Transmission Control Protocol，缩写：TCP）是一种<strong>面向连接的</strong>、<strong>可靠的</strong>、基于字节流的传输层通信协议。</p>
+<p>TCP将用户数据打包成报文段，它发送数据后启动一个定时器，通信的另一端对收到的数据进行确认，并对乱序的数据重新排序，丢弃重复数据。</p>
+<p>TCP还提供端到端的流量控制，并计算和验证一个强制性的端到端检查和。</p>
+<h4 id="tcp提供的服务"><a class="markdownIt-Anchor" href="#tcp提供的服务"></a> TCP提供的服务</h4>
+<p>在一个TCP连接中只能是双方进行通信，而广播和多播不能使用TCP。</p>
+<p>TCP通过以下方式提供可靠性:</p>
+<ol>
+<li>应用数据被分割成TCP认为最适合发送的数据块。这和UDP完全不同，应用程序产生的数据报保持长度不变。 由TCP传递给IP的信息单位称为报文段或段(segment)。</li>
+<li>当TCP发出一个段后，它启动定时器，等待目的端确认收到这个报文段。如果不能及时收到确认，将重发这个报文段。<strong>这里要求发送端在收到确认信息前必须保留该报文段的副本，一旦不能及时收到确认信息，才能重发该报文段</strong>。</li>
+<li>当TCP收到发自TCP连接另一端的数据，它将发送一个确认。通常这个确认不是立即发送，将延迟几分之一秒。</li>
+<li>TCP将保持它首部和数据的检查和。这是一个端到端的检查和，目的是检查数据在传送过程中的变化。如果收到一个段的检查和有差错，TCP将丢弃这个报文段，同时向该报文段的发送方发送否定的信息，表示收到的报文段有误，希望对方重发该报文段。</li>
+<li>TCP报文段作为IP数据包中的数据来传送，而IP数据报到达可能乱序，因此TCP报文段的到达也可能乱序。如果必要，TCP将对收到的数据进行重新排序，将收到的数据以正确的顺序提交给应用层。</li>
+<li>IP数据报会发生重复，因此TCP的接收端必须丢弃重复的数据。</li>
+<li>TCP提供流量控制。TCP使用滑动窗口协议实现流量控制。接收方在“接收窗口”域指出还可接收的字节数量。发送方在没有新的确认包的情况下至多发送“接收窗口”允许的字节数量。接收方可修改“接收窗口”的值。</li>
+</ol>
+<h4 id="tcp的报头格式"><a class="markdownIt-Anchor" href="#tcp的报头格式"></a> TCP的报头格式</h4>
+<p><img src="/img/network/TCP%E6%8A%A5%E5%A4%B4%E6%A0%BC%E5%BC%8F.png" alt="TCP报头格式" /></p>
+<p>源端口： 识别发送连接端口。</p>
+<p>目的端口: 识别接受连接端口。</p>
+<p>序列号(seq):</p>
+<ul>
+<li>如果含有同步标志(SYN)，则此为最初的序列号。第一个资料比特的序列码为本序列号加一</li>
+<li>如果没有同步标志(SYN)，则此为第一个资料比特的序列码。</li>
+</ul>
+<p>确认号(ack)： 期望收到的数据的开始序列号。也即已经收到的数据的字节长度加1。</p>
+<p>数据偏移: 以<strong>4字节为单位</strong>计算出的数据段开始地址的偏移值。</p>
+<p>保留: 须置0。</p>
+<p>标识符:</p>
+<ul>
+<li>URG—为1表示高优先级数据包，紧急指针字段有效。</li>
+<li>ACK—为1表示确认号字段有效。</li>
+<li>PSH—为1表示是带有PUSH标志的数据，指示接收方应该尽快将这个报文段交给应用层而不用等待缓冲区装满。</li>
+<li>RST—为1表示出现严重差错。可能需要重新创建TCP连接。还可以用于拒绝非法的报文段和拒绝连接请求。</li>
+<li>SYN—为1表示这是连接请求或是连接接受请求，用于创建连接和使顺序号同步。</li>
+<li>FIN—为1表示发送方没有数据要传输了，要求释放连接。</li>
+</ul>
+<p>窗口（WIN，16位长）—表示从确认号开始，本报文的发送方可以接收的字节数，即接收窗口大小。用于流量控制。</p>
+<p>校验和（Checksum，16位长）—对整个的TCP报文段，包括TCP头部和TCP数据，以16位字进行计算所得。这是一个强制性的字段。</p>
+<p>紧急指针（16位长）—本报文段中的紧急数据的最后一个字节的序号。</p>
+<h4 id="tcp的建立连接"><a class="markdownIt-Anchor" href="#tcp的建立连接"></a> TCP的建立连接</h4>
+<p><img src="/img/network/TCP%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5.png" alt="TCP建立连接" /></p>
+<p>TCP建立连接的过程如下:</p>
+<ol>
+<li>客户端发送一个SYN段，指明客户想要连接服务器的某个端口，以及初始序号(ISN)。此时客户端进入SYN-SENT状态。</li>
+<li>服务器收到客户端发送的报文后，发回包含服务器初始序号的SYN报文段作为应答。同时将确认号设置为客户端的ISN加1以对客户的SYN报文段进行确认。此时服务器进入SYN-RCVD状态。</li>
+<li>客户端必须将确认序号设置为服务器序号的ISN加1，以对服务器的SYN报文段进行确认。</li>
+</ol>
+<p>这个过程的三个步骤也称为TCP的三次握手。</p>
+<p>我们用通俗的语言来描述这三次握手，然后解释为什么TCP的握手需要3次而不是2次或者4次。</p>
+<ol>
+<li>客户端: 我们来建立连接可以吗？</li>
+<li>服务器: 可以</li>
+<li>客户端: 那我们建立连接吧。</li>
+</ol>
+<p>为什么TCP握手不是2次呢？</p>
+<p>这里讲解两个原因：</p>
+<ul>
+<li>从上面的TCP三次握手的图可以看出，若少了第三次握手，服务器不知道客户端是否具有接受的能力。</li>
+<li>若客户端发送的第一个建立连接的报文由于网络拥塞而停留到某个网络中，而客户端进行超时重传，到某一时间后，两个报文都最终会被传送到服务器，从而建立了两个连接。</li>
+</ul>
+<p>为什么TCP握手不是4次呢？</p>
+<p>从TCP建立连接的图可以看出，只需要三次握手，客户端就可以知道服务器具有接收和发送的能力，服务器也是如此，因此此时就可以建立连接了，而不需多余的握手。</p>
+<h4 id="tcp的释放连接"><a class="markdownIt-Anchor" href="#tcp的释放连接"></a> TCP的释放连接</h4>
+<p>建立一个TCP连接需要三次握手，而释放一个TCP连接需要经过4次握手，<strong>这是由于TCP的半关闭造成的</strong>。一个TCP连接是全双工的，因此每个方向必须单独地进行关闭。即</p>
+<ul>
+<li>当TCP连接的一方完成它的数据发送后，就能发送一个FIN来终止这个方向的连接。</li>
+<li>当TCP连接的另一端收到一个FIN，它必须通知上层应用层对方已经终止了那个方向的数据传送。</li>
+</ul>
+<p>首先进行关闭的一方（发送第一个FIN报文的一方）将执行主动关闭，而TCP关闭的另一方（收到这个FIN报文的一方）执行被动关闭。通常情况下，一方完成主动关闭而另一方被动关闭。</p>
+<p><img src="/img/network/TCP%E7%9A%84%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png" alt="TCP的四次挥手" /></p>
+<p>值得注意的是，客户端需要有一个TIME-WAIT的2MSL(报文段最大生存时间,Maximum Segment Lifetime)的时间，为什么需要这个时间呢？</p>
+<p>这是因为TCP是建立在不可靠网络上的可靠协议。如果主动关闭的一端收到被动关闭一端的发出的FIN包后，返回ACK包，同时进入TIME_WAIT，但是由于网络的原因，<strong>主动关闭一端发送的ACK包可能会延迟，从而触发被动关闭一方重传FIN包，这样一来一回极端情况正好是2MSL</strong>。如果主动关闭的一端直接close或者不到两倍MSL时间就关闭，那么被动关闭发出重传FIN包到达，可能出现的问题是：旧的连接不存在，系统只能返回RST包；新的TCP连接已经建立，延迟包可能会干扰新连接。这都可能导致TCP不可靠。（<strong>所以需要旧的连接一直保持time_wait 2MSL时间</strong>）</p>
+<blockquote>
+<p>客户端发出ACK后，等待一段时间T，确保如果服务器重传FIN自己一定能收到</p>
+<p>分析：</p>
+<ol>
+<li>ACK从客户端到服务器最多经过1MSL，超过这个时间服务器会重发FIN</li>
+<li>服务器重发的FIN最多经过1MSL到达客户端</li>
+</ol>
+<p>结论：如果客户端重发了FIN，且网络没有故障(重发的FIN被丢弃或错误转发)，那么客户端一定能在2MSL之内收到该FIN，因此客户端只需要等待2MSL。</p>
+</blockquote>
+<h4 id="流量控制"><a class="markdownIt-Anchor" href="#流量控制"></a> 流量控制</h4>
+<p><strong>流量控制</strong>用来避免主机分组发送得过快而使接收方来不及完全收下，一般由接收方通告给发送方进行调控。</p>
+<p>TCP使用滑动窗口协议实现流量控制。接收方在“接收窗口”域指出还可接收的字节数量。发送方在没有新的确认包的情况下至多发送“接收窗口”允许的字节数量。接收方可修改“接收窗口”的值。</p>
+<p>当接收方宣布接收窗口的值为0，发送方停止进一步发送数据，开始了“保持定时器”（persist timer），以避免因随后的修改接收窗口的数据包丢失使连接的双侧进入死锁，发送方无法发出数据直至收到接收方修改窗口的指示。当“保持定时器”到期时，TCP发送方尝试恢复发送一个小的ZWP包（Zero Window Probe），期待接收方回复一个带着新的接收窗口大小的确认包。一般ZWP包会设置成3次，如果3次过后还是0的话，有的TCP实现就会发RST把链接断了。</p>
+<h4 id="拥塞控制"><a class="markdownIt-Anchor" href="#拥塞控制"></a> 拥塞控制</h4>
+<p>TCP拥塞控制算法主要由4种算法组成：慢启动、拥塞避免、快速重传和快速恢复。</p>
+<p>首先，先给出如下术语:</p>
+<ul>
+<li>
+<p>发送端最大端尺寸(Sender Maximum Segment, SMSS): SMSS是发送端能发送的最大数据段的尺寸。这个值是以网络最大传送单元MTU或其他因素为基础的。</p>
+<blockquote>
+<p>最大分段大小 (MSS)是在单个分段中TCP愿意接受的数据的字节数最大值。MSS应当足够小以避免IP分片，它会导致丢包或过多的重传。在TCP连接创建时，双端在SYN报文中用MSS选项宣布各自的MSS。</p>
+</blockquote>
+</li>
+<li>
+<p>接收端窗口(rwnd): 最近通知的接收窗口。</p>
+</li>
+<li>
+<p>拥塞窗口(cwnd): 一个TCP状态参量，代表着一个TCP允许发送的最大数据量。 在任意一个给定的时刻，TCP不会发送大于最大确认序列号和cwnd、rwnd中较小者的数据。</p>
+</li>
+</ul>
+<ol>
+<li>
+<p>慢启动和拥塞避免</p>
+<p>慢启动阈值(ssthresh)被用来确定是用慢启动算法还是拥塞避免算法来控制数据传送。ssthresh的初始值可以任意大，但是作为对拥塞的响应，其大小可能会被减小，通常被设置为64KB。</p>
+<p>在cwnd &lt; ssthresh时使用慢启动算法，在cwnd&gt;ssthresh时使用拥塞避免算法。当cwnd和ssthresh相等时，发送方既可以使用慢启动也可以使用拥塞避免算法。</p>
+</li>
+</ol>
+<p>​		在慢启动期间，发送方将初始的cwnd设置为1个SMSS字节;在第1个超时期间没有丢失报文的情况下，cwnd设置为2个SMSS个字节；在第二个超时周期内没有丢失报文的情况下，cwnd设置为4个SMSS个字节，以此类推，直到cwnd超过ssthresh。</p>
+<p>​		当cwnd超过ssthresh或者当cwnd大小达到ssthresh的大小，进入隐塞避免期间。在拥塞避免期间，在没有丢失报文的情况下，cwnd按线性方式增长，即每收到一个ACK，cwnd的大小增加1个SMSS。</p>
+<p>​		当检测到数据段丢失时，将ssthresh设置为当前cwnd的一半，并设置cwnd为1，重新开始慢启动算法。</p>
+<p><img src="/img/network/%E6%85%A2%E5%90%AF%E5%8A%A8%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D%E8%BF%87%E7%A8%8B.png" alt="慢启动和拥塞避免工作过程" /></p>
+<ol start="2">
+<li>
+<p>快速重传和快速恢复。</p>
+<p>当一个次序紊乱的数据到达时，TCP接收端应该迅速发送一个重复ACK，这个ACK的目的是通知发送端收到了一个次序紊乱的数据段，并通知发送端期望的序列号。</p>
+<p><strong>快速重传</strong>（Fast retransmit）是对TCP发送方降低等待重发丢失分段用时的一种改进。TCP发送方每发送一个分段都会启动一个超时计时器，如果没能在特定时间内接收到相应分段的确认，发送方就假设这个分段在网络上丢失了，需要重发。这也是 TCP 用来估计 RTT 的测量方法。</p>
+<p>重复确认（duplicate cumulative acknowledgements，DupAcks）就是这个阶段的基础，其基于以下过程：如果接收方接收到一个数据分段，就会将该分段的序列号加上数据字节长的值，作为分段确认的确认号，发送回发送方，表示期望发送方发送下一个序列号的分段。但是如果接收方提前收到更下一个序列号的分段——或者说接收到无序到达的分段，即之前期望确认号对应的分段出现接收丢失——接收方需要立即使用之前的确认号发送分段确认。此时如果发送方收到接收方相同确认号的分段确认超过1次，并且该对应序列号的分段超时计时器仍没超时的话，则这就是出现重复确认，需要进入快速重传。</p>
+<p>快送重传就是基于以下机制：如果假设重复阈值为3，当发送方收到4次相同确认号的分段确认（第1次收到确认期望序列号，加3次重复的期望序列号确认）时，则可以认为继续发送更高序列号的分段将会被接受方丢弃，而且会无法有序送达。发送方应该忽略超时计时器的等待重发，立即重发重复分段确认中确认号对应序列号的分段。</p>
+<p><strong>快速恢复</strong>（Fast recovery）是Reno算法新引入的一个阶段，在将丢失的分段重传后，启动一个超时定时器，并等待该丢失分段包的分段确认后，再进入拥塞控制阶段。如果仍然超时，则回到慢启动阶段。</p>
+<p>快速重传和快速恢复算法通常按照如下方式一起实现:</p>
+<ol>
+<li>当第三个重复ACK收到时，设置ssthresh=cwnd/2</li>
+<li>重传丢失的数据段并设置cwnd=ssthresh+3*smss。这将人为地按已离开网络的报文段数目和及手段缓冲数据量来扩充拥塞窗口。</li>
+<li>对每个接收到附加信息的重复ACK，将cwnd增加SMSS字节。这将人为地扩充拥塞窗口以反映已经离开网络的附加信息。</li>
+<li>如果cwnd和接收端通知窗口的值允许，则发送一个数据段。</li>
+<li>当下一个确认新数据的ACK到达时，设定cwnd值为ssthresh（步骤1设置的值），这称作&quot;deflating&quot;窗口。</li>
+</ol>
+</li>
+</ol>
 
     </div>
 
