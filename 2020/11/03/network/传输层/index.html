@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://qingyingliu.top/img/network/TCP%E7%9A%84%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png">
 <meta property="og:image" content="https://qingyingliu.top/img/network/%E6%85%A2%E5%90%AF%E5%8A%A8%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D%E8%BF%87%E7%A8%8B.png">
 <meta property="article:published_time" content="2020-11-03T08:19:19.000Z">
-<meta property="article:modified_time" content="2020-11-04T15:12:34.159Z">
+<meta property="article:modified_time" content="2020-11-05T07:18:13.920Z">
 <meta property="article:author" content="Qingying Liu">
 <meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
@@ -319,7 +319,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-04 23:12:34" itemprop="dateModified" datetime="2020-11-04T23:12:34+08:00">2020-11-04</time>
+        <time title="Modified: 2020-11-05 15:18:13" itemprop="dateModified" datetime="2020-11-05T15:18:13+08:00">2020-11-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -487,11 +487,21 @@
 <p><strong>快速恢复</strong>（Fast recovery）是Reno算法新引入的一个阶段，在将丢失的分段重传后，启动一个超时定时器，并等待该丢失分段包的分段确认后，再进入拥塞控制阶段。如果仍然超时，则回到慢启动阶段。</p>
 <p>快速重传和快速恢复算法通常按照如下方式一起实现:</p>
 <ol>
-<li>当第三个重复ACK收到时，设置ssthresh=cwnd/2</li>
-<li>重传丢失的数据段并设置cwnd=ssthresh+3*smss。这将人为地按已离开网络的报文段数目和及手段缓冲数据量来扩充拥塞窗口。</li>
-<li>对每个接收到附加信息的重复ACK，将cwnd增加SMSS字节。这将人为地扩充拥塞窗口以反映已经离开网络的附加信息。</li>
-<li>如果cwnd和接收端通知窗口的值允许，则发送一个数据段。</li>
-<li>当下一个确认新数据的ACK到达时，设定cwnd值为ssthresh（步骤1设置的值），这称作&quot;deflating&quot;窗口。</li>
+<li>
+<p>当第三个重复ACK收到时，设置ssthresh=cwnd/2</p>
+</li>
+<li>
+<p>重传丢失的数据段并设置cwnd=ssthresh+3*smss。</p>
+<blockquote>
+<p>加3的原因是因为收到3个重复的ACK，表明有3个“老”的数据包离开了网络。</p>
+</blockquote>
+</li>
+<li>
+<p>如果再收到 duplicated Acks，那么cwnd = cwnd +1</p>
+</li>
+<li>
+<p>当收到新的数据包的ACK时，把cwnd设置为第一步中的ssthresh的值。原因是因为该ACK确认了新的数据，说明从重复ACK时的数据都已收到，该恢复过程已经结束，可以回到恢复之前的状态了，也即再次进入拥塞避免状态。</p>
+</li>
 </ol>
 </li>
 </ol>
