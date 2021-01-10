@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="介绍 kotlin继承了Java的线程的语法，同时也让创建线程变得更加简单，只需要调用thread函数即可创建线程: 123thread&amp;#123;  doSomeThingInNewThread()&amp;#125; 然而，kotlin并发的优点远不止于此。除了简化创建线程，kotlin还引入了协程的语法，大大增强了并发能力。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kotlin并发">
+<meta property="og:url" content="https://qingyingliu.top/2021/01/10/programming/kotlin/kotlin%E5%B9%B6%E5%8F%91/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="介绍 kotlin继承了Java的线程的语法，同时也让创建线程变得更加简单，只需要调用thread函数即可创建线程: 123thread&amp;#123;  doSomeThingInNewThread()&amp;#125; 然而，kotlin并发的优点远不止于此。除了简化创建线程，kotlin还引入了协程的语法，大大增强了并发能力。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-10T05:50:23.000Z">
+<meta property="article:modified_time" content="2021-01-10T07:15:11.769Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="kotlin">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2021/01/10/programming/kotlin/kotlin%E5%B9%B6%E5%8F%91/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>kotlin并发 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text"> 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text"> 基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text"> 协程的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="nav-number">2.2.</span> <span class="nav-text"> 同步和异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="nav-number">2.3.</span> <span class="nav-text"> 阻塞和非阻塞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5-%E9%98%BB%E5%A1%9E%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.4.</span> <span class="nav-text"> 同步和异步、阻塞和非阻塞的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text"> 协程的基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#globalscopelaunch%E5%92%8Crunblocking"><span class="nav-number">3.1.</span> <span class="nav-text"> GlobalScope.launch和runBlocking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#coroutinesscope"><span class="nav-number">3.2.</span> <span class="nav-text"> coroutinesScope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#suspend%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text"> suspend函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B%E5%BE%88%E8%BD%BB%E9%87%8F"><span class="nav-number">3.4.</span> <span class="nav-text"> 协程很轻量</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/10/programming/kotlin/kotlin%E5%B9%B6%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          kotlin并发
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-10 13:50:23 / Modified: 15:15:11" itemprop="dateCreated datePublished" datetime="2021-01-10T13:50:23+08:00">2021-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/kotlin/" itemprop="url" rel="index"><span itemprop="name">kotlin</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
+<p>kotlin继承了Java的线程的语法，同时也让创建线程变得更加简单，只需要调用<code>thread</code>函数即可创建线程:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">thread&#123;</span><br><span class="line">  doSomeThingInNewThread()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然而，kotlin并发的优点远不止于此。除了简化创建线程，kotlin还引入了协程的语法，大大增强了并发能力。</p>
+<a id="more"></a>
+<h2 id="基础知识"><a class="markdownIt-Anchor" href="#基础知识"></a> 基础知识</h2>
+<h3 id="协程的概念"><a class="markdownIt-Anchor" href="#协程的概念"></a> 协程的概念</h3>
+<p>在《第一行代码》中写道：协程是一种轻量级的线程，协程允许我们在单线程模式下模拟多线程编程的效果。也就是说，我们可以在一个线程里面创建多个协程，类似于一个进程里面可以有多个线程。</p>
+<h3 id="同步和异步"><a class="markdownIt-Anchor" href="#同步和异步"></a> 同步和异步</h3>
+<blockquote>
+<p>这里的同步和异步、阻塞和非阻塞的知识参考知乎讨论: <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19732473">link</a></p>
+</blockquote>
+<p>同步和异步关注的是<strong>消息通信机制</strong>。所谓同步，就是在发出一个调用时，在没有得到结果之前，该调用就不返回。但是一点调用返回，就得到返回值了。即由调用者主动等待调用结果。</p>
+<p>而异步则是相反，调用发出之后，这个调用就直接返回了，所以没有返回结果。当一个异步过程调用发出后，调用者不会立刻得到结果。而是在调用发出后，被调用者通过状态、通知来通知调用者，或通过回调函数处理这个调用。</p>
+<h3 id="阻塞和非阻塞"><a class="markdownIt-Anchor" href="#阻塞和非阻塞"></a> 阻塞和非阻塞</h3>
+<p>阻塞和非阻塞关注的是<strong>程序在等待调用结果（消息，返回值）时的状态.</strong></p>
+<p>阻塞调用是指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回。<br />
+非阻塞调用指在不能立刻得到结果之前，该调用不会阻塞当前线程。</p>
+<h3 id="同步和异步-阻塞和非阻塞的关系"><a class="markdownIt-Anchor" href="#同步和异步-阻塞和非阻塞的关系"></a> 同步和异步、阻塞和非阻塞的关系</h3>
+<p>同步异步:调用与调用结果是否一起返回</p>
+<p>阻塞非阻塞:调用或调用结果返回时当前进程是否被阻塞</p>
+<p>这里举个异步阻塞的例子</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> kotlinx.coroutines.async</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.delay</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.runBlocking</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> = runBlocking &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> start = System.currentTimeMillis()</span><br><span class="line">    <span class="comment">// 创建异步协程1</span></span><br><span class="line">    <span class="keyword">val</span> deferred1 = async &#123;</span><br><span class="line">        delay(<span class="number">1000</span>)</span><br><span class="line">        <span class="number">5</span> + <span class="number">6</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 创建异步协程2</span></span><br><span class="line">    <span class="keyword">val</span> deferred2 = async &#123;</span><br><span class="line">        delay(<span class="number">1000</span>)</span><br><span class="line">        <span class="number">4</span> + <span class="number">5</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取返回结果</span></span><br><span class="line">    <span class="comment">// 由于结果还没有返回，所以此时主线程阻塞</span></span><br><span class="line">    <span class="keyword">val</span> res = deferred1.await() + deferred2.await()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> end = System.currentTimeMillis()</span><br><span class="line">    println(<span class="string">&quot;result is <span class="subst">$&#123;res&#125;</span>, duration is <span class="subst">$&#123;end - start&#125;</span>ms&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="协程的基本语法"><a class="markdownIt-Anchor" href="#协程的基本语法"></a> 协程的基本语法</h2>
+<p>首先，在gradle上添加依赖:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation &#39;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="globalscopelaunch和runblocking"><a class="markdownIt-Anchor" href="#globalscopelaunch和runblocking"></a> GlobalScope.launch和runBlocking</h3>
+<p>当我们使用 <code>GlobalScope.launch</code> 时，我们会创建一个顶层协程。虽然它很轻量，但它运行时仍会消耗一些内存资源。如果我们忘记保持对新启动的协程的引用，它还会继续运行。</p>
+<p>这种协程当应用程序结束时也会跟着一起结束。比如</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    GlobalScope.launch &#123;</span><br><span class="line">        delay(<span class="number">1000</span>)</span><br><span class="line">        println(<span class="string">&quot;World&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    println(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码运行后的结果只会输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello</span><br></pre></td></tr></table></figure>
+<p>这是因为当主线程运行完<code>println</code>之后就结束了，这时GlobalScope中的<code>println</code>还没有运行到，而主线程已经结束了，自然GlobalScope的协程也会结束，于是程序运行不到<code>println(&quot;World&quot;)。</code></p>
+<p>如果想要代码输出<code>World</code>，我们可以在主线程中等待一段时间再结束，直到协程的程序运行完。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> job = GlobalScope.launch &#123;</span><br><span class="line">        delay(<span class="number">1000</span>)</span><br><span class="line">        println(<span class="string">&quot;World&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    println(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="number">1500</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>延迟一段时间来等待另一个协程运行并不是一个好的选择。让我们显式（以非阻塞方式）等待所启动的后台Job 执行结束:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> = runBlocking &#123;</span><br><span class="line">    <span class="keyword">val</span> job = GlobalScope.launch &#123;</span><br><span class="line">        delay(<span class="number">1000</span>)</span><br><span class="line">        println(<span class="string">&quot;World&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    println(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    job.join()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里引入了<code>runBlocking</code>函数，这里先介绍一下。</p>
+<p>runBlocking函数同样也会创建一个协程的作用域，但是他可以保证在协程作用域内的所有代码和子协程没有完全执行完之前一直阻塞当前线程。</p>
+<blockquote>
+<p>注: runBlocking一般只用于测试环境，因为它容易产生性能上的问题</p>
+</blockquote>
+<p>在上述代码中，通过<code>runBlocking</code>函数创建了协程作用域，并在里面又创建了子协程job。由于job里面delay了1s，因此会先输出&quot;Hello&quot;，然后<code>job.join()</code>表示阻塞当前协程，直到<code>job</code>运行完。因此，等待一段时间后，程序会输出<code>World</code>。</p>
+<p>值得注意的是，GlobleScope和runBlocking在正式环境下都用的很少，尽量避免使用，以免产生性能问题。</p>
+<h3 id="coroutinesscope"><a class="markdownIt-Anchor" href="#coroutinesscope"></a> coroutinesScope</h3>
+<p>除了由不同的构建器提供协程作用域之外，还可以使用 coroutineScope 构建器声明自己的作用域。它会创建一个协程作用域并且在所有已启动子协程执行完毕之前不会结束。</p>
+<p>注意: coroutinesScope只能用在suspend函数或者协程作用域中。</p>
+<p>所以我们可以把上面的例子改写成:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> = runBlocking &#123;</span><br><span class="line">    println(<span class="string">&quot;Hello&quot;</span>)</span><br><span class="line">    coroutineScope &#123;</span><br><span class="line">        delay(<span class="number">1000</span>)</span><br><span class="line">        println(<span class="string">&quot;World&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样一看似乎runBlocking和coroutineScope函数没什么区别。的确，它们的作用很相似，但是runBlocking会阻塞当前线程，而coroutineScope只会阻塞当前协程。如果当前线程被阻塞了，那么当前线程的所有协程都会被阻塞，而当前协程被阻塞了，不会影响其他协程。</p>
+<p>所以说runBlocking尽量不要使用，容易引起性能问题。</p>
+<h3 id="suspend函数"><a class="markdownIt-Anchor" href="#suspend函数"></a> suspend函数</h3>
+<p>如果一个函数的定义带有suspend，那么它将会导致协程挂起。在协程内部可以像普通函数一样使用挂起函数， 不过其额外特性是，同样可以使用其他挂起函数（如本例中的 <code>delay</code>）来<em>挂起</em>协程的执行。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> kotlinx.coroutines.*</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> = runBlocking &#123;</span><br><span class="line">    launch &#123; </span><br><span class="line">      <span class="comment">// 此时会挂起launch的协程域</span></span><br><span class="line">      doWorld()</span><br><span class="line">    &#125;</span><br><span class="line">    println(<span class="string">&quot;Hello,&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这是你的第一个挂起函数</span></span><br><span class="line"><span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">doWorld</span><span class="params">()</span></span> &#123;</span><br><span class="line">    delay(<span class="number">1000L</span>)</span><br><span class="line">    println(<span class="string">&quot;World!&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="协程很轻量"><a class="markdownIt-Anchor" href="#协程很轻量"></a> 协程很轻量</h3>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> kotlinx.coroutines.*</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">()</span></span> = runBlocking &#123;</span><br><span class="line">    repeat(<span class="number">100_000</span>) &#123; <span class="comment">// 启动大量的协程</span></span><br><span class="line">        launch &#123;</span><br><span class="line">            delay(<span class="number">5000L</span>)</span><br><span class="line">            print(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码中开启了10万个协程，每个协程等待五秒后输出<code>.</code>。</p>
+<p>如果是线程， 根本无法开启那么多线程。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/kotlin/" rel="tag"># kotlin</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/09/Android/RecyclerView%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="RecyclerView的使用">
+                  <i class="fa fa-chevron-left"></i> RecyclerView的使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="/lib/animejs/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="/lib/quicklink/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2021/01/10/programming/kotlin/kotlin%E5%B9%B6%E5%8F%91/',]
+      });
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="/css/katex.min.css">
+</html>
