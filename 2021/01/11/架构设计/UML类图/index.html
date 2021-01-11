@@ -21,25 +21,26 @@
     var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="UML类图主要描述各个类之间的关系。主要有这六种关系: 泛化、实现、聚合、组合、关联、依赖。  泛化关系 泛化(generalization)关系是一种继承关系。继承关系在UML中表现为泛化(generalize)和实现(realise)。  注: 泛化关系表现为继承非抽象类  继承关系为 is-a的关系；两个对象之间如果可以用 is-a 来表示，就是继承关系。">
+  <meta name="description" content="UML类图主要描述各个类之间的关系。主要有这六种关系: 泛化、实现、聚合、组合、关联、依赖。  推荐使用draw.io工具来画类图   泛化关系 泛化(generalization)关系是一种继承关系。继承关系在UML中表现为泛化(generalize)和实现(realise)。  注: 泛化关系表现为继承非抽象类  继承关系为 is-a的关系；两个对象之间如果可以用 is-a 来表示，就是继承关">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UML类图">
 <meta property="og:url" content="https://qingyingliu.top/2021/01/11/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/UML%E7%B1%BB%E5%9B%BE/index.html">
 <meta property="og:site_name" content="qingying&#39;s blog">
-<meta property="og:description" content="UML类图主要描述各个类之间的关系。主要有这六种关系: 泛化、实现、聚合、组合、关联、依赖。  泛化关系 泛化(generalization)关系是一种继承关系。继承关系在UML中表现为泛化(generalize)和实现(realise)。  注: 泛化关系表现为继承非抽象类  继承关系为 is-a的关系；两个对象之间如果可以用 is-a 来表示，就是继承关系。">
+<meta property="og:description" content="UML类图主要描述各个类之间的关系。主要有这六种关系: 泛化、实现、聚合、组合、关联、依赖。  推荐使用draw.io工具来画类图   泛化关系 泛化(generalization)关系是一种继承关系。继承关系在UML中表现为泛化(generalize)和实现(realise)。  注: 泛化关系表现为继承非抽象类  继承关系为 is-a的关系；两个对象之间如果可以用 is-a 来表示，就是继承关">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalization.jpg">
-<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalize.jpg">
-<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_realize.jpg">
-<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_aggregation.jpg">
-<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_composition.jpg">
-<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_association.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalization.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalize.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_realize.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_aggregation.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_composition.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_association.jpg">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_dependency.jpg">
 <meta property="article:published_time" content="2021-01-11T12:45:01.000Z">
-<meta property="article:modified_time" content="2021-01-11T13:07:18.045Z">
+<meta property="article:modified_time" content="2021-01-11T13:22:45.074Z">
 <meta property="article:author" content="Qingying Liu">
 <meta property="article:tag" content="架构设计">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalization.jpg">
+<meta name="twitter:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalization.jpg">
 
 
 <link rel="canonical" href="https://qingyingliu.top/2021/01/11/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/UML%E7%B1%BB%E5%9B%BE/">
@@ -313,7 +314,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-01-11 20:45:01 / Modified: 21:07:18" itemprop="dateCreated datePublished" datetime="2021-01-11T20:45:01+08:00">2021-01-11</time>
+      <time title="Created: 2021-01-11 20:45:01 / Modified: 21:22:45" itemprop="dateCreated datePublished" datetime="2021-01-11T20:45:01+08:00">2021-01-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -336,6 +337,9 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>UML类图主要描述各个类之间的关系。主要有这六种关系: 泛化、实现、聚合、组合、关联、依赖。</p>
+<blockquote>
+<p>推荐使用draw.io工具来画类图</p>
+</blockquote>
 <h2 id="泛化关系"><a class="markdownIt-Anchor" href="#泛化关系"></a> 泛化关系</h2>
 <p>泛化(generalization)关系是一种继承关系。继承关系在UML中表现为泛化(generalize)和实现(realise)。</p>
 <blockquote>
@@ -345,36 +349,37 @@
 <a id="more"></a>
 <p>eg：自行车是车、猫是动物</p>
 <p>泛化关系用一条带空心箭头的直线表示。例如A继承B可以表示为</p>
-<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalization.jpg" alt="A继承B" /></p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalization.jpg" alt="A继承B" /></p>
 <p>eg：汽车在现实中有实现，可用汽车定义具体的对象；汽车与SUV之间为泛化关系；</p>
-<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalize.jpg" alt="SUV是小汽车的泛化" /></p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_generalize.jpg" alt="SUV是小汽车的泛化" /></p>
 <h2 id="实现关系realize"><a class="markdownIt-Anchor" href="#实现关系realize"></a> 实现关系(realize)</h2>
 <p>实现关系用一条带空心箭头的虚线表示；</p>
 <p>eg：”车”为一个抽象概念，在现实中并无法直接用来定义对象；只有指明具体的子类(汽车还是自行车)，才 可以用来定义对象（”车”这个类在C++中用抽象类表示，在JAVA中有接口这个概念，更容易理解）</p>
-<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_realize.jpg" alt="实现关系" /></p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_realize.jpg" alt="实现关系" /></p>
 <blockquote>
 <p>注：最终代码中，实现关系表现为继承抽象类(接口)；</p>
 </blockquote>
 <h2 id="聚合关系aggregation"><a class="markdownIt-Anchor" href="#聚合关系aggregation"></a> 聚合关系(aggregation)</h2>
 <p>聚合关系用一条带空心菱形箭头的直线表示，如下图表示A聚合到B上，或者说B由A组成；</p>
-<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_aggregation.jpg" alt="聚合关系" /></p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_aggregation.jpg" alt="聚合关系" /></p>
 <p>聚合关系用于表示实体对象之间的关系，表示整体由部分构成的语义；例如一个部门由多个员工组成；</p>
 <p><strong>与组合关系不同的是，整体和部分不是强依赖的，即使整体不存在了，部分仍然存在；例如， 部门撤销了，人员不会消失，他们依然存在；</strong></p>
 <h2 id="组合关系composition"><a class="markdownIt-Anchor" href="#组合关系composition"></a> 组合关系(composition)</h2>
 <p>组合关系用一条带实心菱形箭头直线表示，如下图表示A组成B，或者B由A组成；</p>
-<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_composition.jpg" alt="组合关系" /></p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_composition.jpg" alt="组合关系" /></p>
 <p>与聚合关系一样，组合关系同样表示整体由部分构成的语义；比如公司由多个部门组成；</p>
 <p><strong>但组合关系是一种强依赖的特殊聚合关系，如果整体不存在了，则部分也不存在了</strong>；例如， 公司不存在了，部门也将不存在了；</p>
 <h2 id="关联关系association"><a class="markdownIt-Anchor" href="#关联关系association"></a> 关联关系(association)</h2>
 <p>关联关系是用一条直线表示的；它描述不同类的对象之间的结构关系；它是一种静态关系， 通常与运行状态无关，一般由常识等因素决定的；它一般用来定义对象之间静态的、天然的结构； 所以，关联关系是一种“强关联”的关系；</p>
 <p>比如，乘车人和车票之间就是一种关联关系；学生和学校就是一种关联关系；</p>
 <p><strong>关联关系默认不强调方向，表示对象间相互知道；如果特别强调方向，如下图，表示A知道B，但 B不知道A；</strong></p>
-<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_association.jpg" alt="关联关系" /></p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_association.jpg" alt="关联关系" /></p>
 <blockquote>
 <p>注: 在最终代码中，关联对象通常是以成员变量的形式实现的；</p>
 </blockquote>
 <h2 id="依赖关系dependency"><a class="markdownIt-Anchor" href="#依赖关系dependency"></a> 依赖关系(dependency)</h2>
 <p>依赖关系是用一套带箭头的虚线表示的；如下图表示A依赖于B；他描述一个对象<strong>在运行期间</strong>会用到另一个对象的关系；</p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/uml_dependency.jpg" alt="依赖关系" /></p>
 <p>与关联关系不同的是，它是一种<strong>临时性的关系</strong>，通常在运行期间产生，并且随着运行时的变化； 依赖关系也可能发生变化；</p>
 <p><strong>显然，依赖也有方向，双向依赖是一种非常糟糕的结构，我们总是应该保持单向依赖，杜绝双向依赖的产生；</strong></p>
 <blockquote>
