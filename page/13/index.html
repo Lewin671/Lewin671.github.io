@@ -216,19 +216,19 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">148</span>
+          <span class="site-state-item-count">149</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -268,6 +268,96 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2019/11/04/configuration/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/04/configuration/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95/" class="post-title-link" itemprop="url">ssh免密登录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-04 12:29:59" itemprop="dateCreated datePublished" datetime="2019-11-04T12:29:59+08:00">2019-11-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>与密码验证相对的，是公钥验证。也就是说，要实现免密码登入，首先要设置 SSH 钥匙。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">λ ssh-keygen</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (C:\Users\qingyingliu/.ssh/id_rsa):</span><br><span class="line">C:\Users\qingyingliu/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)?</span><br></pre></td></tr></table></figure>
+<p>这段话告诉了我们，生成的公钥放在了 <code>~/.ssh/id_rsa.pub</code>，私钥放在了 <code>~/.ssh/id_rsa</code>。接下来，我们要让远程机器记住我们的<strong>公钥</strong> 。</p>
+<p>下面提供两种方法:</p>
+<ul>
+<li><code>ssh-copy-id user@remote -p port</code></li>
+<li>在没有 <code>ssh-copy-id</code> 的情况下（比如在 <code>Windows</code> 上），也是可以轻松做到这件事的。用命令的话也是一句话搞定 : <code>ssh user@remote -p port 'mkdir -p .ssh &amp;&amp; cat &gt;&gt; .ssh/authorized_keys' &lt; ~/.ssh/id_rsa.pub</code></li>
+</ul>
+<p>如果上面两种方法都无法免密登录，说明<code>ssh</code>出了一些问题。我们连接的时候可以通过添加<code>-v</code>选项查看调试信息。</p>
+<p>比如出现了<code>Ignored authorized keys: bad ownership or modes for file /home/***/.ssh/authorized_keys</code>说明<code>authorized_keys</code>文件的权限有问题，这个时候我们把这个文件的权限设置为600即可。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1590,118 +1680,6 @@ np.load(fname)<br />
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/12/12/programming/python/%E5%88%9D%E5%A7%8Bscrapy/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">linux配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-12-10 19:55:07" itemprop="dateCreated datePublished" datetime="2018-12-10T19:55:07+08:00">2018-12-10</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="下载源设置"><a class="markdownIt-Anchor" href="#下载源设置"></a> 下载源设置</h3>
-<p>将下载源设置为国内的清华源: <code>https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/</code></p>
-<h3 id="搜狗输入法"><a class="markdownIt-Anchor" href="#搜狗输入法"></a> 搜狗输入法</h3>
-<p>先去搜狗输入法官网下载安装包,然后使用<code>dpkg -i</code>命令安装，如果安装过程有错，则运行<code>sudo apt-get --fix-broken install</code>。</p>
-<p>接着去设置那里设置keyboard input method system为fcitx。</p>
-<h3 id="代理命令行"><a class="markdownIt-Anchor" href="#代理命令行"></a> 代理命令行</h3>
-<p>下载proxychains: <code>sudo apt-get install proxychains</code></p>
-<h3 id="visual-stdio-code"><a class="markdownIt-Anchor" href="#visual-stdio-code"></a> Visual Stdio Code</h3>
-<p>注意，安装Visual Studio Code不要从默认的应用商店下载，因为这样会导致无法在VS Code中输入中文，而是应该从官网下载最新的deb包，然后再安装。</p>
-<h3 id="goole-chrome"><a class="markdownIt-Anchor" href="#goole-chrome"></a> goole chrome</h3>
-<ol>
-<li>
-<p>add key:<br />
-<code>wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -</code></p>
-</li>
-<li>
-<p>set repository:<br />
-<code>echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list</code></p>
-</li>
-<li>
-<p>install package:</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install google-chrome-stable</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>​	注意，如果需要登录谷歌账号，则需要在设置里面设置全局代理。然后设置代理规则: <code>https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</code>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

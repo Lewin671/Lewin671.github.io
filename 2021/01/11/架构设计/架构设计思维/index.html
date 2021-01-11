@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="架构设计思维包括简化思维、分层思维、分治思维和迭代思维。  简化思维 简化是指降低事务的复杂性，用更少的细节来代替较多的细节。 比如，有一个印着纽约团、棕色的马克杯，它有一个红色的杯盖，里面装满了卡布奇诺。 如果简单理解，可以说这是一个有红色杯盖的棕色马克杯。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="架构设计思维">
+<meta property="og:url" content="https://qingyingliu.top/2021/01/11/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="架构设计思维包括简化思维、分层思维、分治思维和迭代思维。  简化思维 简化是指降低事务的复杂性，用更少的细节来代替较多的细节。 比如，有一个印着纽约团、棕色的马克杯，它有一个红色的杯盖，里面装满了卡布奇诺。 如果简单理解，可以说这是一个有红色杯盖的棕色马克杯。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E6%80%9D%E7%BB%B4.gif">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%88%86%E6%B2%BB%E6%80%9D%E7%BB%B4%E4%BD%93%E7%8E%B0.png">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4%E5%92%8C%E6%BC%94%E5%8C%96%E5%BC%8F%E6%80%9D%E7%BB%B4.png">
+<meta property="og:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%BB%BA%E7%AD%91%E6%BC%94%E5%8C%96.png">
+<meta property="article:published_time" content="2021-01-11T06:32:45.000Z">
+<meta property="article:modified_time" content="2021-01-11T07:09:22.097Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="架构设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E6%80%9D%E7%BB%B4.gif">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2021/01/11/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>架构设计思维 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E6%80%9D%E7%BB%B4"><span class="nav-number">1.</span> <span class="nav-text"> 简化思维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B1%82%E6%80%9D%E7%BB%B4"><span class="nav-number">2.</span> <span class="nav-text"> 分层思维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%B2%BB%E6%80%9D%E7%BB%B4"><span class="nav-number">3.</span> <span class="nav-text"> 分治思维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E6%80%9D%E7%BB%B4"><span class="nav-number">4.</span> <span class="nav-text"> 迭代思维</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">149</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/11/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          架构设计思维
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-11 14:32:45 / Modified: 15:09:22" itemprop="dateCreated datePublished" datetime="2021-01-11T14:32:45+08:00">2021-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>架构设计思维包括简化思维、分层思维、分治思维和迭代思维。</p>
+<h2 id="简化思维"><a class="markdownIt-Anchor" href="#简化思维"></a> 简化思维</h2>
+<p>简化是指降低事务的复杂性，用更少的细节来代替较多的细节。</p>
+<p>比如，有一个印着纽约团、棕色的马克杯，它有一个红色的杯盖，里面装满了卡布奇诺。 如果简单理解，可以说这是一个有红色杯盖的棕色马克杯。</p>
+<a id="more"></a>
+<p>在软件架构设计中，<strong>抽象是特殊的简化思维</strong>。相对简化而言，抽象降低复杂度的力度更大。抽象意味着删除或者隐藏事物的细节，而不会破坏事物本身。</p>
+<p>对于刚才举例的例子，我们可以直接抽象为杯子。</p>
+<p>简化系统组件可以避免过度设计，组件的抽象程度直接影响了一个系统整体的复杂度。简化或者抽象可以提升软件的一致性，使得代码更加清晰。</p>
+<h2 id="分层思维"><a class="markdownIt-Anchor" href="#分层思维"></a> 分层思维</h2>
+<p>分层架构是一种比较流行的架构模式，几乎每一种架构都会用到分层思维，以达到关注点分离的目标。典型的例子有: Model-View-Controller、Model-View-Presenter和Model-View-ViewModel架构。</p>
+<p>我们把整个系统划分成若干个层次，每一层专注解决某个领域的问题，并向上提供服务。有些层次是纵向的，它贯穿所有其它层次，称为共享层。分层也可以认为是抽象的一种方式，将系统抽象分解成若干层次化的模块。</p>
+<p>每一层专注解决某个领域的问题，也体现了架构设计原则的“单一职责原则”。比如在计算机网络中把网络协议的功能进行分层，第i层为第i+1层服务。</p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E6%80%9D%E7%BB%B4.gif" alt="计算机网络分层" /></p>
+<h2 id="分治思维"><a class="markdownIt-Anchor" href="#分治思维"></a> 分治思维</h2>
+<p>分治即分而治之。可以理解为将一个复杂的问题划分为多个子问题，然后分别进行处理。</p>
+<p>下面这个图就展示了分治的思维方式:</p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%88%86%E6%B2%BB%E6%80%9D%E7%BB%B4%E4%BD%93%E7%8E%B0.png" alt="分治思维体现" /></p>
+<p>比如，给你一台 8G 内存 /500G 磁盘空间的普通电脑，如何对一个 100G 的大文件进行排序？假定文件中都是字符串记录，一行约 100 个字符。</p>
+<p>这是一个典型的分治问题，100G 的大文件肯定无法一次加载到内存直接排序，所以需要先切分成若干小问题来解决。那么 8G 内存的计算机一次大概能排多大的数据量，可以在有限的时间内排完呢？也就是 100G 的大文件要怎么切法，切成多少份比较合适？</p>
+<p>实际上 8G 内存的话，操作系统要用掉一部分，如果用 Java 开发排序程序，大致 JVM 可用 2~4G 内存，基于一般的经验值，一次排 1G 左右的数据应该没有问题。所以 100G 的文件需要先切分成 100 份，每份 1G，这样每个子文件可以直接加载到内存进行排序。</p>
+<p>假定 100 个 1G 的文件都已经排好了，相当于现在硬盘上有 100 个已经排好序的文件，但是我们最终需要的是一个排好序的文件，下面该怎么做？</p>
+<p>这个时候我们需要把已经解决的子问题组合起来，合并成我们需要的最终结果文件。这个时候该采用什么算法呢？这里考察对外排序和归并排序算法的掌握程度，我们可以将 100 个排好序的文件进行两两归并排序，这样不断重复，我们就会得到 50 个排好序的文件，每个大小是 2G。然后再两两归并，不断重复，直到最后两个文件归并成目标文件，这个文件就是 100G 并且是排好序的。因为是外排序 + 归并排序，每次只需要读取当前索引指向的文件记录到内存，进行比较，小的那个输出到目标文件，内存占用极少。</p>
+<h2 id="迭代思维"><a class="markdownIt-Anchor" href="#迭代思维"></a> 迭代思维</h2>
+<p>迭代思维也叫演化思维，是指架构在设计中演化，在演化中设计，一个不断迭代的过程。</p>
+<p>在互联网软件系统的整个生命周期过程中，前期的设计和开发大致只占三分，在后面的七分时间里，架构师需要根据用户的反馈对架构进行不断的调整。</p>
+<p>当前，社区正在兴起一种新的架构方法学-演化式架构，微服务架构就是一种典型的演化式架构，它能够快速响应市场用户需求的变化，而单块架构就缺乏这种灵活性。</p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4%E5%92%8C%E6%BC%94%E5%8C%96%E5%BC%8F%E6%80%9D%E7%BB%B4.png" alt="设计思维和演化式思维的区别" /></p>
+<p>上面的路线是一开始就直奔微服务架构，其实背后体现的是设计式架构的思维，认为架构师可以完全设计整个系统和它的演化方向。马丁认为这种做法风险非常高，一个是成本高昂，另外一个是刚开始架构师对业务域理解不深，无法清晰划分领域边界，开发出来的系统很可能无法满足用户需求。</p>
+<p>下面的路线是从单块架构开始，随着架构师对业务域理解的不断深入，也随着业务和团队规模的不断扩大，渐进式地把单块架构拆分成微服务架构的思路，这就是演化式架构的思维。如果你观察现实世界中一些互联网公司（例如 eBay，阿里，Netflix 等等）的系统架构，大部分走得都是演化式架构的路线。</p>
+<p>下图是建筑的演化史，在每个阶段，你可以看到设计的影子，但如果时间线拉得足够长，演化的特性就出来了。</p>
+<p><img src="/img/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E5%BB%BA%E7%AD%91%E6%BC%94%E5%8C%96.png" alt="建筑史演化" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag"># 架构设计</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/10/programming/kotlin/kotlin%E5%B9%B6%E5%8F%91/" rel="prev" title="kotlin并发">
+                  <i class="fa fa-chevron-left"></i> kotlin并发
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="/lib/animejs/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="/lib/quicklink/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2021/01/11/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E7%BB%B4/',]
+      });
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="/css/katex.min.css">
+</html>
