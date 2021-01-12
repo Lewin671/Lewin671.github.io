@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="ViewModel ViewModel 类旨在以注重生命周期的方式存储和管理界面相关的数据。ViewModel类让数据可在发生屏幕旋转等配置更改后继续留存。 需要在build.gradle添加依赖: 12345dependencies &amp;#123;    def lifecycle_version &#x3D; &quot;2.2.0&quot;    &#x2F;&#x2F; ViewMode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jetpack组件">
+<meta property="og:url" content="https://qingyingliu.top/2021/01/12/Android/Jetpack%E7%BB%84%E4%BB%B6/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="ViewModel ViewModel 类旨在以注重生命周期的方式存储和管理界面相关的数据。ViewModel类让数据可在发生屏幕旋转等配置更改后继续留存。 需要在build.gradle添加依赖: 12345dependencies &amp;#123;    def lifecycle_version &#x3D; &quot;2.2.0&quot;    &#x2F;&#x2F; ViewMode">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/Android/viewmodel-lifecycle.png">
+<meta property="article:published_time" content="2021-01-12T08:14:40.000Z">
+<meta property="article:modified_time" content="2021-01-12T13:15:14.881Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingyingliu.top/Users/qingyingliu/Desktop/Blog/source/img/Android/viewmodel-lifecycle.png">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2021/01/12/Android/Jetpack%E7%BB%84%E4%BB%B6/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Jetpack组件 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#viewmodel"><span class="nav-number">1.</span> <span class="nav-text"> ViewModel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0viewmodel"><span class="nav-number">1.1.</span> <span class="nav-text"> 实现ViewModel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#viewmodel%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.2.</span> <span class="nav-text"> ViewModel的生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#livedata"><span class="nav-number">2.</span> <span class="nav-text"> LiveData</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8livedata%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.</span> <span class="nav-text"> 使用LiveData对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0livedata"><span class="nav-number">2.2.</span> <span class="nav-text"> 更新LiveData</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lifecycles"><span class="nav-number">3.</span> <span class="nav-text"> LifeCycles</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/12/Android/Jetpack%E7%BB%84%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Jetpack组件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-12 16:14:40 / Modified: 21:15:14" itemprop="dateCreated datePublished" datetime="2021-01-12T16:14:40+08:00">2021-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="viewmodel"><a class="markdownIt-Anchor" href="#viewmodel"></a> ViewModel</h2>
+<p><code>ViewModel</code> 类旨在以注重生命周期的方式存储和管理界面相关的数据。<code>ViewModel</code>类让数据可在发生屏幕旋转等配置更改后继续留存。</p>
+<p>需要在build.gradle添加依赖:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    def lifecycle_version &#x3D; &quot;2.2.0&quot;</span><br><span class="line">    &#x2F;&#x2F; ViewModel</span><br><span class="line">    implementation &quot;androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="实现viewmodel"><a class="markdownIt-Anchor" href="#实现viewmodel"></a> 实现ViewModel</h3>
+<p>架构组件为界面控制器提供了 ViewModel 辅助程序类，该类负责为界面准备数据。在配置更改期间会自动保留 ViewModel 对象，以便它们存储的数据立即可供下一个 Activity 或 Fragment 实例使用。</p>
+<p>例如可以声明这样一个ViewModel类来保存counter变量:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewModel</span>:<span class="type">ViewModel</span></span>()&#123;</span><br><span class="line">  <span class="keyword">var</span> counter = <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意: ViewModel 绝不能引用视图、Lifecycle 或可能存储对 Activity 上下文的引用的任何类。</p>
+</blockquote>
+<p>接着是创建ViewModel对象:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> viewModel = ViewModelProvider(<span class="keyword">this</span>,ViewModelProvider.NewInstanceFactory()).<span class="keyword">get</span>(MyViewModel::<span class="keyword">class</span>.java)</span><br></pre></td></tr></table></figure>
+<p>这里是通过ViewModelProvider来提供viewModel类的。ViewModelProvider有两种用法，一种是像上面直接传入this（当前上下文环境），并传入ViewModelProvider的默认工厂创建出一个viewModel对象。</p>
+<p>如果想要构造有参数的viewModel对象，比如这里我们想给counter初始化为其他的数值。那么需要实现<code>ViewModelProvider.Factory</code>的<code>create</code>方法。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewModelFactory</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> <span class="keyword">data</span>: <span class="built_in">Int</span>) : ViewModelProvider.Factory &#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T : ViewModel?&gt;</span> <span class="title">create</span><span class="params">(modelClass: <span class="type">Class</span>&lt;<span class="type">T</span>&gt;)</span></span>: T &#123;</span><br><span class="line">    <span class="keyword">return</span> MyViewModel(<span class="keyword">data</span>) <span class="keyword">as</span> T</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后这样创建ViewModel对象:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// viewModel</span></span><br><span class="line"><span class="keyword">val</span> viewModel = ViewModelProvider(<span class="keyword">this</span>,MyViewModel.MyViewModelFactory(<span class="number">0</span>))</span><br><span class="line">.<span class="keyword">get</span>(MyViewModel::<span class="keyword">class</span>.java)</span><br></pre></td></tr></table></figure>
+<h3 id="viewmodel的生命周期"><a class="markdownIt-Anchor" href="#viewmodel的生命周期"></a> ViewModel的生命周期</h3>
+<p>ViewModel 对象存在的时间范围是获取 ViewModel 时传递给 ViewModelProvider 的 Lifecycle。ViewModel 将一直留在内存中，直到限定其存在时间范围的 Lifecycle 永久消失：对于 Activity，是在 Activity 完成时；而对于 Fragment，是在 Fragment 分离时。</p>
+<p><img src="/Users/qingyingliu/Desktop/Blog/source/img/Android/viewmodel-lifecycle.png" alt="ViewModel的生命周期" /></p>
+<p>通常在系统首次调用 Activity 对象的 onCreate() 方法时请求 ViewModel。系统可能会在 Activity 的整个生命周期内多次调用 onCreate()，如在旋转设备屏幕时。ViewModel 存在的时间范围是从您首次请求 ViewModel 直到 Activity 完成并销毁。</p>
+<h2 id="livedata"><a class="markdownIt-Anchor" href="#livedata"></a> LiveData</h2>
+<p>LiveData是Jetpack提供的一种响应式编程组件，它可以包含任何类型的数据，并在数据发生变化的时候通知给观察者。LiveData特别适合和ViewModel结合在一起使用。</p>
+<p>与常规的可观察类不同，LiveData 具有生命周期感知能力，意指它遵循其他应用组件（如 Activity、Fragment 或 Service）的生命周期。这种感知能力可确保 LiveData 仅更新处于活跃生命周期状态的应用组件观察者。</p>
+<p>如果观察者（由 Observer 类表示）的生命周期处于 STARTED 或 RESUMED 状态，则 LiveData 会认为该观察者处于活跃状态。LiveData 只会将更新通知给活跃的观察者。为观察 LiveData 对象而注册的非活跃观察者不会收到更改通知。</p>
+<h3 id="使用livedata对象"><a class="markdownIt-Anchor" href="#使用livedata对象"></a> 使用LiveData对象</h3>
+<ol>
+<li>创建 LiveData 实例以存储某种类型的数据。这通常在 ViewModel 类中完成。</li>
+<li>创建可定义 onChanged() 方法的 Observer 对象，该方法可以控制当 LiveData 对象存储的数据更改时会发生什么。通常情况下，您可以在界面控制器（如 Activity 或 Fragment）中创建 Observer 对象。</li>
+<li>使用 observe() 方法将 Observer 对象附加到 LiveData 对象。observe() 方法会采用 LifecycleOwner 对象。这样会使 Observer 对象订阅 LiveData 对象，以使其收到有关更改的通知。通常情况下，您可以在界面控制器（如 Activity 或 Fragment）中附加 Observer 对象。</li>
+</ol>
+<p>我们把刚才ViewModel的数据存储在LiveData中:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewModel</span></span>(<span class="keyword">data</span>: <span class="built_in">Int</span>) : ViewModel() &#123;</span><br><span class="line">    <span class="keyword">val</span> counter: MutableLiveData&lt;<span class="built_in">Int</span>&gt;()</span><br><span class="line">  </span><br><span class="line">  	<span class="keyword">init</span>&#123;</span><br><span class="line">      counter.value = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以这样注册counter的观察者:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">viewModel.counter</span><br><span class="line">.observe(<span class="keyword">this</span>) &#123; count -&gt; binding.textView.text = count.toString() &#125;</span><br></pre></td></tr></table></figure>
+<p>这里observe函数是注册观察者，owner是this（当前Activity或者Fragment），第二个是Observer对象，由于它只有一个函数onChange，所以这里用函数式接口的方式来创建Observer对象。</p>
+<h3 id="更新livedata"><a class="markdownIt-Anchor" href="#更新livedata"></a> 更新LiveData</h3>
+<p>通常，LiveData 仅在数据发生更改时才发送更新，并且仅发送给活跃观察者。此行为的一种例外情况是，观察者从非活跃状态更改为活跃状态时也会收到更新。此外，如果观察者第二次从非活跃状态更改为活跃状态，则只有在自上次变为活跃状态以来值发生了更改时，它才会收到更新。</p>
+<p>在更新数据的时候，需要注意必须调用 setValue(T) 方法以从主线程更新 LiveData 对象。如果在 worker 线程中执行代码，则您可以改用 postValue(T) 方法来更新 LiveData 对象。</p>
+<h2 id="lifecycles"><a class="markdownIt-Anchor" href="#lifecycles"></a> LifeCycles</h2>
+<p>LifeCyclers组件可以让任何一个类都轻松地感知到Activity的声明周期，同时又不需要再Activity中感知大量的逻辑代码。很显然这是一种观察者模式的实现，而我们要做的就是实现观察者观察后该做什么，然后再注册观察者，让发布者知道。</p>
+<p>注册观察者类:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObserver</span>:<span class="type">LifecycleObserver&#123;</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> tag = <span class="string">&quot;MyObserverTag&quot;</span></span><br><span class="line">    <span class="meta">@OnLifecycleEvent(Lifecycle.Event.ON_START)</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">activityStart</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Log.d(tag,<span class="string">&quot;activity start&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OnLifecycleEvent(Lifecycle.Event.ON_STOP)</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">activityStop</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Log.d(tag,<span class="string">&quot;activity stop&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们自己定义的观察者类需要继承LifecycleObserver，然后通过注解来实现对活动的生命周期进行监听。但是我们目前还没有告诉给发布者(Publisher，即被监听者)，这里的发布者是LifecycleOwner。而我们的Activity只要是继承AppCompatActivity，或者Fragment继承自androidx.fragment.app.Fragment，那么它们本身就是一个LifecycleOwner的实例。 所以，在上述Acivity或者Fragment内只要添加下面这一行就可以注册观察者了:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lifecycle.addObserver(MyObserver())</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注: 这里的lifecycle是getLifecycle的语法糖。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/11/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/UML%E7%B1%BB%E5%9B%BE/" rel="prev" title="UML类图">
+                  <i class="fa fa-chevron-left"></i> UML类图
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/12/Android/Android%E6%98%93%E9%94%99%E7%82%B9/" rel="next" title="Android易错点">
+                  Android易错点 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="/lib/animejs/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="/lib/quicklink/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2021/01/12/Android/Jetpack%E7%BB%84%E4%BB%B6/',]
+      });
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="/css/katex.min.css">
+</html>

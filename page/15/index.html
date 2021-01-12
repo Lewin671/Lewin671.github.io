@@ -216,7 +216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -268,6 +268,292 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/26/programming/python/%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E5%BA%8F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/26/programming/python/%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E5%BA%8F%E5%88%97/" class="post-title-link" itemprop="url">功能强大的序列</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-26 21:04:21" itemprop="dateCreated datePublished" datetime="2018-11-26T21:04:21+08:00">2018-11-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h3>
+<p>序列是Python中的一种常用的内置数据类型，一共有五种，包括：</p>
+<ul>
+<li>列表</li>
+<li>元组</li>
+<li>集合</li>
+<li>字典</li>
+<li>字符串</li>
+</ul>
+<p>这篇博客讲的是前四种序列，和字符串分开讲。<br />
+在上面5种序列中，很多的属性和方法都是类似的，下面介绍它们的公共的方法和属性。</p>
+<h3 id="共有的方法"><a class="markdownIt-Anchor" href="#共有的方法"></a> 共有的方法</h3>
+<h4 id="索引indexing"><a class="markdownIt-Anchor" href="#索引indexing"></a> 索引(Indexing)</h4>
+<p>类似与C++、Java等语言的数组，Python的序列也是通过索引来访问的，而且索引的开始下标都是为0.<br />
+比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">verse = [<span class="string">&#x27;春眠不觉晓&#x27;</span>,<span class="string">&#x27;处处闻啼鸟&#x27;</span>,<span class="string">&#x27;夜来风雨声&#x27;</span>,<span class="string">&#x27;花落知多少&#x27;</span>]</span><br><span class="line"><span class="comment"># 输出第1个元素</span></span><br><span class="line">print(verse[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#输出第三个元素</span></span><br><span class="line">print(verse[<span class="number">2</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">春眠不觉晓</span><br><span class="line">夜来风雨声</span><br></pre></td></tr></table></figure>
+<p>但是，Python也有它独自的特点：负数索引。这个索引从最后一个元素开始计数，从-1开始。然后向左依次索引减小1。<br />
+即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-n, -(n-1) , -(n-2) , ,... , -2 , -1 #n为序列的长度</span><br></pre></td></tr></table></figure>
+<p>比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">verse = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">print(verse[<span class="number">-1</span>])</span><br><span class="line">print(verse[<span class="number">-2</span>])</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="切片sliceing"><a class="markdownIt-Anchor" href="#切片sliceing"></a> 切片(Sliceing)</h4>
+<p>切片操作是访问序列中元素的另一种方法，他可以访问一定范围内的元素。通过切片操作可以生成一个新的序列，实现切片操作的语法格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sname[start,end,step]</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>sname: 表示序列的名称</li>
+<li>start： 表示切片的开始位置（包括该位置）。</li>
+<li>end： 切片的截止位置（不包括该位置）。</li>
+<li>step： 步长。</li>
+</ul>
+<p>值得注意的是，这里的参数都是有默认参数的。start默认为0，end默认为序列的长度，step默认为1。<br />
+比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">squares = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>]</span><br><span class="line"></span><br><span class="line">print(squares[<span class="number">-3</span>:])</span><br><span class="line"><span class="comment">#all</span></span><br><span class="line">print(squares[:])</span><br><span class="line"><span class="comment">#reverse</span></span><br><span class="line">print(squares[::<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[9, 16, 25]</span><br><span class="line">[1, 4, 9, 16, 25]</span><br><span class="line">[25, 16, 9, 4, 1]</span><br></pre></td></tr></table></figure>
+<h4 id="序列相加adding"><a class="markdownIt-Anchor" href="#序列相加adding"></a> 序列相加(Adding)</h4>
+<p>在Python中，支持两种<strong>类型相同</strong>的序列进行相加操作，将两个列表合成一个列表。<br />
+比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding&#x3D;utf-8</span><br><span class="line">num &#x3D; [1, 2, 3, 4]</span><br><span class="line">str &#x3D; [&#39;python niubi&#39;,&#39;i love python&#39;,&#39;why not learn python&#39;]</span><br><span class="line">print(num + str)</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, &#39;python niubi&#39;, &#39;i love python&#39;, &#39;why not learn python&#39;]</span><br></pre></td></tr></table></figure>
+<p>注意我刚才上面说的话，支持两种类型相同的序列进行操作，指的是序列的类型，而不是序列元素的类型。比如元组和列表就不能够进行加法操作。</p>
+<h4 id="乘法操作multiplying"><a class="markdownIt-Anchor" href="#乘法操作multiplying"></a> 乘法操作(multiplying)</h4>
+<p>通过乘法操作，我们可以把序列重复n次。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding&#x3D;utf-8</span><br><span class="line">l &#x3D; [1, 2, 3]</span><br><span class="line">print(l*3)</span><br></pre></td></tr></table></figure>
+<p>输出的结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 1, 2, 3, 1, 2, 3]</span><br></pre></td></tr></table></figure>
+<h4 id="检查某个元素是否是序列的成员"><a class="markdownIt-Anchor" href="#检查某个元素是否是序列的成员"></a> 检查某个元素是否是序列的成员</h4>
+<p>通过in关键字，可以判断某个元素是否为序列的成员。<br />
+<code>item in sequence</code><br />
+返回的结果是true或者false</p>
+<h4 id="计算序列的长度-最大值和最小值"><a class="markdownIt-Anchor" href="#计算序列的长度-最大值和最小值"></a> 计算序列的长度、最大值和最小值</h4>
+<p>计算序列的长度： len()函数<br />
+计算最小值： min()<br />
+计算最大值： max()<br />
+比如计算上面例子中的num序列的长度可以这样写：<code>len(num)</code></p>
+<h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3>
+<p>列表是可变的序列，类似于C语言的数组，但是它的元素的类型却是任意的。下面来介绍一些关于列表的方法。</p>
+<h4 id="列表的创建和删除"><a class="markdownIt-Anchor" href="#列表的创建和删除"></a> 列表的创建和删除</h4>
+<p>可以直接通过赋值运算符和<code>[]</code>来创建列表，也可以使用list函数来创建数值列表。<br />
+删除列表：<code>del listname</code>，其中listname是列表名<br />
+例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过扶植和[]来创建列表</span></span><br><span class="line">list1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过list()来创建数值列表</span></span><br><span class="line">list2 = list(range(<span class="number">1</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">print(list1)</span><br><span class="line">print(list2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除列表</span></span><br><span class="line"><span class="keyword">del</span> list1</span><br><span class="line"><span class="keyword">del</span> list2</span><br></pre></td></tr></table></figure>
+<p>运行结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, 5]</span><br><span class="line">[1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
+<h4 id="遍历序列"><a class="markdownIt-Anchor" href="#遍历序列"></a> 遍历序列</h4>
+<p>语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> listname:</span><br><span class="line">    <span class="comment"># do some same things</span></span><br></pre></td></tr></table></figure>
+<p>如果我们需要同时得到元素和下标，则可以这样便利：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(listname):</span><br><span class="line">    <span class="comment"># do some same things</span></span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line">team =[<span class="string">&#x27;火箭&#x27;</span>,<span class="string">&#x27;勇士&#x27;</span>,<span class="string">&#x27;开拓者&#x27;</span>,<span class="string">&#x27;雷霆&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(team):</span><br><span class="line">    print(index,<span class="string">&quot; :&quot;</span>+item)</span><br></pre></td></tr></table></figure>
+<h4 id="排序列表"><a class="markdownIt-Anchor" href="#排序列表"></a> 排序列表</h4>
+<p>排序列表有两种方法，使用列表对象的sort方法和内置的sorted函数。<br />
+比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">l = [<span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">7</span>]</span><br><span class="line">l.sort()</span><br><span class="line">print(l)</span><br><span class="line"></span><br><span class="line">l = [<span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">7</span>]</span><br><span class="line">l = sorted(l)</span><br><span class="line">print(l)</span><br></pre></td></tr></table></figure>
+<p>其中列表对象的sort方法为<br />
+<code>listname.sort(cmp = None, key = None, reverse= NOne)</code><br />
+其中cmp是老的方法，这里不详细介绍（类似与C++的sort函数的cmp函数），主要介绍key和reverse。<br />
+key: 通过某个函数或者是映射返回的值，根据这个值来进行排序。<br />
+reverse： 升序还是降序，默认升序。<br />
+sorted的方法类似，只是加了一个对象参数，表明需要排序的对象。<br />
+<code>sorted(iterable, key = None,reverse = None)</code><br />
+在key那里很多时候为了简洁，会经常用到lamber表达式，有兴趣的同学可以去查一查。</p>
+<h4 id="列表推导式"><a class="markdownIt-Anchor" href="#列表推导式"></a> 列表推导式</h4>
+<p>列表推导式可以快速生成一个列表，或者根据某个列表生存满足指定需求的列表。<br />
+<code>list = [Expression for var in range if condition]</code><br />
+上面的表达的意思就是for循环的var变量如果满足condition表达是，则会加入到list中。</p>
+<p>比如，我们想得到20以内的偶数，我们可以这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line">list = [var <span class="keyword">for</span> var <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">21</span>) <span class="keyword">if</span> var %<span class="number">2</span> ==<span class="number">0</span>]</span><br><span class="line">print(list)</span><br></pre></td></tr></table></figure>
+<h3 id="元组"><a class="markdownIt-Anchor" href="#元组"></a> 元组</h3>
+<p>元组的方法和列表类似，这里只列举出不同之处。</p>
+<ol>
+<li>创建方法不同。元组的创建方法使用<code>()</code>来创建。</li>
+<li>元组是不可修改的，所以修改序列的方法在这里不能用，比如append，insert等等</li>
+<li>列表不能够作为字典的健,而元组可以。</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="comment"># 创建元组</span></span><br><span class="line">tp = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 便利元组</span></span><br><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(tp):</span><br><span class="line">    print(index,item)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/23/programming/python/%E9%80%89%E6%8B%A9%E5%92%8C%E5%BE%AA%E7%8E%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/23/programming/python/%E9%80%89%E6%8B%A9%E5%92%8C%E5%BE%AA%E7%8E%AF/" class="post-title-link" itemprop="url">选择和循环</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-11-23 10:18:29" itemprop="dateCreated datePublished" datetime="2018-11-23T10:18:29+08:00">2018-11-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="选择语句"><a class="markdownIt-Anchor" href="#选择语句"></a> 选择语句</h3>
+<h4 id="if语句"><a class="markdownIt-Anchor" href="#if语句"></a> if语句</h4>
+<p>语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> expression:</span><br><span class="line">    语句块</span><br></pre></td></tr></table></figure>
+<p>如果expression为真，则跳到相应的语句块。例如：<br />
+判断数字是否为5可以如下这样写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">number = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">if</span> number = <span class="number">5</span>:</span><br><span class="line">    print(<span class="string">&#x27;the number is 5&#x27;</span>)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/23/programming/python/%E9%80%89%E6%8B%A9%E5%92%8C%E5%BE%AA%E7%8E%AF/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -998,246 +1284,6 @@ Collections API方便了Java程序猿去使用一些高效的数据类型和算�
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/23/data-structure/huffman-tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/23/data-structure/huffman-tree/" class="post-title-link" itemprop="url">huffman tree</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-10-23 11:30:32" itemprop="dateCreated datePublished" datetime="2018-10-23T11:30:32+08:00">2018-10-23</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-18 19:14:50" itemprop="dateModified" datetime="2020-11-18T19:14:50+08:00">2020-11-18</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> introduction</h3>
-<p>假设我们有一个文件，它只含有a,b,c,d,e,f这六种字符，如果我们用固定长度的bit来表示字符，那么我们需要3个bit来表示一个字符，但是，如果我们使用可变长度的bit来保存字符的话，通过Huffman编码我们可以压缩内存，可以节省20%到90%的内存。下面给出六种字符对应的频率(所有字符一共是10万)，还有其固定长度的bit和可变长度的bit的码字：</p>
-<table>
-<thead>
-<tr>
-<th>a</th>
-<th>b</th>
-<th>c</th>
-<th>d</th>
-<th>e</th>
-<th>f</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Frequency(in thousands)</td>
-<td>45</td>
-<td>13</td>
-<td>12</td>
-<td>16</td>
-<td>9</td>
-</tr>
-<tr>
-<td>fixed-length codeword</td>
-<td>000</td>
-<td>001</td>
-<td>010</td>
-<td>011</td>
-<td>100</td>
-</tr>
-<tr>
-<td>variable-length codeword</td>
-<td>0</td>
-<td>101</td>
-<td>100</td>
-<td>111</td>
-<td>1101</td>
-</tr>
-</tbody>
-</table>
-<p>如果使用定长bit来表示字符，则需要的内存是：3 * 100000 = 300000 bits</p>
-<p>如果使用不定长bit来表示字符，则需要的内存是: (45*1+13*3+12*3+16*3+9*4+5*4) = 224000 bits。<br />
-与定长编码相比，节省了25%的空间。实际上，我们将会看到，这是此文件的最优字符编码。</p>
-<h3 id="prefix-code"><a class="markdownIt-Anchor" href="#prefix-code"></a> prefix code</h3>
-<p>首先我先介绍一下什么叫做前缀编码(prefix code)</p>
-<p><strong>前缀编码</strong>:在一个编码集合中，任何一个字符的编码都不是另外一个字符编码的前缀，这种编码叫做前缀编码。<strong>这种前缀特性保证了每一个编码都能被译码成唯一与之对应的字符，没有二义性(unambiguous)。</strong></p>
-<h3 id="how-to-construct-a-huffman-code"><a class="markdownIt-Anchor" href="#how-to-construct-a-huffman-code"></a> how to construct a Huffman code?</h3>
-<p>Huffman设计了一个贪心算法来<strong>构造最优前缀码</strong>，被称为赫夫曼编码(Huffman code),它的正确性依赖于证明贪心选择属性(greedy choice property)和最优子结构(optimal substructure)。但是我先讲如何构造赫夫曼编码，然后再去证明。</p>
-<p><strong>Huffman tree</strong><br />
-这棵树和Huffman code相对应，其中叶子节点放着字母和它的频率，内部节点则放着它的左右子树的和。我们可以以左子树的边为0，右子树的边代表1，从而进行编码。</p>
-<p>这个算法使用了最小优先队列，每次都将队列里最小的两个值取出来，合并成一个新的节点，然后再把这个节点放入队列，循环，直到队列的大小等于1，说明不能合并，这时就构建好了Huffman tree.</p>
-<p>伪代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Huffman(C):</span><br><span class="line">	for i &#x3D; 1 to n-1:</span><br><span class="line">		allocate a new node z</span><br><span class="line">		z.left&#x3D;x&#x3D;EXTRACT-MIN(Q)</span><br><span class="line">		z.right&#x3D;y&#x3D;EXTRACT-MIN(Q)</span><br><span class="line">		z.freq&#x3D;x.freq+y.freq</span><br><span class="line">		Insert(Q,z)</span><br><span class="line">	return EXTRACT-MIN(Q)</span><br></pre></td></tr></table></figure>
-<h3 id="demonstration-of-greedy-choice-property"><a class="markdownIt-Anchor" href="#demonstration-of-greedy-choice-property"></a> demonstration of greedy-choice property</h3>
-<p>首先我们先定义一个符号B，B(T)表示Huffman Tree的需要的空间。则</p>
-<p>B(T)=sum(freq(ele) * len(ele)), 其中freq(ele)代表ele字符的频率，len(ele)表示表示该字符需要的bit.</p>
-<p>我们假设T为最优Huffman Tree，且树的最大深度的叶子节点为y，且它出现的频率不是最小。<br />
-而频率最小的叶子节点不在最大深度，且用a表示。<br />
-此时<code>B(T)=freq(y) * len(y) + freq(a) * len(a) + ...</code> ,其中<code>freq(y) &gt; freq(a)</code>, <code>len(y) &gt; len(a)</code></p>
-<p>我们交换a,y的位置,此时得到一颗新的树T1，则<code>freq(a1)=freq(a)</code>,<code>freq(y1)=freq(y)</code>,<code>len(a1)=len(y)</code>, <code>len(y1)=len(a)</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B(T1)&#x3D; freq(y1) * len(y1) + freq(a1) * len(a1) + ...</span><br><span class="line">	 &#x3D; freq(y) * len(a) + freq(a) * len(y) + ...</span><br></pre></td></tr></table></figure>
-<p>则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B(T)-B(T1)&#x3D; (freq(y) * len(y) + freq(a) * len(a) + ...) - (freq(y) * len(a) + freq(a) * len(y) + ...)</span><br><span class="line">		  &#x3D; len(y) * (freq(y)-freq(a)) + len(a) * (freq(a) - freq(y))</span><br><span class="line">		  &#x3D; (len(y) - len(a)) * (freq(y) - freq(a))</span><br></pre></td></tr></table></figure>
-<p>其中<code>len(y)-len(a)&gt;0</code>, <code>ferq(y)-freq(a)&gt;0</code>, 所以上式等价于<code>B(T)-B(T1)&gt;0</code>,即：<br />
-<code>B(T)&gt;B(T1)</code>,这就和T是最优的Huffman Tree相矛盾了。所以，频率越小的字符，应该放越深的地方。<br />
-证毕！</p>
-<h3 id="proof-of-optimal-substructure"><a class="markdownIt-Anchor" href="#proof-of-optimal-substructure"></a> Proof of optimal substructure</h3>
-<p><strong>Lemma</strong>: <code>Lemma: T′ is optimal for C′=C∖&#123;x,y&#125;+&#123;z&#125;, if T is optimal for C.</code></p>
-<p><strong>Proof:</strong><br />
-我们用反证法来证明。假设对于<code>C'</code>的最优前缀是<code>T''</code>, 而不是<code>T'</code>,则对于C，<br />
-最优前缀<code>T'''</code>=<code>T''</code>+f(x)+f(y) &gt; <code>T'</code>+f(x)+f(y)=<code>T</code><br />
-这和我们的假设：“对于C，T是最优前缀“相矛盾。所以<code>T'</code>是<code>C'</code>的最优前缀。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/10/10/configuration/codeblocksDebuggerError/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/10/configuration/codeblocksDebuggerError/" class="post-title-link" itemprop="url">codeblocks17.02不能调试的解决办法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-10-10 23:58:10" itemprop="dateCreated datePublished" datetime="2018-10-10T23:58:10+08:00">2018-10-10</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>前段时间codeblocks新出了一个版本17.02，于是我也去更新了。结果发现不能调试，出现了一下的错误信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Active debugger config: GDB&#x2F;CDB debugger:Default</span><br><span class="line">Building to ensure sources are up-to-date</span><br><span class="line">Selecting target: </span><br><span class="line">Debug</span><br><span class="line">ERROR: You need to specify a debugger program in the debuggers&#39;s settings.</span><br><span class="line">(For MinGW compilers, it&#39;s &#39;gdb.exe&#39; (without the quotes))</span><br><span class="line">(For MSVC compilers, it&#39;s &#39;cdb.exe&#39; (without the quotes))</span><br></pre></td></tr></table></figure>
-<p>结果发现没有配置好debugger，只要为debugger设置gdb的路径即可。</p>
-<p>解决方法：</p>
-<ol>
-<li>在codeblocks打开Setting-&gt;Debuger-&gt;GDB/CDB debuger-&gt;default-&gt;Executable path:</li>
-<li>在Executable path填gdb.exe路径，gdb的默认路径是：C:\Program Files (x86)\CodeBlocks\MinGW\bin\gdb32.exe</li>
-</ol>
-
       
     </div>
 
