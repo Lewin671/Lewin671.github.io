@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="首先它们都需要在gradle文件中声明: 1234buildFeatures&amp;#123;	viewBinding true	dataBinding true&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dataBinding和viewBinding">
+<meta property="og:url" content="https://qingyingliu.top/2021/01/13/Android/dataBinding%E5%92%8CviewBinding/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="首先它们都需要在gradle文件中声明: 1234buildFeatures&amp;#123;	viewBinding true	dataBinding true&amp;#125;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-13T09:59:20.000Z">
+<meta property="article:modified_time" content="2021-01-13T10:20:56.868Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2021/01/13/Android/dataBinding%E5%92%8CviewBinding/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>dataBinding和viewBinding | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text"> 视图绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text"> 用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-activity-%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%A7%86%E5%9B%BE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.2.</span> <span class="nav-text"> 在 Activity 中使用视图绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8fragment%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%A7%86%E5%9B%BE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.3.</span> <span class="nav-text"> 在Fragment中使用视图绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E-findviewbyid-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.</span> <span class="nav-text"> 与 findViewById 的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text"> 数据绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E7%BB%91%E5%AE%9A%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">3.</span> <span class="nav-text"> 视图绑定与数据绑定的对比</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">156</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/13/Android/dataBinding%E5%92%8CviewBinding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          dataBinding和viewBinding
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-13 17:59:20 / Modified: 18:20:56" itemprop="dateCreated datePublished" datetime="2021-01-13T17:59:20+08:00">2021-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>首先它们都需要在gradle文件中声明:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">buildFeatures&#123;</span><br><span class="line">	viewBinding true</span><br><span class="line">	dataBinding true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="视图绑定"><a class="markdownIt-Anchor" href="#视图绑定"></a> 视图绑定</h2>
+<p>通过视图绑定功能，您可以更轻松地编写可与视图交互的代码。在模块中启用视图绑定之后，<strong>系统会为该模块中的每个 XML 布局文件生成一个绑定类</strong>。绑定类的实例包含对在相应布局中具有 ID 的所有视图的直接引用。</p>
+<p>在大多数情况下，视图绑定会替代 <code>findViewById</code>。</p>
+<h3 id="用法"><a class="markdownIt-Anchor" href="#用法"></a> 用法</h3>
+<p>为某个模块启用视图绑定功能后，系统会为该模块中包含的每个 XML 布局文件生成一个绑定类。每个绑定类均包含对根视图以及具有 ID 的所有视图的引用。系统会通过以下方式生成绑定类的名称：将 XML 文件的名称转换为驼峰式大小写，并在末尾添加“Binding”一词。</p>
+<p>例如，假设某个布局文件的名称为 <code>result_profile.xml</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">...</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span> <span class="attr">android:id</span>=<span class="string">&quot;@+id/name&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ImageView</span> <span class="attr">android:cropToPadding</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span> <span class="attr">android:id</span>=<span class="string">&quot;@+id/button&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:background</span>=<span class="string">&quot;@drawable/rounded_button&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<p>所生成的绑定类的名称就为 <code>ResultProfileBinding</code>。此类具有两个字段：一个是名为 <code>name</code> 的 <code>TextView</code>，另一个是名为 <code>button</code> 的 <code>Button</code>。该布局中的 <code>ImageView</code> 没有 ID，因此绑定类中不存在对它的引用。</p>
+<p>每个绑定类还包含一个 <code>getRoot()</code> 方法，用于为相应布局文件的根视图提供直接引用。在此示例中，<code>ResultProfileBinding</code> 类中的 <code>getRoot()</code> 方法会返回 <code>LinearLayout</code> 根视图。</p>
+<h3 id="在-activity-中使用视图绑定"><a class="markdownIt-Anchor" href="#在-activity-中使用视图绑定"></a> 在 Activity 中使用视图绑定</h3>
+<p>如需设置绑定类的实例以供 Activity 使用，请在 Activity 的 <code>onCreate()</code>方法中执行以下步骤：</p>
+<ol>
+<li>调用生成的绑定类中包含的静态方法<code>inflate()</code>。这个操作会创建该绑定类的实例以供Activity使用。</li>
+<li>通过<code>getRoot()</code>获得对根视图的引用</li>
+<li>将根视图传递到<code>setContentView()</code>，使其成为屏幕上的活动视图。</li>
+</ol>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding: ResultProfileBinding</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>)</span></span> &#123;</span><br><span class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">  binding = ResultProfileBinding.inflate(layoutInflater)</span><br><span class="line">  <span class="keyword">val</span> view = binding.root</span><br><span class="line">  setContentView(view)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>现在即可使用该绑定类的实例来引用任何视图：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">binding.name.text = viewModel.name</span><br><span class="line">binding.button.setOnClickListener &#123; viewModel.userClicked() &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="在fragment中使用视图绑定"><a class="markdownIt-Anchor" href="#在fragment中使用视图绑定"></a> 在Fragment中使用视图绑定</h3>
+<p>如需设置绑定类的实例以供 Fragment 使用，请在 Fragment 的 <code>onCreateView()</code>方法中执行以下步骤：</p>
+<ol>
+<li>调用生成的绑定类中包含的静态方法<code>inflate()</code>。这个操作会创建该绑定类的实例以供Activity使用。</li>
+<li>通过<code>getRoot()</code>获得对根视图的引用</li>
+<li>从<code>onCreateView()</code>方法返回根视图，使得其成为屏幕上活动视图。</li>
+</ol>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> _binding: ResultProfileBinding? = <span class="literal">null</span></span><br><span class="line"><span class="comment">// This property is only valid between onCreateView and</span></span><br><span class="line"><span class="comment">// onDestroyView.</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> binding <span class="keyword">get</span>() = _binding!!</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">    savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>: View? &#123;</span><br><span class="line">    _binding = ResultProfileBinding.inflate(inflater, container, <span class="literal">false</span>)</span><br><span class="line">    <span class="keyword">val</span> view = binding.root</span><br><span class="line">    <span class="keyword">return</span> view</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroyView</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroyView()</span><br><span class="line">    _binding = <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="与-findviewbyid-的区别"><a class="markdownIt-Anchor" href="#与-findviewbyid-的区别"></a> 与 findViewById 的区别</h3>
+<p>视图绑定有显著优点:</p>
+<ul>
+<li>Null安全: 由于视图绑定会创建对视图的直接引用，因此不存在视图ID无效而引发的Null指针异常的风险。</li>
+<li>类型安全: 每个绑定类中的字段均具有与它们在XML文件中引用的视图相匹配的类型。这并不意味这不存在发生类型转换异常的风险。</li>
+</ul>
+<p>这些差异意味着布局和代码之间的不兼容将会导致构建在编译时（而非运行时）失败。</p>
+<h2 id="数据绑定"><a class="markdownIt-Anchor" href="#数据绑定"></a> 数据绑定</h2>
+<p>数据绑定库是一种支持库，借助该库，您可以使用声明性格式（而非程序化地）将布局中的界面组件绑定到应用中的数据源。</p>
+<p>布局通常是使用调用界面框架方法的代码在 Activity 中定义的。例如，以下代码调用 <code>findViewById()</code> 来查找 <code>TextView</code> 微件并将其绑定到 <code>viewModel</code> 变量的 <code>userName</code> 属性：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">findViewById&lt;TextView&gt;(R.id.sample_text).apply &#123;</span><br><span class="line">  text = viewModel.userName</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下示例展示了如何在布局文件中使用数据绑定库将文本直接分配到微件。这样就无需调用上述任何 Java 代码。请注意赋值表达式中 <code>@&#123;&#125;</code> 语法的使用：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">&quot;@&#123;viewmodel.userName&#125;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>借助布局文件中的绑定组件，您可以移除 Activity 中的许多界面框架调用，使其维护起来更简单、方便。还可以提高应用性能，并且有助于防止内存泄漏以及避免发生 Null 指针异常。</p>
+<p>我们要把布局转化成databinding视图（idea的小灯泡提示），然后添加变量到<code>&lt;data&gt;</code>标签中:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">variable</span></span></span><br><span class="line"><span class="tag">        <span class="attr">name</span>=<span class="string">&quot;data&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">type</span>=<span class="string">&quot;com.example.viewmodelsavestate.MyViewModel&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里就定义了一个名字为data，类型为<code>MyViewModel</code>的变量数据。</p>
+<p>然后就可以通过<code>@&#123;data.xxx&#125;</code>来访问data的值了。</p>
+<p>在使用之前还需要将data和lifecycleOwner设置一下。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">binding.<span class="keyword">data</span> = viewModel</span><br><span class="line">binding.lifecycleOwner = <span class="keyword">this</span></span><br></pre></td></tr></table></figure>
+<h2 id="视图绑定与数据绑定的对比"><a class="markdownIt-Anchor" href="#视图绑定与数据绑定的对比"></a> 视图绑定与数据绑定的对比</h2>
+<p>视图绑定和数据绑定均会生成可用于直接引用视图的绑定类。但是，视图绑定旨在处理更简单的用例，与数据绑定相比，具有以下优势：</p>
+<ul>
+<li>更快的编译速度，视图绑定不需要处理注释，因此编译时间更短。</li>
+<li>更容易使用: 视图绑定不需要特别标记XML布局文件。</li>
+</ul>
+<p>反过来，与数据绑定相比，视图绑定也有如下局限:</p>
+<ul>
+<li>视图绑定不支持布局变量或布局表达式，因此不能用于直接在 XML 布局文件中声明动态界面内容。</li>
+<li>视图绑定不支持双向数据绑定。</li>
+</ul>
+<p>考虑到这些因素，在某些情况下，最好在项目中<strong>同时使用视图绑定和数据绑定</strong>。您可以<strong>在需要高级功能的布局中使用数据绑定，而在不需要高级功能的布局中使用视图绑定</strong>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/12/Android/Android%E6%98%93%E9%94%99%E7%82%B9/" rel="prev" title="Android易错点">
+                  <i class="fa fa-chevron-left"></i> Android易错点
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/13/Android/%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/" rel="next" title="数据持久化">
+                  数据持久化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="/lib/animejs/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="/lib/quicklink/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2021/01/13/Android/dataBinding%E5%92%8CviewBinding/',]
+      });
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="/css/katex.min.css">
+</html>

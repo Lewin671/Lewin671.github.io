@@ -216,7 +216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">156</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -268,6 +268,258 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/13/Android/ViewModel%E4%BF%9D%E5%AD%98%E7%8A%B6%E6%80%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/13/Android/ViewModel%E4%BF%9D%E5%AD%98%E7%8A%B6%E6%80%81/" class="post-title-link" itemprop="url">ViewModel保存状态</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-13 18:26:10 / Modified: 18:30:15" itemprop="dateCreated datePublished" datetime="2021-01-13T18:26:10+08:00">2021-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>虽然ViewModel可以保存数据，在屏幕翻转的时候数据也不会丢失。但是在手机内存不足，在后台被自动杀死的时候，ViewModel的数据也会丢失。而这里有两种解决的办法:</p>
+<p>一种是以往的方法，通过Activity的<code>onSaveInstanceState</code>回调函数中将数据保存到Bundle中，然后再OnCreate函数中重新加载数据。这种方法比较老旧，而ViewModel提出了一种更新的保存方法。</p>
+<blockquote>
+<p>注: 状态必须是简单的轻量级状态。对于复杂或大型数据，应该使用本地持久性存储。</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/13/Android/ViewModel%E4%BF%9D%E5%AD%98%E7%8A%B6%E6%80%81/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/13/Android/%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/13/Android/%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/" class="post-title-link" itemprop="url">数据持久化</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-13 18:22:21 / Modified: 18:25:26" itemprop="dateCreated datePublished" datetime="2021-01-13T18:22:21+08:00">2021-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>数据持久化的方法主要有: 直接文件存储、SharePreferences和数据库存储。文件存储的方法其实就是Java学过的文件的语法，而数据库存储目前最新的技术是使用Room数据库。Room数据库准备用另外一篇文章来讲解，这里主要介绍SharePreferences。</p>
+<p>如果您有想要保存的相对较小键值对集合，则应使用<code>SharedPreferences</code>API。<code>SharedPreferences</code> 对象指向包含键值对的文件，并提供读写这些键值对的简单方法。每个 <code>SharedPreferences</code> 文件均由框架进行管理，可以是私有文件，也可以是共享文件。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/13/Android/%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/13/Android/dataBinding%E5%92%8CviewBinding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/13/Android/dataBinding%E5%92%8CviewBinding/" class="post-title-link" itemprop="url">dataBinding和viewBinding</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-13 17:59:20 / Modified: 18:20:56" itemprop="dateCreated datePublished" datetime="2021-01-13T17:59:20+08:00">2021-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>首先它们都需要在gradle文件中声明:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">buildFeatures&#123;</span><br><span class="line">	viewBinding true</span><br><span class="line">	dataBinding true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/13/Android/dataBinding%E5%92%8CviewBinding/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -881,268 +1133,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/01/09/Android/RecyclerView%E7%9A%84%E4%BD%BF%E7%94%A8/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/09/Android/Intent%E5%92%8CBundle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/Android/Intent%E5%92%8CBundle/" class="post-title-link" itemprop="url">Intent和Bundle</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-01-09 18:07:40 / Modified: 18:36:22" itemprop="dateCreated datePublished" datetime="2021-01-09T18:07:40+08:00">2021-01-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
-<p>Parcelable 和 Bundle 对象可跨进程边界使用，例如与 IPC/Binder 事务之间，带有 intent 的 Activity 之间等，还可以用来存储跨配置更改的瞬时状态。</p>
-<p>当我们用一个Activity去启动另外一个Activity或者Service，发送广播等等，我们就可以使用Intent对象。如果在操作的过程中还需要传递数据，那么这些数据就会存储在Bundle对象里面，这种数据一般很小。</p>
-<h2 id="使用方法"><a class="markdownIt-Anchor" href="#使用方法"></a> 使用方法</h2>
-<h3 id="构建intent"><a class="markdownIt-Anchor" href="#构建intent"></a> 构建intent</h3>
-<p>在调用新的Activity的时候，我们一般构造一个Intent对象，用到的构造函数是:</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Intent(Context packageContext, Class&lt;?&gt; cls) &#123;</span><br><span class="line">  mComponent = new ComponentName(packageContext, cls);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要传入两个参数，一个是intent的上下文，调用新的Activity的Context。</p>
-<p>第二个是新Activity的class。</p>
-<p>例如:</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> intent:Intent = Intent(<span class="keyword">this</span>,MainActivity::<span class="keyword">class</span>.java)</span><br></pre></td></tr></table></figure>
-<p>这样就构建了一个intent对象了。</p>
-<p>如果需要传入一些数据，可以调用intent对象的<code>putExtra</code>函数。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>,MainActivity::<span class="keyword">class</span>.java).also &#123; </span><br><span class="line">  it.putExtra(<span class="string">&quot;para1&quot;</span>,<span class="number">1</span>)</span><br><span class="line">  it.putExtra(<span class="string">&quot;para2&quot;</span>,<span class="string">&quot;Hello World&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而<code>putExtra</code>的函数如下:</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@NonNull</span> Intent putExtra(String name, int value) &#123;</span><br><span class="line">  <span class="keyword">if</span> (mExtras == <span class="literal">null</span>) &#123;</span><br><span class="line">    mExtras = new Bundle();</span><br><span class="line">  &#125;</span><br><span class="line">  mExtras.putInt(name, value);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里的<code>mExtras</code>是一个Bundle对象。所以这段代码表示，把<code>putExtra</code>的值保存在Intent对象的<code>mExtras</code>属性中，而<code>mExtras</code>属性是<code>Bundle</code>类型的。</p>
-<h3 id="获取参数"><a class="markdownIt-Anchor" href="#获取参数"></a> 获取参数</h3>
-<p>通过<code>getIntent</code>方法可以获取到<code>intent</code>对象，在<code>kotlin</code>的语法糖中可以直接写<code>intent</code>，然后调用<code>getStringExtra</code>来获取<code>para2</code>。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Toast.makeText(<span class="keyword">this</span>, <span class="string">&quot;intent data: <span class="subst">$&#123;intent.getStringExtra(<span class="string">&quot;para2&quot;</span>)&#125;</span>&quot;</span>, Toast.LENGTH_LONG).show()</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/09/Android/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/Android/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">Activity的生命周期</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-01-09 17:58:58 / Modified: 18:04:13" itemprop="dateCreated datePublished" datetime="2021-01-09T17:58:58+08:00">2021-01-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="activity声明周期的概念"><a class="markdownIt-Anchor" href="#activity声明周期的概念"></a> Activity声明周期的概念</h2>
-<p>当用户浏览、退出和返回到应用时，应用中的 <code>Activity</code> 实例会在其生命周期的不同状态间转换。</p>
-<p>在生命周期回调方法中，可以声明用户离开和再次进入 Activity 时 Activity 的行为方式。例如，如果您正构建流媒体视频播放器，当用户切换至另一应用时，您可能要暂停视频或终止网络连接。当用户返回时，您可以重新连接网络并允许用户从同一位置继续播放视频。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/09/Android/Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/09/Android/Activity%E7%AE%80%E4%BB%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/Android/Activity%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">Activity简介</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-01-09 17:56:22 / Modified: 18:02:36" itemprop="dateCreated datePublished" datetime="2021-01-09T17:56:22+08:00">2021-01-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="activity的概念"><a class="markdownIt-Anchor" href="#activity的概念"></a> Activity的概念</h2>
-<p>Activity是Android的四大组件之一，Activity充当应用与用户互动的入口，我们一般通过继承Activity来实现Activity的功能。</p>
-<p>Activity 提供窗口供应用在其中绘制界面。此窗口通常会填满屏幕，但也可能比屏幕小，并浮动在其他窗口上面。通常，<strong>一个 Activity 实现应用中的一个屏幕</strong>。例如，应用中的一个 Activity 实现“偏好设置”屏幕，而另一个 Activity 实现“选择照片”屏幕。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/09/Android/Activity%E7%AE%80%E4%BB%8B/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
