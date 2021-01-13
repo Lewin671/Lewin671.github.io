@@ -216,7 +216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">156</span>
+          <span class="site-state-item-count">157</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -268,6 +268,130 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/" class="post-title-link" itemprop="url">Python连接MySQL</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-01 22:26:02" itemprop="dateCreated datePublished" datetime="2018-12-01T22:26:02+08:00">2018-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="安装pymysql"><a class="markdownIt-Anchor" href="#安装pymysql"></a> 安装PyMySQL</h3>
+<p>直接在终端输入： <code>pip install PyMySQL</code>。<br />
+注意：如果没有安装pip的，需要先按照pip。如果安装了pip的还是出错，那应该就是有多个Python的版本，应该使用相应的Python。</p>
+<h3 id="获取连接对象"><a class="markdownIt-Anchor" href="#获取连接对象"></a> 获取连接对象</h3>
+<p>我们首先需要获取连接对象，使用的是connect()函数。connect的参数如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数序号</th>
+<th>参数含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>主机名或IP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>3</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>4</td>
+<td>数据库名称</td>
+</tr>
+</tbody>
+</table>
+<p>注：如果我们再加一个参数: <code>charset='utf-8'</code>可以防止插入中文出错。</p>
+<p>比如：<code>db=pymysql.connect('localhost','Lewin','root','Lewin',charset='utf=8')</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/01/programming/python/Python%E8%BF%9E%E6%8E%A5MySQL/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1211,100 +1335,6 @@ sorted的方法类似，只是加了一个对象参数，表明需要排序的�
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/10/programming/java/Collections-and-Generics/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/10/programming/java/Collections-and-Generics/" class="post-title-link" itemprop="url">Collections and Generics</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-10 18:33:49" itemprop="dateCreated datePublished" datetime="2018-11-10T18:33:49+08:00">2018-11-10</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="collection"><a class="markdownIt-Anchor" href="#collection"></a> Collection</h1>
-<p>在我们编程的时候，我们难免会遇到处理一些集合的问题，在我们的Java中，Collection API就是为了处理集合类问题的API。<br />
-Collections API方便了Java程序猿去使用一些高效的数据类型和算法，比如list,tree，hashtable等等，减少了代码量，同时也是易于拓展，简单使用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/10/programming/java/Collections-and-Generics/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
