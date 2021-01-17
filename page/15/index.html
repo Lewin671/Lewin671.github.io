@@ -216,7 +216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-count">159</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -268,6 +268,244 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">linux配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-10 19:55:07" itemprop="dateCreated datePublished" datetime="2018-12-10T19:55:07+08:00">2018-12-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="下载源设置"><a class="markdownIt-Anchor" href="#下载源设置"></a> 下载源设置</h3>
+<p>将下载源设置为国内的清华源: <code>https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/</code></p>
+<h3 id="搜狗输入法"><a class="markdownIt-Anchor" href="#搜狗输入法"></a> 搜狗输入法</h3>
+<p>先去搜狗输入法官网下载安装包,然后使用<code>dpkg -i</code>命令安装，如果安装过程有错，则运行<code>sudo apt-get --fix-broken install</code>。</p>
+<p>接着去设置那里设置keyboard input method system为fcitx。</p>
+<h3 id="代理命令行"><a class="markdownIt-Anchor" href="#代理命令行"></a> 代理命令行</h3>
+<p>下载proxychains: <code>sudo apt-get install proxychains</code></p>
+<h3 id="visual-stdio-code"><a class="markdownIt-Anchor" href="#visual-stdio-code"></a> Visual Stdio Code</h3>
+<p>注意，安装Visual Studio Code不要从默认的应用商店下载，因为这样会导致无法在VS Code中输入中文，而是应该从官网下载最新的deb包，然后再安装。</p>
+<h3 id="goole-chrome"><a class="markdownIt-Anchor" href="#goole-chrome"></a> goole chrome</h3>
+<ol>
+<li>
+<p>add key:<br />
+<code>wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -</code></p>
+</li>
+<li>
+<p>set repository:<br />
+<code>echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list</code></p>
+</li>
+<li>
+<p>install package:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install google-chrome-stable</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>​	注意，如果需要登录谷歌账号，则需要在设置里面设置全局代理。然后设置代理规则: <code>https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/10/configuration/ubuntu%E9%85%8D%E7%BD%AE/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/12/03/programming/python/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/03/programming/python/Python%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-title-link" itemprop="url">Python多线程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-03 19:59:52" itemprop="dateCreated datePublished" datetime="2018-12-03T19:59:52+08:00">2018-12-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="线程对象"><a class="markdownIt-Anchor" href="#线程对象"></a> 线程对象</h3>
+<p>为了不浪费事件，我在这里写的都是关于threading模块的。</p>
+<h4 id="指定线程的活动"><a class="markdownIt-Anchor" href="#指定线程的活动"></a> 指定线程的活动</h4>
+<p>当我们创建一个线程的时候，我们需要先去指定这个线程去干什么，这里有两种指定的方法：</p>
+<ul>
+<li>传递一个回调对象到构造函数</li>
+<li>子类(继承threading.Thread)重写run()方法</li>
+</ul>
+<p>值得注意的是,threading.Thread的子类只能重写__init__()和run()方法。</p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bar</span>():</span></span><br><span class="line">    print(<span class="string">&quot;bar by callable function&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">subThread</span>(<span class="params">threading.Thread</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;bar by override run function&quot;</span>)</span><br><span class="line"></span><br><span class="line">t1 = threading.Thread(target=bar)</span><br><span class="line">t2 = subThread()</span><br><span class="line"></span><br><span class="line">t1.run()</span><br><span class="line">t2.run()</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bar by callable function</span><br><span class="line">bar by override run function</span><br></pre></td></tr></table></figure>
+<p>其中，threading.Thread类的构造函数为：<br />
+<code>threading.Thread(group=None,target=None,name=None,args=(),kwargs=&#123;&#125;,*,daemon=None)</code></p>
+<p>参数说明：</p>
+<ul>
+<li>group是以后的拓展（当ThreadGroup实现的时候)</li>
+<li>target是回调目标用于被run()方法调用的，默认为None，表示没有任何东西被调用。</li>
+<li>name是线程的名字，默认一个唯一的名字是这样构造的：<code>Thread-N</code>。</li>
+<li>args是一个元组，表示target的参数，默认为()。</li>
+<li>kwargs是一个target关键字字典，默认为{}</li>
+<li>daemon是守护进程</li>
+</ul>
+<h4 id="启动线程start"><a class="markdownIt-Anchor" href="#启动线程start"></a> 启动线程start()</h4>
+<p>调用start()函数之后，线程会自动run方法。</p>
+<h4 id="jointimeoutnone"><a class="markdownIt-Anchor" href="#jointimeoutnone"></a> join(timeout=None)</h4>
+<p>这个函数的作用是: wait until thread terminates。也就是说，会一直运行当前的线程，直到当前线程结束。我们可以使用is_alive()来判断进程是否结束。</p>
+<h4 id="name"><a class="markdownIt-Anchor" href="#name"></a> name</h4>
+<p>线程的名字，可以直接通过点操作符<code>(.)</code>调用name属性。</p>
+<h3 id="线程同步"><a class="markdownIt-Anchor" href="#线程同步"></a> 线程同步</h3>
+<p>由于在多线程中，数据是共享的，所以就有可能多个线程同时去改变一个变量，这个有时候会出问题。比如：我们的计算机的操作就经常要求关闭文件后才能打开，这就是因为如果同时去修改一个文件，会造成最终的结果不确定或者出错，所以我们就需要去同步，或者说，需要把数据“锁”上。在Python中，我们可以使用Lock和RLock类，他们都有相同的方法：</p>
+<ul>
+<li>acquire(blocking=true,timeout=-1)</li>
+<li>release()</li>
+</ul>
+<p>根据英文意思你也知道上面两个方法的作用，acquire是获得一把锁，release是释放锁（即解锁的意思）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span>():</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,balance=<span class="number">0</span></span>):</span></span><br><span class="line">                self.balance = balance</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">take</span>(<span class="params">self,d</span>):</span></span><br><span class="line">                self.balance-=d</span><br><span class="line">                time.sleep(<span class="number">0.001</span>)</span><br><span class="line">                print(<span class="string">&quot;after take &quot;</span>,d,<span class="string">&quot;, and the balance is &quot;</span>,self.balance)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">self,d</span>):</span></span><br><span class="line">                self.balance+=d</span><br><span class="line">                time.sleep(<span class="number">0.0008</span>)</span><br><span class="line">                print(<span class="string">&quot;after save &quot;</span>,d,<span class="string">&quot;, and the balance is &quot;</span>,self.balance)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">take</span>(<span class="params">b</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">                b.take(<span class="number">1</span>)</span><br><span class="line">                <span class="comment">#time.sleep(0.01)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">b</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">                b.save(<span class="number">1</span>)</span><br><span class="line">                <span class="comment">#time.sleep(0.01)</span></span><br><span class="line"></span><br><span class="line">b = Account()</span><br><span class="line">t1 = threading.Thread(target=take,args=(b,))</span><br><span class="line">t2 = threading.Thread(target=save,args=(b,))</span><br><span class="line"></span><br><span class="line">t2.start()</span><br><span class="line">t1.start()</span><br></pre></td></tr></table></figure>
+<p>由于没有同步，会出现这样的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">after save  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  1</span><br><span class="line">after save  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  1</span><br><span class="line">after save  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  1</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span>():</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,balance=<span class="number">0</span></span>):</span></span><br><span class="line">                self.balance = balance</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">take</span>(<span class="params">self,d</span>):</span></span><br><span class="line">                lock.acquire()</span><br><span class="line">                self.balance-=d</span><br><span class="line">                print(<span class="string">&quot;after take &quot;</span>,d,<span class="string">&quot;, and the balance is &quot;</span>,self.balance)</span><br><span class="line">                lock.release()</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">self,d</span>):</span></span><br><span class="line">                lock.acquire()</span><br><span class="line">                self.balance+=d</span><br><span class="line">                print(<span class="string">&quot;after save &quot;</span>,d,<span class="string">&quot;, and the balance is &quot;</span>,self.balance)</span><br><span class="line">                lock.release()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">take</span>(<span class="params">b</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">                b.take(<span class="number">1</span>)</span><br><span class="line">                time.sleep(<span class="number">0.01</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">b</span>):</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">                b.save(<span class="number">1</span>)</span><br><span class="line">                time.sleep(<span class="number">0.01</span>)</span><br><span class="line">lock = threading.Lock()</span><br><span class="line">b = Account()</span><br><span class="line">t1 = threading.Thread(target=take,args=(b,))</span><br><span class="line">t2 = threading.Thread(target=save,args=(b,))</span><br><span class="line"></span><br><span class="line">t2.start()</span><br><span class="line">t1.start()</span><br></pre></td></tr></table></figure>
+<p>进行了同步之后的结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">after save  1 , and the balance is  1</span><br><span class="line">after take  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  -1</span><br><span class="line">after save  1 , and the balance is  0</span><br><span class="line">after take  1 , and the balance is  -1</span><br><span class="line">after save  1 , and the balance is  0</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1147,194 +1385,6 @@ sorted的方法类似，只是加了一个对象参数，表明需要排序的�
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/18/configuration/%E8%AE%A9mysql%E6%94%AF%E6%8C%81%E4%B8%AD%E6%96%87/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">搭建服务器</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-16 16:43:02" itemprop="dateCreated datePublished" datetime="2018-11-16T16:43:02+08:00">2018-11-16</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今天买了一个阿里云服务器，为了就是想让自己写的网页也能够在校外网打开。下面一步一步搭建我的服务器。</p>
-<h3 id="安装ssh"><a class="markdownIt-Anchor" href="#安装ssh"></a> 安装SSH</h3>
-<p>安装SSH的原因是为了能够在本地的电脑连接服务器。</p>
-<ol>
-<li>Ubuntu缺省没有安装SSH Server，使用这个命令安装：<code>sudo apt-get install openssh-server</code>、</li>
-<li>然后确认sshserver是否启动了。<code>ps -e|grep ssh</code>。如果看到sshd那说明ssh-server已经启动了，如下图所示。<br />
-<img src="/uploads/1542358069.png" alt="" /></li>
-<li>启动SSH。<code>sudo/etc/init.d/ssh start</code></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/16/configuration/%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">mysql远程连接</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-16 11:41:25" itemprop="dateCreated datePublished" datetime="2018-11-16T11:41:25+08:00">2018-11-16</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Configuration/" itemprop="url" rel="index"><span itemprop="name">Configuration</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近在尝试将实验室的电脑当做自己的服务器，发现不能够远程实验室的mysql。于是在查阅了一番资料之后，写此博客来记录解决办法。</p>
-<h4 id="检查3306端口是否开启"><a class="markdownIt-Anchor" href="#检查3306端口是否开启"></a> 检查3306端口是否开启</h4>
-<p><code>netstat -an|grep 3306</code><br />
-一般来说这个端口都是打开的。但是服务器的就不一定了，服务器的解决方法请看最下面的注意点。<br />
-<img src="/uploads/portCheck.png" alt="port" /></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/16/configuration/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
