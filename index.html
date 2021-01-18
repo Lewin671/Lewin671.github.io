@@ -216,7 +216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -276,6 +276,104 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/18/interview/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/interview/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" class="post-title-link" itemprop="url">面试准备</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-18 19:43:42 / Modified: 19:58:10" itemprop="dateCreated datePublished" datetime="2021-01-18T19:43:42+08:00">2021-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="java篇"><a class="markdownIt-Anchor" href="#java篇"></a> Java篇</h2>
+<ol>
+<li>
+<p>Java中为什么StringBuilder比StringBuffer快?</p>
+<p>答： <strong>查看源码</strong>，StringBuffer类的append方法，都被<strong>synchronized</strong>所修饰。毕竟多执行了一些操作，还包括锁等待时的线程阻塞</p>
+</li>
+<li>
+<p>经常会被问到finally的用法，是否一定会执行，有return的情况会怎么样？</p>
+<p>答: <code>finally</code>不一定会被执行。例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> num =  <span class="number">6</span>;</span><br><span class="line">  <span class="keyword">if</span> (num &gt; <span class="number">5</span>) &#123;</span><br><span class="line">    System.out.println(num);</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (num &gt; <span class="number">5</span>) &#123;</span><br><span class="line">      System.out.println(num);</span><br><span class="line">      <span class="keyword">return</span> num;</span><br><span class="line">    &#125; </span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">finally</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;我是finally&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过测试发现，如果程序不执行try语句块，那么就不会执行finally。</p>
+<p>如果在try语句块中执行<code>return</code>，仍然还会调用<code>finally</code>的语句块。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getNum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num =  <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line">            System.out.println(num);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (num &gt; <span class="number">5</span>) &#123;</span><br><span class="line">                System.out.println(num);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我是finally&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        getNum();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="并发"><a class="markdownIt-Anchor" href="#并发"></a> 并发</h2>
+<h2 id="android"><a class="markdownIt-Anchor" href="#android"></a> Android</h2>
+<ol>
+<li>
+<p>Android应用时必须遵守单线程模型的原则：</p>
+<p><strong>Android UI操作并不是线程安全的并且这些操作必须在UI线程中执行。</strong></p>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/18/Android/EditText%E5%BB%B6%E8%BF%9F%E8%AF%B7%E6%B1%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -302,7 +400,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-01-18 16:35:29 / Modified: 19:33:42" itemprop="dateCreated datePublished" datetime="2021-01-18T16:35:29+08:00">2021-01-18</time>
+      <time title="Created: 2021-01-18 16:35:29 / Modified: 20:02:14" itemprop="dateCreated datePublished" datetime="2021-01-18T16:35:29+08:00">2021-01-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -326,7 +424,7 @@
     <div class="post-body" itemprop="articleBody">
           <h2 id="问题介绍"><a class="markdownIt-Anchor" href="#问题介绍"></a> 问题介绍</h2>
 <p>在进行搜索的时候，如何做到像知乎这样，输入apple只进行一次请求呢？</p>
-<p><img src="/img/Android/%E5%BB%B6%E8%BF%9F%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0.png" alt="EditText延迟请求" /></p>
+<p><img src="/img/Android/%E5%BB%B6%E8%BF%9F%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0.png" alt="延迟搜索问题描述" /></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/01/18/Android/EditText%E5%BB%B6%E8%BF%9F%E8%AF%B7%E6%B1%82/#more" rel="contents">
@@ -1012,93 +1110,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/01/13/Android/dataBinding%E5%92%8CviewBinding/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/12/Android/Android%E6%98%93%E9%94%99%E7%82%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/12/Android/Android%E6%98%93%E9%94%99%E7%82%B9/" class="post-title-link" itemprop="url">Android易错点</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-01-12 21:33:43 / Modified: 21:38:28" itemprop="dateCreated datePublished" datetime="2021-01-12T21:33:43+08:00">2021-01-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ol>
-<li>
-<p>ViewModel的创建，其中get函数的描述如下:</p>
-<p>Returns an existing ViewModel or creates a new one in the scope (usually, a fragment or an activity)</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分别保存Group1和Group2的分数</span></span><br><span class="line"><span class="keyword">val</span> viewModel1 = ViewModelProvider(<span class="keyword">this</span>,</span><br><span class="line">                                   ViewModelProvider.NewInstanceFactory()).<span class="keyword">get</span>(ScoreViewModel::<span class="keyword">class</span>.java)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> viewModel2 = ViewModelProvider(<span class="keyword">this</span>,</span><br><span class="line">                                   ViewModelProvider.NewInstanceFactory()).<span class="keyword">get</span>(ScoreViewModel::<span class="keyword">class</span>.java)</span><br></pre></td></tr></table></figure>
-<p>这里只会创建一个ViewModel（在同一个scope内），因此这里创建的两个viewModel都是相同的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/12/Android/Android%E6%98%93%E9%94%99%E7%82%B9/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
