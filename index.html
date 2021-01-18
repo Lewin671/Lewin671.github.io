@@ -302,7 +302,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-01-18 19:43:42 / Modified: 19:58:10" itemprop="dateCreated datePublished" datetime="2021-01-18T19:43:42+08:00">2021-01-18</time>
+      <time title="Created: 2021-01-18 19:43:42 / Modified: 21:17:03" itemprop="dateCreated datePublished" datetime="2021-01-18T19:43:42+08:00">2021-01-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -329,26 +329,14 @@
 <li>
 <p>Java中为什么StringBuilder比StringBuffer快?</p>
 <p>答： <strong>查看源码</strong>，StringBuffer类的append方法，都被<strong>synchronized</strong>所修饰。毕竟多执行了一些操作，还包括锁等待时的线程阻塞</p>
-</li>
-<li>
-<p>经常会被问到finally的用法，是否一定会执行，有return的情况会怎么样？</p>
-<p>答: <code>finally</code>不一定会被执行。例如:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> num =  <span class="number">6</span>;</span><br><span class="line">  <span class="keyword">if</span> (num &gt; <span class="number">5</span>) &#123;</span><br><span class="line">    System.out.println(num);</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (num &gt; <span class="number">5</span>) &#123;</span><br><span class="line">      System.out.println(num);</span><br><span class="line">      <span class="keyword">return</span> num;</span><br><span class="line">    &#125; </span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">finally</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;我是finally&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过测试发现，如果程序不执行try语句块，那么就不会执行finally。</p>
-<p>如果在try语句块中执行<code>return</code>，仍然还会调用<code>finally</code>的语句块。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getNum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num =  <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line">            System.out.println(num);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (num &gt; <span class="number">5</span>) &#123;</span><br><span class="line">                System.out.println(num);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我是finally&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        getNum();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="并发"><a class="markdownIt-Anchor" href="#并发"></a> 并发</h2>
-<h2 id="android"><a class="markdownIt-Anchor" href="#android"></a> Android</h2>
-<ol>
-<li>
-<p>Android应用时必须遵守单线程模型的原则：</p>
-<p><strong>Android UI操作并不是线程安全的并且这些操作必须在UI线程中执行。</strong></p>
-</li>
-<li></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/18/interview/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
