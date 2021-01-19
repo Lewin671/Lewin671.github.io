@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="/lib/@fortawesome/fontawesome-free/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"qingyingliu.top","root":"/","scheme":"Pisces","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="MotionLayout 是一种布局类型，可帮助您管理应用中的运动和微件动画。MotionLayout 是 ConstraintLayout 的子类，在其丰富的布局功能基础之上构建而成。作为 ConstraintLayout 库的一部分，MotionLayout 可用作支持库，并可向后兼容 API 级别 14。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MotionLayout使用">
+<meta property="og:url" content="https://qingyingliu.top/2021/01/19/Android/MotionLayout%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="qingying&#39;s blog">
+<meta property="og:description" content="MotionLayout 是一种布局类型，可帮助您管理应用中的运动和微件动画。MotionLayout 是 ConstraintLayout 的子类，在其丰富的布局功能基础之上构建而成。作为 ConstraintLayout 库的一部分，MotionLayout 可用作支持库，并可向后兼容 API 级别 14。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-19T12:06:30.000Z">
+<meta property="article:modified_time" content="2021-01-19T12:34:39.238Z">
+<meta property="article:author" content="Qingying Liu">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://qingyingliu.top/2021/01/19/Android/MotionLayout%E4%BD%BF%E7%94%A8/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>MotionLayout使用 | qingying's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">qingying's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never really desperate, only the lost of the soul.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E5%8A%A8%E5%9C%BA%E6%99%AF%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text"> 运动场景文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#motionscene"><span class="nav-number">1.1.</span> <span class="nav-text"> MotionScene</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transition"><span class="nav-number">1.2.</span> <span class="nav-text"> Transition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constraintset"><span class="nav-number">1.3.</span> <span class="nav-text"> ConstraintSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constraint"><span class="nav-number">1.4.</span> <span class="nav-text"> Constraint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#onclick"><span class="nav-number">1.5.</span> <span class="nav-text"> Onclick</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#onswipe"><span class="nav-number">1.6.</span> <span class="nav-text"> OnSwipe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keyframeset%E5%85%B3%E9%94%AE%E5%B8%A7"><span class="nav-number">1.7.</span> <span class="nav-text"> KeyFrameSet(关键帧)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keyposition"><span class="nav-number">1.8.</span> <span class="nav-text"> KeyPosition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keyattribute"><span class="nav-number">1.9.</span> <span class="nav-text"> KeyAttribute</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingying Liu"
+      src="/uploads/avatar.gif">
+  <p class="site-author-name" itemprop="name">Qingying Liu</p>
+  <div class="site-description" itemprop="description">记录数学和计算机方面的知识</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Lewin671" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Lewin671" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:qingyingliu671@foxmail.com" title="E-Mail → mailto:qingyingliu671@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/19/Android/MotionLayout%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MotionLayout使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-19 20:06:30 / Modified: 20:34:39" itemprop="dateCreated datePublished" datetime="2021-01-19T20:06:30+08:00">2021-01-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>MotionLayout 是一种布局类型，可帮助您<strong>管理应用中的运动和微件动画</strong>。<strong>MotionLayout 是 ConstraintLayout 的子类</strong>，在其丰富的布局功能基础之上构建而成。作为 ConstraintLayout 库的一部分，MotionLayout 可用作支持库，并可向后兼容 API 级别 14。</p>
+<a id="more"></a>
+<p><code>MotionLayout</code> 缩小了布局转换与复杂运动处理之间的差距，同时在<a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/graphics/prop-animation">属性动画框架</a>、<a target="_blank" rel="noopener" href="https://developer.android.com/training/transitions"><code>TransitionManager</code></a> 和 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/androidx/coordinatorlayout/widget/CoordinatorLayout"><code>CoordinatorLayout</code></a> 之间提供了各种功能。</p>
+<blockquote>
+<p><code>MotionLayout</code> 仅适用于其直接子级，不支持嵌套布局层次结构或 Activity 转换。</p>
+</blockquote>
+<p>依赖:</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">  implementation <span class="string">&#x27;androidx.constraintlayout:constraintlayout:2.0.0-beta1&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在创建constraintlayout之后，可以用IDE直接转换成motionlayout，同时它也会为我们生成<strong>MotionScene</strong>文件（在<code>res/xml</code>文件夹下）。MotionScene是一个运动描述文件夹，为了将布局信息与运动描述分开，每个 <code>MotionLayout</code> 都引用一个单独的 MotionScene。请注意，<strong>MotionScene 中的定义优先于 <code>MotionLayout</code> 中的任何类似定义。</strong></p>
+<p>这是一个MotionScene的例子:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">MotionScene</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">xmlns:motion</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">Transition</span></span></span><br><span class="line"><span class="tag">              <span class="attr">motion:constraintSetStart</span>=<span class="string">&quot;@+id/start&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">motion:constraintSetEnd</span>=<span class="string">&quot;@+id/end&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">motion:duration</span>=<span class="string">&quot;1000&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">OnSwipe</span></span></span><br><span class="line"><span class="tag">             <span class="attr">motion:touchAnchorId</span>=<span class="string">&quot;@+id/button&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">motion:touchAnchorSide</span>=<span class="string">&quot;right&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">motion:dragDirection</span>=<span class="string">&quot;dragRight&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Transition</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">ConstraintSet</span> <span class="attr">android:id</span>=<span class="string">&quot;@+id/start&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Constraint</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/button&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;64dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;64dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_marginStart</span>=<span class="string">&quot;8dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">motion:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">motion:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">motion:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ConstraintSet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">ConstraintSet</span> <span class="attr">android:id</span>=<span class="string">&quot;@+id/end&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Constraint</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/button&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;64dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;64dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_marginEnd</span>=<span class="string">&quot;8dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">motion:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">motion:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">motion:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ConstraintSet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">MotionScene</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="运动场景文件"><a class="markdownIt-Anchor" href="#运动场景文件"></a> 运动场景文件</h2>
+<h3 id="motionscene"><a class="markdownIt-Anchor" href="#motionscene"></a> MotionScene</h3>
+<p><code>&lt;MotionScene&gt;</code>是运动场景文件的根元素。<code>&lt;MotionScene&gt;</code> 包含一个或多个 <code>&lt;Transition&gt;</code>元素，<strong>每个元素用于定义运动序列的开始和结束状态，以及这两种状态之间的转换</strong>。</p>
+<p><code>&lt;MotionScene&gt;</code>必须包含<code>&lt;Transition&gt;</code>元素，可以包含<code>&lt;ConstraintSet&gt;</code>元素。</p>
+<h3 id="transition"><a class="markdownIt-Anchor" href="#transition"></a> Transition</h3>
+<p><code>&lt;Transition&gt;</code>指定运动序列的开始和结束状态、任何所需的中间状态以及触发该运动的用户交互。 语法:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Transition</span></span></span><br><span class="line"><span class="tag">            <span class="attr">motion:constraintSetStart</span>=<span class="string">&quot;start&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">motion:constraintSetEnd</span>=<span class="string">&quot;end&quot;</span></span></span><br><span class="line"><span class="tag">            [ <span class="attr">motion:duration</span>=<span class="string">&quot;integer&quot;</span> ] &gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">Transition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>属性:</p>
+<ul>
+<li><code>motion:constraintSetStart</code>: 运动序列的初始状态。可以是 <code>&lt;ConstraintSet&gt;</code> 的 ID，也可以是布局。如需指定 <code>&lt;ConstraintSet&gt;</code>，请将此属性设置为 “<code>@+id/constraintSetId</code>”。如需指定布局，请设置为 “<code>@layout/layoutState</code>”。</li>
+<li><code>motion:constraintSetEnd</code>: 运动序列的最终状态。可以是 <code>&lt;ConstraintSet&gt;</code>的 ID，也可以是布局。如需指定 <code>&lt;ConstraintSet&gt;</code>，请将此属性设置为 “<code>@+id/constraintSetId</code>”。如需指定布局，请设置为 “<code>@layout/layoutState</code>”。</li>
+<li><code>motion:duration</code>: 运动序列的时长，以毫秒为单位。如果未指定，则使用 <code>&lt;MotionScene&gt;</code>元素的 defaultDuration。</li>
+</ul>
+<h3 id="constraintset"><a class="markdownIt-Anchor" href="#constraintset"></a> ConstraintSet</h3>
+<p>指定所有视图在动画序列中某一点上的位置和属性。通常，<strong>一个 <code>&lt;Transition&gt;</code> 元素可指向两个 <code>&lt;ConstraintSet&gt;</code> 元素，其中一个定义动画序列的开始，另一个定义结束</strong>。</p>
+<p>语法:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ConstraintSet</span></span></span><br><span class="line"><span class="tag">               <span class="attr">id</span>=<span class="string">&quot;@id/name&quot;</span>&gt;</span></span><br><span class="line">  [ deriveConstraintsFrom=&quot;id&quot; ]</span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">ConstraintSet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>deriveConstraintsFrom</code>是指（可选）另一个 ConstraintSet 的 ID。如果指定此属性，相应集内的所有约束条件都将应用于此 ConstraintSet，除非此集明确替换它们。</p>
+<p>必须包含<code>&lt;Constraint&gt;</code>元素。</p>
+<h3 id="constraint"><a class="markdownIt-Anchor" href="#constraint"></a> Constraint</h3>
+<p>指定运动序列其中一个元素的位置和属性。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Constraint</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:id</span>=<span class="string">&quot;@id/view_id&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">attributes</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="onclick"><a class="markdownIt-Anchor" href="#onclick"></a> Onclick</h3>
+<p>指定当用户点按特定视图时要执行的操作。单个 <code>&lt;Transition&gt;</code> 可以具有多个 <code>&lt;onClick&gt;</code> 节点，其中每个 <code>&lt;onClick&gt;</code>可指定一个不同的目标视图和一个在点按此视图时要执行的其他操作。</p>
+<p>语法:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">onClick</span></span></span><br><span class="line"><span class="tag">    <span class="attr">motion:targetId</span>=<span class="string">&quot;@id/target_view&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">motion:clickAction</span>=<span class="string">&quot;action&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>属性:</p>
+<ul>
+<li><code>motion:targetId</code>: 受监控的视图。当用户点按此视图时，将会发生转换。</li>
+<li><code>motion:ClickAction</code>: 点按视图时要执行的操作。支持的值包括：
+<ul>
+<li><code>transitionToStart</code>: 为从当前布局到 <code>&lt;Transition&gt;</code> 元素的 <code>motion::constraintSetStart</code> 属性指定的布局添加动画效果。</li>
+<li><code>transitionToEnd</code>: 为从当前布局到 <code>&lt;Transition&gt;</code> 元素的 <code>motion:constraintSetEnd</code> 属性指定的布局添加动画效果。</li>
+<li><code>jumpToStart</code>: 从当前布局跳转到 <code>&lt;Transition&gt;</code> 元素的 <code>motion::constraintSetStart</code> 属性指定的布局。</li>
+<li><code>jumpToEnd</code>: 从当前布局跳转到 <code>&lt;Transition&gt;</code> 元素的 <code>motion:constraintSetEnd</code> 属性指定的布局。</li>
+<li><code>toggle</code>: 如果布局当前处于开始状态，请将动画效果切换为结束状态；否则，请将动画效果切换为开始状态。</li>
+</ul>
+</li>
+</ul>
+<h3 id="onswipe"><a class="markdownIt-Anchor" href="#onswipe"></a> OnSwipe</h3>
+<p>指定当用户在布局上滑动时要执行的操作。动画序列的速度和目标视图的动画受滑动速度和方向的影响，具体取决于您使用可选参数设置的限制。</p>
+<p>单个 <code>&lt;Transition&gt;</code>可以具有多个<code>&lt;onSwipe&gt;</code> 节点，其中每个 <code>&lt;onSwipe&gt;</code>可指定一个不同的滑动方向和一项在用户执行该滑动时要执行的其他操作。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">onSwipe</span></span></span><br><span class="line"><span class="tag">  <span class="attr">motion:touchAnchorId</span>=<span class="string">&quot;@id/target_view&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">motion:touchAnchorSide</span>=<span class="string">&quot;side&quot;</span></span></span><br><span class="line"><span class="tag">[ <span class="attr">motion:dragDirection</span>=<span class="string">&quot;direction&quot;</span> ]</span></span><br><span class="line"><span class="tag">[ <span class="attr">motion:dragScale</span>=<span class="string">&quot;scale&quot;</span> ]</span></span><br><span class="line"><span class="tag">[ <span class="attr">motion:maxVelocity</span>=<span class="string">&quot;maxVelocity&quot;</span> ]</span></span><br><span class="line"><span class="tag">[ <span class="attr">motion:maxAcceleration</span>=<span class="string">&quot;maxAcceleration&quot;</span> ]</span></span><br><span class="line"><span class="tag"> /&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>属性:</p>
+<ul>
+<li>
+<p><code>motion:touchAnchorId</code></p>
+<p>在滑动之后移动的视图。</p>
+</li>
+<li>
+<p><code>motion:touchAnchorSide</code></p>
+<p>滑动所固定到的目标视图的一侧。MotionLayout 将尝试在该固定点与用户手指之间保持恒定的距离。可接受的值包括 <code>&quot;left&quot;</code>、<code>&quot;right&quot;</code>、<code>&quot;top&quot;</code> 和 <code>&quot;bottom&quot;</code>。</p>
+</li>
+<li>
+<p><code>motion:dragDirection</code></p>
+<p>用户滑动动作的方向。如果设置了此属性，此 <code>&lt;onSwipe&gt;</code> 将仅适用于沿特定方向的滑动。可接受的值包括 <code>&quot;dragLeft&quot;</code>、<code>&quot;dragRight&quot;</code>、<code>&quot;dragUp&quot;</code> 和 <code>&quot;dragDown&quot;</code>。</p>
+</li>
+<li>
+<p><code>motion:dragScale</code></p>
+<p>控制视图相对于滑动长度的移动距离。默认值为 1，表明视图移动的距离应与滑动距离一致。如果 <code>dragScale</code> 小于 1，视图移动的距离会远远小于滑动距离（例如，<code>dragScale</code> 为 0.5 意味着如果滑动移动 4 厘米，目标视图会移动 2 厘米）。如果 <code>dragScale</code> 大于 1，视图移动的距离会大于滑动距离（例如，<code>dragScale</code> 为 1.5 意味着如果滑动移动 4 厘米，目标视图会移动 6 厘米）。</p>
+</li>
+<li>
+<p><code>motion:maxVelocity</code></p>
+<p>目标视图的最大速度。</p>
+</li>
+<li>
+<p><code>motion:maxAcceleration</code></p>
+<p>目标视图的最大加速度。</p>
+</li>
+</ul>
+<h3 id="keyframeset关键帧"><a class="markdownIt-Anchor" href="#keyframeset关键帧"></a> KeyFrameSet(关键帧)</h3>
+<p>指定运动序列过程中视图的位置和属性。默认情况下，运动会从初始状态逐渐进入结束状态；<strong>通过使用 <code>&lt;KeyFrameSet&gt;</code>，您可以构建更复杂的运动。</strong><code>&lt;KeyFrameSet&gt;</code> 包含 <code>&lt;KeyPosition&gt;</code> 或 <code>&lt;KeyAttribute&gt;</code> 节点。这些节点中的每个节点都指定目标视图在运动特定点处的位置或属性。<strong><code>MotionLayout</code> 平滑地将视图从起点移至每个中间点，然后移至最终目标位置。</strong></p>
+<p>语法:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">KeyFrameSet</span>&gt;</span></span><br><span class="line">  [ <span class="tag">&lt;<span class="name">KeyPosition</span>/&gt;</span>... ]</span><br><span class="line">  [ <span class="tag">&lt;<span class="name">KeyAttribute</span>/&gt;</span>...]</span><br><span class="line"><span class="tag">&lt;/<span class="name">KeyFrameSet</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="keyposition"><a class="markdownIt-Anchor" href="#keyposition"></a> KeyPosition</h3>
+<p>指定视图在运动序列中特定时刻的位置。该属性用于调整默认的运动路径。</p>
+<p>语法:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">KeyPosition</span></span></span><br><span class="line"><span class="tag">             <span class="attr">motion:motionTarget</span>=<span class="string">&quot;@id/targetPath&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">motion:framePosition</span>=<span class="string">&quot;percentage&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">motion:keyPositionType</span>=<span class="string">&quot;type&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">motion:percentX</span>=<span class="string">&quot;xOffset&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">motion:percentY</span>=<span class="string">&quot;yOffset&quot;</span></span></span><br><span class="line"><span class="tag">             /&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>属性:</p>
+<ul>
+<li>
+<p><code>motion:motionTarget</code></p>
+<p>其运动由此 <code>&lt;KeyPosition&gt;</code> 控制的视图。</p>
+</li>
+<li>
+<p><code>motion:framePosition</code></p>
+<p>1 到 99 之间的整数，用于指定运动序列中视图何时到达此 <code>&lt;KeyPosition&gt;</code> 指定的点。例如，如果 <code>framePosition</code> 为 25，则视图在整个运动路径的四分之一处到达指定点。</p>
+</li>
+<li>
+<p><code>motion:percentX</code>、<code>motion:percentY</code></p>
+<p>指定视图应到达的位置。<code>keyPositionType</code> 属性指定如何解释这些值。</p>
+</li>
+<li>
+<p><code>motion:keyPositionType</code></p>
+<p>指定如何解释 <code>percentX</code> 和 <code>percentY</code> 值。可能的设置包括：<code>parentRelative``percentX</code> 和 <code>percentY</code> 是相对于父视图指定的。X 为横轴，范围从 0（左端）到 1（右端）。Y 为纵轴，其中 0 为顶部，1 为底部。例如，如果您希望目标视图到达父视图右端中间的某个点，可以将 <code>percentX</code> 设置为 1，将 <code>percentY</code> 设置为 0.5。<code>deltaRelative``percentX</code> 和 <code>percentY</code> 是相对于视图在整个运动序列过程中移动的距离指定的。X 为横轴，Y 为纵轴；在这两种情况下，0 为视图在该轴上的起始位置，1 为最终位置。例如，假设目标视图向上移动 100 dp，然后再向右移动 100 dp，但是您希望视图按以下方式移动：首先在运动的前四分之一部分向上移动 40 dp，然后向上呈弧形移动。为此，请将 <code>framePosition</code> 设置为 25，将 <code>keyPositionType</code> 设置为 <code>deltaRelative</code>，并将 <code>percentY</code> 设置为 -0.4。<code>pathRelative</code>X 轴是目标视图在路径范围内移动的方向，其中 0 为起始位置，1 为最终位置。Y 轴垂直于 X 轴，正值位于路径左侧，负值位于右侧；设置一个非零的 percentY 可使视图向一个方向或另一个方向呈弧形运动。因此，视图的初始位置为 <code>(0,0)</code>，最终位置为 <code>(1,0)</code>。例如，假设您希望视图按如下方式移动：在运动序列前半部分的移动距离占总距离的 10％，然后加速移动以覆盖剩余 90％ 的距离。为此，请将 <code>framePosition</code> 设置为 50，将 <code>keyPositionType</code> 设置为 pathRelative，并将 <code>percentX</code> 设置为 0.1。</p>
+</li>
+</ul>
+<h3 id="keyattribute"><a class="markdownIt-Anchor" href="#keyattribute"></a> KeyAttribute</h3>
+<p>指定运动序列中特定时刻的视图属性。您可以使用 <code>&lt;KeyAttribute&gt;</code> 设置视图的任何标准属性。</p>
+<p>语法:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">KeyAttribute</span></span></span><br><span class="line"><span class="tag">              <span class="attr">motion:motionTarget</span>=<span class="string">&quot;@id/targetPath&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">motion:framePosition</span>=<span class="string">&quot;percentage&quot;</span></span></span><br><span class="line"><span class="tag">              [ <span class="attr">attribute</span> = <span class="string">value</span> ]</span></span><br><span class="line"><span class="tag">              /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>属性:</p>
+<ul>
+<li>
+<p><code>motion:motionTarget</code></p>
+<p>查看哪些属性受该 <code>&lt;KeyAttribute&gt;</code> 控制。</p>
+</li>
+<li>
+<p><code>motion:framePosition</code></p>
+<p>从 1 到 99 之间的整数，用于指定在运动序列中视图何时具有该 <code>&lt;KeyAttribute&gt;</code> 指定的属性。例如，如果 <code>framePosition</code> 为 25，则视图在运动的四分之一处具有指定属性。</p>
+</li>
+</ul>
+<p>其他属性，请参阅 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/view/View"><code>View</code></a> 参考文档。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/18/programming/kotlin/Kotlin%E5%85%B1%E4%BA%AB%E7%9A%84%E5%8F%AF%E5%8F%98%E7%8A%B6%E6%80%81%E4%B8%8E%E5%B9%B6%E5%8F%91/" rel="prev" title="Kotlin共享的可变状态与并发">
+                  <i class="fa fa-chevron-left"></i> Kotlin共享的可变状态与并发
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingying Liu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="/lib/animejs/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+  <script src="/lib/quicklink/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 300,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://qingyingliu.top/2021/01/19/Android/MotionLayout%E4%BD%BF%E7%94%A8/',]
+      });
+      });
+  </script>
+
+</body>
+<link rel="stylesheet" type="text/css" href="/css/katex.min.css">
+</html>
