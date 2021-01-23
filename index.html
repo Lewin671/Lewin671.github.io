@@ -216,7 +216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">168</span>
+          <span class="site-state-item-count">170</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -276,7 +276,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/21/programming/java/Java%E8%A1%A5%E7%BC%BA2/">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/23/programming/java/Java%E8%A1%A5%E7%BC%BA3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.gif">
@@ -290,7 +290,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/21/programming/java/Java%E8%A1%A5%E7%BC%BA2/" class="post-title-link" itemprop="url">Java补缺2</a>
+            <a href="/2021/01/23/programming/java/Java%E8%A1%A5%E7%BC%BA3/" class="post-title-link" itemprop="url">Java补缺3</a>
         </h2>
 
         <div class="post-meta-container">
@@ -302,7 +302,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-01-21 20:11:32 / Modified: 20:19:37" itemprop="dateCreated datePublished" datetime="2021-01-21T20:11:32+08:00">2021-01-21</time>
+      <time title="Created: 2021-01-23 14:08:37 / Modified: 14:27:16" itemprop="dateCreated datePublished" datetime="2021-01-23T14:08:37+08:00">2021-01-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -330,12 +330,205 @@
     <div class="post-body" itemprop="articleBody">
           <ol>
 <li>
-<p>HashMap实现原理:</p>
-<p>直接看源代码注释:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* Implementation notes.</span><br><span class="line">*</span><br><span class="line">* This map usually acts as a binned (bucketed) hash table, but</span><br><span class="line">* when bins get too large, they are transformed into bins of</span><br><span class="line">* TreeNodes, each structured similarly to those in</span><br><span class="line">* java.util.TreeMap. Most methods try to use normal bins, but</span><br><span class="line">* relay to TreeNode methods when applicable (simply by checking</span><br><span class="line">* instanceof a node).  Bins of TreeNodes may be traversed and</span><br><span class="line">* used like any others, but additionally support faster lookup</span><br><span class="line">* when overpopulated. However, since the vast majority of bins in</span><br><span class="line">* normal use are not overpopulated, checking for existence of</span><br><span class="line">* tree bins may be delayed in the course of table methods.</span><br></pre></td></tr></table></figure>
+<p><strong>什么是反射</strong></p>
+<p>反射主要是指程序可以访问、检测和修改它本身状态或行为的一种能力</p>
+<p>在Java运行时环境中，对于任意一个类，能否知道这个类有哪些属性和方法？对于任意一个对象，能否调用它的任意一个方法</p>
+<p>Java反射机制主要提供了以下功能：</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类。</li>
+<li>在运行时构造任意一个类的对象。</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法。</li>
+<li>在运行时调用任意一个对象的方法。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/23/programming/java/Java%E8%A1%A5%E7%BC%BA3/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/21/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%A1%A5%E7%BC%BA1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%A1%A5%E7%BC%BA1/" class="post-title-link" itemprop="url">操作系统补缺1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-21 20:37:02 / Modified: 20:52:12" itemprop="dateCreated datePublished" datetime="2021-01-21T20:37:02+08:00">2021-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/OS/" itemprop="url" rel="index"><span itemprop="name">OS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>
+<p><strong>守护线程是什么？</strong></p>
+<p>守护线程（即daemon thread），是个服务线程，准确地来说就是服务其他的线程。</p>
+</li>
+<li>
+<p><strong>线程和进程的区别？</strong></p>
+<p>简而言之，进程是程序运行和资源分配的基本单位，一个程序至少有一个进程，一个进程至少有一个线程。进程在执行过程中拥有独立的内存单元，而多个线程共享内存资源，减少切换次数，从而效率更高。线程是进程的一个实体，是cpu调度和分派的基本单位，是比程序更小的能独立运行的基本单位。同一进程中的多个线程之间可以并发执行。</p>
 </li>
 </ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/21/OS/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%A1%A5%E7%BC%BA1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/21/programming/java/Java%E8%A1%A5%E7%BC%BA2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/programming/java/Java%E8%A1%A5%E7%BC%BA2/" class="post-title-link" itemprop="url">Java补缺2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-21 20:11:32 / Modified: 20:45:05" itemprop="dateCreated datePublished" datetime="2021-01-21T20:11:32+08:00">2021-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>
+<p><strong>HashMap实现原理:</strong></p>
+<p>直接看源代码注释:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">* Implementation notes.</span><br><span class="line">*</span><br><span class="line">* This map usually acts as a binned (bucketed) hash table, but</span><br><span class="line">* when bins get too large, they are transformed into bins of</span><br><span class="line">* TreeNodes, each structured similarly to those in</span><br><span class="line">* java.util.TreeMap. Most methods try to use normal bins, but</span><br><span class="line">* relay to TreeNode methods when applicable (simply by checking</span><br><span class="line">* instanceof a node).  Bins of TreeNodes may be traversed and</span><br><span class="line">* used like any others, but additionally support faster lookup</span><br><span class="line">* when overpopulated. However, since the vast majority of bins in</span><br><span class="line">* normal use are not overpopulated, checking for existence of</span><br><span class="line">* tree bins may be delayed in the course of table methods.</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/21/programming/java/Java%E8%A1%A5%E7%BC%BA2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -939,174 +1132,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/01/18/programming/kotlin/%E5%AF%B9%E8%B1%A1%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/18/Android/Retrofit%E7%94%A8%E6%B3%95%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/18/Android/Retrofit%E7%94%A8%E6%B3%95%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Retrofit用法记录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-01-18 13:15:48 / Modified: 13:42:46" itemprop="dateCreated datePublished" datetime="2021-01-18T13:15:48+08:00">2021-01-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>retrofit的定义为: A type-safe <strong>HTTP client</strong> for Android and Java。</p>
-<p>需要在Gradle中添加如下依赖:</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.squareup.retrofit2:retrofit:2.5.0&#x27;</span></span><br><span class="line">implementation <span class="string">&#x27;com.squareup.retrofit2:converter-gson:2.5.0&#x27;</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/18/Android/Retrofit%E7%94%A8%E6%B3%95%E8%AE%B0%E5%BD%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/17/Android/Room%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/17/Android/Room%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Room组件的使用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-01-17 12:38:02 / Modified: 14:01:17" itemprop="dateCreated datePublished" datetime="2021-01-17T12:38:02+08:00">2021-01-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="room"><a class="markdownIt-Anchor" href="#room"></a> Room</h2>
-<p>Room 在 SQLite 上提供了一个抽象层，以便在充分利用 SQLite 的强大功能的同时，能够流畅地访问数据库。</p>
-<p>处理大量结构化数据的应用可极大地受益于在本地保留这些数据。最常见的用例是缓存相关数据。这样，当设备无法访问网络时，用户仍可在离线状态下浏览相应内容。设备重新连接到网络后，用户发起的所有内容更改都会同步到服务器。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/17/Android/Room%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
