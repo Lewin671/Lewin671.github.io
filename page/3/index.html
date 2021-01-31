@@ -216,7 +216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -268,6 +268,93 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/12/Android/Android%E6%98%93%E9%94%99%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/12/Android/Android%E6%98%93%E9%94%99%E7%82%B9/" class="post-title-link" itemprop="url">Android易错点</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-12 21:33:43 / Modified: 21:38:28" itemprop="dateCreated datePublished" datetime="2021-01-12T21:33:43+08:00">2021-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ol>
+<li>
+<p>ViewModel的创建，其中get函数的描述如下:</p>
+<p>Returns an existing ViewModel or creates a new one in the scope (usually, a fragment or an activity)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分别保存Group1和Group2的分数</span></span><br><span class="line"><span class="keyword">val</span> viewModel1 = ViewModelProvider(<span class="keyword">this</span>,</span><br><span class="line">                                   ViewModelProvider.NewInstanceFactory()).<span class="keyword">get</span>(ScoreViewModel::<span class="keyword">class</span>.java)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> viewModel2 = ViewModelProvider(<span class="keyword">this</span>,</span><br><span class="line">                                   ViewModelProvider.NewInstanceFactory()).<span class="keyword">get</span>(ScoreViewModel::<span class="keyword">class</span>.java)</span><br></pre></td></tr></table></figure>
+<p>这里只会创建一个ViewModel（在同一个scope内），因此这里创建的两个viewModel都是相同的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/12/Android/Android%E6%98%93%E9%94%99%E7%82%B9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1056,94 +1143,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/01/09/Android/Activity%E7%AE%80%E4%BB%8B/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2021/01/08/programming/kotlin/%E5%A7%94%E6%89%98%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/08/programming/kotlin/%E5%A7%94%E6%89%98%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">委托设计模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2021-01-08 20:01:23 / Modified: 21:10:29" itemprop="dateCreated datePublished" datetime="2021-01-08T20:01:23+08:00">2021-01-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Language/kotlin/" itemprop="url" rel="index"><span itemprop="name">kotlin</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h2>
-<p>委托是一种设计模式，在kotlin中支持委托的语法。委托分为两种: 类委托和属性委托。委托把功能的转发给其它对象去实现，实现的细节交给其它对象，而自己只负责转发请求和功能。</p>
-<p>这委托的功能类似的还有继承，继承可以理解为把请求转发给父类，但是继承相比委托来说，不是推荐的方法。原因是:</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/08/programming/kotlin/%E5%A7%94%E6%89%98%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

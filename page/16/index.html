@@ -216,7 +216,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">172</span>
+          <span class="site-state-item-count">173</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -268,6 +268,183 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2019/01/17/programming/python/numpy%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.gif">
+      <meta itemprop="name" content="Qingying Liu">
+      <meta itemprop="description" content="记录数学和计算机方面的知识">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qingying's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/17/programming/python/numpy%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">numpy的使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-17 20:24:48" itemprop="dateCreated datePublished" datetime="2019-01-17T20:24:48+08:00">2019-01-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="什麼是numpy"><a class="markdownIt-Anchor" href="#什麼是numpy"></a> 什麼是numpy?</h3>
+<p>Numpy是一個開源的python科學計算基礎庫，包括：</p>
+<ul>
+<li>一个强大的N维数组对象： ndarray，我們也叫作數組</li>
+<li>广播功能函数</li>
+<li>整合C/C++/Fortran代码的工具</li>
+<li>线性代数、傅里叶变换、随机数生成等功能</li>
+</ul>
+<p>NumPy是SciPy、Pandas等数据处理或科学计算库的基础</p>
+<h3 id="numpy的引用"><a class="markdownIt-Anchor" href="#numpy的引用"></a> numpy的引用</h3>
+<p><code>import numpy as np</code>，尽管别名可以省略或更改，建议使用上述约定的别名</p>
+<h3 id="ndarray多維數組對象"><a class="markdownIt-Anchor" href="#ndarray多維數組對象"></a> ndarray:多維數組對象</h3>
+<p>ndarray是一個通用的同质數據多維容器，也就是說，其中所有元素的數據類型必須是相同類型的，数组下标从0开始。</p>
+<p>注意： ndarray在程序中的别名是:array</p>
+<h3 id="ndarray的屬性"><a class="markdownIt-Anchor" href="#ndarray的屬性"></a> ndarray的屬性</h3>
+<p><img src="/uploads/numpy-attr.png" alt="" /></p>
+<h3 id="創建ndarray的方法"><a class="markdownIt-Anchor" href="#創建ndarray的方法"></a> 創建ndarray的方法</h3>
+<ol>
+<li>从Python中的列表、元组等类型创建ndarray数组</li>
+<li>使用NumPy中函数创建ndarray数组,如:arange, ones, zeros等</li>
+<li>从字节流(raw bytes)中创建ndarray数组</li>
+<li>从文件中读取特定格式,创建ndarray数组</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法1： 使用list或者tuple來創建</span></span><br><span class="line">data1 = np.array([ [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>] ])</span><br><span class="line">print(data1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2：使用numpy的函數來創建特殊數組，如：</span></span><br><span class="line">data2 = np.ones_like(np.arange(<span class="number">20</span>).reshape((<span class="number">4</span>,<span class="number">5</span>)))</span><br><span class="line">print(data2)</span><br></pre></td></tr></table></figure>
+<h3 id="ndarray數組的變換"><a class="markdownIt-Anchor" href="#ndarray數組的變換"></a> ndarray數組的變換</h3>
+<p>对于创建后的ndarray数组,可以对其进行维度变换和元素类型变换。</p>
+<p>维度变换</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.reshape(shape)</td>
+<td>不改变数组元素,返回一个shape形状的数组,原数组不变</td>
+</tr>
+<tr>
+<td>.resize(shape)</td>
+<td>与.reshape()功能一致,但修改原数组</td>
+</tr>
+<tr>
+<td>.swapaxes(ax1,ax2)</td>
+<td>将数组n个维度中两个维度进行调换</td>
+</tr>
+<tr>
+<td>.flatten()</td>
+<td>对数组进行降维,返回折叠后的一维数组,原数组不变</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">b = a.reshape((<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&#x27;\n=========================\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">c = a.resize((<span class="number">6</span>,<span class="number">4</span>))</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+<p>ndarray数组的类型变换則通過astyle方法來更改數據類型。值得注意的是<br />
+astype()方法一定会创建新的数组(原始数据的一个拷贝),即使两个类型一致</p>
+<h3 id="索引和切片"><a class="markdownIt-Anchor" href="#索引和切片"></a> 索引和切片</h3>
+<p>索引:获取数组中特定位置元素的过程<br />
+切片:获取数组元素子集的过程</p>
+<p>多维数组的索引: 每个维度一个索引值,逗号分割<br />
+切片和列表的切片一樣。</p>
+<p>如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line">print(a[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line">print(a[:,:,<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="ndarray數組的運算"><a class="markdownIt-Anchor" href="#ndarray數組的運算"></a> ndarray數組的運算</h3>
+<ol>
+<li>数组与标量之间的运算作用于数组的每一个元素</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">print(a)</span><br><span class="line">print(a*<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>
+<p>numpy一元函數：对ndarray中的数据执行元素级运算的函数<br />
+<img src="/uploads/onep.png" alt="" /><br />
+<img src="/uploads/onep1.png" alt="" /></p>
+</li>
+<li>
+<p>numpy二元函數<br />
+<img src="/uploads/twop.png" alt="" /></p>
+</li>
+</ol>
+<h3 id="打開和存取csv文件"><a class="markdownIt-Anchor" href="#打開和存取csv文件"></a> 打開和存取csv文件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.savetxt(frame, array, fmt=<span class="string">&#x27;%.18e&#x27;</span>, delimiter=<span class="literal">None</span>)</span><br><span class="line">np.loadtxt(frame, dtype=np.float, delimiter=<span class="literal">None</span>, unpack=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>frame : 文件、字符串或产生器,可以是.gz或.bz2的压缩文件</li>
+<li>dtype : 数据类型,可选</li>
+<li>delimiter :分割字符串,默认是任何空格</li>
+<li>unpack : 如果True,读入属性将分别写入不同变量</li>
+</ul>
+<h3 id="numpy的便捷文件存取"><a class="markdownIt-Anchor" href="#numpy的便捷文件存取"></a> numpy的便捷文件存取</h3>
+<p>np.save(fname, array) 或 np.savez(fname, array)<br />
+np.load(fname)<br />
+注意：fname文件名,以.npy为扩展名,压缩扩展名为.npz</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1273,194 +1450,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://qingyingliu.top/2018/11/26/programming/python/%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E5%BA%8F%E5%88%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.gif">
-      <meta itemprop="name" content="Qingying Liu">
-      <meta itemprop="description" content="记录数学和计算机方面的知识">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qingying's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/26/programming/python/%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%E5%BA%8F%E5%88%97/" class="post-title-link" itemprop="url">功能强大的序列</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-26 21:04:21" itemprop="dateCreated datePublished" datetime="2018-11-26T21:04:21+08:00">2018-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-04-27 13:09:02" itemprop="dateModified" datetime="2020-04-27T13:09:02+08:00">2020-04-27</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Programming-Language/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h3>
-<p>序列是Python中的一种常用的内置数据类型，一共有五种，包括：</p>
-<ul>
-<li>列表</li>
-<li>元组</li>
-<li>集合</li>
-<li>字典</li>
-<li>字符串</li>
-</ul>
-<p>这篇博客讲的是前四种序列，和字符串分开讲。<br />
-在上面5种序列中，很多的属性和方法都是类似的，下面介绍它们的公共的方法和属性。</p>
-<h3 id="共有的方法"><a class="markdownIt-Anchor" href="#共有的方法"></a> 共有的方法</h3>
-<h4 id="索引indexing"><a class="markdownIt-Anchor" href="#索引indexing"></a> 索引(Indexing)</h4>
-<p>类似与C++、Java等语言的数组，Python的序列也是通过索引来访问的，而且索引的开始下标都是为0.<br />
-比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">verse = [<span class="string">&#x27;春眠不觉晓&#x27;</span>,<span class="string">&#x27;处处闻啼鸟&#x27;</span>,<span class="string">&#x27;夜来风雨声&#x27;</span>,<span class="string">&#x27;花落知多少&#x27;</span>]</span><br><span class="line"><span class="comment"># 输出第1个元素</span></span><br><span class="line">print(verse[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#输出第三个元素</span></span><br><span class="line">print(verse[<span class="number">2</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">春眠不觉晓</span><br><span class="line">夜来风雨声</span><br></pre></td></tr></table></figure>
-<p>但是，Python也有它独自的特点：负数索引。这个索引从最后一个元素开始计数，从-1开始。然后向左依次索引减小1。<br />
-即：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-n, -(n-1) , -(n-2) , ,... , -2 , -1 #n为序列的长度</span><br></pre></td></tr></table></figure>
-<p>比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">verse = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">print(verse[<span class="number">-1</span>])</span><br><span class="line">print(verse[<span class="number">-2</span>])</span><br></pre></td></tr></table></figure>
-<p>输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="切片sliceing"><a class="markdownIt-Anchor" href="#切片sliceing"></a> 切片(Sliceing)</h4>
-<p>切片操作是访问序列中元素的另一种方法，他可以访问一定范围内的元素。通过切片操作可以生成一个新的序列，实现切片操作的语法格式如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sname[start,end,step]</span><br></pre></td></tr></table></figure>
-<p>参数说明：</p>
-<ul>
-<li>sname: 表示序列的名称</li>
-<li>start： 表示切片的开始位置（包括该位置）。</li>
-<li>end： 切片的截止位置（不包括该位置）。</li>
-<li>step： 步长。</li>
-</ul>
-<p>值得注意的是，这里的参数都是有默认参数的。start默认为0，end默认为序列的长度，step默认为1。<br />
-比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">squares = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>]</span><br><span class="line"></span><br><span class="line">print(squares[<span class="number">-3</span>:])</span><br><span class="line"><span class="comment">#all</span></span><br><span class="line">print(squares[:])</span><br><span class="line"><span class="comment">#reverse</span></span><br><span class="line">print(squares[::<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
-<p>输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[9, 16, 25]</span><br><span class="line">[1, 4, 9, 16, 25]</span><br><span class="line">[25, 16, 9, 4, 1]</span><br></pre></td></tr></table></figure>
-<h4 id="序列相加adding"><a class="markdownIt-Anchor" href="#序列相加adding"></a> 序列相加(Adding)</h4>
-<p>在Python中，支持两种<strong>类型相同</strong>的序列进行相加操作，将两个列表合成一个列表。<br />
-比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding&#x3D;utf-8</span><br><span class="line">num &#x3D; [1, 2, 3, 4]</span><br><span class="line">str &#x3D; [&#39;python niubi&#39;,&#39;i love python&#39;,&#39;why not learn python&#39;]</span><br><span class="line">print(num + str)</span><br></pre></td></tr></table></figure>
-<p>输出结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, &#39;python niubi&#39;, &#39;i love python&#39;, &#39;why not learn python&#39;]</span><br></pre></td></tr></table></figure>
-<p>注意我刚才上面说的话，支持两种类型相同的序列进行操作，指的是序列的类型，而不是序列元素的类型。比如元组和列表就不能够进行加法操作。</p>
-<h4 id="乘法操作multiplying"><a class="markdownIt-Anchor" href="#乘法操作multiplying"></a> 乘法操作(multiplying)</h4>
-<p>通过乘法操作，我们可以把序列重复n次。比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># coding&#x3D;utf-8</span><br><span class="line">l &#x3D; [1, 2, 3]</span><br><span class="line">print(l*3)</span><br></pre></td></tr></table></figure>
-<p>输出的结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 1, 2, 3, 1, 2, 3]</span><br></pre></td></tr></table></figure>
-<h4 id="检查某个元素是否是序列的成员"><a class="markdownIt-Anchor" href="#检查某个元素是否是序列的成员"></a> 检查某个元素是否是序列的成员</h4>
-<p>通过in关键字，可以判断某个元素是否为序列的成员。<br />
-<code>item in sequence</code><br />
-返回的结果是true或者false</p>
-<h4 id="计算序列的长度-最大值和最小值"><a class="markdownIt-Anchor" href="#计算序列的长度-最大值和最小值"></a> 计算序列的长度、最大值和最小值</h4>
-<p>计算序列的长度： len()函数<br />
-计算最小值： min()<br />
-计算最大值： max()<br />
-比如计算上面例子中的num序列的长度可以这样写：<code>len(num)</code></p>
-<h3 id="列表"><a class="markdownIt-Anchor" href="#列表"></a> 列表</h3>
-<p>列表是可变的序列，类似于C语言的数组，但是它的元素的类型却是任意的。下面来介绍一些关于列表的方法。</p>
-<h4 id="列表的创建和删除"><a class="markdownIt-Anchor" href="#列表的创建和删除"></a> 列表的创建和删除</h4>
-<p>可以直接通过赋值运算符和<code>[]</code>来创建列表，也可以使用list函数来创建数值列表。<br />
-删除列表：<code>del listname</code>，其中listname是列表名<br />
-例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过扶植和[]来创建列表</span></span><br><span class="line">list1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过list()来创建数值列表</span></span><br><span class="line">list2 = list(range(<span class="number">1</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">print(list1)</span><br><span class="line">print(list2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除列表</span></span><br><span class="line"><span class="keyword">del</span> list1</span><br><span class="line"><span class="keyword">del</span> list2</span><br></pre></td></tr></table></figure>
-<p>运行结果为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, 5]</span><br><span class="line">[1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
-<h4 id="遍历序列"><a class="markdownIt-Anchor" href="#遍历序列"></a> 遍历序列</h4>
-<p>语法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> listname:</span><br><span class="line">    <span class="comment"># do some same things</span></span><br></pre></td></tr></table></figure>
-<p>如果我们需要同时得到元素和下标，则可以这样便利：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(listname):</span><br><span class="line">    <span class="comment"># do some same things</span></span><br></pre></td></tr></table></figure>
-<p>例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line">team =[<span class="string">&#x27;火箭&#x27;</span>,<span class="string">&#x27;勇士&#x27;</span>,<span class="string">&#x27;开拓者&#x27;</span>,<span class="string">&#x27;雷霆&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(team):</span><br><span class="line">    print(index,<span class="string">&quot; :&quot;</span>+item)</span><br></pre></td></tr></table></figure>
-<h4 id="排序列表"><a class="markdownIt-Anchor" href="#排序列表"></a> 排序列表</h4>
-<p>排序列表有两种方法，使用列表对象的sort方法和内置的sorted函数。<br />
-比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line">l = [<span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">7</span>]</span><br><span class="line">l.sort()</span><br><span class="line">print(l)</span><br><span class="line"></span><br><span class="line">l = [<span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">7</span>]</span><br><span class="line">l = sorted(l)</span><br><span class="line">print(l)</span><br></pre></td></tr></table></figure>
-<p>其中列表对象的sort方法为<br />
-<code>listname.sort(cmp = None, key = None, reverse= NOne)</code><br />
-其中cmp是老的方法，这里不详细介绍（类似与C++的sort函数的cmp函数），主要介绍key和reverse。<br />
-key: 通过某个函数或者是映射返回的值，根据这个值来进行排序。<br />
-reverse： 升序还是降序，默认升序。<br />
-sorted的方法类似，只是加了一个对象参数，表明需要排序的对象。<br />
-<code>sorted(iterable, key = None,reverse = None)</code><br />
-在key那里很多时候为了简洁，会经常用到lamber表达式，有兴趣的同学可以去查一查。</p>
-<h4 id="列表推导式"><a class="markdownIt-Anchor" href="#列表推导式"></a> 列表推导式</h4>
-<p>列表推导式可以快速生成一个列表，或者根据某个列表生存满足指定需求的列表。<br />
-<code>list = [Expression for var in range if condition]</code><br />
-上面的表达的意思就是for循环的var变量如果满足condition表达是，则会加入到list中。</p>
-<p>比如，我们想得到20以内的偶数，我们可以这样写：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line">list = [var <span class="keyword">for</span> var <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">21</span>) <span class="keyword">if</span> var %<span class="number">2</span> ==<span class="number">0</span>]</span><br><span class="line">print(list)</span><br></pre></td></tr></table></figure>
-<h3 id="元组"><a class="markdownIt-Anchor" href="#元组"></a> 元组</h3>
-<p>元组的方法和列表类似，这里只列举出不同之处。</p>
-<ol>
-<li>创建方法不同。元组的创建方法使用<code>()</code>来创建。</li>
-<li>元组是不可修改的，所以修改序列的方法在这里不能用，比如append，insert等等</li>
-<li>列表不能够作为字典的健,而元组可以。</li>
-</ol>
-<p>例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="comment"># 创建元组</span></span><br><span class="line">tp = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 便利元组</span></span><br><span class="line"><span class="keyword">for</span> index,item <span class="keyword">in</span> enumerate(tp):</span><br><span class="line">    print(index,item)</span><br></pre></td></tr></table></figure>
-
       
     </div>
 
