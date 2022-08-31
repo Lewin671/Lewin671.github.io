@@ -23,5 +23,8 @@ export default defineConfig({
       path: '/life',
     },
   ],
+  // 为了部署在 github Page
+  base: '/website',
+  publicPath: '/website/',
     // more config: https://d.umijs.org/config
 });
