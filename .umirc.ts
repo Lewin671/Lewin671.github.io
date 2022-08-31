@@ -23,5 +23,8 @@ export default defineConfig({
       path: '/life',
     },
   ],
+  // 以下两行的作用: 渲染成有具体内容的静态 html 页面，便于 SEO
+  ssr: {},
+  exportStatic: {}
   // more config: https://d.umijs.org/config
 });
