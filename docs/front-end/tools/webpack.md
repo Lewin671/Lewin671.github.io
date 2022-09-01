@@ -106,7 +106,7 @@ module.exports = {
 };
 ```
 
-## Browser Compatibility
+### Browser Compatibility
 
 Webpack supports all browsers that are ES5-compliant. Webpack needs `Promise` for `import` and `require.ensure()`. If you want to support older browser, you will need to load a polyfill before using these expressions.
 
