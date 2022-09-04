@@ -19,6 +19,10 @@ export default defineConfig({
       path: '/client',
     },
     {
+      title: '英语',
+      path: '/english',
+    },
+    {
       title: '生活',
       path: '/life',
     },
