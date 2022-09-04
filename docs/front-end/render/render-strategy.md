@@ -24,6 +24,8 @@ Client Side Rendering 是指直接在浏览器中使用 JavaScript 渲染页面�
 
 ### SSR
 
+> 这里介绍的是 old SSR，需要区别下面的 Universal SSR(带有hydration的过程)。大家通常说的SSR，一般是指 Universal SSR.
+> 
 SSR 是指服务端渲染好整份 HTML，然后将该 HTML 作为导航的响应交给浏览器渲染。这避免了额外的往返时间损耗（数据请求、模板请求等）。
 
 ![SSR](../../static/ssr.png)
