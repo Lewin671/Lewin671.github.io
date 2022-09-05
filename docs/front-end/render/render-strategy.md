@@ -24,16 +24,18 @@ Client Side Rendering 是指直接在浏览器中使用 JavaScript 渲染页面�
 
 ### SSR
 
-> 这里介绍的是 old SSR，需要区别下面的 Universal SSR(带有hydration的过程)。大家通常说的SSR，一般是指 Universal SSR.
-> 
-SSR 是指服务端渲染好整份 HTML，然后将该 HTML 作为导航的响应交给浏览器渲染。这避免了额外的往返时间损耗（数据请求、模板请求等）。
+SSR 是指服务端渲染好整份 HTML，然后将该 HTML 和需要的 Javascript 作为导航的响应交给浏览器渲染并让页面可响应。这避免了额外的往返时间损耗（数据请求、模板请求等）。
+
+客户端需要执行 Javascript 用于挂载 DOM 事件，从而可以响应用户事件，这个过程叫做 [(re)hydration](https://vite-plugin-ssr.com/hydration)。
 
 ![SSR](../../static/ssr.png)
 
+![combine ssr and csr](../../static/combind-ssr-and-csr.webp)
+
 优点:
 
--   更快的 First Paint 和 First Contentful Paint(FCP)。
--   避免发送大量的 JS 代码，可以让渲染有更快的 Time to Interactive(TTI)。
+-   更快的首屏加载。可以在网络差、设备差、禁止JavaScript的情况下获得比较好的用户体验，因为 render 的内容是ready的，无需等待执行 JavaScript 和请求数据。
+-   better SEO ranking
 -   可以开启**流式渲染**，进一步加快页面渲染速度
 
 缺点:
@@ -49,14 +51,6 @@ Static Side Generation 发生在构建时间，它可以提供一个非常快的
 这里和 SSR 不同的是，这里的 Time to First Byte 也是非常快的，因为它不需要渲染 HTML，HTML 在构建时就已经确定了。 一般来说，SSG 会为每一个 url 都提前生成 HTML，因此这些静态资源可以部署到多个 CND 上，从而进行 edge-caching。
 
 ![SSG](../../static/ssg.png)
-
-### 通过 rehydration 结合 SSR 和 CSR
-
-Server 端将 application 渲染成 HTML，然后将用于渲染的 JavaScript 和数据都内嵌在 HTML 中，返回给浏览器渲染，挂载对应的 DOM 事件等等，这个过程也叫做 [hydration](https://vite-plugin-ssr.com/hydration)。
-
-这样做可以让 FCP 和 SSR 一样快，但是还需要在客户端渲染，但是 Time to Interactive 还是比较慢，因为它需要等 JS 执行挂载任务后才能对用户进行响应。
-
-![combine ssr and csr](../../static/combind-ssr-and-csr.webp)
 
 ### Progressive Hydration
 
