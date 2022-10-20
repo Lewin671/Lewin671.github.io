@@ -16,7 +16,7 @@
       window.routerBase = "/";
     </script>
     <script>
-      //! umi version: 3.5.34
+      //! umi version: 3.5.35
     </script>
     <script>
       !(function () {
@@ -40,12 +40,13 @@
 </span></div><div class="token-line"><span class="token plain">    // Incorrect usage: The left operand must be an lvalue (C2106).`j * 4` is a prvalue.</span></div><div class="token-line"><span class="token plain">    7 = i; // C2106</span></div><div class="token-line"><span class="token plain">    j * 4 = 7; // C2106</span></div><div class="token-line"><span class="token plain">
 </span></div><div class="token-line"><span class="token plain">    // Correct usage: the dereferenced pointer is an lvalue.</span></div><div class="token-line"><span class="token plain">    *p = i;</span></div><div class="token-line"><span class="token plain">
 </span></div><div class="token-line"><span class="token plain">    // Correct usage: the conditional operator returns an lvalue.</span></div><div class="token-line"><span class="token plain">    ((i &lt; 3) ? i : j) = 7;</span></div><div class="token-line"><span class="token plain">
-</span></div><div class="token-line"><span class="token plain">    // Incorrect usage: the constant ci is a non-modifiable lvalue (C3892).</span></div><div class="token-line"><span class="token plain">    const int ci = 7;</span></div><div class="token-line"><span class="token plain">    ci = 9; // C3892</span></div><div class="token-line"><span class="token plain">}</span></div></pre></div><h3 id="lvalue-reference-and-rvalue-reference"><a aria-hidden="true" tabindex="-1" href="/client/c++/lvalues and rvalues#lvalue-reference-and-rvalue-reference"><span class="icon icon-link"></span></a>lvalue reference and rvalue reference</h3><p>这部分可以看这个地址的介绍: <a target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/cpp/cpp/references-cpp?view=msvc-170">https://learn.microsoft.com/en-us/cpp/cpp/references-cpp?view=msvc-170<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="__dumi-default-external-link-icon"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><p>里面除了介绍 lvalue reference 和 rvalue reference，也提到和 reference 和 pointer 的对比。</p></div><div class="__dumi-default-layout-footer-meta"><span data-updated-text="最后更新时间：">10/16/2022 12:07:17</span></div></div></div></div>
+</span></div><div class="token-line"><span class="token plain">    // Incorrect usage: the constant ci is a non-modifiable lvalue (C3892).</span></div><div class="token-line"><span class="token plain">    const int ci = 7;</span></div><div class="token-line"><span class="token plain">    ci = 9; // C3892</span></div><div class="token-line"><span class="token plain">}</span></div></pre></div><h3 id="lvalue-reference-and-rvalue-reference"><a aria-hidden="true" tabindex="-1" href="/client/c++/lvalues and rvalues#lvalue-reference-and-rvalue-reference"><span class="icon icon-link"></span></a>lvalue reference and rvalue reference</h3><p>这部分可以看这个地址的介绍: <a target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/en-us/cpp/cpp/references-cpp?view=msvc-170">https://learn.microsoft.com/en-us/cpp/cpp/references-cpp?view=msvc-170<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="__dumi-default-external-link-icon"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p><p>里面除了介绍 lvalue reference 和 rvalue reference，也提到和 reference 和 pointer 的对比。</p></div><div class="__dumi-default-layout-footer-meta"><span data-updated-text="最后更新时间：">10/20/2022 17:29:21</span></div></div></div></div>
 	<script>
   window.g_useSSR = true;
   window.g_initialProps = {};
 	</script>
 
+    <script src="/index.js" defer="true"></script>
     <script src="/umi.js"></script>
   </body>
 </html>
