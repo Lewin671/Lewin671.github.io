@@ -3,6 +3,24 @@ console.log('serviceWorker.js');
 const staticResourceMatcher = /.*\.((png)|(jpg)|(svg)|(mp4)|(webp))/;
 const cacheName = 'cacheName';
 
+self.addEventListener('install', (event) => {
+  console.log('service worker installed.');
+});
+
+this.addEventListener('activate', (event) => {
+  console.log('service worker activated.');
+
+  event.waitUntil(
+    caches.keys().then((keyList) =>
+      Promise.all(
+        keyList.map((key) => {
+          return caches.delete(key);
+        }),
+      ),
+    ),
+  );
+});
+
 self.addEventListener('fetch', (event) => {
   const url = event.request.url;
   if (staticResourceMatcher.test(url)) {
@@ -21,6 +39,7 @@ self.addEventListener('fetch', (event) => {
                 // we need to save clone to put one copy in cache
                 // and serve second one
                 console.log('service worker fetch ' + url + ' ' + response.ok);
+
                 if (response.ok) {
                   let responseClone = response.clone();
 
@@ -28,8 +47,6 @@ self.addEventListener('fetch', (event) => {
                     console.log('service worker save resource ' + url);
                     cache.put(event.request, responseClone);
                   });
-                } else {
-                  console.log(response.headers);
                 }
                 return response;
               })
