@@ -2,9 +2,9 @@
 
 前端的渲染方案主要有:
 
--   CSR: 客户端渲染 (Client Side Rendering)，也叫(Browser Side Render)，即现在 Vue/React 的 SPA 架构的方式。
--   SSR： 服务端渲染(Server Side Rendering)，服务端渲染好 HTML 模板，交由浏览器渲染。
--   SSG：页面静态化 Static Side Generation，把页面提前渲染成 HTML。
+- CSR: 客户端渲染 (Client Side Rendering)，也叫(Browser Side Render)，即现在 Vue/React 的 SPA 架构的方式。
+- SSR： 服务端渲染(Server Side Rendering)，服务端渲染好 HTML 模板，交由浏览器渲染。
+- SSG：页面静态化 Static Side Generation，把页面提前渲染成 HTML。
 
 ### CSR
 
@@ -14,13 +14,13 @@ Client Side Rendering 是指直接在浏览器中使用 JavaScript 渲染页面�
 
 > 见: https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload
 
-![CSR](../../static/csr.png)
+![CSR](https://lqy-blog.oss-cn-hangzhou.aliyuncs.com/csr.png)
 
 缺点:
 
--   白屏时间长。
--   SEO 不友好
--   ...
+- 白屏时间长。
+- SEO 不友好
+- ...
 
 ### SSR
 
@@ -28,19 +28,19 @@ SSR 是指服务端渲染好整份 HTML，然后将该 HTML 和需要的 Javascr
 
 客户端需要执行 Javascript 用于挂载 DOM 事件，从而可以响应用户事件，这个过程叫做 [(re)hydration](https://vite-plugin-ssr.com/hydration)。
 
-![SSR](../../static/ssr.png)
+![SSR](https://lqy-blog.oss-cn-hangzhou.aliyuncs.com/ssr.png)
 
-![combine ssr and csr](../../static/combind-ssr-and-csr.webp)
+![combine ssr and csr](https://lqy-blog.oss-cn-hangzhou.aliyuncs.com/combind-ssr-and-csr.webp)
 
 优点:
 
--   更快的首屏加载。可以在网络差、设备差、禁止JavaScript的情况下获得比较好的用户体验，因为 render 的内容是ready的，无需等待执行 JavaScript 和请求数据。
--   better SEO ranking
--   可以开启**流式渲染**，进一步加快页面渲染速度
+- 更快的首屏加载。可以在网络差、设备差、禁止 JavaScript 的情况下获得比较好的用户体验，因为 render 的内容是 ready 的，无需等待执行 JavaScript 和请求数据。
+- better SEO ranking
+- 可以开启**流式渲染**，进一步加快页面渲染速度
 
 缺点:
 
--   在服务端生成页面需要花时间，这可能会导致更慢的 TTFB(Time to First Byte)。
+- 在服务端生成页面需要花时间，这可能会导致更慢的 TTFB(Time to First Byte)。
 
 Server Side Rendering 不是一个银弹。它的动态性会带来非常大的计算量。正确地使用 SSR 涉及到 component caching、memory consumption 和 memorization 等技巧
 
@@ -50,7 +50,7 @@ Static Side Generation 发生在构建时间，它可以提供一个非常快的
 
 这里和 SSR 不同的是，这里的 Time to First Byte 也是非常快的，因为它不需要渲染 HTML，HTML 在构建时就已经确定了。 一般来说，SSG 会为每一个 url 都提前生成 HTML，因此这些静态资源可以部署到多个 CND 上，从而进行 edge-caching。
 
-![SSG](../../static/ssg.png)
+![SSG](https://lqy-blog.oss-cn-hangzhou.aliyuncs.com/ssg.png)
 
 ### Progressive Hydration
 
@@ -58,13 +58,13 @@ The time that the user sees non-interactive UI on the screen is also refered to 
 
 从服务端发送来的 DOM 组件被完全 hydrated 需要花一定的时间。在组件完全被 hydrated 之前，JS 文件可以被加载、处理和执行，而不是一次性 hydrate 整个 application，即我们可以渐进式 hydrate 这些 DOM 结点。
 
-<video controls width="100%" src="https://res.cloudinary.com/ddxwdqwkr/video/upload/v1609056522/patterns.dev/prog-rehy-2.mp4">
+<video controls width="100%" src="https://lqy-blog.oss-cn-hangzhou.aliyuncs.com/prog-rehy-2.mp4">
 </video>
 
-通过这样，我们可以减少让页面具有响应的JS数量，同时可以只hydrate用户需要的结点。
+通过这样，我们可以减少让页面具有响应的 JS 数量，同时可以只 hydrate 用户需要的结点。
 
-<video controls width="100%" src="https://res.cloudinary.com/ddxwdqwkr/video/upload/v1609056521/patterns.dev/prog-rehy-5.mp4">
+<video controls width="100%" src="https://lqy-blog.oss-cn-hangzhou.aliyuncs.com/prog-rehy-5.mp4">
 
-Progressive hydrate可以让我们只hydrate特定条件的组件，比如只hydrate视口内可见的组件。
+Progressive hydrate 可以让我们只 hydrate 特定条件的组件，比如只 hydrate 视口内可见的组件。
 
 progressive hydration 有可能在特定条件下让组件无法响应，但是这个基本上对用户来说无感。
