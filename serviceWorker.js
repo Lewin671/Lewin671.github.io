@@ -1,6 +1,7 @@
 console.log('serviceWorker.js');
 
-const staticResourceMatcher = /.*\.((png)|(jpg)|(svg)|(mp4)|(webp))/;
+const staticResourceMatcher =
+  /.*lqy-blog\.oss-cn-hangzhou\.aliyuncs.com\/.*\.((png)|(jpg)|(svg)|(mp4)|(webp))/;
 const cacheName = 'cacheName';
 
 self.addEventListener('install', (event) => {
@@ -33,7 +34,7 @@ self.addEventListener('fetch', (event) => {
           return response;
         } else {
           return (
-            fetch(event.request)
+            fetch(event.request.url)
               .then((response) => {
                 // response may be used only once
                 // we need to save clone to put one copy in cache
