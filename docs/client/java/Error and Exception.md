@@ -5,9 +5,6 @@ Errors and exceptions are sublcass of the Throwable Java class. The Error class 
 ![Error and Execption](https://lqy-blog.oss-cn-hangzhou.aliyuncs.com/6032805567922176-20221118202048284.svg)
 
 
-
-
-
 ## Error
 
 Errors are usually raised by the environment in which the application is running. For example, an error will occur due to a lack of system resources.
@@ -15,7 +12,6 @@ Errors are usually raised by the environment in which the application is running
 It is not possible to recover from an error.
 
 Errors occur at run-time and are not known by the compiler; hence, they are classified as "unchecked".
-
 
 
 "OutOfMemory" and "StackOverflow" are examples of errors.
