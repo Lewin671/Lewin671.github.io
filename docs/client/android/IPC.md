@@ -6,8 +6,6 @@ An interface description language or interface definition language(IDL) is gener
 
 IDLs describe an interface in a language-independent way, enabling communication between software components that do not share one language, for example, between those written in C++ and those written in Java.
 
-> Note: Using AIDL is important as long as you permit clients from different applications to access your service for IPC and need to handle multithreading in your service. 
-
 ### Examples
 
 - AIDL: Java based, for Android, supports local and remote procedure calls, can be accessed from native application by calling through Java Native Interface(JNI)。
@@ -33,3 +31,5 @@ As mentioned earlier, a process cannot access another process’s memory. Howeve
 The Binder driver-managed chunk of memory is read-only to the process, and all writing is performed by the kernel module. When a process sends a message to another process, the kernel allocates some space in the destination process’s memory and copies the message data directly from the sending process.
 
 Higher-level IPC abstractions in Android such as Intents, Messengers and ContentProviders are built on top of Binder. Additionally, service interfaces that need to be exposed to other processes can be defined using the Android Interface Definition Language (AIDL), which enables clients to call remote services as if they were local Java objects.
+
+> Note: Using AIDL is important as long as you permit clients from different applications to access your service for IPC and need to handle multithreading in your service. 
