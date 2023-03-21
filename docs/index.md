@@ -16,7 +16,7 @@ features:
     desc: 记录 Web 容器的一些常见性能优化点
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/b8570f4d-c1b1-45eb-a1da-abff53159967/kj9t990h_w144_h144.png
     title: 生活
-    desc: 总结生活、工作中的一些比较难得的心得
+    desc: 生活、工作等相关的内容，随便写写
 #   - icon: https://gw.alipayobjects.com/zos/bmw-prod/b3e102cd-5dad-4046-a02a-be33241d1cc7/kj9t8oji_w144_h144.png
 #     title: API automatically generated
 #     desc: Component API can be automatically generated based on TypeScript type definitions, and components will always be『the same in appearance』
