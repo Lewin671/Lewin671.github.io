@@ -8,12 +8,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Use Node.js 16
-      - uses: actions/setup-node@v2
-      - with:
-          node-version: '16'
       - uses: actions/checkout@v2
+      - name: Use Node.js 16 # add this step to use node 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
       - run: npm install
       - run: npm run docs:build
       - name: Deploy
