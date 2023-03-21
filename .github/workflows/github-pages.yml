@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --openssl-legacy-provider # set environment variable for the whole job
     steps:
       - uses: actions/checkout@v2
       - run: npm install
