@@ -29,6 +29,10 @@ export default defineConfig({
       path: '/life',
     },
     {
+      title: '工具',
+      path: '/tools',
+    },
+    {
       title: '心理学',
       path: '/psychology'
     }
